@@ -1,6 +1,10 @@
 Manifest-Version: 1.0
 Build-Jdk-Spec: 11
+<<<<<<< HEAD
 Implementation-Title: ojoa
+=======
+Implementation-Title: demoJ01
+>>>>>>> main
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
 
