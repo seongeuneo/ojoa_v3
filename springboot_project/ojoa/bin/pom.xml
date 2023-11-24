@@ -9,10 +9,10 @@
       <version>2.7.17</version>
       <relativePath /> <!-- lookup parent from repository -->
    </parent>
-   <groupId>com.ojo</groupId>
-   <artifactId>ojoa</artifactId>
+   <groupId>com.example</groupId>
+   <artifactId>demoJ01</artifactId>
    <version>0.0.1-SNAPSHOT</version>
-   <name>ojoa</name>
+   <name>demoJ01</name>
    <description>Demo project for Spring Boot</description>
    <properties>
       <java.version>11</java.version>
