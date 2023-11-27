@@ -1,0 +1,261 @@
+/* MyShop/Deposits.css */
+
+/* 페이지 너비 제한과 컨테이너 스타일링 */
+#wrap {
+    width: 100%;
+    max-width: 1240px;
+    /* 최대 너비 */
+    margin: 0 auto;
+    /* 가운데 정렬 */
+}
+
+/* 경로 표시 스타일링 */
+.HistoryList .path {
+    color: #333;
+    font-size: 12px;
+    margin: 20px auto;
+    margin-right: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.HistoryList .path span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    display: none;
+}
+
+.HistoryList .path li {
+    float: left;
+    padding-left: 12px;
+    margin: 0;
+    color: #333;
+}
+
+.HistoryList .path ol {
+    float: right;
+}
+
+/* 페이지 제목 스타일링 */
+.HistoryList .headTltleArea {
+    min-height: 30px;
+    margin: 50px 0 20px;
+    border-bottom: 0;
+    text-align: left;
+}
+
+.HistoryList .headTltleArea h2 {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+}
+
+/* 정보 박스 스타일링 */
+.HistoryList .BaseBox {
+    padding: 20px 0;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border: 5px solid #e8e8e8;
+    color: #404040;
+}
+
+.BaseBox ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.HistoryList .BaseBox ul li {
+    margin: 5px 0;
+    padding: 0 45px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.ec-base-tab ul.menu {
+    /* 탭 메뉴 스타일링 */
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid;
+    /* 밑줄 효과 */
+    padding: 10px 0;
+}
+
+.ec-base-tab ul.menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.ec-base-tab ul.menu li a {
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* 적립금 내역 테이블 스타일링 */
+.HistoryList_inside {
+    margin-top: 20px;
+}
+
+.Base_Table_TypeList table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.Base_Table_TypeList th,
+.Base_Table_TypeList td {
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    /* 테두리 설정 */
+}
+
+.Base_Table_TypeList th {
+    background-color: #f5f5f5;
+    /* 배경색 */
+    font-weight: bold;
+}
+
+.Base_Table_TypeList caption {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* 아래 여백 */
+}
+
+/* 페이지네이션 스타일링 */
+.ec-base-paginate {
+    margin: 30px 0 50px;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+    display: block;
+}
+
+.ec-base-paginate li {
+    display: inline-block;
+    margin: 0 0 0 -1px;
+    border: 1px solid #d7d5d5;
+    font-size: 12px;
+    color: #757575;
+    vertical-align: top;
+}
+
+.ec-base-paginate li p.this {
+    padding-bottom: 6px;
+    border-bottom: 3px solid #495164;
+    color: #495164;
+}
+
+.ec-base-paginate li p {
+    display: block;
+    width: 33px;
+    padding: 9px 0;
+    font-weight: bold;
+    color: #939393;
+    line-height: 14px;
+    background: #fff;
+}
+
+.ec-base-paginate ol {
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+}
+
+.ec-base-paginate img {
+    border: none;
+    vertical-align: top;
+}
+
+.ec-base-paginate .menu li {
+    display: block;
+    min-width: 187px;
+    margin: 0 0 0 -1px;
+    padding: 12px 5px 11px;
+    border-right: 1px solid #cbcdce;
+    color: #707070;
+    text-decoration: none;
+    outline: 0;
+    text-align: center;
+    background: #f2f2f2;
+}
+
+/* 도움말 박스 스타일링 */
+.ec-base-help {
+    margin: 20px 0;
+    border: 1px solid #d6d4d4;
+    line-height: 18px;
+}
+
+.ec-base-help {
+    padding: 0 9px 12px;
+}
+
+.ec-base-help {
+    color: #707070;
+}
+
+.ec-base-help ol .item1 {
+    background-position: -484px 0;
+}
+
+.ec-base-help ol .item2 {
+    background-position: -434px -100px;
+}
+
+.ec-base-help ol .item3 {
+    background-position: -384px -200px;
+}
+
+.ec-base-help ol {
+    margin: 15px 0 0 11px;
+}
+
+.ec-base-help h3 {
+    padding: 9px 0 6px 10px;
+    border-bottom: 1px solid #e8e7e7;
+    color: #101010;
+    font-size: 12px;
+    background: #fbfbfb;
+}
+
+.ec-base-help ol li {
+    padding: 0 0 0 25px;
+    background: url(../../../../public/images/ico_number.png) no-repeat;
+}
+
+.ec-base-help>h3 {
+    padding: 9px 0 6px 10px;
+    border-bottom: 1px solid #e8e7e7;
+    color: #101010;
+    font-size: 12px;
+    background: #fbfbfb;
+    display: block;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.ec-base-help li {
+    color: #101010;
+    font-size: 12px;
+    background: #fbfbfb;
+    display: block;
+}

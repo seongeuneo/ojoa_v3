@@ -1,0 +1,170 @@
+
+/* ====================================================== */
+/* myPage_main */
+.Order {
+  width: 1240px;
+  margin: 0 auto;
+  padding: 0;
+  margin-bottom: 160px;
+  overflow: hidden;
+}
+
+/* ================== main / order페이지 ================== */
+.Order #od_backbody {
+  max-width: 1240px;
+  background-color: #fff;
+  font-size: 13pt;
+  padding: 50px 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.Order #od_frame {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.Order .od_backbody ol {
+  list-style: square;
+}
+
+.Order #od_productInfo {
+  border: solid px #e0e0eb;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 10pt;
+}
+
+.Order #od_productInfo th,
+.Order #od_productInfo td {
+  border: solid 1px #e0e0eb;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.Order #od_frame div:nth-of-type(1) span:nth-of-type(1) {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.Order #od_frame div:nth-of-type(2) {
+  border: solid 1px #e0e0eb;
+  padding: 10px 10px;
+  font-size: 13pt
+}
+
+.Order #od_search {
+  border: 1px solid #dedede;
+  border-top: 1px solid black;
+}
+
+.Order #od_search select {
+  border: silver 1px solid;
+  cursor: pointer;
+}
+
+.Order #od_search div:nth-of-type(1) {
+  border-bottom: solid 1px gray;
+  padding: 20px;
+}
+
+.Order #od_search input {
+  border: silver 1px solid;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.Order #od_search ol {
+  padding: 10px 20px;
+  font-size: 10pt;
+  color: gray;
+}
+
+.Order #od_search button {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.Order #od_frame br+span:nth-last-child(3) {
+  font-size: 10pt;
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px 10px;
+}
+
+.Order #od_productInfo th:nth-of-type(3) {
+  width: 550px;
+}
+
+.Order #od_frame div:last-child {
+  text-align: center;
+}
+
+.Order .od_number {
+  width: 100px;
+}
+
+.Order .od_amount {
+  width: 50px;
+}
+
+/* ========================================== */
+/* ====================================================== */
+/* navi_bar */
+.Order .path {
+  color: #333;
+  font-size: 12px;
+  /* margin: 20px auto; */
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.Order .path span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  white-space: nowrap;
+  text-indent: 100%;
+  display: none;
+}
+
+.Order .path li {
+  float: left;
+  padding-left: 12px;
+  margin: 0;
+  color: #333;
+}
+
+.Order .path ol {
+  float: right;
+}
+
+
+
+.Order .pageTlt {
+  color: #333;
+}
+
+.Order .pageTlt h2 {
+  height: 60px;
+  text-align: center;
+  line-height: 90px;
+  font-size: 30px;
+  letter-spacing: 3px;
+  padding-top: 70px;
+  padding-bottom: 0px;
+}
+
+.Order .txt_01 {
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  font-weight: 300;
+  padding-top: 5px;
+  padding-bottom: 120px;
+}
