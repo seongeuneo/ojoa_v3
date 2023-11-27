@@ -1,0 +1,128 @@
+/* ==================  product_list 시작 ================== */
+
+.ProductList {
+  padding-top: 50px;
+  width: 1240px;
+  text-align: center;
+  background-color: #fff;
+  margin: auto;
+}
+
+.ProductList .pl_section {
+  display: flex;
+  width: 230px;
+}
+
+.ProductList .prodItems {
+  width: 1240px;
+  height: 270px;
+  margin: 30px 20px 0 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+
+  position: relative;
+
+}
+
+.ProductList .prodItems img {
+  width: 230px;
+  height: 230px;
+}
+
+.pl_items li {
+  width: 100%;
+  height: 100%;
+
+}
+
+/* ======아이콘영역===================== */
+
+.ProductList .pl_thumb_img>a {
+  position: relative;
+}
+
+.ProductList .prodItems .pl_icon {
+  width: 230px;
+  height: calc(230px*0.2);
+
+  position: absolute;
+  bottom: 40%;
+  z-index: 100;
+
+  display: flex;
+  flex-flow: column wrap;
+
+  align-items: center;
+  cursor: pointer;
+
+}
+
+.ProductList .prodItems .pl_icon .pd_cart img,
+.ProductList .prodItems .pl_icon .pd_heart img {
+  width: 35px;
+  height: 35px;
+}
+
+.ProductList .prodItems .pl_icon .pd_cart,
+.ProductList .prodItems .pl_icon .pd_heart {
+  display: none;
+}
+
+
+/* ==================  이미지 호버 아이콘 ================== */
+
+.ProductList .prodItems img:hover {
+  opacity: 0.4;
+}
+
+.ProductList .prodItems .pl_thumb_img:hover .pd_cart,
+.ProductList .prodItems .pl_thumb_img:hover .pd_heart,
+.ProductList .prodItems .pl_icon .pd_cart:hover,
+.ProductList .prodItems .pl_icon .pd_heart:hover {
+  display: block;
+}
+
+
+/* ==================  텍스트별 스타일 ================== */
+
+.ProductList .prodItems .pl_b span,
+.ProductList .prodItems .pl_d span {
+  color: #a26f59;
+}
+
+.ProductList .prodItems .pl_a {
+  font-weight: bold;
+  color: #333;
+  width: 230px;
+  height: fit-content;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ProductList .prodItems .pl_b {
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px 0;
+  width: 230px;
+  height: fit-content;
+  text-align: center;
+}
+
+.ProductList .prodItems .pl_c {
+  font-size: 12px;
+  margin-top: 5px auto;
+  line-height: 120%;
+  width: 230px;
+  height: fit-content;
+  text-align: center;
+}
+
+.ProductList .prodItems .pl_d {
+  font-size: 12px;
+  margin-top: 25px;
+  margin-right: 5px;
+  width: 230px;
+  height: fit-content;
+  text-align: center;
+}

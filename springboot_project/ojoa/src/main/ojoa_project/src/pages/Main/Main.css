@@ -1,0 +1,422 @@
+.Main a {
+    text-decoration: none;
+}
+
+.Main li {
+    list-style-type: none;
+}
+
+.Main body {
+    min-width: 1240px;
+    margin: auto;
+    padding: auto;
+}
+
+.Main main {
+    background-color: white;
+    min-height: 450px;
+    width: 1240px;
+    margin: auto;
+}
+
+/* ================== 쇼룸 슬라이드 스타일 및 동작 ================== */
+.Main .section {
+    margin-top: 80px;
+}
+
+.Main .section input[id*="slide"] {
+    display: none;
+}
+
+.Main .section .slidewrap {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.Main .section .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.Main .section .slidelist>li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .5s;
+}
+
+.Main .section .slidelist>li>a {
+    display: block;
+    position: relative;
+}
+
+.Main .section .slidelist>li>a img {
+    width: 100%;
+}
+
+.Main .section .slidelist label {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 50px;
+    cursor: pointer;
+}
+
+.Main .section .slidelist .textbox {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.7;
+    text-align: center;
+    padding-top: 25px;
+    width: 1240px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Main .section .slidelist .textbox h3 {
+    font-size: 36px;
+    color: #fff;
+    transform: translateY(30px);
+    transition: all .5s;
+    z-index: 5;
+}
+
+.Main .section .slidelist .textbox p {
+    font-size: 16px;
+    color: #fff;
+    transform: translateY(30px);
+    transition: all .5s;
+    z-index: 5;
+}
+
+/* input에 체크되면 슬라이드 효과 */
+.Main .section input[id="slide01"]:checked~.slidewrap .slidelist>li {
+    transform: translateX(0%);
+}
+
+.Main .section input[id="slide02"]:checked~.slidewrap .slidelist>li {
+    transform: translateX(-100%);
+}
+
+.Main .section input[id="slide03"]:checked~.slidewrap .slidelist>li {
+    transform: translateX(-200%);
+}
+
+/* input에 체크되면 텍스트 효과 */
+.Main .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox h3 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .2s;
+}
+
+.Main .section input[id="slide01"]:checked~.slidewrap li:nth-child(1) .textbox p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .4s;
+}
+
+.Main .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox h3 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .2s;
+}
+
+.Main .section input[id="slide02"]:checked~.slidewrap li:nth-child(2) .textbox p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .4s;
+}
+
+.Main .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox h3 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .2s;
+}
+
+.Main .section input[id="slide03"]:checked~.slidewrap li:nth-child(3) .textbox p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .4s;
+}
+
+/* 좌,우 슬라이드 버튼 */
+.Main .slide-control>div {
+    display: none;
+}
+
+.Main .section .left {
+    left: 30px;
+    background: url(../../../public/images/left.png) center center / 100% no-repeat;
+}
+
+.Main .section .right {
+    right: 30px;
+    background: url(../../../public/images/right.png) center center / 100% no-repeat;
+}
+
+.Main .section input[id="slide01"]:checked~.slidewrap .slide-control>div:nth-child(1) {
+    display: block;
+}
+
+.Main .section input[id="slide02"]:checked~.slidewrap .slide-control>div:nth-child(2) {
+    display: block;
+}
+
+.Main .section input[id="slide03"]:checked~.slidewrap .slide-control>div:nth-child(3) {
+    display: block;
+}
+
+/* 페이징 */
+.Main .slide-pagelist {
+    text-align: center;
+    padding: 20px;
+}
+
+.Main .slide-pagelist>li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Main .slide-pagelist>li>label {
+    display: block;
+    padding: 8px 8px;
+    border-radius: 30px;
+    background: #ccc;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.Main .section input[id="slide01"]:checked~.slidewrap .slide-pagelist>li:nth-child(1)>label {
+    background: #8f8f8f;
+}
+
+.Main .section input[id="slide02"]:checked~.slidewrap .slide-pagelist>li:nth-child(2)>label {
+    background: #999;
+}
+
+.Main .section input[id="slide03"]:checked~.slidewrap .slide-pagelist>li:nth-child(3)>label {
+    background: #999;
+}
+
+/* ====================================================== */
+
+/* 워니파트 */
+
+/* FlipRoom */
+
+
+.FlipRoom {
+    width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.FlipRoom .colimg {
+    width: 400px;
+    height: 600px;
+    text-align: center;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+
+
+
+/* Room part */
+
+
+.FlipRoom .hover_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    box-sizing: border-box;
+    /* height:100vh; */
+}
+
+.FlipRoom .hover_wrap>div {
+    max-width: 400px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.FlipRoom .hover_wrap>div img {
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.FlipRoom .hover_wrap>div .front {
+    transition: transform 1s;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.FlipRoom .hover_wrap>div .back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.FlipRoom .hover_wrap>div figcaption {
+    background: rgba(0, 0, 0, 0.4);
+    color: #F8F8FF;
+    padding: 5px;
+    text-align: center;
+    line-height: 1.5;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%) translateZ(100px);
+    width: 60%;
+    backface-visibility: hidden;
+}
+
+.FlipRoom .hover_wrap>.back_text {
+    background: white;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    line-height: 1.5;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%) translateZ(100px);
+    width: 60%;
+    backface-visibility: hidden;
+}
+
+
+
+
+/* mouse hover effect */
+
+.FlipRoom .hover_leftright .front {
+    transform: rotateY(0deg);
+}
+
+.FlipRoom .hover_leftright:hover .front {
+    transform: rotateY(180deg);
+}
+
+.FlipRoom .hover_leftright .back {
+    transform: rotateY(-180deg);
+}
+
+.FlipRoom .hover_leftright:hover .back {
+    transform: rotateY(0deg);
+}
+
+
+/*============================ 마지막 6가지 세부파트 ======================== */
+
+/* MiniSection */
+
+.MiniSection {
+    width: 1240px;
+    column-count: 3;
+    margin: auto;
+}
+
+
+.MiniItems .colsection {
+    width: 400px;
+    height: 150px;
+    margin-bottom: 10px;
+    border: #cccccc solid 1px;
+    display: flex;
+    position: relative;
+    background-color: white;
+}
+
+
+
+.MiniItems .colsection .colsec_img {
+    width: 130px;
+    height: 120px;
+    padding: 0 10px;
+    display: flex;
+    float: left;
+    position: absolute;
+    align-content: center;
+    bottom: 0;
+}
+
+
+
+.MiniItems .img_top {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    background-color: #000;
+    color: white;
+    font-weight: bold;
+    width: 130px;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+.MiniItems .colsection .colsec_name {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px;
+}
+
+
+.MiniItems .colsection .colsec_price {
+    font-size: 17px;
+    font-weight: bold;
+    right: 0;
+    position: absolute;
+    width: 120px;
+}
+
+
+/*------new--------*/
+.MiniItems .colsection .colsec_info {
+    position: absolute;
+    left: 200px;
+    margin-top: 10px;
+    vertical-align: middle;
+}
+
+
+.MiniItems .colsection .colsec_price sup {
+    color: red;
+    font-weight: bold;
+    padding: 5px;
+
+}
+
+.MiniItems .colsection .colsec_mini {
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}
+
+/*---------하트부분-------*/
+
+
+
+.MiniItembox .heartbtn {
+    /* position: absolute; */
+    position:relative;
+    bottom: 45px;
+    left: 365px;
+    width: 25px;
+    height: 25px;
+}

@@ -1,0 +1,47 @@
+/* ==================  product_list 필터 ================== */
+
+.PLFilter {
+    width: 1240px;
+    margin: 50px auto 50px;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 0;
+    display: block;
+}
+
+.PLFilter .product_function {
+    /* color: #353535; */
+    border: 0;
+    margin: 0 auto 10px;
+    overflow: hidden;
+    text-align: right;
+    line-height: 38px;
+}
+
+.PLFilter .product_function .product_count {
+    color: #777;
+    line-height: 40px;
+    font-size: 12px;
+    padding: 0;
+    float: left;
+}
+
+.PLFilter .product_compare {
+    margin: 0 4px 0 0;
+}
+
+.product_compare li {
+    display: inline;
+    padding: 0 6px 0 10px;
+    color: #777;
+    font-size: 12px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.product_compare li:hover {
+    font-weight: bold;
+}
+
+.product_compare li:first-child {
+    background: none;
+}

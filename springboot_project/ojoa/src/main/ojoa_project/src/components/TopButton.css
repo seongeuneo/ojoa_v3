@@ -1,0 +1,11 @@
+.Top_Btn_scroll {
+    position: fixed;
+    right: 1%;
+    bottom: 40%;
+    cursor: pointer;
+}
+
+.btn_top {
+    width: 45px;
+    height: 50px;
+}

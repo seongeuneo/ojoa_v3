@@ -1,0 +1,63 @@
+/* 페이지네이션 스타일링 */
+.ec-base-paginate {
+  margin: 30px 0 50px;
+  text-align: center;
+  font-size: 0;
+  line-height: 0;
+  display: block;
+}
+
+/* .ec-base-paginate li {
+  display: inline-block;
+  margin: 0 0 0 -1px;
+  border: 1px solid #d7d5d5;
+  font-size: 12px;
+  color: #757575;
+  vertical-align: top;
+} */
+
+.ec-base-paginate li a.this {
+  padding-bottom: 6px;
+  border-bottom: 3px solid #495164;
+  color: #495164;
+}
+
+.ec-base-paginate li a {
+  display: block;
+  width: 33px;
+  padding: 9px 0;
+  font-weight: bold;
+  color: #939393;
+  line-height: 14px;
+  background: #fff;
+}
+
+/* .ec-base-paginate ol {
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: top;
+} */
+
+/* .ec-base-paginate img {
+  border: none;
+  vertical-align: top;
+} */
+/* 
+.ec-base-paginate .menu li {
+  display: block;
+  min-width: 187px;
+  margin: 0 0 0 -1px;
+  padding: 12px 5px 11px;
+  border-right: 1px solid #cbcdce;
+  color: #707070;
+  text-decoration: none;
+  outline: 0;
+  text-align: center;
+  background: #f2f2f2;
+} */
