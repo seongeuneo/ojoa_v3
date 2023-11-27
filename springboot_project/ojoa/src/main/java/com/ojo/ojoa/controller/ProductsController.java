@@ -3,17 +3,17 @@ package com.ojo.ojoa.controller;
 
 import org.springframework.stereotype.Controller;
 
-import com.ojo.ojoa.service.ProductService;
+import com.ojo.ojoa.service.ProductsService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
-@AllArgsConstructor
-public class ProductController {
+//@AllArgsConstructor
+public class ProductsController {
 
-	private final ProductService itemService;
+	//private final ProductsService ProductsService;
 	
-	 // 상품 등록 get 페이지
+	  //상품 등록 get 페이지
 //    @GetMapping("/new")
 //    public String itemForm(Model model) {
 //        model.addAttribute("products", new Products());
@@ -21,7 +21,7 @@ public class ProductController {
 //        return "item/itemForm";
 //    }
 	
-    // 상품 등록 post
+     //상품 등록 post
 //    @PostMapping(value = "/admin/item/new")
 //    public String itemNew(@Valid Products products, BindingResult bindingResult,
 //                          Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
