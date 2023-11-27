@@ -3,15 +3,15 @@ package com.ojo.ojoa.controller;
 
 import org.springframework.stereotype.Controller;
 
-import com.ojo.ojoa.service.ProductService;
+//import com.ojo.ojoa.service.ProductService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
-@AllArgsConstructor
+//@AllArgsConstructor
 public class ProductController {
 
-	private final ProductService itemService;
+	//private final ProductService itemService;
 	
 	 // 상품 등록 get 페이지
 //    @GetMapping("/new")
