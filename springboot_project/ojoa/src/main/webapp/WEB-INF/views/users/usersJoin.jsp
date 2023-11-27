@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Spring_Boot Users Join **</title>
+<title>** Users Join **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
@@ -90,16 +90,16 @@ function inCheck() {
 			<span id="nMessage" class="eMessage"></span>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">I D</th>
-		<td><input type="text" name="id" id="id" placeholder="영어, 10글자이내" size="10">
+		<td><input type="text" name="id" id="id" placeholder="영어, 10글자이내" size="10" autocomplete="id">
 			<button type="button" id="idDup" onclick="idDupCheck()">ID중복확인</button>
 			<br><span id="iMessage" class="eMessage"></span>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">Password</th>
-		<td><input type="password" name="pwd" id="pwd" placeholder="영어, 숫자, 특수문자" size="10"><br>
+		<td><input type="password" name="pwd" id="pwd" placeholder="영어, 숫자, 특수문자" size="10" autocomplete="new-password"><br>
 			<span id="pMessage" class="eMessage"></span>
 		</td></tr>	
 	<tr height="40"><th bgcolor="aqua">Pw 확인</th>
-      	<td><input type="password" id="pwd2" placeholder="재입력 확인" size="10"><br>
+      	<td><input type="password" id="pwd2" placeholder="재입력 확인" size="10" autocomplete="new-password"><br>
         	<span id="p2Message" class="eMessage"></span>
         </td></tr>	
     <tr height="40"><th bgcolor="aqua">주소</th>

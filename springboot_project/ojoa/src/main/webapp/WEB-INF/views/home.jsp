@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>
-	Ojoa Project SpringBoot JPA !!!  
+	Ojoa Project  
 </h1>
 <P>* Server_Time: ${serverTime}</P>
 <hr>
