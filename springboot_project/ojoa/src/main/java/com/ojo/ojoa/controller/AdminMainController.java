@@ -19,7 +19,7 @@ public class AdminMainController {
 	@GetMapping("/adminmain")
 	public String adminMain() {
 		// 여기서는 관리자 페이지의 JSP 파일명을 반환합니다.
-		return "admin/AdminMain"; // adminPage는 관리자 페이지의 JSP 파일명입니다.
+		return "/admin/AdminMain"; // adminPage는 관리자 페이지의 JSP 파일명입니다.
 	}
 
 }
