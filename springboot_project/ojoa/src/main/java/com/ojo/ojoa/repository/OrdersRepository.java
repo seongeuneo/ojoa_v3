@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ojo.ojoa.entity.Orders;
 
 @Repository
-public interface OrdersRepository extends JpaRepository<Orders, Long> {
+public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
 
 	
