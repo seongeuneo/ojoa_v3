@@ -30,24 +30,15 @@
 	&nbsp;<a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>
 <br>
-<<<<<<< HEAD
+
 &nbsp;<a href="member/memberList">memberList</a>&nbsp; 
-=======
->>>>>>> main
 &nbsp;<a href="board/boardList">bordList??</a>&nbsp; 
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
-<<<<<<< HEAD
 &nbsp;<a href="cart/cartList">cart_List</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">orders_List</a>&nbsp; 
-<<<<<<< HEAD
-&nbsp;<a href="products/ordersList">products_List</a>&nbsp; 
-=======
-=======
 &nbsp;<a href="cart/cartList">cart_List</a>&nbsp;
->>>>>>> main
 &nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
->>>>>>> main
 </body>
 </html>
