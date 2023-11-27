@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "wishlist")
+@Table(name = "wish")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Wishlist {
+public class Wish {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
