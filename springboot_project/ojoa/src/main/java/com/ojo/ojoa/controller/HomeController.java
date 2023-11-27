@@ -22,4 +22,3 @@ public class HomeController {
 	} //home
 	
 } //class
-

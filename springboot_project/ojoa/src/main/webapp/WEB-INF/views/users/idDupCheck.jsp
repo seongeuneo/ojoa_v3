@@ -32,7 +32,7 @@ function idOK() {
 	//opener.document.getElementById('id').readonly='readonly'; //XXXXX
 	//opener.document.getElementById('id').readOnly='readOnly'; //OK    
 	opener.document.getElementById('id').readOnly=true; //OK
-	opener.document.getElementById('password').focus();
+	opener.document.getElementById('pwd').focus();
 	// 4) 
 	close();
 	// => window.close() , self.close()
@@ -55,7 +55,6 @@ function idOK() {
 	<h3>** ID 중복확인 *</h3>
 	<h4>Parameter id값 확인</h4>
 	=> Parameter_ID : ${param.id}<br>
-	=> MemberDTO_ID : ${memberDTO.id}<br>
 	<hr>
 	<form action="idDupCheck" method="get">
 		User_ID : 

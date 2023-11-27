@@ -9,14 +9,14 @@
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** Spring_Boot Member Login **</h2>
+<h2>** Spring_Boot Users Login **</h2>
 <form action="login" method="post">
 <table>
 	<tr height="40"><td><label for="id">ID</label></td>
 		<td><input type="text" id="id" name="id"></td>
 	</tr>
 	<tr height="40"><td><label for="password">Password</label></td>
-		<td><input type="password" id="password" name="password"></td>
+		<td><input type="password" id="pwd" name="pwd"></td>
 	</tr>
 	<tr height="40"><td></td>
 		<td><input type="submit" value="로그인">&nbsp;&nbsp;
