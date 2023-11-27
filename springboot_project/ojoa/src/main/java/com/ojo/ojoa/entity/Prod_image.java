@@ -13,30 +13,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "administrators")
+@Table(name = "prod_image")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Administrators {
+
+public class Prod_image {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id; // PK, AI
+	private int prod_imagenum; // PK
+	
+	private int prod_num; // 상품 번호 FK for product(prodnum)
 	
 	@Column(nullable = false)
-	private String pwd; // 관리자 비밀번호
+	private String prod_image1; // 썸네일 이미지 1
+	@Column(nullable = true)
+	private String prod_image2; // 썸네일 이미지 2
+	@Column(nullable = true)
+	private String prod_image3; // 썸네일 이미지 3
+	@Column(nullable = true)
+	private String prod_image4; // 썸네일 이미지 4
 	
 	@Column(nullable = false)
-	private String name; // 관리자 이름
-	
-	@Column(nullable = false)
-	private String email; // 관리자 이메일 
-	
-	@Column(nullable = false)
-	private String phone; // 관리자 전화번호
-	
-	
-	
-
+	private String prod_imagedetail; // 상세이미지
 }
