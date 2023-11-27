@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Products {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +48,10 @@ public class Products {
 	private String prod_content;
 	
 	@Column(nullable = false)
-	private String prod_image;
+	private String prod_mainimage;
 	
 	@Column(nullable = false, columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (prod_useyn IN ('y', 'n'))")
-	private String prod_useyn; // 판매: 'y' , 중단: 'n'
+	private String prod_sellyn; // 판매: 'y' , 중단: 'n'
 	
 	@CreatedDate
 	@Column(nullable = false)

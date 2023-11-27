@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ojo.ojoa.entity.Products;
+import com.ojo.ojoa.entity.Product;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<Products, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	 /*
      * 메뉴 아이디로 상품 목록 조회
@@ -16,5 +16,7 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
      * @return
      */
 	
-	 List<Products> findAllByCategoryId(Long categoryId);
+	 List<Product> findAllByCategoryId(Long categoryId);
 }
+
+

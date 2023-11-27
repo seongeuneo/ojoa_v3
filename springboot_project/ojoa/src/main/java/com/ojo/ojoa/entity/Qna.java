@@ -4,6 +4,7 @@ package com.ojo.ojoa.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,13 +24,14 @@ import lombok.NoArgsConstructor;
 public class Qna {
    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int qna_seq;
 
     @Column(name="prod_num", nullable=false)
-    private int prod_num;
+    private int prod_num; //Foregin key
 
     @Column(name="id", nullable=false)
-    private String id;
+    private String id; //Foregin key
 
     @Column(name="qna_category", nullable=false)
     private String qna_category;

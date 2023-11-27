@@ -14,21 +14,21 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "wishlist")
+@Table(name = "wish")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Wishlist {
+public class Wish {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int wish_num;
 	
 	@Column(name="id", nullable=false)
-	private String id;
+	private String id; //Foregin key
 	
 	@Column(name="prod_num", nullable=false)
-	private int prod_num;
+	private int prod_num;  //Foregin key
 
 } //class
