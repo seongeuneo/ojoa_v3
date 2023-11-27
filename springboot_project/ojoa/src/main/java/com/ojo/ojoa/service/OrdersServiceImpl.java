@@ -34,7 +34,7 @@ public class OrdersServiceImpl implements OrdersService {
 		Orders existingOrder = ordersRepository.findById(id).orElse(null);
 		if (existingOrder != null) {
 			// 업데이트된 정보로 기존 주문을 업데이트하고 저장
-			existingOrder.setSomeField(updatedOrder.getSomeField());
+			// existingOrder.setSomeField(updatedOrder.getSomeField());
 			// 필요한 업데이트 로직들을 수행
 			// ...
 			
@@ -53,7 +53,8 @@ public class OrdersServiceImpl implements OrdersService {
     public List<Orders> getOrdersListByUserId(Long id) {
         // userId를 기준으로 해당 사용자의 주문 목록을 가져오는 로직을 구현해야 합니다.
 		// userId를 기반으로 주문 목록을 가져오는 예시 쿼리
-        return ordersRepository.findByUserId(id);
+        // return ordersRepository.findByUserId(id);
+		return ordersRepository.findAll();
     }
 	
 	// 기타 주문과 관련된 비즈니스 로직을 구현할 수 있어요.
