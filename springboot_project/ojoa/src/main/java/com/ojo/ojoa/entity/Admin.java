@@ -13,12 +13,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "administrators")
+@Table(name = "admin")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Administrators {
+public class Admin {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

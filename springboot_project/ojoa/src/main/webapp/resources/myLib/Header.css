@@ -1,3 +1,6 @@
+
+@charset "UTF-8";
+/* 
 .header {
     background-color: white;
     min-height: 80px;
@@ -5,8 +8,8 @@
     margin: auto;
 }
 
-/*======================================================*/
-/* header */
+======================================================
+header
 #mheader {
     position: relative;
     height: 100px;
@@ -19,7 +22,7 @@
     margin: auto;
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     top: -25px;
 }
 
@@ -53,7 +56,7 @@
     position: relative;
     display: flex;
     justify-content: flex-end;
-    /* 서치를 헤더 오른쪽 끝에 배치 */
+    서치를 헤더 오른쪽 끝에 배치
     align-items: center;
 }
 
@@ -71,11 +74,11 @@
 }
 
 .header input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #c6c6c6 inset;
+   -webkit-box-shadow: 0 0 0 1000px #c6c6c6 inset;
 }
 
-/*======================================================*/
-/* category_navi_drop_bar */
+======================================================
+category_navi_drop_bar
 #category_nav {
     font: bold 16px;
     width: 1240px;
@@ -125,13 +128,13 @@
     transition: ease 1s;
 }
 
-/* .sticky {
+.sticky {
     position: sticky;
     top: 0;
-} */
+}
 
-/* ======================================================= */
-/* .header .mtalk img {
+=======================================================
+.header .mtalk img {
     position: fixed;
     width: 50px;
     height: 50px;
@@ -139,7 +142,7 @@
     bottom: 10%;
     z-index: 1;
     cursor: pointer;
-} */
+}
 
 .header .mchannel img {
     position: fixed;
@@ -149,4 +152,62 @@
     bottom: 2%;
     z-index: 1;
     cursor: pointer;
+} */
+
+/* body 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* h1 스타일 */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* header 스타일 */
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+/* 로고 이미지 스타일 */
+.logo {
+    width: 100px;
+    height: auto;
+  
+}
+
+.header {
+	display: grid;
+  place-items: center; /* 요소들을 가운데로 정렬 */
+}
+
+
+/* 네비게이션 바 스타일 */
+.navBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navBar ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.navBar ul li:last-child {
+    margin-right: 0;
+}
+
+.navBar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navBar ul li a:hover {
+    color: #ff6600;
 }
