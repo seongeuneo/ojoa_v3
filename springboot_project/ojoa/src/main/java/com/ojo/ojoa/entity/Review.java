@@ -28,7 +28,7 @@ public class Review {
 	@Column(name="rv_title", nullable=false)
 	private String rv_title;
 	
-	@Column(name="rv_title", nullable=false)
+	@Column(name="rv_content", nullable=false)
 	private String rv_content;
 	
 	@Column(name="rv_date", nullable=false)
