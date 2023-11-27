@@ -52,7 +52,7 @@ public class UsersController {
 	// ** UsersDetail
 	@GetMapping(value ="/usersDetail")
 	public String usersDetail(HttpServletRequest request, Model model, Users entity) {
-model.addAttribute("apple", service.selectOne(entity.getId()));
+		model.addAttribute("apple", service.selectOne(entity.getId()));
 		
 		if ( "U".equals(request.getParameter("jCode")) )
 			 return "users/usersUpdate";
@@ -138,8 +138,8 @@ model.addAttribute("apple", service.selectOne(entity.getId()));
 	// => 수정후 submit -> 수정 Service 
 	//		-> 성공: detail
 	//		-> 실패: 재시도 유도 (usersUpdate.jsp)
-	@PostMapping(value="/usersupdate")
-	public String usersUpdte(HttpSession session,
+	@PostMapping(value="/usersUpdate")
+	public String usersUpdate(HttpSession session,
 							  Users entity, Model model) throws IOException {
 		
 		// => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관

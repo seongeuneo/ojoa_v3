@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Spring_Boot UsersList **</title>
+<title>** UsersList **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** Spring_Boot UsersList **</h2>
+<h2>** UsersList **</h2>
 
 <hr>
 <c:if test="${not empty requestScope.message}">
