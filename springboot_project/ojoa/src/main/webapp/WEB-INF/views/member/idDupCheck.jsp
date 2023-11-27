@@ -32,7 +32,7 @@ function idOK() {
 	//opener.document.getElementById('id').readonly='readonly'; //XXXXX
 	//opener.document.getElementById('id').readOnly='readOnly'; //OK    
 	opener.document.getElementById('id').readOnly=true; //OK
-	opener.document.getElementById('pwd').focus();
+	opener.document.getElementById('password').focus();
 	// 4) 
 	close();
 	// => window.close() , self.close()

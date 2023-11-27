@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ojo.ojoa.entity.Users;
-import com.ojo.ojoa.service.UsersService;
+import com.ojo.ojoa.entity.Member;
+import com.ojo.ojoa.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/member")
 @Log4j2
 @AllArgsConstructor
-public class UsersController {
+public class MemberController {
 	
-	UsersService service;
+	MemberService service;
 	PasswordEncoder passwordEncoder;
 	
 	// ** ID 중복확인
 	@GetMapping("/idDupCheck")
-	public String idDupCheck(Users entity, Model model) {
+	public String idDupCheck(Member entity, Model model) {
 		// 1) newID 확인
 		if ( service.selectOne(entity.getId()) !=null ) {
 			// => 존재 : 사용불가
@@ -40,26 +40,26 @@ public class UsersController {
 			// => 없으면: 사용가능
 			model.addAttribute("idUse", "T");
 		}
-		return "users/idDupCheck";
+		return "member/idDupCheck";
 	} //idDupCheck
 	
-	// ** UsersList
-	@GetMapping("/usersList")
-	public void usersList(Model model) {
+	// ** MemberList
+	@GetMapping("/memberList")
+	public void memberList(Model model) {
 		model.addAttribute("banana", service.selectList());
-	} //usersList
+	} //memberList
 	
-	// ** UsersDetail
-	@GetMapping(value ="/usersDetail")
-	public String usersDetail(HttpServletRequest request, Model model, Users entity) {
+	// ** MemberDetail
+	@GetMapping(value ="/memberDetail")
+	public String memberDetail(HttpServletRequest request, Model model, Member entity) {
 		model.addAttribute("apple", service.selectOne(entity.getId()));
 		
 		if ( "U".equals(request.getParameter("jCode")) )
-			 return "users/usersUpdate";
-		else return "users/usersDetail";
-	} //usersDetail
+			 return "member/memberUpdate";
+		else return "member/memberDetail";
+	} //memberDetail
 
-	// ** Users Login & Logout
+	// ** Member Login & Logout
 	// => LoginForm : Get
 	// => 계층적 url 적용 
 	@GetMapping(value="/loginForm")
@@ -69,10 +69,10 @@ public class UsersController {
 	
 	// => Login 처리 : Post
 	@PostMapping(value="/login")
-	public String login(HttpSession session, Model model, Users entity) {
+	public String login(HttpSession session, Model model, Member entity) {
 		// ** 로그인 Service 처리
 		// 1. 요청분석
-		String password = entity.getPwd();
+		String password = entity.getPassword();
 		String uri="redirect:/home"; 
 		// "home" -> home.jsp (성공)
 		// "redirect:home" -> home 을 재요청, 그러므로 HomeController 의 home 메서드로
@@ -81,11 +81,11 @@ public class UsersController {
 		entity=service.selectOne(entity.getId());
 		
 		if ( entity!=null && 
-			passwordEncoder.matches(password, entity.getPwd()) ) {	
+			passwordEncoder.matches(password, entity.getPassword()) ) {	
 			session.setAttribute("loginID", entity.getId());
 			session.setAttribute("loginName", entity.getName());
 		}else {
-			uri="users/loginForm";
+			uri="member/loginForm";
 			model.addAttribute("message", "로그인 실패. 다시 하세요");
 		}
 		return uri;
@@ -102,22 +102,22 @@ public class UsersController {
 
 	// ** Join 기능
 	// => JoinForm: GET
-	@GetMapping(value="/usersJoin")
-	public void usersJoin() {
+	@GetMapping(value="/memberJoin")
+	public void memberJoin() {
 		// viewName 생략 -> 요청명이 viewName 이 됨
 	}
 	
 	// => Join Service 처리: POST
 	@PostMapping(value="/join")
 	public String join(HttpServletRequest request, 
-					Users entity, Model model) throws IOException  {
+					Member entity, Model model) throws IOException  {
 		// 1. 요청분석 & Service
-		// => 성공: 로그인유도 (loginForm 으로, users/loginForm.jsp)
-		// => 실패: 재가입유도 (joinForm 으로, users/memberJoin.jsp)
-		String uri="users/loginForm";
+		// => 성공: 로그인유도 (loginForm 으로, member/loginForm.jsp)
+		// => 실패: 재가입유도 (joinForm 으로, member/memberJoin.jsp)
+		String uri="member/loginForm";
 		
 		// ** PasswordEncoder (암호화 적용)
-		entity.setPwd(passwordEncoder.encode(entity.getPwd()));
+		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 		
 		// 2. Service 처리
 		try {
@@ -126,25 +126,25 @@ public class UsersController {
 		} catch (Exception e) {
 			log.info("** insert Exception => "+e.toString());
 			model.addAttribute("message", "회원가입 실패. 다시 하세요.");
-			uri="users/usersJoin";
+			uri="member/memberJoin";
 		}
 		
 		// 3. View 
 		return uri;
 	} // Join_Post
 	
-	// ** Users Update
-	// => 요청: home 에서 내정보수정 -> 내정보수정Form (usersUpdate.jsp) 출력
+	// ** Member Update
+	// => 요청: home 에서 내정보수정 -> 내정보수정Form (memberUpdate.jsp) 출력
 	// => 수정후 submit -> 수정 Service 
 	//		-> 성공: detail
-	//		-> 실패: 재시도 유도 (usersUpdate.jsp)
-	@PostMapping(value="/usersUpdate")
-	public String usersUpdate(HttpSession session,
-							  Users entity, Model model) throws IOException {
+	//		-> 실패: 재시도 유도 (memberUpdate.jsp)
+	@PostMapping(value="/memberUpdate")
+	public String memberUpdate(HttpSession session,
+							  Member entity, Model model) throws IOException {
 		
 		// => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
 		model.addAttribute("apple", entity);
-		String uri="users/usersDetail";
+		String uri="member/memberDetail";
 		
 		// ** password는 수정불가
 		
@@ -157,15 +157,15 @@ public class UsersController {
 		} catch (Exception e) {
 			log.info("** update Exception => "+e.toString());
 			model.addAttribute("message", "회원정보 수정 실패. 다시 하세요.");
-			uri="users/usersUpdate";
+			uri="member/memberUpdate";
 		}
 		
 		return uri;
-	} //usersUpdte
+	} //memberUpdte
 	
-	// ** Users Delete: 회원탈퇴
-	@GetMapping(value="/usersdelete")
-	public String usersdelete(HttpSession session, Users entity, RedirectAttributes rttr) {
+	// ** Member Delete: 회원탈퇴
+	@GetMapping(value="/memberdelete")
+	public String memberdelete(HttpSession session, Member entity, RedirectAttributes rttr) {
 		
 		String uri = "redirect:/home";
 		
@@ -173,8 +173,8 @@ public class UsersController {
 			log.info("** delete 성공 id => "+service.delete(entity.getId()));
 			rttr.addFlashAttribute("message", "탈퇴 성공. 1개월 후 재가입 가능 합니다.") ;	
 			 if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
-				 // => 관리자에 의한 강제탈퇴 : usersList.jsp
-				 uri="redirect:usersList";
+				 // => 관리자에 의한 강제탈퇴 : memberList.jsp
+				 uri="redirect:memberList";
 			 }else {
 				 // => 본인탈퇴 : home.jsp, session 무효화 
 				 session.invalidate();
@@ -185,7 +185,7 @@ public class UsersController {
 		}
 		
 		return uri;
-	} // usersdelete
+	} //memberdelete
 	
 	
 } //class

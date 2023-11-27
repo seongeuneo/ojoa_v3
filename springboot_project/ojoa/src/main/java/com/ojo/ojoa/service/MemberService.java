@@ -2,18 +2,18 @@ package com.ojo.ojoa.service;
 
 import java.util.List;
 
-import com.ojo.ojoa.entity.Users;
+import com.ojo.ojoa.entity.Member;
 
-public interface UsersService {
+public interface MemberService {
 	
 	// ** selectList
-	public List<Users> selectList();
+	public List<Member> selectList();
 
 	// ** selectOne
-	public Users selectOne(String id);
+	public Member selectOne(String id);
 
 	// ** save : insert, update
-	public String save(Users entity);
+	public String save(Member entity);
 		
 	// ** delete
 	public String delete(String id);
