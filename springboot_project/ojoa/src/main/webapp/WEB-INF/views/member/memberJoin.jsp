@@ -44,7 +44,8 @@ function idDupCheck() {
   let adCheck=false; // 상세주소
   let phCheck=false; // 전화번호
   let eCheck=false; // 이메일
-  let mCheck=false; // 마케팅 수신 동의
+  let sCheck=false; // sms 수신 동의
+  let mCheck=false; // 이메일 수신 동의
 
 // 3) submit 실행 여부 판단 & 실행
 // => 모든항목의 무결성을 확인
@@ -60,10 +61,11 @@ function inCheck() {
 	if (adCheck==false) { document.getElementById('adMessage').innerHTML=' 필수입력, 상세주소 를 확인하세요~~'; }
 	if (phCheck==false) { document.getElementById('phMessage').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
 	if (eCheck==false) { document.getElementById('eMessage').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
-	if (mCheck==false) { document.getElementById('mMessage').innerHTML=' 필수입력, 마케팅 수신 동의 를 확인하세요~~'; }
+	if (sCheck==false) { document.getElementById('sMessage').innerHTML=' 필수입력, SMS 수신 동의 를 확인하세요~~'; }
+	if (mCheck==false) { document.getElementById('mMessage').innerHTML=' 필수입력, 이메일 수신 동의 를 확인하세요~~'; }
 	
 	if (nCheck && iCheck && pCheck && p2Check 
-			   && zCheck && aCheck && adCheck && phCheck && eCheck && mCheck) {
+			   && zCheck && aCheck && adCheck && phCheck && eCheck && mCheck && sCheck && mCheck) {
 		// => submit 확인
 		if ( confirm(" 정말 가입 하십니까? (Yes:확인 / No:취소)") ) {
 			// => submit 진행
@@ -81,7 +83,7 @@ function inCheck() {
 
 </head>
 <body>
-<h2>** Spring_Boot Users Join **</h2>
+<h2>** Member Join **</h2>
 
 <form action="join" method="Post" enctype="multipart/form-data" id="myform">
 <table>
@@ -95,11 +97,11 @@ function inCheck() {
 			<br><span id="iMessage" class="eMessage"></span>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">Password</th>
-		<td><input type="password" name="pwd" id="pwd" placeholder="영어, 숫자, 특수문자" size="10" autocomplete="new-password"><br>
+		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" size="10" autocomplete="new-password"><br>
 			<span id="pMessage" class="eMessage"></span>
 		</td></tr>	
 	<tr height="40"><th bgcolor="aqua">Pw 확인</th>
-      	<td><input type="password" id="pwd2" placeholder="재입력 확인" size="10" autocomplete="new-password"><br>
+      	<td><input type="password" id="password2" placeholder="재입력 확인" size="10" autocomplete="new-password"><br>
         	<span id="p2Message" class="eMessage"></span>
         </td></tr>	
     <tr height="40"><th bgcolor="aqua">주소</th>
@@ -126,13 +128,13 @@ function inCheck() {
         </select>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">SMS 수신 여부</th>
-		<td><input type="radio" name="marketingSMS" id="marketingSMS" value="y"><label>수신함</label>
-			<input type="radio" name="marketingSMS" id="marketingSMSNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>수신함</label>
+			<input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신안함</label>
 			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span>
        	</td></tr>	
 	<tr height="40"><th bgcolor="aqua">이메일 수신 여부</th>
-		<td><input type="radio" name="marketingEmail" id="marketingEmail" value="y"><label>수신함</label>
-			<input type="radio" name="marketingEmail" id="marketingEmailNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_email" id="marketing_email" value="y"><label>수신함</label>
+			<input type="radio" name="marketing_email" id="marketing_emailNone" value="n" checked><label>수신안함</label>
 			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span>
        	</td></tr>	
 				

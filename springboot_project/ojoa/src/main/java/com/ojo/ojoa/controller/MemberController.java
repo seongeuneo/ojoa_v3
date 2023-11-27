@@ -109,7 +109,7 @@ public class MemberController {
 	
 	// => Join Service 처리: POST
 	@PostMapping(value="/join")
-	public String join(HttpServletRequest request, 
+	public String join(HttpServletRequest request,
 					Member entity, Model model) throws IOException  {
 		// 1. 요청분석 & Service
 		// => 성공: 로그인유도 (loginForm 으로, member/loginForm.jsp)

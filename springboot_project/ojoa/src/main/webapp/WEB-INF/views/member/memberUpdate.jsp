@@ -28,7 +28,7 @@
 		
 		
 	<tr height="40"><th bgcolor="Khaki">Password</th>
-		<td><input type="password" name="pwd" value=${requestScope.apple.pwd} size="20" readonly></td></tr>	
+		<td><input type="password" name="password" value=${requestScope.apple.pwd} size="20" readonly></td></tr>	
 		-->
 	<tr height="40"><th bgcolor="aqua">Password</th>
 		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" size="20" autocomplete="new-password"><br>
@@ -64,13 +64,13 @@
         </select>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">SMS 수신 여부</th>
-		<td><input type="radio" name="marketing" id="marketingSMS" value="y"><label>수신함</label>
-            <input type="radio" name="marketing" id="marketingNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>수신함</label>
+            <input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신안함</label>
             <span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span>
        	</td></tr>	
 	<tr height="40"><th bgcolor="aqua">이메일 수신 여부</th>
-		<td><input type="radio" name="marketing" id="marketingEmail" value="y"><label>수신함</label>
-            <input type="radio" name="marketing" id="marketingNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_email" id="marketing_email" value="y"><label>수신함</label>
+            <input type="radio" name="marketing_email" id="marketing_emailNone" value="n" checked><label>수신안함</label>
             <span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span>
        	</td></tr>	
 	
