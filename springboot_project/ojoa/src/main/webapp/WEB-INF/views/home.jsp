@@ -24,8 +24,8 @@
 <!-- Login 후 -->
 <c:if test="${not empty sessionScope.loginID}">
 	&nbsp;<a href="users/logout">Logout</a>&nbsp;
-	&nbsp;<a href="users/usersdetail?id=${sessionScope.loginID}">내정보</a>&nbsp;  
-	&nbsp;<a href="users/usersdetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a>&nbsp;  
+	&nbsp;<a href="users/usersDetail?id=${sessionScope.loginID}">내정보</a>&nbsp;
+	&nbsp;<a href="users/usersDetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a>&nbsp;  
 	&nbsp;<a href="users/pUpdateForm">PW수정</a>&nbsp; 
 	&nbsp;<a href="users/usersdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>

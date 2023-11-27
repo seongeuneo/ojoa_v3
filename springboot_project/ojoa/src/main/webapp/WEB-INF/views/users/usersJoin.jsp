@@ -125,10 +125,10 @@ function inCheck() {
         </select>
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">마케팅 수신 동의</th>
-		<td><input type="radio" name="agree"><label>이메일</label>
-            <input type="radio" name="agree"><label>SMS</label>
-            <input type="radio" name="agree"><label>수신받지않음</label>
-            <span>마케팅 수신에 동의하실 경우, Ojoa의 소식을 빠르게 받아보실 수 있습니다.</span>
+		<td><input type="radio" name="marketing" id="marketing" value="2"><label>이메일</label>
+            <input type="radio" name="marketing" id="marketing" value="3"><label>SMS</label>
+            <input type="radio" name="marketing" id="marketing" value="1" checked><label>수신받지않음</label>
+            <span style="font-size: 12px; color: red;">&nbsp;&nbsp;&nbsp;마케팅 수신에 동의하실 경우, Ojoa의 소식을 빠르게 받아보실 수 있습니다.</span>
        	</td></tr>
 				
 	<tr height="40"><th></th>

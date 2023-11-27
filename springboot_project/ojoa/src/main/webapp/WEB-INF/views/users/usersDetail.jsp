@@ -5,33 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Spring_Boot Member Detail **</title>
+<title>** Users Detail **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** Spring_Boot Member Detail **</h2>
+<h2>** Users Detail **</h2>
 <table>
 <c:if test="${not empty requestScope.apple}">
 	<tr height="40"><th bgcolor="Thistle">I D</th>
 		<td>${requestScope.apple.id}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Password</th>
-		<td>${requestScope.apple.password}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">password</th>
+		<td>${requestScope.apple.pwd}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">Name</th>
 		<td>${requestScope.apple.name}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Age</th>
-		<td>${requestScope.apple.age}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Jno</th>
-		<td>${requestScope.apple.jno}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Info</th>
-		<td>${requestScope.apple.info}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Point</th>
-		<td>${requestScope.apple.point}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">Birthday</th>
-		<td>${requestScope.apple.birthday}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">추천인</th>
-		<td>${requestScope.apple.rid}</td></tr>	
-	<tr height="40"><th bgcolor="Thistle">Image</th>
-		<td><img alt="MyImage" src="/${requestScope.apple.uploadfile}" width="80" height="100"></td></tr>									
+	<tr height="40"><th bgcolor="Thistle">phone</th>
+		<td>${requestScope.apple.phone}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">zipcode</th>
+		<td>${requestScope.apple.zipcode}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">address</th>
+		<td>${requestScope.apple.address}</td></tr>
+	<tr height="40"><th bgcolor="Thistle">addressdetail</th>
+		<td>${requestScope.apple.addressdetail}</td></tr>
+	<tr height="40"><th bgcolor="Thistle">email</th>
+		<td>${requestScope.apple.email}</td></tr>
+	<tr height="40"><th bgcolor="Thistle">regdate</th>
+		<td>${requestScope.apple.regdate}</td></tr>	
 </c:if>
 <c:if test="${empty requestScope.apple}">
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
