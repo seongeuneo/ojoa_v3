@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+body {
+  min-width: 1240px;
+  margin: auto;
+  padding: auto;
+}
+
+header {
+  background-color: white;
+  min-height: 80px;
+  width: 1240px;
+  margin: auto;
+}
+
+main {
+  background-color: white;
+  min-height: 450px;
+  width: 1240px;
+  margin: auto;
+}
+
+footer {
+  background-color: white;
+  min-height: 450px;
+  width: 1240px;
+  margin: auto;
+}

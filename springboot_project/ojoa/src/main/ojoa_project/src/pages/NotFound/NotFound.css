@@ -1,0 +1,18 @@
+.NotFound {
+    background-color: white;
+    width: 1240px;
+    margin: auto;
+    text-align: center;
+}
+
+.NotFound .error {
+    min-width: 1240px;
+    min-height: 450px;
+    margin: auto;
+    padding: auto;
+    background-color: white;
+    color: #333;
+    font-size: 30px;
+    margin-top: 300px;
+    letter-spacing: 3px;
+}

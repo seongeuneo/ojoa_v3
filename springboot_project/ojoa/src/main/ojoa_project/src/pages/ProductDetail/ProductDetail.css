@@ -1,0 +1,443 @@
+/* ====================================================== */
+/* navi_bar */
+.ProductList .path {
+  color: #333;
+  font-size: 12px;
+  margin: 0px auto;
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.ProductList .path span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  white-space: nowrap;
+  text-indent: 100%;
+  display: none;
+}
+
+.ProductList .path li {
+  float: left;
+  padding-left: 12px;
+  margin: 0;
+  color: #333;
+}
+
+.ProductList .path ol {
+  float: right;
+}
+
+
+
+
+
+
+/*======================================================*/
+/* main product detail page */
+
+.ProductDetail {
+  width: 1240px;
+  margin: 0 auto;
+  padding: 50px 0 0;
+}
+
+.ProductDetail .product_view {
+  margin: 70px auto;
+  /* padding: 0 0 0 395px; */
+  width: 1240px;
+  height: 500px;
+  min-width: 1240px;
+  box-sizing: border-box;
+  position: relative;
+
+}
+
+
+.ProductDetail .product_view h2,
+.ProductDetail .product_view table {
+  position: absolute;
+  width: 380px;
+
+  right: calc(100%*0.15);
+  text-align: left;
+}
+
+.ProductDetail .product_view table {
+  top: calc(100%*0.1);
+}
+
+.ProductDetail .product_view .pd_img {
+  position: absolute;
+  width: 380px;
+
+  left: calc(100%*0.15);
+}
+
+.ProductDetail .product_view .pd_img ul {
+  cursor: pointer;
+}
+
+.ProductDetail .product_view ul img.active {
+  border: 1px solid rgb(43, 148, 205);
+}
+
+.ProductDetail .product_view .pd_img>img {
+  width: 368px;
+  height: 370px;
+  border: 1px solid #e8e8e8;
+}
+
+.ProductDetail .product_view .pd_img li::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.ProductDetail .product_view .pd_img li {
+  float: left;
+  padding: 10px 10px 0 0;
+}
+
+.ProductDetail .product_view .pd_img .on img {
+  border: solid 2px #94c4f8;
+}
+
+.ProductDetail .product_view .pd_img li img {
+  width: 68px;
+  height: 68px;
+  border: 1px solid #e8e8e8;
+}
+
+.ProductDetail .product_view h2 {
+  padding: 0 0 20px;
+  border-bottom: 2px solid #333;
+  font-size: 24px;
+  color: #232323;
+  line-height: 26px;
+  margin: 0 0 15px;
+}
+
+.ProductDetail .product_view .hide {
+  display: none;
+}
+
+/* =================================================== */
+/* .product_view table */
+
+
+.ProductDetail .product_view table th,
+.ProductDetail .product_view table td {
+  padding: 14px 0;
+  font-size: 15px;
+  color: #444;
+  text-align: left;
+  border: none;
+}
+
+.ProductDetail .product_view table td .price {
+  font-size: 22px;
+}
+
+.ProductDetail .product_view table td .total {
+  font-size: 22px;
+  color: #0a56a9;
+}
+
+.ProductDetail .product_view table td .total b {
+  font-size: 22px;
+}
+
+.ProductDetail .product_view table.pd_length {
+  width: 71px;
+  height: 32px;
+  border: 1px solid #c6c6c6;
+}
+
+.ProductDetail .product_view table .pd_length>input {
+  width: 100px;
+  height: 32px;
+  border: none;
+  text-align: center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ProductDetail .pd_length button {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid black;
+  border-radius: 4px;
+  font-weight: border;
+  /* background-color: rgb(233, 232, 232); */
+  background-color: white;
+}
+
+.ProductDetail .product_view table .pd_length a {
+  overflow: hidden;
+  right: 0;
+  top: 0;
+  width: 26px;
+  height: 16px;
+  color: transparent;
+  display: none;
+}
+
+.ProductDetail .product_view table .pd_length>a:nth-of-type(1) {
+  top: 0;
+}
+
+.ProductDetail .product_view table .pd_length>a:nth-of-type(1) {
+  bottom: 0;
+  border-top: 1px solid #c6c6c6;
+}
+
+.ProductDetail .product_view table select {
+  width: 100%;
+  border: 1px solid #c6c6c6;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.ProductDetail .product_view table select::-ms-expand {
+  display: none;
+}
+
+.ProductDetail .product_view .pd_btns {
+  padding: 45px auto;
+  text-align: center;
+
+  position: absolute;
+  bottom: -5%;
+  right: calc(100%*0.18);
+}
+
+.ProductDetail .product_view>.pd_btns>a {
+  display: inline-block;
+  width: 136px;
+  height: 42px;
+  font-size: 16px;
+  color: #000000;
+  border-radius: 2px;
+  line-height: 42px;
+}
+
+.ProductDetail .product_view>.pd_btns>a.pd_btn1 {
+  background-color: white;
+  color: #c6c6c6;
+  border: 1px solid #c6c6c6;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.ProductDetail .product_view>.pd_btns>a.pd_btn1:hover {
+  background-color: #b4b4b4;
+  color: #c6c6c6;
+  border: 1px solid #c6c6c6;
+
+  transition-duration: 1s;
+}
+
+
+.ProductDetail .product_view>.pd_btns>a.pd_btn2 {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ProductDetail .pd_length button:hover,
+.ProductDetail .product_view>.pd_btns>a.pd_btn2:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+
+  transition-duration: 1s;
+  cursor: pointer;
+}
+
+
+/* =================================================== */
+/* 상세페이지 시작 ( 상품상세정보  )*/
+
+.ProductDetail .pd_section {
+  margin: auto;
+
+  width: 1240px;
+  min-width: 1240px;
+  height: 40px;
+  line-height: 40px;
+
+  text-align: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.ProductDetail .pd_section {
+  border-bottom: 4px solid rgb(107, 107, 107);
+}
+
+.ProductDetail .pd_section a {
+  color: inherit;
+}
+
+.pd_section a {
+  text-decoration: none;
+  color: #000000;
+  /* 기본 폰트 컬러 */
+}
+
+/* 클릭된 링크 스타일 */
+.pd_section a.active {
+  color: #bcbcbc;
+  /* 클릭 시 폰트 컬러 변경 */
+}
+
+.ProductDetail .pd_part1 {
+  width: 1240px;
+  min-height: 1240px;
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* =================================================== */
+/* 상세페이지 시작 ( 상품구매후기  )*/
+
+.ProductDetail .review,
+.ProductDetail .pd_qna {
+  margin: 20px auto;
+  margin-bottom: 200px;
+  width: 80%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+
+.ProductDetail .review th,
+.ProductDetail .review td,
+.ProductDetail .pd_qna th,
+.ProductDetail .pd_qna td {
+  padding: 10px;
+  height: 20px;
+  border: #c6c6c6 solid 1px;
+}
+
+.ProductDetail .review a,
+.ProductDetail .pd_qna a {
+  color: inherit;
+  cursor: pointer;
+}
+
+.ProductDetail .review tr:first-of-type {
+  background-color: #c6c6c6;
+}
+
+/* =================================================== */
+/* 상세페이지 시작 ( 상품 Q&A  )*/
+
+.ProductDetail .pd_qna th {
+  text-align: end;
+  padding: 10px;
+}
+
+.pd_qna a {
+  cursor: pointer;
+}
+
+/* =================================================== */
+/* 상세페이지 시작 ( 상품 구매안내  )*/
+
+.ProductDetail .pd_orderInfo {
+  margin: 20px auto;
+  width: 80%;
+  color: #504f4f;
+}
+
+.ProductDetail .pd_orderInfo h2,
+.ProductDetail .pd_orderInfo h3 {
+  margin: 5px auto;
+}
+
+.ProductDetail .pd_orderInfo h3,
+.ProductDetail .pd_orderInfo2>div>div+div,
+.ProductDetail .pd_orderInfo3>div>div {
+  margin-top: 15px;
+}
+
+.ProductDetail .pd_orderInfo3>div>div {
+  margin-bottom: -15px;
+}
+
+.ProductDetail .pd_orderInfo1 p,
+.ProductDetail .pd_orderInfo2 p,
+.ProductDetail .pd_orderInfo3 p {
+  white-space: pre-line;
+}
+
+/* ====================================================== */
+/* navi_bar */
+.ProductDetail .path {
+  color: #333;
+  font-size: 12px;
+  /* margin: 20px auto; */
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.ProductDetail .path span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  white-space: nowrap;
+  text-indent: 100%;
+  display: none;
+}
+
+.ProductDetail .path li {
+  float: left;
+  padding-left: 12px;
+  margin: 0;
+  color: #333;
+}
+
+.ProductDetail .path ol {
+  float: right;
+}
+
+
+.ProductDetail .txt_01 {
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  font-weight: 300;
+  padding-top: 5px;
+  padding-bottom: 120px;
+}
+
+/* ===모달창=== */
+.ModalContent {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 600px;
+  /* 모달 너비 */
+  min-height: 400px;
+
+  height: 100vm;
+  /* 화면 높이의 100% */
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
