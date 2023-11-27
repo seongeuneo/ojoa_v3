@@ -26,7 +26,7 @@ public class Cart {
 	
 	   private String id; // 장바구니 이용 회원 FK for user(id)
 	   
-	   private int prod_num; // 상품번호 FK for product(prodnum)
+	   private int prod_num; // 상품번호 FK for product(prod_num)
 	   
 	   @Column(nullable = false, columnDefinition = "int default 1")
 	   private int quantity;
