@@ -1,25 +1,29 @@
 package com.ojo.ojoa.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ojo.ojoa.entity.Products;
 import com.ojo.ojoa.service.ProductsService;
 
-import lombok.AllArgsConstructor;
 
 @Controller
-//@AllArgsConstructor
+@RequestMapping("/products")
 public class ProductsController {
 
-	//private final ProductsService ProductsService;
+	@Autowired
+	private ProductsService productsService;
 	
 	  //상품 등록 get 페이지
-//    @GetMapping("/new")
-//    public String itemForm(Model model) {
-//        model.addAttribute("products", new Products());
-//        model.addAttribute("item_image", new Item_image());
-//        return "item/itemForm";
-//    }
+    @GetMapping("/new")
+    public String itemForm(Model model) {
+        model.addAttribute("products", new Products());
+        return "item/itemForm";
+    }
 	
      //상품 등록 post
 //    @PostMapping(value = "/admin/item/new")
@@ -107,7 +111,7 @@ public class ProductsController {
 //
 //        return "item/itemMng"; // 조회한 상품 데이터를 전달받는 페이지
 //    }
-//    
+    
  // 상품 상세 get 페이지
 //    @GetMapping(value = "/item/{prod_num}")
 //    public String itemDtl(Model model, @PathVariable("itemId") Long itemId) {
