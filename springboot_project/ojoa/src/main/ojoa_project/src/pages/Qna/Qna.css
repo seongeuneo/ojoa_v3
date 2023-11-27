@@ -1,0 +1,276 @@
+/* ============================== */
+/* QnaThumbNail */
+.qna_path {
+    width: 1240px;
+    padding: 0;
+    display: flex;
+    color: #333;
+    font-size: 12px;
+    margin: 20px auto;
+    height: 30px;
+    justify-content: flex-end;
+    font-family: "paybooc-Light", sans-serif;
+}
+
+.qna_path span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    display: none;
+}
+
+.qna_path li {
+    float: left;
+    padding-left: 12px;
+    color: #333;
+    margin: 0;
+}
+
+.qna_path li a {
+    color: #333;
+}
+
+.qna_title {
+
+    color: #333;
+}
+
+.qna_title h2 {
+    height: 60px;
+    text-align: center;
+    line-height: 90px;
+    font-size: 30px;
+    letter-spacing: 3px;
+    padding-top: 70px;
+    padding-bottom: 0px;
+}
+
+.qna_title .txt_01 {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    font-weight: 300;
+    padding-top: 5px;
+    padding-bottom: 120px;
+}
+
+
+/* ============================== */
+/* QnaFilter */
+.qna_filter_container {
+
+    position: relative;
+    width: 1240px;
+    margin: 0 auto;
+}
+
+.qna_board_sort {
+    padding: 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.qna_board_sort .select {
+    height: 24px;
+    border: 1px solid #e5e5e5;
+    border-collapse: collapse;
+}
+
+.qna_board_find fieldset {
+    display: block;
+    color: #2e2e2e;
+    flex-wrap: wrap;
+}
+
+.qna_board_find legend {
+    position: absolute;
+    text-indent: -9999em;
+
+}
+
+.qna_board_find input[type=text] {
+    margin-left: 20px;
+    height: 24px;
+    width: 200px;
+    border: 1px solid #d5d5d5;
+    color: #353535;
+}
+
+.qna_board_find #search_date {
+    margin-right: 5px;
+}
+
+.qna_board_find #search_date,
+.qna_board_find #search_key,
+#board_category {
+    height: 24px;
+    border: 1px solid #d5d5d5;
+    width: 100px;
+    font-size: 12px;
+    font-family: "paybooc-Light", sans-serif;
+}
+
+.qna_board_find_btn {
+    margin-left: 1px;
+    width: 50px;
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    vertical-align: top;
+    background-color: #a3a1a1;
+    color: white;
+    text-align: center;
+    line-height: 24px;
+    font-size: 12px;
+    font-family: "paybooc-Light", sans-serif;
+    cursor: pointer;
+}
+
+/* ============================== */
+/*TitleList & ListItem */
+.qna_ListItem_container,
+.qna_TitleList_container {
+    position: relative;
+    width: 1240px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.qna_board_name {
+    background-color: #e9e9e9;
+    border: 1px solid #fff;
+    text-align: center;
+}
+
+.qna_board_st1,
+.qna_Lboard_st2,
+.qna_Tboard_st2,
+.qna_board_st3,
+.qna_board_st4,
+.qna_board_st5,
+.qna_board_st6,
+.qna_board_st7 {
+    background-color: #fff;
+    border: 0.5px solid #e9e9e9;
+    border-collapse: collapse;
+    line-height: 25px;
+}
+
+/* ============================== */
+/*TitleList*/
+
+.qna_Tboard_st {
+    font-weight: bold;
+    font-size: 13px;
+    height: 30px;
+    font-family: "paybooc-Light", sans-serif;
+}
+
+.qna_board_st2 {
+    display: inline-block;
+    width: 100%;
+}
+
+
+.qna_board_st1,
+.qna_board_st3,
+.qna_board_st5,
+.qna_board_st6 {
+    text-align: center;
+}
+
+.qna_board_st4 a {
+    cursor: pointer;
+}
+
+/* .qna_board_st4 .qna_board_st img {
+    margin: 5px;
+    width: 18px;
+    height: 13px;
+} */
+
+/* ============================== */
+/*ListItem*/
+.qna_ListItem_container {
+    border: 1px solid #fff;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.qna_Lboard_st {
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 12px;
+}
+
+.qna_Lboard_st2 img {
+    width: 50px;
+    vertical-align: middle;
+    align-content: left;
+}
+
+/* 제목 안에 내용글 */
+.qna_board_st7 .notification_row {
+    text-align: center;
+    line-height: 100px;
+    font-size: 13px;
+}
+
+/* ============================== */
+/* QnaWriteBtn */
+
+
+.qna_write_btn {
+    position: relative;
+    width: 1240px;
+    margin: 30px auto 0px;
+    /*글쓰기 위치: 상,좌,하,우*/
+    justify-content: flex-end;
+}
+
+.qna_write_btn a {
+    position: absolute;
+    right: 0px;
+    background-color: #a3a1a1;
+    color: white;
+    font-size: 12px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    font-weight: 600;
+    transition: 0.25s;
+    margin-left: -1px;
+    cursor: pointer;
+}
+
+/* ============================== */
+/* QnaModal */
+
+table .qna_table2 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    margin: 20px 10px;
+}
+
+table .qna_table2 tr {
+    width: 50px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+table .qna_table2 td {
+    width: 100px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}

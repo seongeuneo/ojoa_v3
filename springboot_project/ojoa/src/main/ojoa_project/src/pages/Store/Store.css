@@ -1,0 +1,119 @@
+.store_container .path {
+    color: #333;
+    font-size: 12px;
+    margin: 20px auto;
+    margin-right: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.store_container .path span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    display: none;
+}
+
+.store_container .path li {
+    float: left;
+    padding-left: 12px;
+    margin: 0;
+    color: #333;
+}
+
+.store_container .path ol {
+    float: right;
+}
+
+.Store {
+    background-color: white;
+    width: 1240px;
+    margin: auto;
+    margin-bottom: 160px;
+    overflow: hidden;
+}
+
+.stores {
+    display: flex;
+    justify-content: space-between;
+}
+
+.store_container .pageTlt {
+    color: #333;
+}
+
+.store_container .pageTlt h2 {
+    height: 60px;
+    text-align: center;
+    line-height: 90px;
+    font-size: 30px;
+    letter-spacing: 3px;
+    padding-top: 70px;
+    padding-bottom: 0px;
+}
+
+.store_container .txt_01 {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    font-weight: 300;
+    padding-top: 5px;
+    padding-bottom: 120px;
+}
+
+.stores .storeInfo {
+    margin: 17px 0 0 0;
+}
+
+.stores .storeInfo .storeTlt {
+    color: #333;
+    padding-left: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.stores .storeInfo .add {
+    background: url(../../../public/images/map.png) no-repeat 0 center/auto 15px;
+    text-align: left;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.stores .storeInfo p:nth-child(n+2) {
+    text-align: left;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.stores .storeInfo .addEn {
+    font-size: .7rem;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.stores .storeInfo .time {
+    background: url(../../../public/images/time.png) no-repeat 0 center/auto 15px;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.stores .storeInfo .tel {
+    background: url(../../../public/images/tel.png) no-repeat 0 center/auto 15px;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+/* .stores .storeInfo div { */
+    /* border: 1px solid #333; */
+    /* width: 550px;
+    height: 400px;
+} */

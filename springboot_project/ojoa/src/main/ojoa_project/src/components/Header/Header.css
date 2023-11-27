@@ -1,0 +1,152 @@
+.header {
+    background-color: white;
+    min-height: 80px;
+    width: 1240px;
+    margin: auto;
+}
+
+/*======================================================*/
+/* header */
+#mheader {
+    position: relative;
+    height: 100px;
+    margin: 0;
+    padding-top: 30px;
+}
+
+.header .navBar {
+    height: 30px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    top: -25px;
+}
+
+.header .logo {
+    float: left;
+    height: 100px;
+}
+
+.header .navBar ul {
+    float: right;
+    margin-top: 0;
+}
+
+.header .navBar li {
+    float: left;
+    margin-left: 10px;
+}
+
+.header .navBar a {
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.header .navBar a span {
+    color: gainsboro;
+}
+
+.header .search {
+    top: 60px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    /* 서치를 헤더 오른쪽 끝에 배치 */
+    align-items: center;
+}
+
+.header .search input {
+    width: 80%;
+    height: 110px;
+    font-size: 20px;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #333;
+}
+
+.header input:focus {
+    outline: none;
+}
+
+.header input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #c6c6c6 inset;
+}
+
+/*======================================================*/
+/* category_navi_drop_bar */
+#category_nav {
+    font: bold 16px;
+    width: 1240px;
+    height: 40px;
+    background: #000;
+    line-height: 40px;
+    margin: 0 auto;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+#category_nav>ul {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#category_nav>ul>li {
+    width: 130px;
+    position: relative;
+    display: inline-block;
+}
+
+#category_nav>ul>li>ul {
+    width: 130px;
+    display: none;
+    position: absolute;
+    font-size: 15px;
+    background: #000;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#category_nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+#category_nav>ul>li:hover>ul {
+    display: block;
+}
+
+#category_nav>ul>li>ul>li:hover {
+    background: #8f8f8f;
+    transition: ease 1s;
+}
+
+/* .sticky {
+    position: sticky;
+    top: 0;
+} */
+
+/* ======================================================= */
+/* .header .mtalk img {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    right: 1%;
+    bottom: 10%;
+    z-index: 1;
+    cursor: pointer;
+} */
+
+.header .mchannel img {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    right: 1%;
+    bottom: 2%;
+    z-index: 1;
+    cursor: pointer;
+}
