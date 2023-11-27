@@ -28,8 +28,8 @@ public class OrdersServiceImpl implements OrdersService {
  	
  	// ** selectOne
  	@Override
- 	public Orders selectOne(int order_num) {
- 		Optional<Orders> result = ordersRepository.findById(order_num);
+ 	public Orders selectOne(int orders_num) {
+ 		Optional<Orders> result = ordersRepository.findById(orders_num);
      	if ( result.isPresent() ) return result.get();
      	else return null;
  	}
@@ -43,9 +43,9 @@ public class OrdersServiceImpl implements OrdersService {
  	 
  	// ** cancel
  	@Override
- 	public int delete(int order_num) {
- 		ordersRepository.deleteById(order_num);
- 		return order_num ; // 삭제후 key return
+ 	public int delete(int orders_num) {
+ 		ordersRepository.deleteById(orders_num);
+ 		return orders_num ; // 삭제후 key return
  	}
  	
  } //class

@@ -35,14 +35,14 @@
 		<c:if test="${not empty requestScope.myorders}">
 			<c:forEach var="s" items="${requestScope.myorders}">
 				<tr>
-					<td>${s.order_num}</td>
+					<td>${s.orders_num}</td>
 					<td>${s.id}</td>
-					<td>${s.order_indate}</td>
-					<td>${s.order_totalprice}</td>
-					<td>${s.order_price}</td>
-					<td>${s.order_method}</td>
-					<td>${s.order_addresscheck}</td>
-					<td align="center"><a href="ocancel?order_num=${s.order_num}">주문취소</a></td>
+					<td>${s.orders_indate}</td>
+					<td>${s.orders_totalprice}</td>
+					<td>${s.orders_price}</td>
+					<td>${s.orders_method}</td>
+					<td>${s.orders_addresscheck}</td>
+					<td align="center"><a href="ocancel?order_num=${s.orders_num}">주문취소</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>

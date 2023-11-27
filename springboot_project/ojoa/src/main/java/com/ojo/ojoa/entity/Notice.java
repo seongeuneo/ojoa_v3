@@ -10,25 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "noti")
+@Table(name = "notice")
 
-public class Noti {
+public class Notice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "noti_seq")
-	private String noti_seq;
+    @Column(name = "notice_seq")
+	private String notice_seq;
     
     @Column(name="id", nullable =false, length = 20)
 	private String id;
     
-    @Column(name="noti_title", nullable =false, length = 30)
-	private String noti_title;
+    @Column(name="notice_title", nullable =false, length = 30)
+	private String notice_title;
     
-    @Column(name="noti_content", nullable =false, length = 1000)
-	private String noti_content;
+    @Column(name="notice_content", nullable =false, length = 1000)
+	private String notice_content;
     
-    @Column(name="noti_date", nullable =false)
-	private LocalDateTime noti_date;
+    @Column(name="notice_date", nullable =false)
+	private LocalDateTime notice_date;
 	
 }
