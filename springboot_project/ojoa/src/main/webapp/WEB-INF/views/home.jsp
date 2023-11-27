@@ -37,6 +37,6 @@
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
 &nbsp;<a href="cart/cartList">cart_List</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">orders_List</a>&nbsp; 
-&nbsp;<a href="admin/">Admin DelieverList</a>&nbsp; 
+&nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
 </body>
 </html>
