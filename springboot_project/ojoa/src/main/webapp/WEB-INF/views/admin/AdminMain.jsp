@@ -22,7 +22,7 @@
                         <div class="navBar">
                             <ul>
                                 <li><a href="/">상품관리 </a>&nbsp;<span>|</span></li>
-                                <li><a href="/users/usersList">회원관리 </a>&nbsp;<span>|</span></li>
+                                <li><a href="/member/memberList">회원관리 </a>&nbsp;<span>|</span></li>
                                <!--  <li><a href="/admindeliever/admindelieverlist">배송관리 </a>&nbsp;<span>|</span></li> -->
                                 <li><a href="/orders/ordersList">주문관리 </a></li>
                             </ul>

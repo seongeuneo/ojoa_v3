@@ -30,10 +30,8 @@
 	&nbsp;<a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>
 <br>
-<<<<<<< HEAD
+
 &nbsp;<a href="member/memberList">memberList</a>&nbsp; 
-=======
->>>>>>> main
 &nbsp;<a href="board/boardList">bordList??</a>&nbsp; 
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
