@@ -5,17 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Users Detail **</title>
+<title>** Member Detail **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** Users Detail **</h2>
+<h2>** Member Detail **</h2>
 <table>
 <c:if test="${not empty requestScope.apple}">
 	<tr height="40"><th bgcolor="Thistle">I D</th>
 		<td>${requestScope.apple.id}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">password</th>
-		<td>${requestScope.apple.pwd}</td></tr>	
+		<td>${requestScope.apple.password}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">Name</th>
 		<td>${requestScope.apple.name}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">phone</th>
@@ -28,7 +28,11 @@
 		<td>${requestScope.apple.addressdetail}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">email</th>
 		<td>${requestScope.apple.email}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">regdate</th>
+	<tr height="40"><th bgcolor="Thistle">SMS 수신여부</th>
+		<td>${requestScope.apple.marketing_sms}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">이메일 수신여부</th>
+		<td>${requestScope.apple.marketing_email}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">가입일</th>
 		<td>${requestScope.apple.regdate}</td></tr>	
 </c:if>
 <c:if test="${empty requestScope.apple}">

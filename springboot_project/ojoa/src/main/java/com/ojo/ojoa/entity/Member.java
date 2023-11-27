@@ -17,19 +17,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class Member {
 	
 	@Id
 	private String id; // Primary key
 	
 	@Column(nullable = false)
-	private String pwd;
+	private String password;
 	
 	@Column(nullable = false)
 	private String name;
@@ -49,14 +49,17 @@ public class Users {
 	@Column(nullable = false)
 	private String phone;
 	
-	@Column(nullable = false, columnDefinition = "int default 1")
-	private int useyn;
+	@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (memberyn IN ('y', 'n'))")
+	private String memberyn;
 	
 	@CreatedDate
 	@Column(nullable = false)
 	private LocalDateTime regdate;  // LocalDateTime을 사용해서 생성일을 관리.
 	
-	@Column(nullable = false, columnDefinition = "int default 1")
-	private int marketing;
+	@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (marketing_sms IN ('y', 'n'))")
+	private String marketing_sms;
+
+	@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (marketing_email IN ('y', 'n'))")
+	private String marketing_email;
 	
 } //class

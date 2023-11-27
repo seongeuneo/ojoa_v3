@@ -9,14 +9,14 @@
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** Users Login **</h2>
+<h2>** Member Login **</h2>
 <form action="login" method="post">
 <table>
 	<tr height="40"><td><label for="id">ID</label></td>
 		<td><input type="text" id="id" name="id" autocomplete="username"></td>
 	</tr>
 	<tr height="40"><td><label for="password">Password</label></td>
-		<td><input type="password" id="pwd" name="pwd" autocomplete="current-password"></td>
+		<td><input type="password" id="password" name="password" autocomplete="current-password"></td>
 	</tr>
 	<tr height="40"><td></td>
 		<td><input type="submit" value="로그인">&nbsp;&nbsp;

@@ -18,19 +18,19 @@
 
 <!-- Login 전 -->
 <c:if test="${empty sessionScope.loginID}">
-	&nbsp;<a href="users/loginForm">Login</a>&nbsp;
-	&nbsp;<a href="users/usersJoin">Join</a>&nbsp;
+	&nbsp;<a href="member/loginForm">Login</a>&nbsp;
+	&nbsp;<a href="member/memberJoin">Join</a>&nbsp;
 </c:if>
 <!-- Login 후 -->
 <c:if test="${not empty sessionScope.loginID}">
-	&nbsp;<a href="users/logout">Logout</a>&nbsp;
-	&nbsp;<a href="users/usersDetail?id=${sessionScope.loginID}">내정보</a>&nbsp;
-	&nbsp;<a href="users/usersDetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a>&nbsp;  
-	&nbsp;<a href="users/pUpdateForm">PW수정</a>&nbsp; 
-	&nbsp;<a href="users/usersdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
+	&nbsp;<a href="member/logout">Logout</a>&nbsp;
+	&nbsp;<a href="member/memberDetail?id=${sessionScope.loginID}">내정보</a>&nbsp;
+	&nbsp;<a href="member/memberDetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a>&nbsp;  
+	&nbsp;<a href="member/pUpdateForm">PW수정</a>&nbsp; 
+	&nbsp;<a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>
 <br>
-&nbsp;<a href="users/usersList">usersList</a>&nbsp; 
+&nbsp;<a href="member/memberList">memberList</a>&nbsp; 
 &nbsp;<a href="board/boardList">bordList??</a>&nbsp; 
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 

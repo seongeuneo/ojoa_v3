@@ -115,21 +115,26 @@ function inCheck() {
         	<span id="phMessage" class="eMessage">
 		</td></tr>
 	<tr height="40"><th bgcolor="aqua">이메일</th>
-		<td><input type="text" name="email" id="email" size="20">@<input type="text" size="10"><br>
+		<td><input type="text" name="email" id="email" size="20" required>@<input type="text" size="10">
         	<span id="eMessage" class="eMessage">
 		<select name="email_domain">
             <option value="self">선택</option>
             <option value="naver">naver.com</option>
             <option value="daum">hanmail.net</option>
             <option value="gmail">gmail.com</option>
+            <option value="직접입력"></option>
         </select>
 		</td></tr>
-	<tr height="40"><th bgcolor="aqua">마케팅 수신 동의</th>
-		<td><input type="radio" name="marketing" id="marketing" value="2"><label>이메일</label>
-            <input type="radio" name="marketing" id="marketing" value="3"><label>SMS</label>
-            <input type="radio" name="marketing" id="marketing" value="1" checked><label>수신받지않음</label>
-            <span style="font-size: 12px; color: red;">&nbsp;&nbsp;&nbsp;마케팅 수신에 동의하실 경우, Ojoa의 소식을 빠르게 받아보실 수 있습니다.</span>
-       	</td></tr>
+	<tr height="40"><th bgcolor="aqua">SMS 수신 여부</th>
+		<td><input type="radio" name="marketingSMS" id="marketingSMS" value="y"><label>수신함</label>
+			<input type="radio" name="marketingSMS" id="marketingSMSNone" value="n" checked><label>수신안함</label>
+			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span>
+       	</td></tr>	
+	<tr height="40"><th bgcolor="aqua">이메일 수신 여부</th>
+		<td><input type="radio" name="marketingEmail" id="marketingEmail" value="y"><label>수신함</label>
+			<input type="radio" name="marketingEmail" id="marketingEmailNone" value="n" checked><label>수신안함</label>
+			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span>
+       	</td></tr>	
 				
 	<tr height="40"><th></th>
 		<td><input type="submit" id="submitTag" value="가입" onclick="return inCheck()" disabled>
