@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Products {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Products {
 	private String prod_name;
 	
 	@Column(nullable = false, columnDefinition = "int default 1")
-	private int  prod_kind;  // 침대: '1', 소파: '2', 책장: '3', 옷장: '4', 조명: '5', 의자: '6'
+	private char  prod_kind;  // 침대: '1', 소파: '2', 책장: '3', 옷장: '4', 조명: '5', 의자: '6'
 	
 	@Column(nullable = false)
 	private int  prod_discount;
@@ -48,10 +48,10 @@ public class Products {
 	private String prod_content;
 	
 	@Column(nullable = false)
-	private String prod_image;
+	private String prod_mainimage;
 	
 	@Column(nullable = false, columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (prod_useyn IN ('y', 'n'))")
-	private String prod_useyn; // 판매: 'y' , 중단: 'n'
+	private char prod_sellyn; // 판매: 'y' , 중단: 'n'
 	
 	@CreatedDate
 	@Column(nullable = false)
@@ -62,5 +62,12 @@ public class Products {
 	
 	@Column(nullable = false, columnDefinition = "float default 0.0")
 	private float prod_grade;  // 기본 평점 '0.0'
+
+	public String getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 } //class

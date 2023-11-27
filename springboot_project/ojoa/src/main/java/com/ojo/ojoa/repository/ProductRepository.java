@@ -3,9 +3,9 @@ package com.ojo.ojoa.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ojo.ojoa.entity.Products;
+import com.ojo.ojoa.entity.Product;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<Products, Long> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 }
