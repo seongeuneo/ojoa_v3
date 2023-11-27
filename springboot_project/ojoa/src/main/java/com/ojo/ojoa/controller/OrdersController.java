@@ -39,7 +39,7 @@ public class OrdersController {
 		String uri = "redirect:/orders/ordersList";
 		
 		try {
-			log.info("** cancel 성공  => "+ordersService.delete(entity.getOrder_num()));
+			log.info("** cancel 성공  => "+ordersService.delete(entity.getOrders_num()));
 			rttr.addFlashAttribute("message", "~~ 주문취소 성공!! ~~") ;	
 			if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
 				// => 관리자에 의한 강제 주문취소 : orderList.jsp

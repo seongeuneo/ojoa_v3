@@ -14,13 +14,13 @@ public interface OrdersService {
 	List<Orders> selectList();
 
 	// ** selectOne
-	Orders selectOne(int order_num);
+	Orders selectOne(int orders_num);
 
 	// ** insert, update
 	String save(Orders entity);
 
 	// ** cancel
-	int delete(int order_num);
+	int delete(int orders_num);
     
     
 }
