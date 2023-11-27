@@ -35,5 +35,7 @@
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
+&nbsp;<a href="cart/cartList">cart_List</a>&nbsp; 
+&nbsp;<a href="orders/ordersList">orders_List</a>&nbsp; 
 </body>
 </html>
