@@ -28,7 +28,7 @@ public class Cart {
 	   
 	   private int prod_num; // 상품번호 FK for product(prod_num)
 	   
-	   @Column(nullable = false, columnDefinition = "int default 1")
+	   //@Column(nullable = false, columnDefinition = "int default 1")
 	   private int quantity;
 
 }
