@@ -28,7 +28,7 @@
 		
 		
 	<tr height="40"><th bgcolor="Khaki">Password</th>
-		<td><input type="password" name="password" value=${requestScope.apple.pwd} size="20" readonly></td></tr>	
+		<td><input type="password" name="password" value=${requestScope.apple.password} size="20" readonly></td></tr>	
 		-->
 	<tr height="40"><th bgcolor="aqua">Password</th>
 		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" size="20" autocomplete="new-password"><br>

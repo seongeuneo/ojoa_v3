@@ -32,6 +32,19 @@ function idDupCheck() {
 	
 } //idDupCheck
 
+// ** 이메일 도메인 관련
+function handleDomainChange(select) {
+    var inputField = document.getElementById('domain');
+    if (select.value === '직접입력') {
+        inputField.disabled = false;
+        inputField.value = '';
+        inputField.focus();
+    } else {
+        inputField.disabled = true;
+        inputField.value = select.value;
+    }
+} //handleDomainChange
+
 // ** 입력값의 무결성 점검 ***************************
 // 1) 전역변수 정의
 //=> 입력값의 무결성 점검여부를 확인하는 switch 변수
@@ -52,6 +65,7 @@ function idDupCheck() {
 // => 오류가 없으면 : return true
 // => 오류가 1항목이라도 있으면 : return false 
 function inCheck() {
+	
 	if (nCheck==false) { document.getElementById('nMessage').innerHTML=' 필수입력, name 을 확인하세요~~'; }
 	if (iCheck==false) { document.getElementById('iMessage').innerHTML=' 필수입력, id 를 확인하세요~~'; }
 	if (pCheck==false) { document.getElementById('pMessage').innerHTML=' 필수입력, password 를 확인하세요~~'; }
@@ -78,7 +92,7 @@ function inCheck() {
 		return false;
 	}
 } //inCheck
-	
+
 </script>
 
 </head>
@@ -87,24 +101,25 @@ function inCheck() {
 
 <form action="join" method="Post" enctype="multipart/form-data" id="myform">
 <table>
-	<tr height="40"><th bgcolor="aqua">Name</th>
+
+	<tr height="40"><th bgcolor="silver">Name</th>
 		<td><input type="text" name="name" id="name" placeholder="한글 또는 영어" size="10"><br>
 			<span id="nMessage" class="eMessage"></span>
 		</td></tr>
-	<tr height="40"><th bgcolor="aqua">I D</th>
+	<tr height="40"><th bgcolor="silver">I D</th>
 		<td><input type="text" name="id" id="id" placeholder="영어, 10글자이내" size="10" autocomplete="id">
 			<button type="button" id="idDup" onclick="idDupCheck()">ID중복확인</button>
 			<br><span id="iMessage" class="eMessage"></span>
 		</td></tr>
-	<tr height="40"><th bgcolor="aqua">Password</th>
+	<tr height="40"><th bgcolor="silver">Password</th>
 		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" size="10" autocomplete="new-password"><br>
 			<span id="pMessage" class="eMessage"></span>
 		</td></tr>	
-	<tr height="40"><th bgcolor="aqua">Pw 확인</th>
+	<tr height="40"><th bgcolor="silver">Pw 확인</th>
       	<td><input type="password" id="password2" placeholder="재입력 확인" size="10" autocomplete="new-password"><br>
         	<span id="p2Message" class="eMessage"></span>
         </td></tr>	
-    <tr height="40"><th bgcolor="aqua">주소</th>
+    <tr height="40"><th bgcolor="silver">주소</th>
       	<td><input type="text" name="zipcode" id="zipcode" placeholder="우편번호입력" size="10">
       	<form action="" target="_blank"><input class="inside_btn" type="submit" name="find_postcode"
                                         value="우편번호찾기"></form><br>
@@ -112,27 +127,36 @@ function inCheck() {
                                 <input type="text" name="addressdetail" id="addressdetail" placeholder="상세주소" size="10">
         	<span id="adMessage" class="eMessage"></span>
         </td></tr>
-	<tr height="40"><th bgcolor="aqua">휴대폰 번호</th>
-		<td><input type="tel" name="phone" placeholder="'-' 를 제외한 전화번호 입력" size="20" ><br>
-        	<span id="phMessage" class="eMessage">
-		</td></tr>
-	<tr height="40"><th bgcolor="aqua">이메일</th>
-		<td><input type="text" name="email" id="email" size="20" required>@<input type="text" size="10">
-        	<span id="eMessage" class="eMessage">
-		<select name="email_domain">
-            <option value="self">선택</option>
-            <option value="naver">naver.com</option>
-            <option value="daum">hanmail.net</option>
-            <option value="gmail">gmail.com</option>
-            <option value="직접입력"></option>
-        </select>
-		</td></tr>
-	<tr height="40"><th bgcolor="aqua">SMS 수신 여부</th>
+		<tr height="40">
+		    <th bgcolor="silver">휴대폰 번호</th>
+		    <td>
+			    <input type="text" name="phonePrefix" id="phonePrefix" value="010" placeholder="010" size="1" readonly>&nbsp;-
+			    <input type="text" name="phoneMiddle" id="phoneMiddle" size="3" maxlength="4">&nbsp;-
+			    <input type="text" name="phoneSuffix" id="phoneSuffix" size="3" maxlength="4"><br>
+			</td>
+		</tr>
+
+		<tr height="40">
+		    <th bgcolor="silver">이메일</th>
+		    <td>
+		        <input type="text" name="email" id="email" size="15" required>@
+		        <input type="text" id="domain" size="10" disabled>
+		        <span id="eMessage" class="eMessage"></span>
+		        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)">
+		            <option value="self">선택</option>
+		            <option value="naver.com">naver.com</option>
+		            <option value="hanmail.net">hanmail.net</option>
+		            <option value="gmail.com">gmail.com</option>
+		            <option value="custom">직접입력</option>
+		        </select>
+		    </td>
+		</tr>
+	<tr height="40"><th bgcolor="silver">SMS 수신 여부</th>
 		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>수신함</label>
 			<input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신안함</label>
 			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span>
        	</td></tr>	
-	<tr height="40"><th bgcolor="aqua">이메일 수신 여부</th>
+	<tr height="40"><th bgcolor="silver">이메일 수신 여부</th>
 		<td><input type="radio" name="marketing_email" id="marketing_email" value="y"><label>수신함</label>
 			<input type="radio" name="marketing_email" id="marketing_emailNone" value="n" checked><label>수신안함</label>
 			<span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span>
@@ -144,6 +168,7 @@ function inCheck() {
 			<input type="reset" value="취소">&nbsp;&nbsp;
 		</td>
 	</tr>					
+
 </table>
 </form>
 <hr>
