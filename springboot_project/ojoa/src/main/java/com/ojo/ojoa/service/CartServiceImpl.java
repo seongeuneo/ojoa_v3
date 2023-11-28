@@ -1,15 +1,14 @@
 package com.ojo.ojoa.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.repository.CartRepository;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
-import java.util.Optional;
 
 //@Log4j2
 @Service

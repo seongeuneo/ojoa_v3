@@ -29,5 +29,4 @@ public interface WishService {
 	int delete(int wish_num);
 
     
-    
 }

@@ -48,4 +48,5 @@ public class WishServiceImpl implements WishService {
  		return wish_num ; // 삭제후 key return
  	}
  	
+ 	
  } //class
