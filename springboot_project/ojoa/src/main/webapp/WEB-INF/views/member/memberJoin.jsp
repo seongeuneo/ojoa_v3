@@ -11,16 +11,6 @@
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
 
-// ** ID 중복확인
-// => UI 개선사항
-// => 중복확인 버튼 추가
-//    처음 : 중복확인버튼_enable / submit_disable
-// => 중복확인 완료후 submit 이 가능하도록
-//    중복확인버튼_disable / submit_enable
-// => 중복확인 기능 : function idDupCheck()
-//    id입력값의 무결성점검 -> id 확인요청 -> 서버로 전송 -> id , selectOne 결과 -> response: 사용가능/불가능 
-// => 서버측 : 컨트롤러에 idDupCheck 요청을 처리하는 매핑메서드, view_Page(팝업창) 작성  
-
 function idDupCheck() {
 	// 1) 입력값의 무결성 확인
 	if ( iCheck==false ) iCheck=idCheck();
@@ -29,7 +19,6 @@ function idDupCheck() {
 		let url = "idDupCheck?id="+document.getElementById('id').value;
 		window.open(url,'_blank','width=400,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes'); 
 	}
-	
 } //idDupCheck
 
 // ** 이메일 도메인 관련
@@ -60,6 +49,22 @@ function handleDomainChange(select) {
   let sCheck=false; // sms 수신 동의
   let mCheck=false; // 이메일 수신 동의
 
+onload=function() {
+	// => Name
+	document.getElementById('name').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('id').focus();
+				} //if 		
+			});
+	  
+	  
+	  
+	  
+	  
+  }
+  
 // 3) submit 실행 여부 판단 & 실행
 // => 모든항목의 무결성을 확인
 // => 오류가 없으면 : return true
