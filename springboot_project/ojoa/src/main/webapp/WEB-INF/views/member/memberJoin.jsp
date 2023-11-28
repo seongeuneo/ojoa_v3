@@ -31,8 +31,11 @@ function idDupCheck() {
   let zCheck=false; // 우편번호
   let aCheck=false; // 주소
   let adCheck=false; // 상세주소
-  let phCheck=false; // 전화번호
-  let eCheck=false; // 이메일
+  let ph1Check=false; // 전화번호1
+  let ph2Check=false; // 전화번호2
+  let ph3Check=false; // 전화번호3
+  let e1Check=false; // 이메일1
+  let e2Check=false; // 이메일2(domain)
   let sCheck=false; // sms 수신 동의
   let mCheck=false; // 이메일 수신 동의
 
@@ -92,8 +95,32 @@ onload=function() {
 	document.getElementById('password2').addEventListener("focusout",
 			()=> { p2Check=pw2Check(); });
 	
-	// => Phone ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	document.getElementById('phoneSuffix').addEventListener("keydown",
+	// => Phone1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('phone1').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('phone2').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('phone1').addEventListener("focusout",
+			()=> { ph1Check=pho1Check(); });
+	
+	// => Phone2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('phone2').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('phone3').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('phone2').addEventListener("focusout",
+			()=> { ph2Check=pho2Check(); });
+	
+	// => Phone3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('phone3').addEventListener("keydown",
 			(e)=> {
 				if ( e.which==13 ) {
 					e.preventDefault();
@@ -101,11 +128,23 @@ onload=function() {
 				} //if 		
 			});
 	// -> 무결성 확인
-	document.getElementById('phoneSuffix').addEventListener("focusout",
-			()=> { phCheck=phoCheck(); });
+	document.getElementById('phone3').addEventListener("focusout",
+			()=> { ph3Check=pho3Check(); });
 	
-	// => Email ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	document.getElementById('email').addEventListener("keydown",
+	// => Email1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('email1').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('email2').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('email1').addEventListener("focusout",
+			()=> { e1Check=email1Check(); });
+	
+	// => Email2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('email2').addEventListener("keydown",
 			(e)=> {
 				if ( e.which==13 ) {
 					e.preventDefault();
@@ -113,8 +152,8 @@ onload=function() {
 				} //if 		
 			});
 	// -> 무결성 확인
-	document.getElementById('email').addEventListener("focusout",
-			()=> { eCheck=emailCheck(); });
+	document.getElementById('email2').addEventListener("focusout",
+			()=> { e2Check=email2Check(); });
 	
 }; //onload
   
@@ -128,10 +167,13 @@ function inCheck() {
 	if (iCheck==false) { document.getElementById('iMessage').innerHTML=' 필수입력, id 를 확인하세요~~'; }
 	if (pCheck==false) { document.getElementById('pMessage').innerHTML=' 필수입력, password 를 확인하세요~~'; }
 	if (p2Check==false) { document.getElementById('p2Message').innerHTML=' 필수입력, password 재입력을 확인하세요~~'; }
-	if (phCheck==false) { document.getElementById('phMessage').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
-	if (eCheck==false) { document.getElementById('emMessage').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
+	if (ph1Check==false) { document.getElementById('ph1Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
+	if (ph2Check==false) { document.getElementById('ph2Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
+	if (ph3Check==false) { document.getElementById('ph3Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
+	if (e1Check==false) { document.getElementById('em1Message').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
+	if (e2Check==false) { document.getElementById('em2Message').innerHTML=' 필수입력, 도메인 을 확인하세요~~'; }
 	
-	if (nCheck && iCheck && pCheck && p2Check && phCheck && eCheck) {
+	if (nCheck && iCheck && pCheck && p2Check && ph1Check && ph2Check && ph3Check && e1Check && e2Check ) {
 		// => submit 확인
 		if ( confirm(" 정말 가입 하십니까? (Yes:확인 / No:취소)") ) {
 			// => submit 진행
@@ -185,19 +227,19 @@ function inCheck() {
 	<tr height="40">
 	    <th bgcolor="silver">휴대폰 번호</th>
 	    <td>
-		    <input type="text" name="phonePrefix" id="phonePrefix" value="010" placeholder="010" size="1" readonly>&nbsp;-
-		    <input type="text" name="phoneMiddle" id="phoneMiddle" size="3" maxlength="4">&nbsp;-
-		    <input type="text" name="phoneSuffix" id="phoneSuffix" size="3" maxlength="4"><br>
-       	<span id="phMessage" class="eMessage"></span>
+		    <input type="text" name="phone1" id="phone1" value="010" placeholder="010" size="1" readonly>&nbsp;-
+		    <input type="text" name="phone2" id="phone2" size="3" maxlength="4">&nbsp;-
+		    <input type="text" name="phone3" id="phone3" size="3" maxlength="4"><br>
+      	 	<span id="ph2Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="ph3Message" class="eMessage"></span>
 		</td>
 	</tr>
 
 	<tr height="40">
    		<th bgcolor="silver">이메일</th>
    	 	<td colspan="2">
-	        <input type="text" name="email" id="email" size="15" required>
+	        <input type="text" name="email1" id="email1" size="15" required>
 	        @
-	        <input type="text" id="domain" size="10" disabled>
+	        <input type="text" id="email2" name="email2" size="10" disabled>
 	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)" onblur="handleCustomDomain()">
 			    <option value="self">선택</option>
 			    <option value="naver.com">naver.com</option>
@@ -205,7 +247,7 @@ function inCheck() {
 			    <option value="gmail.com">gmail.com</option>
 			    <option value="custom">직접입력</option>
 			</select><br>
-	        <span id="emMessage" class="eMessage"></span>
+	        <span id="em1Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="em2Message" class="eMessage"></span>
     	</td>
 	</tr>
 	<tr height="40"><th bgcolor="silver">SMS 수신 여부</th>

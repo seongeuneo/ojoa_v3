@@ -112,25 +112,15 @@ public class MemberController {
 					Member entity, Model model) throws IOException  {
 	
 		// 사용자로부터 이메일과 도메인 불러옴
-	    String email = request.getParameter("email");
-	    String domain = request.getParameter("email_domain");
+	    String email1 = request.getParameter("email1");
+	    String email2 = request.getParameter("email_domain");
 
 	    // 이메일과 도메인을 결합
-	    String fullEmail = email + "@" + domain;
+	    String domain = "@" + email2;
 
 	    // 합쳐진 이메일(도메인 포함)을 엔터티에 설정
-	    entity.setEmail(fullEmail);
+	    entity.setEmail2(domain);
 	    
-	    // 사용자로부터 받은 전화번호의 각 부분
-	    String phoneMiddle = request.getParameter("phoneMiddle");
-	    String phoneSuffix = request.getParameter("phoneSuffix");
-
-	    // 전화번호 조합
-	    String fullPhone = "010" + "-" + phoneMiddle + "-" + phoneSuffix;
-	        
-	    // 완전한 전화번호 값을 엔티티에 설정
-	    entity.setPhone(fullPhone);
-
 	    // 1. 요청분석 & Service
 		// => 성공: 로그인유도 (loginForm 으로, member/loginForm.jsp)
 		// => 실패: 재가입유도 (joinForm 으로, member/memberJoin.jsp)

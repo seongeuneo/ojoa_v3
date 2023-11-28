@@ -96,36 +96,84 @@ function pw2Check() {
         return true;
     };
 } //pw2Check
-
-// 5) Phone
-function phoCheck() {
-    let phone = document.getElementById('phoneSuffix').value;
-    if (phone.length < 4) {
-        document.getElementById('phMessage').innerHTML = '전화번호를 올바르게 입력하세요.';
+  
+// 5) Phone1
+function pho1Check() {
+    let phone1 = document.getElementById('phone1').value;
+    if (phone.length < 3) {
+        document.getElementById('ph1Message').innerHTML = '전화번호를 올바르게 입력하세요.';
         return false;
 
         // => 숫자 로만 구성 되었는지 확인
-    } else if (phone.replace(/[0-9]/gi, '').length > 0) {
-        document.getElementById('phMessage').innerHTML = '숫자만 입력하세요.';
+    } else if (phone1.replace(/[0-9]/gi, '').length > 0) {
+        document.getElementById('ph1Message').innerHTML = '숫자만 입력하세요.';
         return false;
 
     } else {
-        document.getElementById('phMessage').innerHTML = '';
+        document.getElementById('ph1Message').innerHTML = '';
         return true;
     };
-} //phoCheck
+} //pho1Check
+  
+// 6) Phone2
+function pho2Check() {
+    let phone2 = document.getElementById('phone2').value;
+    if (phone2.length < 4) {
+        document.getElementById('ph2Message').innerHTML = '중간 4자리 번호를 올바르게 입력하세요.';
+        return false;
 
-// 6) email
-function emailCheck() {
-    let email = document.getElementById('email').value;
-    if (email.length < 3) {
-        document.getElementById('emMessage').innerHTML = '이메일을 입력하세요.';
+        // => 숫자 로만 구성 되었는지 확인
+    } else if (phone2.replace(/[0-9]/gi, '').length > 0) {
+        document.getElementById('ph2Message').innerHTML = '숫자만 입력하세요.';
+        return false;
+
+    } else {
+        document.getElementById('ph2Message').innerHTML = '';
+        return true;
+    };
+} //pho2Check
+  
+// 7) Phone3
+function pho3Check() {
+    let phone3 = document.getElementById('phone3').value;
+    if (phone3.length < 4) {
+        document.getElementById('ph3Message').innerHTML = '마지막 4자리 번호를 올바르게 입력하세요.';
+        return false;
+
+        // => 숫자 로만 구성 되었는지 확인
+    } else if (phone3.replace(/[0-9]/gi, '').length > 0) {
+        document.getElementById('ph3Message').innerHTML = '숫자만 입력하세요.';
+        return false;
+
+    } else {
+        document.getElementById('ph3Message').innerHTML = '';
+        return true;
+    };
+} //pho3Check
+  
+// 6) email1
+function email1Check() {
+    let email1 = document.getElementById('email1').value;
+    if (email1.length < 3) {
+        document.getElementById('em1Message').innerHTML = '이메일을 입력하세요.';
         return false;
     } else {
-        document.getElementById('emMessage').innerHTML = '';
+        document.getElementById('em1Message').innerHTML = '';
         return true;
     };
-} //emailCheck
+} //email1Check
+  
+// 7) email2
+function email2Check() {
+    let email2 = document.getElementById('email2').value;
+    if (email2.length < 3) {
+        document.getElementById('em2Message').innerHTML = '이메일을 입력하세요.';
+        return false;
+    } else {
+        document.getElementById('em2Message').innerHTML = '';
+        return true;
+    };
+} //email2Check
 
 
 

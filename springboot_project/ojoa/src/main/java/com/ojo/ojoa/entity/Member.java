@@ -31,10 +31,9 @@ public class Member {
 	
 	@Column(name="password")
 	private String password;
+	
 	@Column(name="name")
 	private String name;
-	@Column(name="email")
-	private String email;
 	
 	@Column(name="zipcode")
 	private String zipcode;
@@ -44,9 +43,6 @@ public class Member {
 	
 	@Column(name="addressdetail")
 	private String addressdetail;
-	
-	@Column(name="phone")
-	private String phone;
 	
 	@Column(name="memberyn")
 	//@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (memberyn IN ('y', 'n'))")
@@ -59,9 +55,27 @@ public class Member {
 	@Column(name="marketing_sms")
 	//@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (marketing_sms IN ('y', 'n'))")
 	private String marketing_sms;
-
+	
 	@Column(name="marketing_email")
 	//@Column(columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (marketing_email IN ('y', 'n'))")
 	private String marketing_email;
+	
+	@Column(name="email1")
+	private String email1;
+	
+	@Column(name="email2")
+	private String email2;
+	
+	@Column(name="phone1")
+	private String phone1;
+	
+	@Column(name="phone2")
+	private String phone2;
+	
+	@Column(name="phone3")
+	private String phone3;
+	
+	@Column(name="mileage")
+	private int mileage;
 	
 } //class

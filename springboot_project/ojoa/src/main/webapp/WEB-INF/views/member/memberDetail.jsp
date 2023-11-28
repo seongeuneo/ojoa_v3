@@ -18,16 +18,22 @@
 		<td>${requestScope.apple.password}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">Name</th>
 		<td>${requestScope.apple.name}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">phone</th>
-		<td>${requestScope.apple.phone}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">phone1</th>
+		<td>${requestScope.apple.phone1}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">phone2</th>
+		<td>${requestScope.apple.phone2}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">phone3</th>
+		<td>${requestScope.apple.phone3}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">zip_code</th>
 		<td>${requestScope.apple.zipcode}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">address</th>
 		<td>${requestScope.apple.address}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">address_detail</th>
 		<td>${requestScope.apple.addressdetail}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">email</th>
-		<td>${requestScope.apple.email}</td></tr>
+	<tr height="40"><th bgcolor="Thistle">email1</th>
+		<td>${requestScope.apple.email1}</td></tr>
+	<tr height="40"><th bgcolor="Thistle">email2</th>
+		<td>${requestScope.apple.email2}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">SMS 수신여부</th>
 		<td>${requestScope.apple.marketing_sms}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">이메일 수신여부</th>

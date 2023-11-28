@@ -29,25 +29,27 @@
 		-->
 		
 	<tr height="40"><th bgcolor="Orange">Name</th>
-		<td><input type="text" name="name" value="${requestScope.apple.name}" size="20" readonly>
+		<td><input type="text" name="name" value="${requestScope.apple.name}" size="20" readonly autocomplete="username">
 		</td></tr>
 		
-	<tr height="40"><th bgcolor="Silver">Password</th>
-		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" size="20" autocomplete="new-password"><br>
+   	<tr height="40"><th bgcolor="Silver">Password</th>
+		<td><input type="password" name="password" id="password" placeholder="영어, 숫자, 특수문자" value="${requestScope.apple.password}" size="20" autocomplete="new-password" readonly><br>
 			<span id="pMessage" class="eMessage"></span>
-		</td></tr>	
+		</td>
+	</tr>	
 	<tr height="40"><th bgcolor="Silver">Pw 확인</th>
-      	<td><input type="password" id="password2" placeholder="재입력 확인" size="20" autocomplete="new-password"><br>
+      	<td><input type="password" id="password2" placeholder="재입력 확인" value="${requestScope.apple.password}" size="20" autocomplete="new-password" readonly><br>
         	<span id="p2Message" class="eMessage"></span>
-        </td></tr>
+        </td>
+    </tr>
         
 	<tr height="40">
     <th bgcolor="silver">주소</th>
     	<td colspan="2">
-	        <input type="text" name="zipcode" id="zipcode" placeholder="우편번호입력" size="10">
+	        <input type="text" name="zipcode" id="zipcode" placeholder="우편번호입력" value="${requestScope.apple.zipcode}" size="10">
 	        <input class="inside_btn" type="submit" name="find_postcode" value="우편번호찾기"><br>
-	        <input type="text" name="address" id="address" required>
-	        <input type="text" name="addressdetail" id="addressdetail" placeholder="상세주소" size="10">
+	        <input type="text" name="address" id="address" value="${requestScope.apple.address}"  required>
+	        <input type="text" name="addressdetail" id="addressdetail"  value="${requestScope.apple.addressdetail}" placeholder="상세주소" size="10">
 	        <span id="adMessage" class="eMessage"></span>
    		</td>
 	</tr>
@@ -55,27 +57,26 @@
 	<tr height="40">
 	    <th bgcolor="silver">휴대폰 번호</th>
 	    <td>
-		    <input type="text" name="phonePrefix" id="phonePrefix" value="010" placeholder="010" size="1" readonly>&nbsp;-
-		    <input type="text" name="phoneMiddle" id="phoneMiddle" size="3" maxlength="4">&nbsp;-
-		    <input type="text" name="phoneSuffix" id="phoneSuffix" size="3" maxlength="4"><br>
-       	<span id="phMessage" class="eMessage"></span>
+		    <input type="text" name="phone1" id="phone1" value="010" placeholder="010" size="1" readonly>&nbsp;-
+		    <input type="text" name="phone2" id="phone2" value="${requestScope.apple.phone2}" size="3" maxlength="4">&nbsp;-
+		    <input type="text" name="phone3" id="phone3" value="${requestScope.apple.phone3}" size="3" maxlength="4"><br>
+       	<span id="ph2Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="ph3Message" class="eMessage"></span>
 		</td>
 	</tr>
 
 	<tr height="40">
    		<th bgcolor="silver">이메일</th>
    	 	<td colspan="2">
-	        <input type="text" name="email" id="email" size="15" required>
+	        <input type="text" name="email1" id="email1" value="${requestScope.apple.email1}" size="15" required>
 	        @
-	        <input type="text" id="domain" size="10" disabled>
-	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)">
-	            <option value="self">선택</option>
+	        <input type="text" id="email_domain" size="10">
+	        <select name="email2" id="email2" value="${requestScope.apple.email2}" onchange="handleDomainChange(this)">
+	            <option value="self">직접입력</option>
 	            <option value="naver.com">naver.com</option>
 	            <option value="hanmail.net">hanmail.net</option>
 	            <option value="gmail.com">gmail.com</option>
-	            <option value="custom">직접입력</option>
 	        </select><br>
-	        <span id="emMessage" class="eMessage"></span>
+	        <span id="em1Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="em2Message" class="eMessage"></span>
     	</td>
 	</tr>
 	

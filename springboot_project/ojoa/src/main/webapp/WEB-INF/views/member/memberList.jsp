@@ -17,8 +17,8 @@
 </c:if>
 <table border="1" style="width:90%">
 	<tr bgcolor="Silver">
-		<th>ID</th><th>Password</th><th>Name</th><th>Email</th><th>zip_code</th><th>address</th>
-		<th>address_detail</th><th>Phone</th><th>가입현황</th><th>가입날짜</th><th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th>
+		<th>ID</th><th>Password</th><th>Name</th><th>Email</th><th>domain</th><th>zip_code</th><th>address</th>
+		<th>address_detail</th><th>Phone1</th><th>Phone2</th><th>Phone3</th><th>가입현황</th><th>가입날짜</th><th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th>
 		<!-- 관리자 기능 추가 -->
 		<c:if test="${sessionScope.loginID=='admin'}">
 			<th>Delete</th>
@@ -28,8 +28,8 @@
 		<c:forEach var="s" items="${requestScope.banana}">
 		<tr><td><a href="memberDetail?id=${s.id}">${s.id}</a></td>
 			
-			<td>${s.password}</td><td>${s.name}</td><td>${s.email}</td><td>${s.zipcode}</td>
-			<td>${s.address}</td><td>${s.addressdetail}</td><td>${s.phone}</td><td>${s.memberyn}</td><td align="center">${s.regdate}</td><td align="center">${s.marketing_sms}</td><td align="center">${s.marketing_email}</td>
+			<td>${s.password}</td><td>${s.name}</td><td align="center">${s.email1}</td><td align="center">${s.email2}</td><td>${s.zipcode}</td>
+			<td>${s.address}</td><td>${s.addressdetail}</td><td align="center">${s.phone1}</td><td align="center">${s.phone2}</td><td align="center">${s.phone3}</td><td>${s.memberyn}</td><td align="center">${s.regdate}</td><td align="center">${s.marketing_sms}</td><td align="center">${s.marketing_email}</td>
 			<!-- 관리자 기능 추가 -->
 			<c:if test="${sessionScope.loginID=='admin'}">
 				<td align="center"><a href="memberdelete?id=${s.id}">삭제</a></td>
