@@ -21,19 +21,20 @@ import lombok.NoArgsConstructor;
 public class Admin {
 	
 	@Id
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id; // PK, AI
 	
-	@Column(nullable = false)
-	private String pwd; // 관리자 비밀번호
+	@Column(name="password")
+	private String password; // 관리자 비밀번호
 	
-	@Column(nullable = false)
+	@Column(name="name")
 	private String name; // 관리자 이름
 	
-	@Column(nullable = false)
+	@Column(name="email")
 	private String email; // 관리자 이메일 
 	
-	@Column(nullable = false)
+	@Column(name="phone")
 	private String phone; // 관리자 전화번호
 	
 	

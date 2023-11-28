@@ -102,3 +102,9 @@ function App() {
 }
 
 export default App;
+
+
+
+jdbc:mysql://192.168.0.58:3306/ojoa?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+jdbc:mysql://HOSTNAME(ip):3306(포트번호)/kakao(Database name)?serverTimezone=Asia/Seoul"></property>
+출처: https://jjinny0609.tistory.com/115 [냐냥:티스토리]
