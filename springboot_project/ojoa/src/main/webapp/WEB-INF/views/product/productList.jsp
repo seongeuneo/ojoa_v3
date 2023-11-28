@@ -58,7 +58,7 @@
 					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
 					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
 					<td align="center"><button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
-					<td align="center"><span onclick="addWish()">관심목록 추가</span></td>
+					<td align="center"><span onclick="addWish(${s.prod_num})">관심목록 추가</span></td>
 		<%-- </c:if> --%>
 				</tr>
 			</c:forEach>
