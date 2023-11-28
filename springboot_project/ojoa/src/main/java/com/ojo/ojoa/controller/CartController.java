@@ -10,7 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.service.CartService;
-import com.ojo.ojoa.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +21,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/cart")
 public class CartController {
 	
-	ProductService productService;
     CartService cartService;
 
 
@@ -58,9 +56,10 @@ public class CartController {
 		return uri;
 	} // cdelete
 
-
 }
+
 //==========================================
 
 // 상품 목록에서 장바구니 담기 버튼 눌렀을 때 담기는거
 
+    // 상품 목록에서 장바구니 담기 버튼 눌렀을 때 상품을 장바구니에 추가하는 메서드

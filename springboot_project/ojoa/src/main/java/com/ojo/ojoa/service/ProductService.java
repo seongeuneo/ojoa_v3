@@ -24,6 +24,4 @@ public interface ProductService {
 	int delete(int prod_num);
 
     
-    
-
 } //class
