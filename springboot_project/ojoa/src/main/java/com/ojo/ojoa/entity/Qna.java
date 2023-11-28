@@ -44,5 +44,9 @@ public class Qna {
 
     private String qna_indate;
 
+    //글등록시 필요한 Entity
+    private int root;
+    private int step;
+    private int indent;
    
 } //class

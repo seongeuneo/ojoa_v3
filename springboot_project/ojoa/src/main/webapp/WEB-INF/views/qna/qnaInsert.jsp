@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** SpringBoot Board_Insert **</title>
+<title>** SpringBoot Qna_Insert **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** SpringBoot Board_Insert **</h2>
+<h2>** SpringBoot Qna_Insert **</h2>
 
 <form action="binsert" method="Post">
 <table>
