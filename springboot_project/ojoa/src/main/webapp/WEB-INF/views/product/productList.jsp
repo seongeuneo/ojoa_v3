@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** UsersList **</h2>
+<h2>** Product List **</h2>
 
 <hr>
 <c:if test="${not empty requestScope.message}">
@@ -17,37 +17,50 @@
 </c:if>
 <table border="1" style="width:90%">
 	<tr bgcolor="Orange">
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Email</th>
-		<th>zip_code</th>
-		<th>address</th>
-		<th>address_detail</th>
-		<th>Phone</th>
-		<th>가입현황</th>
-		<th>가입날짜</th>
-		<th>마케팅 동의</th>
+		<th>상품 번호</th>
+		<th>대표 썸네일 사진</th>
+		<th>상품 이름</th>
+		<th>상품 종류</th>
+		<th>할인률</th>
+		<th>판매가</th>
+		<th>상품설명</th>
+		<th>판매 유무</th>
+		<th>등록일</th>
+		<th>재고 수량</th>
+		<th>평점</th>
+		<th>상품 삭제</th>
+		
 		<!-- 관리자 기능 추가 -->
 		<c:if test="${sessionScope.loginID=='admin'}">
-			<th>Delete</th>
 		</c:if>
 	</tr>
-	<c:if test="${not empty requestScope.banana}">
-		<c:forEach var="s" items="${requestScope.banana}">
-		<tr><td><a href="usersdetail?id=${s.id}">${s.id}</a></td>
-			
-			<td>${s.pwd}</td><td>${s.name}</td><td>${s.email}</td><td>${s.zipcode}</td>
-			<td>${s.address}</td><td>${s.addressdetail}</td><td>${s.phone}</td><td>${s.useyn}</td><td>${s.regdate}</td><td>${s.marketing}</td>
-			<!-- 관리자 기능 추가 -->
-			<c:if test="${sessionScope.loginID=='admin'}">
-				<td align="center"><a href="usersdelete?id=${s.id}">삭제</a></td>
-			</c:if>
-		</tr>	
-		</c:forEach>
-	</c:if>
-	<c:if test="${empty requestScope.banana}">
-		<tr><td colspan="7">출력할 Data가 1건도 없습니다 ~~</td>
+
+		<c:if test="${not empty requestScope.product}">
+			<c:forEach var="s" items="${requestScope.product}">
+				<tr>
+					<td>${s.prod_num}</a></td>
+					<td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
+					<td>${s.prod_name}</td>
+					<td>${s.prod_kind}</td>
+					<td>${s.prod_discount}</td>
+					<td>${s.prod_price1}</td>
+					<td>${s.prod_content}</td>
+					<td>${s.prod_sellyn}</td>
+					<td>${s.prod_regdate}</td>
+					<td>${s.prod_stock}</td>
+					<td>${s.prod_grade}</td>
+
+				<!-- 관리자 기능 추가 -->
+		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
+					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">삭제</a></td>
+		<%-- </c:if> --%>
+				</tr>
+			</c:forEach>
+		</c:if>
+
+
+		<c:if test="${empty requestScope.product}">
+		<tr><td colspan="12">출력할 Data가 1건도 없습니다 ~~</td>
 		</tr>
 	</c:if>
 </table>
