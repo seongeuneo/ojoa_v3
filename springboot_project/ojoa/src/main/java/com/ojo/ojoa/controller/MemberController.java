@@ -159,7 +159,7 @@ public class MemberController {
 	//		-> 성공: detail
 	//		-> 실패: 재시도 유도 (memberUpdate.jsp)
 	@PostMapping(value="/memberUpdate")
-	public String memberUpdate(HttpSession session, HttpServletRequest request,
+	public String memberUpdate(HttpSession session,
 							  Member entity, Model model) throws IOException {
 		
 		// => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
@@ -167,27 +167,6 @@ public class MemberController {
 		String uri="member/memberDetail";
 		
 		// ** password는 수정불가
-		
-		// 사용자로부터 이메일과 도메인 불러옴
-	    String email = request.getParameter("email");
-	    String domain = request.getParameter("email_domain");
-
-	    // 이메일과 도메인을 결합
-	    String fullEmail = email + "@" + domain;
-
-	    // 합쳐진 이메일(도메인 포함)을 엔터티에 설정
-	    entity.setEmail(fullEmail);
-	    
-	    // 사용자로부터 받은 전화번호의 각 부분
-	    String phoneMiddle = request.getParameter("phoneMiddle");
-	    String phoneSuffix = request.getParameter("phoneSuffix");
-
-	    // 전화번호 조합
-	    String fullPhone = "010" + "-" + phoneMiddle + "-" + phoneSuffix;
-	        
-	    // 완전한 전화번호 값을 엔티티에 설정
-	    entity.setPhone(fullPhone);
-
 		
 		// => Service 처리
 		try {

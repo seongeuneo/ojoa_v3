@@ -21,19 +21,6 @@ function idDupCheck() {
 	}
 } //idDupCheck
 
-//이메일 도메인 관련
-function handleDomainChange(select) {
-    var inputField = document.getElementById('domain');
-    if (select.value === '직접입력') {
-        inputField.disabled = false;
-        inputField.value = '';
-        inputField.focus();
-    } else {
-        inputField.disabled = true;
-        inputField.value = select.value;
-    }
-} //handleDomainChange
-
 // ** 입력값의 무결성 점검 ***************************
 // 1) 전역변수 정의
 //=> 입력값의 무결성 점검여부를 확인하는 switch 변수
@@ -211,13 +198,13 @@ function inCheck() {
 	        <input type="text" name="email" id="email" size="15" required>
 	        @
 	        <input type="text" id="domain" size="10" disabled>
-	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)">
-	            <option value="self">선택</option>
-	            <option value="naver.com">naver.com</option>
-	            <option value="hanmail.net">hanmail.net</option>
-	            <option value="gmail.com">gmail.com</option>
-	            <option value="custom">직접입력</option>
-	        </select><br>
+	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)" onblur="handleCustomDomain()">
+			    <option value="self">선택</option>
+			    <option value="naver.com">naver.com</option>
+			    <option value="hanmail.net">hanmail.net</option>
+			    <option value="gmail.com">gmail.com</option>
+			    <option value="custom">직접입력</option>
+			</select><br>
 	        <span id="emMessage" class="eMessage"></span>
     	</td>
 	</tr>
