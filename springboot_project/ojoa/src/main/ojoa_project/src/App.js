@@ -31,7 +31,7 @@ function App() {
   // Spring Boot 연결
   const [message, setMessage] = useState([]);
 
- 
+
   useEffect(() => {
     axios.get('/hello')
       .then((response) => {
@@ -67,7 +67,8 @@ function App() {
 
         <ScrollTop />
         <a href="http://localhost:8080/admin/adminmain">관리자용</a>
-        <Header/>
+        <p>{message}</p>
+        <Header />
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
