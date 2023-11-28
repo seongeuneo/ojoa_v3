@@ -42,7 +42,6 @@
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
 &nbsp;<a href="cart/cartList">cart_List</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">orders_List</a>&nbsp; 
-&nbsp;<a href="cart/cartList">cart_List</a>&nbsp;
 &nbsp;<a href="wish/wishlist">관심심품</a>&nbsp;
 
 &nbsp;<a href="qna/qnaList">게시판QnA</a>&nbsp; 

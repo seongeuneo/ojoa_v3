@@ -1,12 +1,14 @@
-x<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** UsersList **</title>
+<title>** Product List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h2>** Product List **</h2>
@@ -56,13 +58,8 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
 					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
 					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
-<<<<<<< HEAD
-					<td align="center"><button onclick="addCart()">장바구니담기</button></td>
+					<td align="center"> <button onclick="addCart(${s.prod_num},'${s.prod_mainimage}')">장바구니담기</button></td>
 					<td align="center"><span onclick="addWish()">관심목록 추가</span></td>
-=======
-					<td align="center"><button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
-					<td align="center"><span onclick="addWish(${s.prod_num})">관심목록 추가</span></td>
->>>>>>> main
 		<%-- </c:if> --%>
 				</tr>
 			</c:forEach>

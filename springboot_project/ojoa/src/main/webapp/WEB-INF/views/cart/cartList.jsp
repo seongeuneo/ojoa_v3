@@ -20,6 +20,7 @@
 		<th>카트번호</th>
 		<th>회원ID</th>
 		<th>상품번호</th>
+		<th>상품사진</th>
 		<th>수량</th>
 		<th>Delete</th>
 
@@ -35,6 +36,7 @@
 					<td>${s.cart_num}</td>
 					<td>${s.id}</td>
 					<td>${s.prod_num}</td>
+				    <td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.quantity}</td>
 					<td align="center"><a href="cdelete?cart_num=${s.cart_num}">삭제</a></td>
 				</tr>
