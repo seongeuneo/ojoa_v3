@@ -30,9 +30,9 @@
 		<td>${requestScope.apple.address}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">address_detail</th>
 		<td>${requestScope.apple.addressdetail}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">email1</th>
+	<tr height="40"><th bgcolor="Thistle">email</th>
 		<td>${requestScope.apple.email1}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">email2</th>
+	<tr height="40"><th bgcolor="Thistle">domain</th>
 		<td>${requestScope.apple.email2}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">SMS 수신여부</th>
 		<td>${requestScope.apple.marketing_sms}</td></tr>	
@@ -40,6 +40,8 @@
 		<td>${requestScope.apple.marketing_email}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">가입일</th>
 		<td>${requestScope.apple.regdate}</td></tr>	
+	<tr height="40"><th bgcolor="Thistle">적립금</th>
+		<td>${requestScope.apple.mileage}</td></tr>	
 </c:if>
 <c:if test="${empty requestScope.apple}">
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
