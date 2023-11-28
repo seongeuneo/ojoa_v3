@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.service.CartService;
+import com.ojo.ojoa.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,7 +21,8 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping("/cart")
 public class CartController {
-
+	
+	ProductService productService;
     CartService cartService;
 
 
@@ -55,23 +57,10 @@ public class CartController {
 		
 		return uri;
 	} // cdelete
+
+
 }
-
-
 //==========================================
 
+// 상품 목록에서 장바구니 담기 버튼 눌렀을 때 담기는거
 
-
-
-
-//// ** Cart Detail - 여기에 뭐하까~(클릭하면 뭐나올지 생각해보기~)
-
-//@GetMapping(value ="/cartdetail")
-//public String mdetail(HttpServletRequest request, Model model, Member entity) {
-//	model.addAttribute("apple", service.selectOne(entity.getId()));
-//	
-//	if ( "U".equals(request.getParameter("jCode")) )
-//		 return "member/memberUpdate";
-//	else return "member/memberDetail";
-//	
-//} // cartdetail

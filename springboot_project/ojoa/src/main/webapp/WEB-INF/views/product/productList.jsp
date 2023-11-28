@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>** UsersList **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h2>** Product List **</h2>
@@ -29,6 +30,8 @@
 		<th>재고 수량</th>
 		<th>평점</th>
 		<th>상품 삭제</th>
+		<th>장바구니 담기</th>
+		<th>관심목록 추가</th>
 		
 		<!-- 관리자 기능 추가 -->
 		<c:if test="${sessionScope.loginID=='admin'}">
@@ -52,11 +55,33 @@
 
 				<!-- 관리자 기능 추가 -->
 		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
-					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">삭제</a></td>
+					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
+					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
+					<td align="center"><button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
+					<td align="center"><span onclick="addWish()">관심목록 추가</span></td>
 		<%-- </c:if> --%>
 				</tr>
 			</c:forEach>
 		</c:if>
+
+<script>
+    // addCart 함수 정의
+    function addCart(prod_num) {
+        axios.get(`/addCart?prod_num=${prod_num}`)
+            .then(response => {
+                // 요청이 성공한 경우
+                console.log(response.data); // 추가 정보나 로그 등을 출력하거나 다른 작업 수행
+                alert('상품이 장바구니에 추가되었습니다.');
+                // 추가적인 작업이 필요한 경우 페이지 새로고침 또는 다른 동작을 수행할 수 있습니다.
+                window.location.reload(); // 예시로 페이지를 새로고침하는 코드
+            })
+            .catch(error => {
+                // 요청이 실패한 경우
+                console.error('장바구니 추가 중 오류 발생:', error);
+                alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.');
+            });
+    }
+</script>
 
 
 		<c:if test="${empty requestScope.product}">

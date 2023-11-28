@@ -22,6 +22,7 @@ public interface ProductService {
 
 	// ** delete
 	int delete(int prod_num);
+
     
     
 
