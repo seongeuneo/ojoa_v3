@@ -22,3 +22,5 @@ public class HomeController {
    } //home
    
 } //class
+
+// 주석 넣으면 콘트롤라부활하겠지?
