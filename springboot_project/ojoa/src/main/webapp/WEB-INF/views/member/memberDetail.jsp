@@ -20,11 +20,11 @@
 		<td>${requestScope.apple.name}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">phone</th>
 		<td>${requestScope.apple.phone}</td></tr>	
-	<tr height="40"><th bgcolor="Thistle">zipcode</th>
+	<tr height="40"><th bgcolor="Thistle">zip_code</th>
 		<td>${requestScope.apple.zipcode}</td></tr>	
 	<tr height="40"><th bgcolor="Thistle">address</th>
 		<td>${requestScope.apple.address}</td></tr>
-	<tr height="40"><th bgcolor="Thistle">addressdetail</th>
+	<tr height="40"><th bgcolor="Thistle">address_detail</th>
 		<td>${requestScope.apple.addressdetail}</td></tr>
 	<tr height="40"><th bgcolor="Thistle">email</th>
 		<td>${requestScope.apple.email}</td></tr>
