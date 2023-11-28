@@ -1,15 +1,14 @@
-x<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>       
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** UsersList **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<title>Wish Product List</title>
 </head>
 <body>
-<h2>** Product List **</h2>
+<h2>Wish Product List</h2>
 
 <hr>
 <c:if test="${not empty requestScope.message}">
@@ -28,13 +27,7 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<th>등록일</th>
 		<th>재고 수량</th>
 		<th>평점</th>
-		<th>상품 삭제</th>
-		<th>장바구니 담기</th>
-		<th>관심목록 추가</th>
-		
-		<!-- 관리자 기능 추가 -->
-		<c:if test="${sessionScope.loginID=='admin'}">
-		</c:if>
+		<th>관심상품 제거</th>
 	</tr>
 
 		<c:if test="${not empty requestScope.product}">
@@ -51,19 +44,7 @@ x<%@ page language="java" contentType="text/html; charset=UTF-8"
 					<td>${s.prod_regdate}</td>
 					<td>${s.prod_stock}</td>
 					<td>${s.prod_grade}</td>
-
-				<!-- 관리자 기능 추가 -->
-		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
-					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
-					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
-<<<<<<< HEAD
-					<td align="center"><button onclick="addCart()">장바구니담기</button></td>
-					<td align="center"><span onclick="addWish()">관심목록 추가</span></td>
-=======
-					<td align="center"><button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
-					<td align="center"><span onclick="addWish(${s.prod_num})">관심목록 추가</span></td>
->>>>>>> main
-		<%-- </c:if> --%>
+					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>
