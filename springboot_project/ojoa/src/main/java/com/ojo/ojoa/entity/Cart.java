@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +37,7 @@ public class Cart {
        @Column(name="quantity")
 	   //@Column(nullable = false, columnDefinition = "int default 1")
 	   private int quantity;
+       
+      private String prod_mainimage;
 
 }

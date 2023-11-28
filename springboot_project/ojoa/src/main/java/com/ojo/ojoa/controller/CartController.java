@@ -2,6 +2,8 @@ package com.ojo.ojoa.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.service.CartService;
-import com.ojo.ojoa.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +23,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/cart")
 public class CartController {
 	
-	ProductService productService;
     CartService cartService;
 
 
@@ -59,8 +59,27 @@ public class CartController {
 	} // cdelete
 
 
-}
+
 //==========================================
 
-// 상품 목록에서 장바구니 담기 버튼 눌렀을 때 담기는거
 
+// 상품 목록에서 장바구니 담기 버튼 눌렀을 때 상품을 장바구니에 추가하는 메서드
+// ** Add Cart - 장바구니에 상품 추가
+	
+	@GetMapping("/addCart")
+    public ResponseEntity<String> addCart(HttpSession session, Cart entity, RedirectAttributes rttr) {
+    	
+    	String loginID = (String)session.getAttribute("loginID");
+    	try {
+    		if (loginID == null) {
+    			throw new Exception("loginID isNull");
+    		}
+            entity.setId(loginID);
+    		cartService.save(entity); // 상품을 관심목록에 추가하는 서비스 메서드 호출
+            return ResponseEntity.ok("상품이 관심목록에 추가되었습니다.");
+        } catch (Exception e) {
+        	System.out.println("addCart exeption " + e.toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품 추가 중 오류 발생");
+        }
+	}
+}
