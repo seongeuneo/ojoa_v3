@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.repository.QnaRepository;
 

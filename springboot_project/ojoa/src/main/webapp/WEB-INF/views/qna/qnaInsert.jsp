@@ -11,13 +11,13 @@
 <body>
 <h2>** SpringBoot Qna_Insert **</h2>
 
-<form action="qinsert" method="Post">
+<form action="qnaInsert" method="Post">
 <table>
 	<tr height="40"><th bgcolor="Pink">I D</th>
 		<td><input type="text" name="id" value="${sessionScope.loginID}" readonly size="20"></td></tr>
 	
-	<%-- <tr height="40"><th bgcolor="Pink">상 품</th>
-		<td><input type="text" name="prod_num" value="${sessionScope.loginID}" readonly size="20"></td></tr> --%>
+	 <tr height="40"><th bgcolor="Pink">상 품</th>
+		<td><input type="text" name="prod_num" value="" size="20"></td></tr> 
 	
 	<tr height="40">
 				<th bgcolor="Pink">카테고리</th>

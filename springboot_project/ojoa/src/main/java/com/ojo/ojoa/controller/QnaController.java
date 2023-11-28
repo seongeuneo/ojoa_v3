@@ -1,24 +1,18 @@
 package com.ojo.ojoa.controller;
 
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.service.QnaService;
 
@@ -83,7 +77,7 @@ public class QnaController {
       
       try {
          log.info("** delete 성공  => "+qnaService.delete(entity.getQna_seq()));
-         rttr.addFlashAttribute("message", "~~ 게시글삭제 성공!! ~~") ;   
+         rttr.addFlashAttribute("message", "게시글삭제 성공!!") ;   
          if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
             // => 관리자에 의한 강제삭제 : qnaList.jsp
             uri="redirect:qnaList";
@@ -93,7 +87,7 @@ public class QnaController {
          }
       } catch (Exception e) {
          log.info("** delete Exception => "+e.toString());
-         rttr.addFlashAttribute("message", "~~ 삭제 실패 ~~");
+         rttr.addFlashAttribute("message", " 삭제 실패.. ");
       }
       
       return uri;

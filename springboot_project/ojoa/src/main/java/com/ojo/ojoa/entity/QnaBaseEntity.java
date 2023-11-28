@@ -27,14 +27,14 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(value={ AuditingEntityListener.class })
 @Getter
-@Table(name = "BaseEntity")
-abstract class BaseEntity {
+
+abstract class QnaBaseEntity {
 	
 	@CreatedDate
-	@Column(name="regDate", updatable=false)
-	private LocalDateTime regDate;
+	@Column(name="qna_indate", updatable=false)
+	private LocalDateTime qna_indate;
 	
 	@LastModifiedDate
-	@Column(name="modDate")
-	private LocalDateTime modDate; 
+	@Column(name="qna_redate")
+	private LocalDateTime qna_redate; 
 }

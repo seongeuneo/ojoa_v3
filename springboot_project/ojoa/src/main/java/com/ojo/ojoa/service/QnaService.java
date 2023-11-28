@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.entity.Qna;
 
 @Service
