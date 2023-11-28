@@ -59,9 +59,51 @@ onload=function() {
 				} //if 		
 			});
 	  
+	// => ID
+	// -> keydown_EnterKey 에 포커스이동 적용
+	// -> 제어문자의 ascii 코드 값(참고)
+	//	  esc=27, EnterKey=13, Space_Bar=32
+	document.getElementById('id').focus();
+	document.getElementById('id').addEventListener('keydown', 
+		(e) => { 
+			if ( e.which==13 ) {
+				e.preventDefault();
+				// => form 에 submit 이 있는경우
+				// => enter 누르면 자동 submit 발생되므로 이를 제거함
+				document.getElementById('password').focus();
+			} //if
+		});
+	// -> 무결성 확인
+	document.getElementById('id').addEventListener('focusout',
+			()=>{ iCheck=idCheck(); }); 	  
 	  
-	  
-	  
+	// => Password
+	document.getElementById('password').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('password2').focus();
+				} //if 		
+			});
+	document.getElementById('password').addEventListener("focusout",
+			()=> { pCheck=pwCheck(); });
+	
+	// => Password2
+	document.getElementById('password2').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('name').focus();
+				} //if 		
+			});
+	document.getElementById('password2').addEventListener("focusout",
+			()=> { p2Check=pw2Check(); });
+	
+	
+	
+	
+	
+	
 	  
   }
   
