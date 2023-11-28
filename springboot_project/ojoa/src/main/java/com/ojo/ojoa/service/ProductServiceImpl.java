@@ -33,9 +33,9 @@ public class ProductServiceImpl implements ProductService {
 
  	// ** insert, update
  	@Override
- 	public String save(Product entity) {
+ 	public int save(Product entity) {
  		productRepository.save(entity); // 저장 또는 수정
-         return entity.getId();   // 저장후 key return
+         return entity.getProd_num();   // 저장후 key return
  	}
  	 
  	// ** delete

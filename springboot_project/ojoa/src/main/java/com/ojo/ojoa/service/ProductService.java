@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Product;
 
 @Service
@@ -19,7 +18,7 @@ public interface ProductService {
 	Product selectOne(int prod_num);
 
 	// ** insert, update
-	String save(Product entity);
+	int save(Product entity);
 
 	// ** delete
 	int delete(int prod_num);

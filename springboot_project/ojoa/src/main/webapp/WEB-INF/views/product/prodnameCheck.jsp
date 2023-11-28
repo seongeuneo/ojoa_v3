@@ -38,6 +38,7 @@ function idOK() {
 	// => window.close() , self.close()
 } //idOK
 </script>
+
 <style>
 	body {
 		background-color: LightYellow;
@@ -52,7 +53,7 @@ function idOK() {
 </head>
 <body>
 <div id="wrap">
-	<h3>** ID 중복확인 *</h3>
+	<h3>** 상품이름 중복확인 *</h3>
 	<h4>Parameter id값 확인</h4>
 	=> Parameter_ID : ${param.id}<br>
 	<hr>
