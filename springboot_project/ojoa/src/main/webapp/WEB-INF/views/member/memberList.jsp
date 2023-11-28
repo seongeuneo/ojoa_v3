@@ -26,13 +26,13 @@
 	</tr>
 	<c:if test="${not empty requestScope.banana}">
 		<c:forEach var="s" items="${requestScope.banana}">
-		<tr><td><a href="memberdetail?id=${s.id}">${s.id}</a></td>
+		<tr><td><a href="memberDetail?id=${s.id}">${s.id}</a></td>
 			
 			<td>${s.password}</td><td>${s.name}</td><td>${s.email}</td><td>${s.zipcode}</td>
 			<td>${s.address}</td><td>${s.addressdetail}</td><td>${s.phone}</td><td>${s.memberyn}</td><td>${s.regdate}</td><td>${s.marketing_sms}</td><td>${s.marketing_email}</td>
 			<!-- 관리자 기능 추가 -->
 			<c:if test="${sessionScope.loginID=='admin'}">
-				<td align="center"><a href="memberdelete?id=${s.id}">삭제</a></td>
+				<td align="center"><a href="memberDelete?id=${s.id}">삭제</a></td>
 			</c:if>
 		</tr>	
 		</c:forEach>

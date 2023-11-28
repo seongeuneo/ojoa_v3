@@ -11,16 +11,6 @@
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
 
-// ** ID 중복확인
-// => UI 개선사항
-// => 중복확인 버튼 추가
-//    처음 : 중복확인버튼_enable / submit_disable
-// => 중복확인 완료후 submit 이 가능하도록
-//    중복확인버튼_disable / submit_enable
-// => 중복확인 기능 : function idDupCheck()
-//    id입력값의 무결성점검 -> id 확인요청 -> 서버로 전송 -> id , selectOne 결과 -> response: 사용가능/불가능 
-// => 서버측 : 컨트롤러에 idDupCheck 요청을 처리하는 매핑메서드, view_Page(팝업창) 작성  
-
 function idDupCheck() {
 	// 1) 입력값의 무결성 확인
 	if ( iCheck==false ) iCheck=idCheck();
@@ -29,10 +19,9 @@ function idDupCheck() {
 		let url = "idDupCheck?id="+document.getElementById('id').value;
 		window.open(url,'_blank','width=400,height=300,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes'); 
 	}
-	
 } //idDupCheck
 
-// ** 이메일 도메인 관련
+//이메일 도메인 관련
 function handleDomainChange(select) {
     var inputField = document.getElementById('domain');
     if (select.value === '직접입력') {
@@ -60,6 +49,88 @@ function handleDomainChange(select) {
   let sCheck=false; // sms 수신 동의
   let mCheck=false; // 이메일 수신 동의
 
+onload=function() {
+	  
+	// => Name
+	//document.getElementById('name').focus();
+	document.getElementById('name').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('id').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('id').addEventListener('focusout',
+			()=>{ nCheck=nmCheck(); }); 
+	
+	// => ID
+	// -> keydown_EnterKey 에 포커스이동 적용
+	// -> 제어문자의 ascii 코드 값(참고)
+	//	  esc=27, EnterKey=13, Space_Bar=32
+	document.getElementById('id').addEventListener('keydown', 
+		(e) => { 
+			if ( e.which==13 ) {
+				e.preventDefault();
+				// => form 에 submit 이 있는경우
+				// => enter 누르면 자동 submit 발생되므로 이를 제거함
+				document.getElementById('password').focus();
+			} //if
+		});
+	// -> 무결성 확인
+	document.getElementById('id').addEventListener('focusout',
+			()=>{ iCheck=idCheck(); }); 	  
+	  
+	// => Password
+	document.getElementById('password').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('password2').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('password').addEventListener("focusout",
+			()=> { pCheck=pwCheck(); });
+	
+	// => Password2
+	document.getElementById('password2').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('phone').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('password2').addEventListener("focusout",
+			()=> { p2Check=pw2Check(); });
+	
+	// => Phone ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('phoneSuffix').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('email').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('phoneSuffix').addEventListener("focusout",
+			()=> { phCheck=phoCheck(); });
+	
+	// => Email ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	document.getElementById('email').addEventListener("keydown",
+			(e)=> {
+				if ( e.which==13 ) {
+					e.preventDefault();
+					document.getElementById('submitTag').focus();
+				} //if 		
+			});
+	// -> 무결성 확인
+	document.getElementById('email').addEventListener("focusout",
+			()=> { eCheck=emailCheck(); });
+	
+}; //onload
+  
 // 3) submit 실행 여부 판단 & 실행
 // => 모든항목의 무결성을 확인
 // => 오류가 없으면 : return true
@@ -70,16 +141,10 @@ function inCheck() {
 	if (iCheck==false) { document.getElementById('iMessage').innerHTML=' 필수입력, id 를 확인하세요~~'; }
 	if (pCheck==false) { document.getElementById('pMessage').innerHTML=' 필수입력, password 를 확인하세요~~'; }
 	if (p2Check==false) { document.getElementById('p2Message').innerHTML=' 필수입력, password 재입력을 확인하세요~~'; }
-	if (zCheck==false) { document.getElementById('zMessage').innerHTML=' 필수입력, zipcode 를 확인하세요~~'; }
-	if (aCheck==false) { document.getElementById('aMessage').innerHTML=' 필수입력, 주소 를 확인하세요~~'; }
-	if (adCheck==false) { document.getElementById('adMessage').innerHTML=' 필수입력, 상세주소 를 확인하세요~~'; }
 	if (phCheck==false) { document.getElementById('phMessage').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
-	if (eCheck==false) { document.getElementById('eMessage').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
-	if (sCheck==false) { document.getElementById('sMessage').innerHTML=' 필수입력, SMS 수신 동의 를 확인하세요~~'; }
-	if (mCheck==false) { document.getElementById('mMessage').innerHTML=' 필수입력, 이메일 수신 동의 를 확인하세요~~'; }
+	if (eCheck==false) { document.getElementById('emMessage').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
 	
-	if (nCheck && iCheck && pCheck && p2Check 
-			   && zCheck && aCheck && adCheck && phCheck && eCheck && mCheck && sCheck && mCheck) {
+	if (nCheck && iCheck && pCheck && p2Check && phCheck && eCheck) {
 		// => submit 확인
 		if ( confirm(" 정말 가입 하십니까? (Yes:확인 / No:취소)") ) {
 			// => submit 진행
@@ -119,38 +184,43 @@ function inCheck() {
       	<td><input type="password" id="password2" placeholder="재입력 확인" size="10" autocomplete="new-password"><br>
         	<span id="p2Message" class="eMessage"></span>
         </td></tr>	
-    <tr height="40"><th bgcolor="silver">주소</th>
-      	<td><input type="text" name="zipcode" id="zipcode" placeholder="우편번호입력" size="10">
-      	<form action="" target="_blank"><input class="inside_btn" type="submit" name="find_postcode"
-                                        value="우편번호찾기"></form><br>
-                                        <input type="text" name="address" id="address" required>
-                                <input type="text" name="addressdetail" id="addressdetail" placeholder="상세주소" size="10">
-        	<span id="adMessage" class="eMessage"></span>
-        </td></tr>
-		<tr height="40">
-		    <th bgcolor="silver">휴대폰 번호</th>
-		    <td>
-			    <input type="text" name="phonePrefix" id="phonePrefix" value="010" placeholder="010" size="1" readonly>&nbsp;-
-			    <input type="text" name="phoneMiddle" id="phoneMiddle" size="3" maxlength="4">&nbsp;-
-			    <input type="text" name="phoneSuffix" id="phoneSuffix" size="3" maxlength="4"><br>
-			</td>
-		</tr>
+    <tr height="40">
+    <th bgcolor="silver">주소</th>
+    	<td colspan="2">
+	        <input type="text" name="zipcode" id="zipcode" placeholder="우편번호입력" size="10">
+	        <input class="inside_btn" type="submit" name="find_postcode" value="우편번호찾기"><br>
+	        <input type="text" name="address" id="address" required>
+	        <input type="text" name="addressdetail" id="addressdetail" placeholder="상세주소" size="10">
+	        <span id="adMessage" class="eMessage"></span>
+   		</td>
+	</tr>
+	
+	<tr height="40">
+	    <th bgcolor="silver">휴대폰 번호</th>
+	    <td>
+		    <input type="text" name="phonePrefix" id="phonePrefix" value="010" placeholder="010" size="1" readonly>&nbsp;-
+		    <input type="text" name="phoneMiddle" id="phoneMiddle" size="3" maxlength="4">&nbsp;-
+		    <input type="text" name="phoneSuffix" id="phoneSuffix" size="3" maxlength="4"><br>
+       	<span id="phMessage" class="eMessage"></span>
+		</td>
+	</tr>
 
-		<tr height="40">
-		    <th bgcolor="silver">이메일</th>
-		    <td>
-		        <input type="text" name="email" id="email" size="15" required>@
-		        <input type="text" id="domain" size="10" disabled>
-		        <span id="eMessage" class="eMessage"></span>
-		        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)">
-		            <option value="self">선택</option>
-		            <option value="naver.com">naver.com</option>
-		            <option value="hanmail.net">hanmail.net</option>
-		            <option value="gmail.com">gmail.com</option>
-		            <option value="custom">직접입력</option>
-		        </select>
-		    </td>
-		</tr>
+	<tr height="40">
+   		<th bgcolor="silver">이메일</th>
+   	 	<td colspan="2">
+	        <input type="text" name="email" id="email" size="15" required>
+	        @
+	        <input type="text" id="domain" size="10" disabled>
+	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)">
+	            <option value="self">선택</option>
+	            <option value="naver.com">naver.com</option>
+	            <option value="hanmail.net">hanmail.net</option>
+	            <option value="gmail.com">gmail.com</option>
+	            <option value="custom">직접입력</option>
+	        </select><br>
+	        <span id="emMessage" class="eMessage"></span>
+    	</td>
+	</tr>
 	<tr height="40"><th bgcolor="silver">SMS 수신 여부</th>
 		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>수신함</label>
 			<input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신안함</label>
