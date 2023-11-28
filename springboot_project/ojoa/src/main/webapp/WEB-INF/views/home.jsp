@@ -31,14 +31,22 @@
 </c:if>
 <br>
 
-&nbsp;<a href="member/memberList">memberList</a>&nbsp; 
+<c:if test="${sessionScope.loginID == 'admin'}">
+   &nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
+</c:if>
+
 &nbsp;<a href="board/boardList">bordList??</a>&nbsp; 
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
 &nbsp;<a href="cart/cartList">cart_List</a>&nbsp;
+<<<<<<< HEAD
+=======
 &nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
 &nbsp;<a href="product/productInsert">상품등록 페이지</a>&nbsp; 
 &nbsp;<a href="product/productList">상품리스트 페이지</a>&nbsp; 
+>>>>>>> main
 </body>
 </html>
+
+
