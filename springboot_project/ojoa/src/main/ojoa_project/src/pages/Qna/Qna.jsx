@@ -201,6 +201,7 @@ function Qna() {
     const endIndex = startIndex + itemsPerPage;
     const pagedQnaList = qnaList.slice(startIndex, endIndex);
 
+    
 
     return (
         <ModalProvider>

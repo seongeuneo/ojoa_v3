@@ -23,28 +23,26 @@ import Mileage from './pages/MyPage/MyShop/Mileage';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
+
+import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
 // import ProductList from './pages/ProductList'
 
 
 function App() {
   // Spring Boot 연결
-  const [message, setMessage] = useState([]);
-
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('/hello')
+    axios
+      .get('/api/productList')
       .then((response) => {
-        return response.data; // axios에서 response.data로 데이터가 들어있습니다.
-      })
-      .then(function (data) {
-        setMessage(data);
-      })
-      .catch(function (error) {
-        console.error('Error fetching data:', error);
+        setData(response.data);
+        console.log("서버연결성공 => ", response.data);
+      }).catch((error) => {
+        console.log(error)
       });
   }, []);
-
 
 
   //장바구니
@@ -66,8 +64,12 @@ function App() {
       <BrowserRouter>
 
         <ScrollTop />
+
+        {/* {data.map((item) => 
+           item.prod_name)} */}
+
         <a href="http://localhost:8080/admin/adminmain">관리자용</a>
-        <p>{message}</p>
+
         <Header />
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
@@ -86,6 +88,9 @@ function App() {
           <Route path="/productList/Bookshelf/*" element={<Bookshelf cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/Closet/*" element={<Closet cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/Lighting/*" element={<Lighting cart={cart} setCart={setCart} handleCart={handleCart} />} />
+
+          {/* <Route path="/ProductList/ProductCategory/*" element={<ProductCategory cart={cart} setCart={setCart} handleCart={handleCart} />} /> */}
+
           <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart} convertPrice={convertPrice}
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
           <Route path="/login/info" element={<Info />} />
