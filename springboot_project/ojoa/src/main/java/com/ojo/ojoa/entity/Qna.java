@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,9 +54,5 @@ public class Qna {
     @Column(name="qna_indate")
     private String qna_indate;
 
-    //글등록시 필요한 Entity
-    private int root;
-    private int step;
-    private int indent;
    
 } //class

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** SpringBoot Qna CriList **</title>
+<title>** SpringBoot Board CriList **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 <script>
 //1. 검색조건 입력 후 버튼클릭
@@ -41,7 +41,7 @@ function keywordClear(){
 
 </head>
 <body>
-<h2>** Qna CriList Mybatis **</h2>
+<h2>** Board CriList Mybatis **</h2>
 <hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
@@ -50,10 +50,10 @@ function keywordClear(){
 <div id="searchBar">
 	<select name="searchType" id="searchType" onchange="keywordClear()">
 		<option value="all" ${pageMaker.cri.searchType=='all' ? 'selected' : ''}>전체</option>
-		<option value="qna_title" ${pageMaker.cri.searchType=='qna_title' ? 'selected' : ''}>Qna_title</option>
-		<option value="qna_content" ${pageMaker.cri.searchType=='qna_content' ? 'selected' : ''}>Qna_content</option>
+		<option value="qna_title" ${pageMaker.cri.searchType=='qna_title' ? 'selected' : ''}>Qnd_Title</option>
+		<option value="qna_content" ${pageMaker.cri.searchType=='qna_content' ? 'selected' : ''}>Qnd_Content</option>
 		<option value="id" ${pageMaker.cri.searchType=='id' ? 'selected' : ''}>ID(글쓴이)</option>
-		<option value="qna_indate" ${pageMaker.cri.searchType=='qna_indate' ? 'selected' : ''}>Qna_indate</option>
+		<option value="qna_indate" ${pageMaker.cri.searchType=='qna_indate' ? 'selected' : ''}>Qna_Indate</option>
 	</select>
 	<input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword}">
 	<button id="searchBtn" onclick="searchDB()">Search</button>
@@ -61,7 +61,7 @@ function keywordClear(){
 <br><hr>
 <table style="width:100%">
 	<tr bgcolor="LimeGreen">
-		<th>Qna_seq</th><th>Qna_title</th><th>ID</th><th>qna_indate</th>
+		<th>Qnd_Seq</th><th>Qna_Title</th><th>ID</th><th>Qna_indate</th>
 	</tr>
 	<c:if test="${not empty requestScope.banana}">
 		<c:forEach var="s" items="${requestScope.banana}">
@@ -78,7 +78,7 @@ function keywordClear(){
 				</c:if>
 				
 				<c:if test="${not empty sessionScope.loginID}">
-					<a href="qdetail?seq=${s.qna_seq}">${s.qna_title}</a>
+					<a href="qdetail?qna_seq=${s.qna_seq}">${s.qna_title}</a>
 			 	</c:if>    
 				<c:if test="${empty sessionScope.loginID}">
 					${s.qna_title}
@@ -102,11 +102,6 @@ function keywordClear(){
  	 1) FirstPage, Prev  -->
 	<c:choose>
 		<c:when test="${pageMaker.prev && pageMaker.spageNo>1}">
-			<%-- OLD_Version
-			<a href="bcriList?currPage=1&rowsPerPage=5">FP</a>&nbsp;
-		  	<a href="bcriList?currPage=${pageMaker.spageNo-1}&rowsPerPage=5">&LT;</a>&nbsp;&nbsp; --%>
-		  	
-		  	<!-- ver02: ver01 + 검색조건 -> searchQuery()메서드 적용   -->
 		  	<a href="qcriList${pageMaker.searchQuery(1)}">FP</a>&nbsp;
 		  	<a href="qcriList${pageMaker.searchQuery(pageMaker.spageNo-1)}">&LT;</a>&nbsp;&nbsp;
 		</c:when>
@@ -121,18 +116,11 @@ function keywordClear(){
 			<font color="Orange" size="5"><b>${i}</b></font>&nbsp;
 		</c:if>
 		<c:if test="${i!=pageMaker.cri.currPage}">
-			<%-- <a href="bcriList?currPage=${i}&rowsPerPage=5">${i}</a>   
-				=> pageMaker의 makeQuery() 메서드 적용 : ver01 	
-					<a href="bcriList${pageMaker.makeQuery(i)}">${i}</a>&nbsp; 
-					
-				=> ver02 --%>
+
 			<a href="qcriList${pageMaker.searchQuery(i)}">${i}</a>&nbsp;
 		</c:if>
 	</c:forEach>
 	 
-	<!-- 3) Next, LastPage 
-		=> ver01: makeQuery() 메서드 사용
-		=> ver02: searchQuery() 메서드 사용 -->
 	<c:choose>
 		<c:when test="${pageMaker.next && pageMaker.epageNo>0}">
 			&nbsp;<a href="qcriList${pageMaker.searchQuery(pageMaker.epageNo+1)}">&GT;</a>
