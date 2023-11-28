@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ModalProvider } from "./pages/Qna/QnaModal/ModalContext";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton';
@@ -26,7 +26,27 @@ import Checkout from "./pages/Checkout/Checkout";
 // import NewList from './pages/ProductList/NewList';
 // import ProductList from './pages/ProductList'
 
+
 function App() {
+  // Spring Boot 연결
+  const [message, setMessage] = useState([]);
+
+ 
+  useEffect(() => {
+    axios.get('/hello')
+      .then((response) => {
+        return response.data; // axios에서 response.data로 데이터가 들어있습니다.
+      })
+      .then(function (data) {
+        setMessage(data);
+      })
+      .catch(function (error) {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
+
   //장바구니
   const [cart, setCart] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(true);
@@ -44,8 +64,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+
         <ScrollTop />
-        <Header />
+        <a href="http://localhost:8080/admin/adminmain">관리자용</a>
+        <Header/>
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
