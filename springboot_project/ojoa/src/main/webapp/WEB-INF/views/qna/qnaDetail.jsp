@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** SpringBoot Board Detail **</title>
+<title>** SpringBoot Qna Detail **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 </head>
 <body>
-<h2>** SpringBoot Board Detail **</h2>
+<h2>** SpringBoot Qna Detail **</h2>
 <table>
 <c:if test="${not empty requestScope.apple}">
 	<tr height="40"><th bgcolor="Plum">SEQ</th>
@@ -35,14 +35,14 @@
 </c:if>
 <hr>
 <!-- 로그인 한 경우에는 새글등록, 답글등록 -->
-&nbsp;<a href="boardInsert">새글등록</a>&nbsp;
+&nbsp;<a href="qnaInsert">새글등록</a>&nbsp;
 <!-- 댓글등록을 위해 부모글의 root, step, indent 값이 필요하기 때문에
 	 서버로 보내주어야함 (퀴리스트링으로 작성)	 -->
 &nbsp;<a href="replyInsert?root=${apple.root}&step=${apple.step}&indent=${apple.indent}">답글등록</a>&nbsp;
 <!-- 로그인id 와 글쓴이id 가 동일하면 수정, 삭제 가능  --> 
 <c:if test="${sessionScope.loginID==requestScope.apple.id}">
-	&nbsp;<a href="bdetail?jCode=U&seq=${requestScope.apple.seq}">글수정</a>&nbsp;
-	&nbsp;<a href="bdelete?seq=${apple.seq}&root=${apple.root}">글삭제</a>&nbsp;
+	&nbsp;<a href="qdetail?jCode=U&seq=${requestScope.apple.seq}">글수정</a>&nbsp;
+	&nbsp;<a href="qdelete?seq=${apple.seq}&root=${apple.root}">글삭제</a>&nbsp;
 </c:if>
 <hr>
 &nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
