@@ -1,9 +1,9 @@
 // addWish.js 파일
 
 // 관심목록 추가 함수
-function addWish(prodNum) {
+function addWish(prod_num) {
     // axios를 사용하여 관심목록에 상품을 추가하는 요청
-    axios.get(`/addWish?prod_num=${prodNum}`)
+    axios.get(`/wish/addWish?prod_num=${prod_num}`)
         .then(response => {
             // 요청이 성공한 경우
             console.log(response.data); // 추가 정보나 로그 등을 출력하거나 다른 작업 수행
@@ -17,3 +17,5 @@ function addWish(prodNum) {
             alert('상품을 관심목록에 추가하는데 문제가 발생했습니다.');
         });
 }
+
+
