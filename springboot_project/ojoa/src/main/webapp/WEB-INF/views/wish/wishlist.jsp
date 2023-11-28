@@ -8,7 +8,7 @@
 <title>Wish Product List</title>
 </head>
 <body>
-<h2>** Product List **</h2>
+<h2>Wish Product List</h2>
 
 <hr>
 <c:if test="${not empty requestScope.message}">
@@ -27,7 +27,7 @@
 		<th>등록일</th>
 		<th>재고 수량</th>
 		<th>평점</th>
-		<th>상품 삭제</th>
+		<th>관심상품 제거</th>
 	</tr>
 
 		<c:if test="${not empty requestScope.product}">
