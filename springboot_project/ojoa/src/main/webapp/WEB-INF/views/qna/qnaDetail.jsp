@@ -12,18 +12,24 @@
 <h2>** SpringBoot Qna Detail **</h2>
 <table>
 <c:if test="${not empty requestScope.apple}">
-	<tr height="40"><th bgcolor="Plum">SEQ</th>
-		<td>${requestScope.apple.seq}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_seq</th>
+		<td>${requestScope.apple.qna_seq}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Prod_num</th>
+		<td>${requestScope.apple.prod_num}</td></tr>	
 	<tr height="40"><th bgcolor="Plum">I D</th>
 		<td>${requestScope.apple.id}</td></tr>	
-	<tr height="40"><th bgcolor="Plum">Title</th>
-		<td>${requestScope.apple.title}</td></tr>
-	<tr height="40"><th bgcolor="Plum">Content</th>
-		<td>${requestScope.apple.content}</td></tr>
-	<tr height="40"><th bgcolor="Plum">RegDate</th>
-		<td>${requestScope.apple.regdate}</td></tr>
-	<tr height="40"><th bgcolor="Plum">조회수</th>
-		<td>${requestScope.apple.cnt}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_category</th>
+		<td>${requestScope.apple.qna_category}</td></tr>	
+	<tr height="40"><th bgcolor="Plum">Qna_Title</th>
+		<td>${requestScope.apple.qna_title}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_content</th>
+		<td>${requestScope.apple.qna_content}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_reply</th>
+		<td>${requestScope.apple.qna_reply}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_redate</th>
+		<td>${requestScope.apple.qna_redate}</td></tr>
+	<tr height="40"><th bgcolor="Plum">Qna_indate</th>
+		<td>${requestScope.apple.qna_indate}</td></tr>
 </c:if>
 <c:if test="${empty requestScope.apple}">
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
@@ -41,8 +47,8 @@
 &nbsp;<a href="replyInsert?root=${apple.root}&step=${apple.step}&indent=${apple.indent}">답글등록</a>&nbsp;
 <!-- 로그인id 와 글쓴이id 가 동일하면 수정, 삭제 가능  --> 
 <c:if test="${sessionScope.loginID==requestScope.apple.id}">
-	&nbsp;<a href="qdetail?jCode=U&seq=${requestScope.apple.seq}">글수정</a>&nbsp;
-	&nbsp;<a href="qdelete?seq=${apple.seq}&root=${apple.root}">글삭제</a>&nbsp;
+	&nbsp;<a href="qdetail?jCode=U&qna_seq=${requestScope.apple.qna_seq}">글수정</a>&nbsp;
+	&nbsp;<a href="qdelete?qna_seq=${apple.qna_seq}&root=${apple.root}">글삭제</a>&nbsp;
 </c:if>
 <hr>
 &nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
