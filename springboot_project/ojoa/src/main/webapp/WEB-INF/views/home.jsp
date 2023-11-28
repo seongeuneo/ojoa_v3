@@ -32,7 +32,7 @@
 <br>
 
 &nbsp;<a href="member/memberList">memberList</a>&nbsp; 
-&nbsp;<a href="board/boardList">bordList??</a>&nbsp; 
+&nbsp;<a href="qna/qnaList">QnaList</a>&nbsp; 
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 

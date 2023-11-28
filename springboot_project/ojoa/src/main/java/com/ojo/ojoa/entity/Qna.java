@@ -30,25 +30,18 @@ public class Qna {
     @Column(name="prod_num", nullable=false)
     private int prod_num; //Foregin key
 
-    @Column(name="id", nullable=false)
     private String id; //Foregin key
 
-    @Column(name="qna_category", nullable=false)
     private String qna_category;
 
-    @Column(name="qna_title", nullable=false)
     private String qna_title;
 
-    @Column(name="qna_content", nullable=false)
     private String qna_content;
 
-    @Column(name="qna_reply", nullable=false)
     private String qna_reply;
 
-    @Column(nullable = false, columnDefinition = "int default 1")
-    private String qna_rep;
+    private String qna_redate;
 
-    @Column(name="qna_indate", nullable=false)
     private String qna_indate;
 
    
