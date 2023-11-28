@@ -31,5 +31,6 @@
                     <br />
                 </div>
             </header>
+            &nbsp;<a href="/home">Home</a>&nbsp;
 </body>
 </html>
