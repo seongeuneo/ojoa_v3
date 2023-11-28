@@ -2,10 +2,14 @@ package com.ojo.ojoa.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Wish;
@@ -26,8 +30,26 @@ public class WishController {
 	// ** Product List - 회원별 카트 목록 반환 
     @GetMapping("/wishlist")
     public void wishList(Model model) {
-    	model.addAttribute("wish", wishService.selectList());
+    	model.addAttribute("mywish", wishService.selectList());
     } // wishlist
+    
+    @GetMapping("/addWish")
+    public ResponseEntity<String> addWish(HttpSession session, Wish entity, RedirectAttributes rttr) {
+    	
+    	String loginID = (String)session.getAttribute("loginID");
+    	try {
+    		if (loginID == null) {
+    			throw new Exception("loginID isNull");
+    		}
+            entity.setId(loginID);
+    		wishService.save(entity); // 상품을 관심목록에 추가하는 서비스 메서드 호출
+            return ResponseEntity.ok("상품이 관심목록에 추가되었습니다.");
+        } catch (Exception e) {
+        	System.out.println("addWish exeption " + e.toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품 추가 중 오류 발생");
+        }
+    }
+
     
  // ** wish delete - 주문 취소
  	@GetMapping(value="/wdelete") // ocancel => 주문취소(oredercancel)
