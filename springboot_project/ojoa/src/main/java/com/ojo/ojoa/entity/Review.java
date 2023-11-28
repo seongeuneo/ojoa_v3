@@ -20,21 +20,29 @@ import lombok.NoArgsConstructor;
 public class Review {
 	
 	@Id
-	private int rv_seq; //Primary key Auto increment
+    @Column(name="review_seq")
+	private int review_seq; //Primary key Auto increment
 	
 	@Column(name="id", nullable=false)
 	private String id; //Foregin key
 	
-	@Column(name="rv_title", nullable=false)
-	private String rv_title;
+	@Column(name="review_title", nullable=false)
+	private String review_title;
 	
-	@Column(name="rv_content", nullable=false)
-	private String rv_content;
+	@Column(name="review_content", nullable=false)
+	private String review_content;
 	
-	@Column(name="rv_date", nullable=false)
-	private String rv_date;
 	
-	@Column(nullable = false, columnDefinition = "int default 0")
-	private int rv_view;
+	@Column(name="review_image1")
+	private String review_image1;
+	
+	@Column(name="review_image2")
+	private String review_image2;
+			
+	@Column(name="review_date")
+	private String review_date;
+	
+	@Column(name="review_view", nullable = false) //columnDefinition = "int default 0")
+	private int review_view;
 	
 } //class

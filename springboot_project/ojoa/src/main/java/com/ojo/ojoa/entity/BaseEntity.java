@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -26,6 +27,7 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(value={ AuditingEntityListener.class })
 @Getter
+@Table(name = "BaseEntity")
 abstract class BaseEntity {
 	
 	@CreatedDate
