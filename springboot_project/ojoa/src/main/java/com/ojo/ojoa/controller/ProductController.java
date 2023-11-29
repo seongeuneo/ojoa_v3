@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -112,6 +114,15 @@ public class ProductController {
 		
 		return uri;
 	} // pdelete
+	
+	// 상품 상세 정보 조회
+    @GetMapping("/detail/{prod_num}")
+    public String productDetail(@PathVariable("prod_num") int prodNum, Model model) {
+        Product product = productService.selectOne(prodNum);
+        model.addAttribute("product", product);
+        return "productdetail/productDetail"; // productDetail.jsp로 반환
+    }
+
 	
 	
 }
