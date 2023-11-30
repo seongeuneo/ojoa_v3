@@ -45,7 +45,7 @@ public class QnaController {
     
     // ** 새글등록: Insert 
     @GetMapping("/qnaInsert")
-    public void productInsert(Model model) {
+    public void qnaInsert(Model model) {
        model.addAttribute("qna", qnaService.selectList());
     } // qnaInsert
   
@@ -53,12 +53,12 @@ public class QnaController {
    @PostMapping(value="/qnaInsert")
    public String qnaInsert(HttpServletRequest request,
          Qna entity, Model model) throws IOException  {
-      String uri = "redirect:/qna/qnaList";
+      String uri = "qna/qnaInsert";
    
       // 2. Service 처리
       try {
          log.info("** insert 성공 id => "+qnaService.save(entity));
-         model.addAttribute("message", "게시 등록 완료.");
+         model.addAttribute("message", "게시글 등록 완료.");
       } catch (Exception e) {
          log.info("** insert Exception => "+e.toString());
          model.addAttribute("message", "게시글등록 실패. 다시 하세요.");
