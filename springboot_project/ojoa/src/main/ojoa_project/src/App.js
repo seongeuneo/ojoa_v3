@@ -31,19 +31,6 @@ import ProductCategory from "./pages/ProductList/ProductCategory";
 
 
 function App() {
-  // Spring Boot 연결
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('/api/productList')
-      .then((response) => {
-        setData(response.data);
-        console.log("서버연결성공 => ", response.data);
-      }).catch((error) => {
-        console.log(error)
-      });
-  }, []);
 
 
   //장바구니
@@ -65,13 +52,6 @@ function App() {
       <BrowserRouter>
 
         <ScrollTop />
-
-        {data.map((item) =>
-          item.prod_name)}
-        {data.map((item) =>
-          item.prod_mainimage)}
-
-
         <a href="http://localhost:8080/admin/adminmain">관리자용</a>
 
         <Header />
