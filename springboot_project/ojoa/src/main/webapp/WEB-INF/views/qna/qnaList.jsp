@@ -17,18 +17,22 @@
 </c:if>
 <table style="width:100%">
 	<tr bgcolor="skyblue">
-		<th>Qna_Seq</th>
-		<th>Qna_Category</th>
-		<th>Qna_Title</th>
+		<th>문의 번호</th>
 		<th>ID</th>
+		<th>카테고리</th>
+		<th>문의 제목</th>
+		<th>문의 내용</th>
+		<th>삭제</th>
 		
 	</tr>
 	<c:if test="${not empty requestScope.qna}">
 		<c:forEach var="s" items="${requestScope.qna}">
 		<tr><td>${s.qna_seq}</td>	
-			<td>${s.qna_title}</td>
-			<td>${s.qna_category}</td>
 			<td>${s.id}</td>
+			<td>${s.qna_category}</td>
+			<td>${s.qna_title}</td>
+			<td>${s.qna_content}</td>
+			<td align="center"><a href="qdelete?qna_seq=${s.qna_seq}">상품삭제</a></td>
 		</tr>	
 		</c:forEach>
 	</c:if>
@@ -40,7 +44,7 @@
 <hr>
 <!-- 로그인 한 경우에만 새글등록 가능 -->
 <c:if test="${not empty sessionScope.loginID}">
-	&nbsp;<a href="qnaInsert">새글등록</a>&nbsp;
+	<!--&nbsp;<a href="qnaInsert">새글등록</a>&nbsp;-->
 </c:if>	
 &nbsp;<a href="/home">Home</a>&nbsp;
 </body>

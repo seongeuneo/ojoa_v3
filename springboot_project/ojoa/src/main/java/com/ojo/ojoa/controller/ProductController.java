@@ -41,6 +41,8 @@ public class ProductController {
     } // productList
     
     
+// 상풍 등록하기 : Insert
+    
     @GetMapping("/productInsert")
     public void productInsert(Model model) {
     	model.addAttribute("product", productService.selectList());

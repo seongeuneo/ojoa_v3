@@ -11,13 +11,13 @@
 <body>
 <h2>** SpringBoot Qna_Insert **</h2>
 
-<form action="qnaInsert" method="Post">
+<form action="qnaInsert" method="Post" enctype="multipart/form-data" id="myform">
 <table>
 	<tr height="40"><th bgcolor="Pink">I D</th>
 		<td><input type="text" name="id" value="${sessionScope.loginID}" readonly size="20"></td></tr>
 	
-	 <tr height="40"><th bgcolor="Pink">상 품</th>
-		<td><input type="text" name="prod_num" value="" size="20"></td></tr> 
+	 <!-- <tr height="40"><th bgcolor="Pink">상품 번호</th>
+		<td><input type="text" name="prod_num" value="prod_num" size="20"></td></tr> --> 
 	
 	<tr height="40">
 				<th bgcolor="Pink">카테고리</th>
@@ -35,14 +35,14 @@
 		</td></tr>
 	
 	<tr height="40"><th bgcolor="Pink">제 목</th>
-		<td><input type="text" name="qna_title" size="50"></td></tr>	
+		<td><input type="text" name="qna_title" id="qna_title" size="50"></td></tr>	
 	
 	<tr height="40"><th bgcolor="Pink">문의내용</th>
-		<td><textarea rows="5" cols="50" name="qna_content"></textarea>
+		<td><textarea rows="5" cols="50" name="qna_content" id="qna_content"></textarea>
 		</td></tr>
 	
 	<tr height="40"><th></th>
-		<td><input type="submit" value="등록">&nbsp;&nbsp;&nbsp;
+		<td><input type="submit" id="submitTag" value="글등록">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="취소">		
 		</td>
 	</tr>
