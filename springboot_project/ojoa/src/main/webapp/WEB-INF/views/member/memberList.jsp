@@ -31,7 +31,7 @@
 			
 			<td>${s.password}</td><td>${s.name}</td><td align="center">${s.email1}</td><td align="center">${s.email2}</td><td>${s.zipcode}</td>
 			<td>${s.address}</td><td>${s.addressdetail}</td><td align="center">${s.phone1}</td><td align="center">${s.phone2}</td>
-			<td align="center">${s.phone3}</td><td>${s.memberyn}</td><td align="center">${s.regdate}</td><td align="center">${s.marketing_sms}</td>
+			<td align="center">${s.phone3}</td><td align="center">${s.memberyn}</td><td align="center">${s.regdate}</td><td align="center">${s.marketing_sms}</td>
 			<td align="center">${s.marketing_email}</td><td align="center">${s.mileage}</td>
 			<!-- 관리자 기능 추가 -->
 			<c:if test="${sessionScope.loginID=='admin'}">
