@@ -5,19 +5,6 @@ import "./ProductListItem.css";
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from '../../data/ItemsData'
 
 const ProductListItem = ({ content, onSelect, handleCart }) => {
-    // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
 
     //const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -84,14 +71,12 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 <ul className="prodItems">
                     <li className="pl_thumb_img">
                         <a>
-                            {data.map((item) =>
-                                item.prod_name)}
                             <Link to={{
-                                key: content.id,
-                                pathname: `/ProductDetail/${content.id}`,
+                                key: content.prod_num,
+                                pathname: `/ProductDetail/${content.prod_num}`,
                                 state: { productData: content } // 선택한 상품 정보를 state로 전달
                             }}>
-                                <img src={`/thumbs/${content.imgNo}_1.jpg`} alt={`Product ${content.productName}`} />
+                                <img src={`/thumbs/${content.prod_mainimage}_1.jpg`} alt={`Product ${content.prod_num}`} />
                             </Link>
                             <div className="pl_icon">
                                 <a className="pd_cart">
@@ -111,29 +96,29 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                     </li>
 
                     <li className="pl_a"><a><Link to={{
-                        key: content.id,
-                        pathname: `/ProductDetail/${content.id}`,
+                        key: content.prod_num,
+                        pathname: `/ProductDetail/${content.prod_num}`,
                         state: { productData: content }
-                    }}>{content.productName}</Link></a></li>
+                    }}>{content.prod_name}</Link></a></li>
                     <li className="pl_b"><a><Link to={{
                         key: content.id,
-                        pathname: `/ProductDetail/${content.id}`,
+                        pathname: `/ProductDetail/${content.prod_num}`,
                         state: { productData: content }
                     }}>
                         {/* {productPrice}원
                         <span> {content.productPromotion}%</span> */}
                         </Link></a></li>
                     <li className="pl_c"><a><Link to={{
-                        key: content.id,
-                        pathname: `/ProductDetail/${content.id}`,
+                        key: content.prod_num,
+                        pathname: `/ProductDetail/${content.prod_num}`,
                         state: { productData: content }
-                    }}>{content.productInfo}</Link></a></li>
+                    }}>{content.prod_content}</Link></a></li>
                     <li className="pl_d"><a><Link to={{
-                        key: content.id,
-                        pathname: `/ProductDetail/${content.id}`,
+                        key: content.prod_num,
+                        pathname: `/ProductDetail/${content.prod_num}`,
                         state: { productData: content }
-                    }}>리뷰 <span>{content.productReview}</span> 평점 *
-                        <span>{content.productGrade}/5</span></Link></a></li>
+                    }}>리뷰 <span>{content.prod_grade}</span> 평점 *
+                        <span>{content.prod_grade}/5</span></Link></a></li>
                 </ul>
             </section>
         </div >
