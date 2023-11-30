@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orders_detail")
 
-public class Orders_Detail {
+public class OrdersDetail {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,7 @@ public class Orders_Detail {
     @Column(name="ordersdt_result")
 	//@Column(name = "ordersdt_result", columnDefinition = "CHAR(1) DEFAULT 'B'")
 	private char ordersdt_result;
+
+
+	
 }
