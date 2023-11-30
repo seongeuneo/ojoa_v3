@@ -17,6 +17,24 @@ public class MemberServiceImpl implements MemberService {
 
 	private final MemberRepository repository;
 	
+	// ** password update
+	@Override
+    public boolean updatePassword(Member entity) {
+        try {
+            Member existingMember = repository.findById(entity.getId()).orElse(null);
+
+            if (existingMember != null) {
+                existingMember.setPassword(entity.getPassword());
+                repository.save(existingMember);
+                return true;
+            }
+        } catch (Exception e) {
+            // 예외 처리
+            e.printStackTrace();
+        }
+        return false;
+    }
+	
 	// ** selectList
 	@Override
 	public List<Member> selectList() {

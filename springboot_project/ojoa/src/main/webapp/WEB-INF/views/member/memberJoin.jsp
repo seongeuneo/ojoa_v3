@@ -42,7 +42,7 @@ function idDupCheck() {
 onload=function() {
 	  
 	// => Name
-	//document.getElementById('name').focus();
+	document.getElementById('name').focus();
 	document.getElementById('name').addEventListener("keydown",
 			(e)=> {
 				if ( e.which==13 ) {
@@ -167,13 +167,12 @@ function inCheck() {
 	if (iCheck==false) { document.getElementById('iMessage').innerHTML=' 필수입력, id 를 확인하세요~~'; }
 	if (pCheck==false) { document.getElementById('pMessage').innerHTML=' 필수입력, password 를 확인하세요~~'; }
 	if (p2Check==false) { document.getElementById('p2Message').innerHTML=' 필수입력, password 재입력을 확인하세요~~'; }
-	if (ph1Check==false) { document.getElementById('ph1Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
 	if (ph2Check==false) { document.getElementById('ph2Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
 	if (ph3Check==false) { document.getElementById('ph3Message').innerHTML=' 필수입력, 전화번호 를 확인하세요~~'; }
 	if (e1Check==false) { document.getElementById('em1Message').innerHTML=' 필수입력, 이메일 을 확인하세요~~'; }
 	if (e2Check==false) { document.getElementById('em2Message').innerHTML=' 필수입력, 도메인 을 확인하세요~~'; }
 	
-	if (nCheck && iCheck && pCheck && p2Check && ph1Check && ph2Check && ph3Check && e1Check && e2Check ) {
+	if (nCheck && iCheck && pCheck && p2Check && ph2Check && ph3Check && e1Check && e2Check ) {
 		// => submit 확인
 		if ( confirm(" 정말 가입 하십니까? (Yes:확인 / No:취소)") ) {
 			// => submit 진행
@@ -229,8 +228,8 @@ function inCheck() {
 	    <td>
 		    <input type="text" name="phone1" id="phone1" value="010" placeholder="010" size="1" readonly>&nbsp;-
 		    <input type="text" name="phone2" id="phone2" size="3" maxlength="4">&nbsp;-
-		    <input type="text" name="phone3" id="phone3" size="3" maxlength="4"><br>
-      	 	<span id="ph2Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="ph3Message" class="eMessage"></span>
+		    <input type="text" name="phone3" id="phone3" size="3" maxlength="4">
+      	 	<span id="ph2Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="ph3Message" class="eMessage"></span><br>
 		</td>
 	</tr>
 
@@ -239,15 +238,8 @@ function inCheck() {
    	 	<td colspan="2">
 	        <input type="text" name="email1" id="email1" size="15" required>
 	        @
-	        <input type="text" id="email2" name="email2" size="10" disabled>
-	        <select name="email_domain" id="email_domain" onchange="handleDomainChange(this)" onblur="handleCustomDomain()">
-			    <option value="self">선택</option>
-			    <option value="naver.com">naver.com</option>
-			    <option value="hanmail.net">hanmail.net</option>
-			    <option value="gmail.com">gmail.com</option>
-			    <option value="custom">직접입력</option>
-			</select><br>
-	        <span id="em1Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="em2Message" class="eMessage"></span>
+	        <input type="text" id="email2" name="email2" size="10">
+	        <span id="em1Message" class="eMessage"></span>&nbsp;&nbsp;&nbsp;<span id="em2Message" class="eMessage"></span><br>
     	</td>
 	</tr>
 	<tr height="40"><th bgcolor="silver">SMS 수신 여부</th>

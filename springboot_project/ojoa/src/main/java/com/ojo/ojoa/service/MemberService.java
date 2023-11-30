@@ -18,4 +18,7 @@ public interface MemberService {
 	// ** delete
 	public String delete(String id);
 	
+	// ** 패스워드 업데이트
+    public boolean updatePassword(Member entity);
+	
 }

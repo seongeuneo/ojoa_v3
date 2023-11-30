@@ -167,13 +167,49 @@ function email1Check() {
 function email2Check() {
     let email2 = document.getElementById('email2').value;
     if (email2.length < 3) {
-        document.getElementById('em2Message').innerHTML = '이메일을 입력하세요.';
+        document.getElementById('em2Message').innerHTML = '도메인을 입력하세요.';
         return false;
     } else {
         document.getElementById('em2Message').innerHTML = '';
         return true;
     };
 } //email2Check
+  
+// 8) zip_code
+function zipCheck() {
+    let zipcode = document.getElementById('zipcode').value;
+    if (zipcode.length < 2) {
+        document.getElementById('zMessage').innerHTML = '우편번호를 입력하세요.';
+        return false;
+    } else {
+        document.getElementById('zMessage').innerHTML = '';
+        return true;
+    };
+} //zipCheck
+  
+// 9) address
+function addressCheck() {
+    let address = document.getElementById('address').value;
+    if (address.length < 4) {
+        document.getElementById('aMessage').innerHTML = '주소를 입력하세요.';
+        return false;
+    } else {
+        document.getElementById('aMessage').innerHTML = '';
+        return true;
+    };
+} //addressCheck
+  
+// 10) address_detail
+function addressdetailCheck() {
+    let addressdetail = document.getElementById('addressdetail').value;
+    if (addressdetail.length < 2) {
+        document.getElementById('adMessage').innerHTML = '상세주소를 입력하세요.';
+        return false;
+    } else {
+        document.getElementById('adMessage').innerHTML = '';
+        return true;
+    };
+} //addressdetailCheck
 
 
 

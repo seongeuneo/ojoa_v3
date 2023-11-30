@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Spring Mybatis Password Update **</title>
+<title>** Password Update **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css" >
 <script>
 	function pCheck() {
@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-<h2>** Spring Mybatis Password Update **</h2>
+<h2>** Password Update **</h2>
 <div align="center">
 <br>
 <b>=> 새로운 Password 를 입력 하세요 ~~</b><br><br>
