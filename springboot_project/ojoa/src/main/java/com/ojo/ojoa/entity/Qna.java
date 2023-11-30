@@ -32,22 +32,22 @@ public class Qna {
 //    @JoinColumn(name = "prod_num_test", nullable=false)
 //    private Product product;
     
-    @Column(name="prod_num", nullable=false)
+    //@Column(name="prod_num", nullable=false)
     private int prod_num; //Foregin key
 
-    @Column(name="id", nullable=false)
+    //@Column(name="id", nullable=false)
     private String id; //Foregin key
 
-    @Column(name="qna_category", nullable=false)
+    //@Column(name="qna_category", nullable=false)
     private String qna_category;
 
-    @Column(name="qna_title", nullable=false)
+    //@Column(name="qna_title", nullable=false)
     private String qna_title;
 
-    @Column(name="qna_content", nullable=false)
+    //@Column(name="qna_content", nullable=false)
     private String qna_content;
 
-    @Column(name="qna_reply", nullable=false)
+    //@Column(name="qna_reply", nullable=false)
     private String qna_reply;
     
 //    @Column(name="qna_redate", nullable=false)
