@@ -196,7 +196,7 @@ function Qna() {
     // 현재 페이지 상태와 페이지 변경 함수
     const [currentPage, setCurrentPage] = useState(1);
 
-	// react 연결
+	// Springboot 요쳥
 	useEffect(() => {
         axios
             .get("api/qna/allQnaList")
