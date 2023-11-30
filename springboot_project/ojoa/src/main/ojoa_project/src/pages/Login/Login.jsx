@@ -1,6 +1,7 @@
 import '../Login/Login.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // axios 라이브러리 import
 import FindIdModal from './FindIdModal/FindIdModal';
 import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
 
@@ -9,6 +10,8 @@ import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
 const Login = () => {
     const [findIdModalVisible, setFindIdModalVisible] = useState(false);
     const [findPasswordModalVisible, setFindPasswordModalVisible] = useState(false);
+    const [username, setUsername] = useState(''); // 사용자명 상태값 추가
+    const [password, setPassword] = useState(''); // 비밀번호 상태값 추가
 
     function showFindIdModal() {
         setFindIdModalVisible(true);
@@ -16,6 +19,21 @@ const Login = () => {
     function showFindPasswordModal() {
         setFindPasswordModalVisible(true);
     }
+
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/member/login', {
+                id: username,
+                password: password
+            });
+
+            // 로그인 성공 시 처리
+            console.log(response.data); // 서버에서 반환한 데이터
+        } catch (error) {
+            // 로그인 실패 시 처리
+            console.error('로그인 에러:', error);
+        }
+    };
 
     // 클릭버튼 handle
     // const handleNaverClick = () => {
@@ -54,14 +72,26 @@ const Login = () => {
                                         <span><img src="../images/account.png" alt="아이디" />
                                             <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"> </Link>
                                         </span>
-                                        <input type="text" name="userID" placeholder="아이디" minLength="3" />
+                                        <input type="text"
+                                            name="userID"
+                                            placeholder="아이디"
+                                            minLength="3"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)} // 아이디 입력 값 업데이트
+                                        />
                                     </label>
                                     <label className="login_password">
                                         <span><img src="../images/password.png" alt="비밀번호" /></span>
-                                        <input type="password" name="userPSW" placeholder="비밀번호" minLength="3" />
+                                        <input type="password"
+                                            name="userPSW"
+                                            placeholder="비밀번호"
+                                            minLength="3"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
+                                        />
                                     </label>
                                     <div className="login_btn">
-                                        <Link to="../my_page/my_page.html">로그인</Link>
+                                        <Link onClick={handleLogin}>로그인</Link>
                                     </div>
                                     <div className="login_security">
                                         <img src="../images/ico_access.gif" alt="보안접속" />
