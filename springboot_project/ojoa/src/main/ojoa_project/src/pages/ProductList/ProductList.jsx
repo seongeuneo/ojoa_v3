@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useReducer, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductListItem from "./ProductListItem";
 import "./ProductList.css";
 import Pagination from "../../components/Pagination/Pagination";
@@ -6,9 +6,6 @@ import PLFilter from "./PLFilter";
 import { Link } from "react-router-dom";
 import mockList from '../../data/ItemsData'
 import axios from "axios";
-import Modal from 'react-modal';
-import { parse } from "qs";
-// import AddCart from './Modal/AddCart';
 
 
 
@@ -37,6 +34,7 @@ function sortProducts(products, sortKey) {
 
 //카테고리 : 의자
 function Chair({ cart, setCart, handleCart }) {
+
     // Spring Boot 연결
     const [data, setData] = useState([]);
 
@@ -51,28 +49,33 @@ function Chair({ cart, setCart, handleCart }) {
             });
     }, []);
 
-    const chair_filter = mockList.filter((chair) => chair.type === 'chair');
+    const filteredChairs = data.filter((item) => item.prod_kind === '의자'); // 데이터에서 의자만 필터링
 
     const [sortKey, setSortKey] = useState(""); // 초기 정렬 기준: 신상품
     const [currentPage, setCurrentPage] = useState(1);
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(chair_filter, sortKey);
+    const sortedList = sortProducts(filteredChairs, sortKey); // 필터링된 의자 리스트를 정렬
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-
-    const singleLi = data.map((item) => (
-        <li key={item.prod_num}>
-            <ProductListItem cart={cart} setCart={setCart} handleCart={handleCart}>
-                <Link className="productLink" to={`/products/detail/${item.prod_num}`}>
-                    {item.prod_name}
+    console.log("displayedItems" + displayedItems);
+    const singleLi = displayedItems.map((content) => (
+        <li key={content.prod_num}>
+            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+                <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
+                    {displayedItems.map((item) =>
+                        item.prod_name)} {/* 이 부분에서 의자의 이름 필드를 가져와야 함 */}
                 </Link>
             </ProductListItem>
         </li>
-    ));
+    ))
+
+    const chairNames = filteredChairs.map((item) => item.prod_name);
+
+    console.log(singleLi);
 
     const totalPages = Math.ceil(sortedList.length / itemsPerPage);
 
@@ -80,7 +83,6 @@ function Chair({ cart, setCart, handleCart }) {
         <div className="ProductList">
             <div className="path">
                 <span>현재 위치</span>
-
                 <ol>
                     <li><Link to="/">홈</Link></li>
                     <li title="현재 위치">&gt; &nbsp;&nbsp;의자</li>
@@ -92,13 +94,8 @@ function Chair({ cart, setCart, handleCart }) {
             </div>
             <PLFilter numOfList={sortedList.length} setSortKey={setSortKey} />
 
+
             <ul className="pl_items">{singleLi}</ul>
-            {/* <ul>
-                <li>
-                    {data.map((item) =>
-                        item.prod_name)}
-                </li>
-            </ul> */}
 
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
@@ -121,15 +118,21 @@ const Bed = ({ cart, setCart, handleCart }) => {
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    const singleLi = displayedItems.map((content) => (
-        <li key={content.id}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
-                <Link className="productLink" to={`/products/detail/${content.id}`} key={content.id}>
-                    {content.productName}
-                </Link>
-            </ProductListItem>
-        </li>
-    ));
+    const singleLi = displayedItems.map((content) => {
+        if (content.prod_kind === '의자') {
+            return (
+                <li key={content.prod_num}>
+                    <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+                        <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
+                            {content.prod_name}
+                        </Link>
+                    </ProductListItem>
+                </li>
+            );
+        }
+        return null; // 의자가 아닌 경우에는 아무것도 반환하지 않음
+    }
+    )
 
     const totalPages = Math.ceil(sortedList.length / itemsPerPage);
 

@@ -19,7 +19,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             });
     }, []);
 
-    const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
@@ -62,7 +62,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             id: content.id,
             imgNo: content.imgNo,
             productName: content.productName,
-            productPriceFormatted: content.productPriceFormatted,
+            //productPriceFormatted: content.productPriceFormatted,
             productPromotion: content.productPromotion,
             productInfo: content.productInfo,
             productReview: content.productReview,
@@ -119,8 +119,10 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                         key: content.id,
                         pathname: `/ProductDetail/${content.id}`,
                         state: { productData: content }
-                    }}>{productPrice}원
-                        <span> {content.productPromotion}%</span></Link></a></li>
+                    }}>
+                        {/* {productPrice}원
+                        <span> {content.productPromotion}%</span> */}
+                        </Link></a></li>
                     <li className="pl_c"><a><Link to={{
                         key: content.id,
                         pathname: `/ProductDetail/${content.id}`,
