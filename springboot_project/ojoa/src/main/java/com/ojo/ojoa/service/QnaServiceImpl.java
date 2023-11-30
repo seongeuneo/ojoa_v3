@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.repository.QnaRepository;
 
@@ -45,8 +46,8 @@ public class QnaServiceImpl implements QnaService {
 	 	}
 	 	
 	 	// ** react selectAllList
-//	 	@Override
-//	 	public List<QnaDto> selectAllList() {
-//	 		return qnaRepository.findAllQnaList();
-//	 	}
+	 	@Override
+	 	public List<QnaDTO> selectAllList() {
+	 		return qnaRepository.findAllQnaList();
+	 	}
 }

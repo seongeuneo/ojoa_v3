@@ -98,7 +98,7 @@ function Qna() {
     // 게시판 필터
     const [filters, setFilters] = useState({ category: "", date: "", key: "", query: "" });
 
-    const qnaList = [
+    /*const qnaList = [
         {
             num: '공지',
             imgNo: '-',
@@ -187,7 +187,7 @@ function Qna() {
             date: '2023.05.18'
         }
 
-    ]; // qnaList
+    ]; // qnaList*/
 
 
     // 한 페이지당 몇 개의 글을 보여줄 것인지 정의
@@ -195,6 +195,18 @@ function Qna() {
 
     // 현재 페이지 상태와 페이지 변경 함수
     const [currentPage, setCurrentPage] = useState(1);
+
+	// react 연결
+	useEffect(() => {
+        axios
+            .get("api/qna/allQnaList")
+            .then((response) => {
+                setQnaList(response.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
 
     // 현재 페이지에 해당하는 게시물 선택
     const startIndex = (currentPage - 1) * itemsPerPage;
