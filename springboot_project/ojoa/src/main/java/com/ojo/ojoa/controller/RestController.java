@@ -14,8 +14,8 @@ import com.ojo.ojoa.service.QnaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+@RestController
 @AllArgsConstructor
-@Controller
 @Log4j2
 @RequestMapping("api/qna")
 public class RestController {
