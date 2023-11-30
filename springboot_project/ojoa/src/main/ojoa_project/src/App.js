@@ -20,6 +20,7 @@ import Agree from './pages/Join/Agree';
 import Popup from './pages/Join/Popup';
 import Qna from './pages/Qna/Qna';
 import Mileage from './pages/MyPage/MyShop/Mileage';
+import Modify from './pages/MyPage/Modify';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
@@ -76,6 +77,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
+          <Route path="/mypage/*" element={<Modify />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
