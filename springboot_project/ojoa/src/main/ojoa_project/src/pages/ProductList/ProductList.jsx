@@ -1,10 +1,11 @@
-import React, { useContext, createContext, useReducer, useRef, useState } from "react";
+import React, { useEffect, createContext, useReducer, useRef, useState } from "react";
 import ProductListItem from "./ProductListItem";
 import "./ProductList.css";
 import Pagination from "../../components/Pagination/Pagination";
 import PLFilter from "./PLFilter";
 import { Link } from "react-router-dom";
 import mockList from '../../data/ItemsData'
+import axios from "axios";
 import Modal from 'react-modal';
 import { parse } from "qs";
 // import AddCart from './Modal/AddCart';
@@ -36,6 +37,19 @@ function sortProducts(products, sortKey) {
 
 //카테고리 : 의자
 function Chair({ cart, setCart, handleCart }) {
+    // Spring Boot 연결
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('/api/productList')
+            .then((response) => {
+                setData(response.data);
+                console.log("서버연결성공 => ", response.data);
+            }).catch((error) => {
+                console.log(error)
+            });
+    }, []);
 
     const chair_filter = mockList.filter((chair) => chair.type === 'chair');
 
@@ -49,11 +63,15 @@ function Chair({ cart, setCart, handleCart }) {
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    const singleLi = displayedItems.map((content) => (
-        <li key={content.id}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
-                <Link className="productLink" to={`/products/detail/${content.id}`} key={content.id}>
-                    {content.productName}
+    {
+        data.map((item) =>
+            item.prod_name)
+    }
+    const singleLi = data.map((item) => (
+        <li key={item.prod_num}>
+            <ProductListItem cart={cart} setCart={setCart} handleCart={handleCart}>
+                <Link className="productLink" to={`/products/detail/${item.prod_num}`}>
+                    {item.prod_name}
                 </Link>
             </ProductListItem>
         </li>
@@ -65,6 +83,7 @@ function Chair({ cart, setCart, handleCart }) {
         <div className="ProductList">
             <div className="path">
                 <span>현재 위치</span>
+
                 <ol>
                     <li><Link to="/">홈</Link></li>
                     <li title="현재 위치">&gt; &nbsp;&nbsp;의자</li>
