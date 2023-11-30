@@ -13,8 +13,9 @@ import com.ojo.ojoa.entity.Qna;
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	List<Qna> findAll();
 	
-	@Query("SELECT new com.ojo.ojoa.dto.QnaDto(A.qna_seq, B.prod_image, B.prod_name, A.qna_category, A.qna_title, A.qna_content, '' AS titleIcon, A.id, A.qna_redate) FROM Qna A LEFT JOIN Product B ON A.prod_num = B.prod_num")
-    List<QnaDTO> findAllQnaList();
+//	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO(A.qna_seq, B.prod_mainimage, B.prod_name, A.qna_category, A.qna_title, A.qna_content, '' AS titleIcon, A.id, A.qna_redate) FROM Qna A LEFT JOIN Product B ON A.prod_num = B.prod_num")
+	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO(A.qna_seq, B.prod_mainimage, B.prod_name, A.qna_category, A.qna_title, A.qna_content, '' AS titleIcon, A.id, A.qna_redate) FROM Qna A LEFT JOIN Product B ON A.prod_num = B.prod_num ORDER BY A.qna_indate DESC")
+	List<QnaDTO> findAllQnaList();
 	
 	//@Query(value = "SELECT A.qna_seq, B.prod_image, A.qna_category, A.qna_title, A.qna_content, A.id, A.qna_redate FROM qna A LEFT JOIN product B ON A.prod_num = B.prod_num")
 	//List<Qna> findAllQnaList();

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.service.QnaService;
@@ -13,11 +14,11 @@ import com.ojo.ojoa.service.QnaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-
+@RestController
 @AllArgsConstructor
 @Log4j2
 @RequestMapping("api/qna")
-public class RestController {
+public class QnaRestController {
 	QnaService qnaService;
 	
 	@GetMapping("/allQnaList")

@@ -12,7 +12,7 @@ public class QnaDTO {
 	private int qna_seq;
 	
 	@JsonProperty("imgNo")
-    private String prod_image;
+    private String prod_mainimage;
 	
 	@JsonProperty("itemInfo")
     private String prod_name;
@@ -38,9 +38,10 @@ public class QnaDTO {
     public QnaDTO() {
     }
 
-    public QnaDTO(int qna_seq, String prod_image, String prod_name, String qna_category, String qna_title, String qna_content, String titleIcon, String id, LocalDateTime qna_redate) {
+//    	public QnaDTO(int qna_seq, String prod_mainimage, String prod_name, String qna_category, String qna_title, String qna_content, String id, LocalDateTime qna_redate) {
+    public QnaDTO(int qna_seq, String prod_mainimage, String prod_name, String qna_category, String qna_title, String qna_content, String titleIcon, String id, LocalDateTime qna_redate) {
         this.qna_seq = qna_seq;
-        this.prod_image = prod_image;
+        this.prod_mainimage = prod_mainimage;
         this.prod_name = prod_name;
         this.qna_category = qna_category;
         this.qna_title = qna_title;
