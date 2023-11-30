@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>** Cart List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h2>** Cart List **</h2>
@@ -22,6 +24,7 @@
 		<th>상품번호</th>
 		<th>상품사진</th>
 		<th>수량</th>
+		<th>결제하기</th>
 		<th>Delete</th>
 
 
@@ -38,6 +41,7 @@
 					<td>${s.prod_num}</td>
 				    <td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.quantity}</td>
+					<td align="center"> <button onclick="payNow('${s.id}')">결제하기</button></td>
 					<td align="center"><a href="cdelete?cart_num=${s.cart_num}">삭제</a></td>
 				</tr>
 			</c:forEach>

@@ -40,8 +40,9 @@
 &nbsp;<a href="/guestlist">GList??</a>&nbsp; 
 &nbsp;<a href="/gupdate">GUpdate??</a>&nbsp; 
 &nbsp;<a href="/gpagelist">GPageList??</a>&nbsp; 
-&nbsp;<a href="cart/cartList">cart_List</a>&nbsp; 
-&nbsp;<a href="orders/ordersList">orders_List</a>&nbsp; 
+&nbsp;<a href="cart/cartList">장바구니 리스트</a>&nbsp; 
+&nbsp;<a href="orders/ordersList">주문리스트</a>&nbsp; 
+&nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp; 
 &nbsp;<a href="wish/wishlist">관심심품</a>&nbsp;
 
 &nbsp;<a href="qna/qnaList">게시판QnA</a>&nbsp; 
