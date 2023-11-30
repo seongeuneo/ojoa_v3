@@ -43,4 +43,10 @@ public class QnaServiceImpl implements QnaService {
 	 		qnaRepository.deleteById(qna_seq);
 	 		return qna_seq ; // 삭제후 key return
 	 	}
+	 	
+	 	// ** react selectAllList
+//	 	@Override
+//	 	public List<QnaDto> selectAllList() {
+//	 		return qnaRepository.findAllQnaList();
+//	 	}
 }

@@ -53,7 +53,7 @@ public class QnaController {
    @PostMapping(value="/qnaInsert")
    public String qnaInsert(HttpServletRequest request,
          Qna entity, Model model) throws IOException  {
-      String uri = "redirect:/qna/qnaInsert";
+      String uri = "redirect:/qna/qnaList";
    
       // 2. Service 처리
       try {

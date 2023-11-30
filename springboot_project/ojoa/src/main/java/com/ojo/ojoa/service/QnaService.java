@@ -23,4 +23,6 @@ public interface QnaService {
 	// ** delete
 	int delete(int qna_seq);
 	
+//	// ** react selectAllList
+//	List<QnaDto> selectAllList();
 }
