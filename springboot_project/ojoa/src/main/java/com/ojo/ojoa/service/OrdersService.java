@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Orders;
 
 @Service
@@ -11,16 +12,17 @@ import com.ojo.ojoa.entity.Orders;
 public interface OrdersService {
 
 	// ** selectList
-	List<Orders> selectList();
+	public List<Orders> selectList();
 
 	// ** selectOne
-	Orders selectOne(int orders_num);
+	public Orders selectOne(int orders_num);
 
-	// ** insert, update
-	String save(Orders entity);
-
-	// ** cancel
-	int delete(int orders_num);
+	// ** save : insert, update
+	public String save(Orders entity);
+		
+	// ** delete
+	public int delete(int orders_num);
+	
     
     
 }

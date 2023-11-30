@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Cart;
+import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.service.CartService;
+import com.ojo.ojoa.service.ProductService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/cart")
 public class CartController {
 	
+	//ProductService productService;
     CartService cartService;
 
 
@@ -74,9 +77,10 @@ public class CartController {
     		if (loginID == null) {
     			throw new Exception("loginID isNull");
     		}
+ 		
             entity.setId(loginID);
-    		cartService.save(entity); // 상품을 관심목록에 추가하는 서비스 메서드 호출
-            return ResponseEntity.ok("상품이 관심목록에 추가되었습니다.");
+    		cartService.save(entity); // 상품을 장바구니에 추가하는 서비스 메서드 호출
+            return ResponseEntity.ok("상품이 장바구니에 추가되었습니다.");
         } catch (Exception e) {
         	System.out.println("addCart exeption " + e.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품 추가 중 오류 발생");

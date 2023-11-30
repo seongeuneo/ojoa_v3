@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>** Orders List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h2>** Orders List **</h2>
@@ -16,7 +18,7 @@
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table border="1" style="width:90%">
-	<tr bgcolor="SKyBlue">
+	<tr bgcolor="SkyBlue">
 		<th>주문번호</th>
 		<th>회원ID</th>
 		<th>주문날짜</th>
@@ -42,7 +44,7 @@
 					<td>${s.orders_price}</td>
 					<td>${s.orders_method}</td>
 					<td>${s.orders_addresscheck}</td>
-					<td align="center"><a href="ocancel?order_num=${s.orders_num}">주문취소</a></td>
+					<td align="center"><a href="ocancel?orders_num=${s.orders_num}">주문취소</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>
