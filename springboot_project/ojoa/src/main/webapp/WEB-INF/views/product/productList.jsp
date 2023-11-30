@@ -8,7 +8,14 @@
 <title>** Product List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<<<<<<< HEAD
 <script src="/resources/myLib/productCheck.js"></script>
+=======
+    <script src="/resources/myLib/addWish.js"></script> <!-- addWish.js 파일을 로드 -->
+</head>
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+>>>>>>> main
 </head>
 <body>
 <h2>** Product List **</h2>
@@ -31,8 +38,15 @@
 		<th>재고 수량</th>
 		<th>평점</th>
 		<th>상품 삭제</th>
-		<th>장바구니 담기</th>
 		<th>관심목록 추가</th>
+<<<<<<< HEAD
+=======
+		<th>장바구니 담기</th>
+		
+		<!-- 관리자 기능 추가 -->
+		<c:if test="${sessionScope.loginID=='admin'}">
+		</c:if>
+>>>>>>> main
 	</tr>
     <c:choose>
 		<c:when test="${not empty requestScope.productList}">
@@ -50,10 +64,20 @@
 					<td>${product.prod_stock}</td>
 					<td>${product.prod_grade}</td>
 
+<<<<<<< HEAD
 					<td align="center"><a href="/product/delete/${product.prod_num}">상품삭제</a></td>
 
 					<td align="center"> <button onclick="addCart(${product.prod_num},'${product.prod_mainimage}')">장바구니담기</button></td>
 					<td align="center"><button onclick="addWish(${product.prod_num})">관심목록 추가</button></td>
+=======
+				<!-- 관리자 기능 추가 -->
+		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
+					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
+					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
+					<td align="center"><button onclick="addWish(${s.prod_num})">관심목록 추가</button></td>
+					<td align="center"> <button onclick="addCart(${s.prod_num},'${s.prod_mainimage}')">장바구니담기</button></td>
+		<%-- </c:if> --%>
+>>>>>>> main
 				</tr>
 			</c:forEach>
 		</c:when>
