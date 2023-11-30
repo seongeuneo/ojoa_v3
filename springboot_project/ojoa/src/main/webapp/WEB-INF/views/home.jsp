@@ -26,7 +26,7 @@
 	&nbsp;<a href="member/logout">Logout</a>&nbsp;
 	&nbsp;<a href="member/memberDetail?id=${sessionScope.loginID}">내정보</a>&nbsp;
 	&nbsp;<a href="member/memberDetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a>&nbsp;  
-	&nbsp;<a href="member/pUpdateForm">PW수정</a>&nbsp; 
+	<%-- &nbsp;<a href="member/memberShippingAddress?jCode=U&id=${sessionScope.loginID}">배송지정보</a>&nbsp;  --%> 
 	&nbsp;<a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>
 <br>

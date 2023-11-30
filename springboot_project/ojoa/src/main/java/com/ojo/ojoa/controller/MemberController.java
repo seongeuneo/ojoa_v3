@@ -42,6 +42,39 @@ public class MemberController {
 		return "member/idDupCheck";
 	} //idDupCheck
 	
+	// ** PasswordUpdate
+	// => passwordUpdate_Form 출력
+	@GetMapping(value="/pUpdateForm")
+	public String pUpdateForm() {
+	    return "member/pUpdateForm"; // 비밀번호 변경 폼을 보여줄 JSP 페이지의 경로
+	} //pUpdateForm
+	        
+	// => password 만 수정
+	@PostMapping(value="/passwordUpdate")
+	public String passwordUpdate(HttpServletRequest request, Model model, Member entity) {
+	    String id = (String) request.getSession().getAttribute("loginID");
+
+	    entity.setId(id);
+	    entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+
+	    String uri = "member/loginForm";
+	    try {
+	        boolean passwordUpdated = service.updatePassword(entity);
+
+	        if (passwordUpdated) {
+	            request.getSession().invalidate(); 
+	            model.addAttribute("message", "비밀번호가 수정되었습니다. 다시 로그인하세요.");
+	        } else {
+	            model.addAttribute("message", "비밀번호 수정에 실패했습니다. 다시 시도하세요.");
+	            uri = "member/pUpdateForm";
+	        }
+	    } catch (Exception e) {
+	        model.addAttribute("message", "오류가 발생했습니다. 다시 시도하세요.");
+	        uri = "member/pUpdateForm";
+	    }
+	    return uri;
+	}
+	
 	// ** MemberList
 	@GetMapping("/memberList")
 	public void memberList(Model model) {
@@ -108,29 +141,8 @@ public class MemberController {
 	
 	// => Join Service 처리: POST
 	@PostMapping(value="/join")
-	public String join(HttpServletRequest request,
-					Member entity, Model model) throws IOException  {
+	public String join(Member entity, Model model) throws IOException  {
 	
-		// 사용자로부터 이메일과 도메인 불러옴
-	    String email = request.getParameter("email");
-	    String domain = request.getParameter("email_domain");
-
-	    // 이메일과 도메인을 결합
-	    String fullEmail = email + "@" + domain;
-
-	    // 합쳐진 이메일(도메인 포함)을 엔터티에 설정
-	    entity.setEmail(fullEmail);
-	    
-	    // 사용자로부터 받은 전화번호의 각 부분
-	    String phoneMiddle = request.getParameter("phoneMiddle");
-	    String phoneSuffix = request.getParameter("phoneSuffix");
-
-	    // 전화번호 조합
-	    String fullPhone = "010" + "-" + phoneMiddle + "-" + phoneSuffix;
-	        
-	    // 완전한 전화번호 값을 엔티티에 설정
-	    entity.setPhone(fullPhone);
-
 	    // 1. 요청분석 & Service
 		// => 성공: 로그인유도 (loginForm 으로, member/loginForm.jsp)
 		// => 실패: 재가입유도 (joinForm 으로, member/memberJoin.jsp)
@@ -159,7 +171,7 @@ public class MemberController {
 	//		-> 성공: detail
 	//		-> 실패: 재시도 유도 (memberUpdate.jsp)
 	@PostMapping(value="/memberUpdate")
-	public String memberUpdate(HttpSession session,
+	public String memberUpdate(HttpSession session, HttpServletRequest request,
 							  Member entity, Model model) throws IOException {
 		
 		// => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
