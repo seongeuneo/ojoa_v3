@@ -38,6 +38,7 @@
 
 &nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
 <br>
+&nbsp;<a href="qna/qnaInsert">게시판 글쓰기</a>&nbsp; 
 &nbsp;<a href="qna/qnaList">게시판QnA</a>&nbsp; 
 &nbsp;<a href="cart/cartList">장바구니 리스트</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">주문리스트</a>&nbsp; 
