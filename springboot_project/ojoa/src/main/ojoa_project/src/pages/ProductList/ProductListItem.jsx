@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams, Link } from "react-router-dom"
 import "./ProductListItem.css";
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from '../../data/ItemsData'
 
 const ProductListItem = ({ content, onSelect, handleCart }) => {
+    // Spring Boot 연결
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('/api/productList')
+            .then((response) => {
+                setData(response.data);
+                console.log("서버연결성공 => ", response.data);
+            }).catch((error) => {
+                console.log(error)
+            });
+    }, []);
 
     const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -70,6 +84,8 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 <ul className="prodItems">
                     <li className="pl_thumb_img">
                         <a>
+                            {data.map((item) =>
+                                item.prod_name)}
                             <Link to={{
                                 key: content.id,
                                 pathname: `/ProductDetail/${content.id}`,

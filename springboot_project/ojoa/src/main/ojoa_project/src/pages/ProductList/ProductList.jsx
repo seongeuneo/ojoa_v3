@@ -63,7 +63,7 @@ function Chair({ cart, setCart, handleCart }) {
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    
+
     const singleLi = data.map((item) => (
         <li key={item.prod_num}>
             <ProductListItem cart={cart} setCart={setCart} handleCart={handleCart}>
@@ -93,12 +93,12 @@ function Chair({ cart, setCart, handleCart }) {
             <PLFilter numOfList={sortedList.length} setSortKey={setSortKey} />
 
             <ul className="pl_items">{singleLi}</ul>
-            <ul>
-            <li>
-            {data.map((item) =>
-            item.prod_name)}
-               </li>
-            </ul>
+            {/* <ul>
+                <li>
+                    {data.map((item) =>
+                        item.prod_name)}
+                </li>
+            </ul> */}
 
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
