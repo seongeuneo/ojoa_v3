@@ -67,6 +67,9 @@ function App() {
 
         {data.map((item) => 
            item.prod_name)}
+           {data.map((item) => 
+           item.prod_mainimage)}
+           
 
         <a href="http://localhost:8080/admin/adminmain">관리자용</a>
 
