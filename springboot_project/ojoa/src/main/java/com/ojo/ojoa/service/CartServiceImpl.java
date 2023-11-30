@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.repository.CartRepository;
 
@@ -44,5 +45,12 @@ public class CartServiceImpl implements CartService {
  		cartRepository.deleteById(cart_num);
  		return cart_num ; // 삭제후 key return
  	}
+ 	
+ 	
+// ** (장바구니+상품) 테이블 Join 
+	@Override
+	public List<CartProdDTO> findCartProd(){
+	return cartRepository.findCartProd();
+	   } 	
  	
  } //class

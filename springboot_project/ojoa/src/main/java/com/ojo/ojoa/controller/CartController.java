@@ -30,10 +30,12 @@ public class CartController {
 
 
 // ** Cart List - 회원별 카트 목록 반환 
+    
+// ** Cart+Product Join List
     @GetMapping("/cartList")
     public void cartList(Model model) {
-    	model.addAttribute("mycart", cartService.selectList());
-    } // cartList
+    	model.addAttribute("mycart", cartService.findCartProd());
+    }
 
 
 
@@ -86,4 +88,7 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품 추가 중 오류 발생");
         }
 	}
-}
+	
+
+} //class
+
