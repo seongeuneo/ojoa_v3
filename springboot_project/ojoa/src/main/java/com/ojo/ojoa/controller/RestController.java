@@ -3,7 +3,6 @@ package com.ojo.ojoa.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,7 @@ import com.ojo.ojoa.service.QnaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@RestController
+
 @AllArgsConstructor
 @Log4j2
 @RequestMapping("api/qna")
