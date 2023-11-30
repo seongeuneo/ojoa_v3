@@ -64,6 +64,7 @@ function Mileage() {
                     <li><a><NavLink to="./pages/MyPage/MyShop/MileageCouponList">미가용쿠폰/회원등급적립내역</NavLink></a></li>
                 </ul >
             </div >
+            
 
             <Routes>
                 <Route path="/pages/mypage/myshop/mileagehistorylist" element={<MileageHistoryList />} />
