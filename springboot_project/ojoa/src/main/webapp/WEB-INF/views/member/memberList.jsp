@@ -18,7 +18,8 @@
 <table border="1" style="width:90%">
 	<tr bgcolor="Silver">
 		<th>ID</th><th>Password</th><th>Name</th><th>Email</th><th>domain</th><th>zip_code</th><th>address</th>
-		<th>address_detail</th><th>Phone1</th><th>Phone2</th><th>Phone3</th><th>가입현황</th><th>가입날짜</th><th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th><th>적립금(mileage)</th>
+		<th>address_detail</th><th>Phone1</th><th>Phone2</th><th>Phone3</th><th>가입현황</th><th>가입날짜</th>
+		<th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th><th>적립금(mileage)</th>
 		<!-- 관리자 기능 추가 -->
 		<c:if test="${sessionScope.loginID=='admin'}">
 			<th>Delete</th>
