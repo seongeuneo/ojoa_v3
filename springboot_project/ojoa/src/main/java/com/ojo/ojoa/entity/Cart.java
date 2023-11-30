@@ -35,6 +35,6 @@ public class Cart {
 	   //@Column(nullable = false, columnDefinition = "int default 1")
 	   private int quantity;
        
-      private String prod_mainimage;
+      //private String prod_mainimage;
 
 }

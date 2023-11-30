@@ -34,36 +34,42 @@
 		<th>관심목록 추가</th>
 		<th>장바구니 담기</th>
 		
+		<!-- 관리자 기능 추가 -->
+		<c:if test="${sessionScope.loginID=='admin'}">
+		</c:if>
 	</tr>
-    <c:choose>
-		<c:when test="${not empty requestScope.productList}">
-			<c:forEach var="product" items="${requestScope.productList}">
+
+		<c:if test="${not empty requestScope.product}">
+			<c:forEach var="s" items="${requestScope.product}">
 				<tr>
 					<td>${s.prod_num}</a></td>
-					<td><img alt="Product Image" src="/${product.prod_mainimage}" width="80" height="70"></td>
-					<td>${product.prod_name}</td>
-					<td>${product.prod_kind}</td>
-					<td>${product.prod_discount}</td>
-					<td>${product.prod_price1}</td>
-					<td>${product.prod_content}</td>
-					<td>${product.prod_sellyn}</td>
-					<td>${product.prod_regdate}</td>
-					<td>${product.prod_stock}</td>
-					<td>${product.prod_grade}</td>
+					<td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
+					<td>${s.prod_name}</td>
+					<td>${s.prod_kind}</td>
+					<td>${s.prod_discount}</td>
+					<td>${s.prod_price1}</td>
+					<td>${s.prod_content}</td>
+					<td>${s.prod_sellyn}</td>
+					<td>${s.prod_regdate}</td>
+					<td>${s.prod_stock}</td>
+					<td>${s.prod_grade}</td>
 
+				<!-- 관리자 기능 추가 -->
+		<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
 					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
 					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
 					<td align="center"><button onclick="addWish(${s.prod_num})">관심목록 추가</button></td>
-					<td align="center"> <button onclick="addCart(${s.prod_num},'${s.prod_mainimage}')">장바구니담기</button></td>
+					<td align="center"> <button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
+		<%-- </c:if> --%>
 				</tr>
 			</c:forEach>
-		</c:when>
-		<c:otherwise>
+		</c:if>
+
+
+		<c:if test="${empty requestScope.product}">
 		<tr><td colspan="12">출력할 Data가 1건도 없습니다 ~~</td>
 		</tr>
-		</c:otherwise>
-</c:choose>
-
+	</c:if>
 </table>
 <hr>
 &nbsp;<a href="/home">Home</a>&nbsp;
