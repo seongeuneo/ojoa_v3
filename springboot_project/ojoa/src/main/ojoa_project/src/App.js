@@ -24,6 +24,7 @@ import Modify from './pages/MyPage/Modify';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
+import Wish from "./pages/MyPage/MyShop/Wish";
 
 import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
@@ -59,6 +60,7 @@ function App() {
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/mypage/*" element={<Modify />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
+          <Route path="/mypage/wish/*" element={<Wish />} />
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />

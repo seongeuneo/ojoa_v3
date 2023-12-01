@@ -25,7 +25,7 @@ const MyshopMain = () => {
                         <p>회원이신 고객님의 개인정보를<br />관리하는 공간입니다.</p>
                     </div>
                 </Link>
-                <Link to="../cart">
+                <Link to="/MyPage/Wish">
                     <div className="shopMain">
                         <h3><img src="../images/img_wishlist.png" alt="관심상품" /><br /><strong>Wishlist</strong><span>관심 상품</span>
                         </h3>
