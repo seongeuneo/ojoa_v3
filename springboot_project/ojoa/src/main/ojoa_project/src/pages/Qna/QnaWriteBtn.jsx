@@ -3,6 +3,7 @@ import "../Qna/Qna.css";
 import Modal from 'react-modal';
 import QnaModal from './QnaModal/QnaModal';
 
+
 const QnaWriteBtn = () => {
 
     // // 모달창 띄우기
