@@ -43,15 +43,13 @@ public class RestReactController {
     }
 
 	
-<<<<<<< HEAD:springboot_project/ojoa/src/main/java/com/ojo/ojoa/controller/RestReactController.java
-	@GetMapping("cart/allCartList")
-    public ResponseEntity<List<CartDTO>> getAllCartList(Model model) {
-		List<CartDTO> test = cartService.selectAllList();
-    	//model.addAttribute("qna", test);
-    	return ResponseEntity.ok(test);
-    }
+//	@GetMapping("cart/allCartList")
+//    public ResponseEntity<List<CartDTO>> getAllCartList(Model model) {
+//		List<CartDTO> test = cartService.selectAllList();
+//    	//model.addAttribute("qna", test);
+//    	return ResponseEntity.ok(test);
+//    }
 	
-=======
 // 여기서부터 새로운 코드
 	 // 새로운 코드 - 데이터 저장	
     @PostMapping("/saveQna")
@@ -69,5 +67,4 @@ System.out.println("111111"+entity);
         }
     }
 
->>>>>>> main:springboot_project/ojoa/src/main/java/com/ojo/ojoa/controller/ReactRestController.java
 }
