@@ -32,7 +32,7 @@
 			<td>${s.qna_category}</td>
 			<td>${s.qna_title}</td>
 			<td>${s.qna_content}</td>
-			<td align="center"><a href="qdelete?qna_seq=${s.qna_seq}">상품삭제</a></td>
+			<td align="center"><a href="qdelete?qna_seq=${s.qna_seq}">글 삭제</a></td>
 		</tr>	
 		</c:forEach>
 	</c:if>
