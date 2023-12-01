@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Wish Product List</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 </head>
 <body>
 <h2>Wish Product List</h2>
@@ -14,7 +15,7 @@
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
-<table border="1" style="width:90%">
+<table class="wishTable" border="1" style="width:90%">
 	<tr bgcolor="Orange">
 		<th>상품 인덱스</th>
 		<th>로그인 아이디</th>

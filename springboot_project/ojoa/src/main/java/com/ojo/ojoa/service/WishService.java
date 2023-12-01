@@ -20,7 +20,7 @@ public interface WishService {
 	List<Wish> selectList();
 
 	// ** selectOne
-	Wish selectOne(int wish_num);
+	Wish selectOne(int wish);
 
 	// ** insert, update
 	String save(Wish entity);
