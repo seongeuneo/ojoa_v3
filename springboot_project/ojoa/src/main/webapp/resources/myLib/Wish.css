@@ -1,0 +1,293 @@
+
+.wishTable a {
+    text-decoration: none;
+}
+
+.wishTable li {
+    list-style-type: none;
+}
+
+.wishTable .container .path {
+    color: #333;
+    font-size: 12px;
+    margin: 20px auto;
+    margin-right: 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.wishTable .container .path span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    display: none;
+}
+
+.wishTable .container .path li {
+    float: left;
+    padding-left: 12px;
+    margin: 0;
+    color: #333;
+}
+
+.wishTable .container .path ol {
+    float: right;
+}
+
+.wishTable .container .pageTlt {
+    color: #333;
+}
+
+.wishTable .container .pageTlt h2 {
+    height: 60px;
+    text-align: center;
+    line-height: 90px;
+    font-size: 30px;
+    letter-spacing: 3px;
+    padding-top: 70px;
+    padding-bottom: 0px;
+}
+
+.wishTable .container .txt_01 {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    font-weight: 300;
+    padding-top: 5px;
+    padding-bottom: 120px;
+}
+
+/* ====================================================== */
+/* myPage_main */
+.wishTable .container {
+    background-color: white;
+    width: 1240px;
+    margin: auto;
+}
+
+/*======================================================*/
+/* thumbnail */
+.wishTable .base-box {
+    padding: 20px 20px 20px 0px;
+    border: 1px solid #dedede;
+    border-top: 1px solid black;
+    color: #333;
+}
+
+.wishTable .thumbnail {
+    display: table-cell;
+    padding: 0 15px;
+    width: 70px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.wishTable .description {
+    display: table-cell;
+    padding: 0 10px;
+    border-left: 1px solid #e8e8e8;
+    vertical-align: middle;
+}
+
+/*======================================================*/
+/* asyncbankbook */
+.wishTable #h2_p{
+    text-align: left;
+}
+
+.wishTable .myshop_asyncbankbook {
+    overflow: hidden;
+    padding: 15px 0px 15px 0px;
+    margin: 20px auto;
+    border: 1px solid #dedede;
+    border-top: 1px solid black;
+}
+
+.wishTable .myshop_asyncbankbook div span {
+    color: darkgray;
+}
+
+.wishTable .myshop_asyncbankbook .sub_title {
+    float: left;
+    width: 370px;
+    padding: 10px 0 0 30px;
+}
+
+.wishTable .myshop_asyncbankbook ul {
+    float: right;
+    width: 470px;
+}
+
+.wishTable .myshop_asyncbankbook ul li {
+    float: left;
+    margin: 5px 0;
+    padding: 0 45px;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.wishTable .myshop_asyncbankbook .title {
+    float: left;
+    width: 40%;
+    font-weight: normal;
+}
+
+.wishTable .myshop_asyncbankbook .data {
+    float: left;
+    width: 47%;
+    padding: 0 10px;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.wishTable .btnNormal {
+    /* display: inline-block; */
+    padding: 2px 8px;
+    border: 1px solid #d1d1d1;
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #333;
+    background-color: #f0efef;
+    border-radius: 5px;
+}
+
+.wishTable .btnNormal:hover {
+    background-color: black;
+    color: white;
+}
+
+/*======================================================*/
+/* orderstate */
+.wishTable .myshop_orderstate {
+    margin: 20px auto;
+    border: 1px solid #dedede;
+    border-top: 1px solid black;
+}
+
+.wishTable .myshop_orderstate .title {
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #e9e9e9;
+    background-color: #f6f6f6;
+}
+
+.wishTable .myshop_orderstate .title h3 {
+    font-size: 14px;
+    color: #333;
+}
+
+.wishTable .myshop_orderstate .desc {
+    padding-left: 5px;
+    font-weight: normal;
+    font-size: 11px;
+    color: #333;
+}
+
+.wishTable .myshop_orderstate .state {
+    padding: 19px 0;
+    color: #333;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.wishTable .myshop_orderstate .order {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.wishTable .myshop_orderstate .order li {
+    border-right: 1px solid #c9c8ca;
+    text-align: center;
+    padding: 30px 0px;
+}
+
+.wishTable .myshop_orderstate .order li strong {
+    display: block;
+    margin: 2px 0 7px;
+    font-size: 14px;
+    color: #333;
+}
+
+.wishTable .myshop_orderstate .order .count {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+}
+
+.wishTable .myshop_orderstate .cs {
+    padding: 20px;
+}
+
+.wishTable .myshop_orderstate .cs li {
+    color: #333;
+    padding: 2px;
+    text-align: center;
+}
+
+.wishTable .myshop_orderstate .cs .count {
+    color: #333;
+    font-size: 14px;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.wishTable .myshop_orderstate .cs strong {
+    font-weight: bold;
+    font-size: 13px;
+    color: #333;
+}
+
+/*======================================================*/
+/* myshopMain */
+.wishTable .myshopMain {
+    margin: 25px 0;
+}
+
+.wishTable .myshopMain .shopMain {
+    float: left;
+    width: 18%;
+    height: 260px;
+    margin: 0 1% 20px 1%;
+    padding-top: 40px;
+    border: 1px solid #dedede;
+    box-sizing: border-box;
+    text-align: center;
+
+}
+
+.wishTable .myshopMain .shopMain a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wishTable .myshopMain .shopMain h3 {
+    position: relative;
+    font-size: 12px;
+    color: #333;
+    font-weight: normal;
+}
+
+.wishTable .myshopMain .shopMain h3 strong {
+    font-size: 18px;
+}
+
+.wishTable .myshopMain .shopMain h3 span {
+    display: block;
+    padding: 6px 0 0;
+}
+
+.wishTable .myshopMain .shopMain p {
+    font-size: 11px;
+    line-height: 20px;
+    color: #333;
+}
+
+.wishTable .myshopMain .shopMain:hover {
+    border: 1px solid #999;
+}
