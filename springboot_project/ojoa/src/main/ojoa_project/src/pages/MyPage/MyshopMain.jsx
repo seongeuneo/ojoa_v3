@@ -17,7 +17,7 @@ const MyshopMain = () => {
                         <p>고객님께서 주문하신 상품의<br />주문내역을 확인하실 수 있습니다.</p>
                     </div>
                 </Link>
-                <Link to="./modify">
+                <Link to="../member/modify">
                     <div className="shopMain">
                         <h3><img src="../images/img_profile.png" alt="회원정보" /><br /><strong>Profile</strong><span>회원 정보 및 수정</span>
                         </h3>

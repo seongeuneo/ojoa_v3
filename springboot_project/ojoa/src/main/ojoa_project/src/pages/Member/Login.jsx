@@ -1,4 +1,4 @@
-import '../Login/Login.css';
+import '../Member/Login.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // axios 라이브러리 import
@@ -141,7 +141,7 @@ const Login = () => {
                                     &quot;회원을 위한 다양한 혜택이 준비되어 있습니다.&quot;
                                 </div>
                                 <div className="login_join_btn">
-                                    <Link to="/login/info">회원가입</Link>
+                                    <Link to="/member/join">회원가입</Link>
                                 </div>
                             </div>
                         </div>
