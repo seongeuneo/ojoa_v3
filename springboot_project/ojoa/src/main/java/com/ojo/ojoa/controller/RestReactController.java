@@ -15,10 +15,7 @@ import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.service.CartService;
-import com.ojo.ojoa.service.MemberService;
-import com.ojo.ojoa.service.ProductService;
 import com.ojo.ojoa.service.QnaService;
-import com.ojo.ojoa.service.WishService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @AllArgsConstructor
 @Log4j2
-@RequestMapping("api")
+@RequestMapping("api/qna")
 public class RestReactController {
 	QnaService qnaService;
 	CartService cartService;
@@ -43,7 +40,6 @@ public class RestReactController {
     }
 
 	
-<<<<<<< HEAD:springboot_project/ojoa/src/main/java/com/ojo/ojoa/controller/RestReactController.java
 	@GetMapping("cart/allCartList")
     public ResponseEntity<List<CartDTO>> getAllCartList(Model model) {
 		List<CartDTO> test = cartService.selectAllList();
@@ -51,7 +47,6 @@ public class RestReactController {
     	return ResponseEntity.ok(test);
     }
 	
-=======
 // 여기서부터 새로운 코드
 	 // 새로운 코드 - 데이터 저장	
     @PostMapping("/saveQna")
@@ -68,6 +63,5 @@ System.out.println("111111"+entity);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
         }
     }
-
->>>>>>> main:springboot_project/ojoa/src/main/java/com/ojo/ojoa/controller/ReactRestController.java
 }
+
