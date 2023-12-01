@@ -111,7 +111,7 @@ const Cart = ({ cart, convertPrice }) => {
     // Springboot 요청
     useEffect(() => {
         axios
-            .get("api/cart/allCartList")
+            .get("/api/cart/allCartList")
             .then((response) => {
                 setCartState(response.data);
             })

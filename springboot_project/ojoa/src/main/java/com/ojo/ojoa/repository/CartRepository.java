@@ -18,8 +18,8 @@ extends JpaRepository<Cart, Integer> {
 		+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num order by c.prod_num")
 List<CartProdDTO> findCartProd();
 
-// React Join
-@Query("SELECT new com.ojo.ojoa.DTO.CartDTO(c.cart_num, c.id, c.prod_num, c.quantity, p.prod_mainimage, p.prod_name, p.prod_discount, p.prod_price1)"
-		+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num order by c.prod_num")
-List<CartDTO> findAllCartList();
+//React Join
+	@Query("SELECT new com.ojo.ojoa.DTO.CartDTO(c.cart_num, c.id, c.prod_num, c.quantity, p.prod_mainimage, p.prod_name, p.prod_discount, p.prod_price1) "
+			+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num order by c.prod_num")
+	List<CartDTO> findAllCartList();
 }
