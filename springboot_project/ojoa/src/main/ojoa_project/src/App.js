@@ -13,14 +13,14 @@ import Order from './pages/Order/Order';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from './pages/ProductList/ProductList';
 import NotFound from './pages/NotFound/NotFound';
-import Login from './pages/Login/Login';
+import Login from './pages/Member/Login';
 import Cart from './pages/Cart/Cart';
-import Info from './pages/Join/Info';
-import Agree from './pages/Join/Agree';
-import Popup from './pages/Join/Popup';
+import Join from './pages/Member/Join';
+//import Agree from './pages/Member/Join';
+//import Popup from './pages/Join/Popup';
 import Qna from './pages/Qna/Qna';
 import Mileage from './pages/MyPage/MyShop/Mileage';
-import Modify from './pages/MyPage/Modify';
+import Modify from './pages/Member/Modify';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
@@ -57,12 +57,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
-          <Route path="/mypage/*" element={<Modify />} />
+          <Route path="/member/*" element={<Modify />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/login/" element={<Login />} />
+          <Route path="/member/login/" element={<Login />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:mockList_id/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />
@@ -78,9 +78,9 @@ function App() {
 
           <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart} convertPrice={convertPrice}
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
-          <Route path="/login/info" element={<Info />} />
-          <Route path="/login/info/agree" element={<Agree />} />
-          <Route path="/login/info/agree/popup" element={<Popup />} />
+          <Route path="/member/join" element={<Join />} />
+          {/* <Route path="/login/info/agree" element={<Agree />} />
+          <Route path="/login/info/agree/popup" element={<Popup />} /> */}
           <Route path="/qna" element={<Qna />} />
           <Route path="/checkout" element={<Checkout cart={cart} />} />
         </Routes>

@@ -24,7 +24,6 @@ function Header() {
         return CATEGORY_PATHS[category] || '#';
     };
 
-
     return (
         <>
             <header className='header'>
@@ -36,7 +35,7 @@ function Header() {
                     <div>
                         {/* 상단 로고 */}
                         <div>
-                            <Link to="/"><img className="logo" src="/images/ojoa_logo_b.png" alt="logo"/></Link>
+                            <Link to="/"><img className="logo" src="/images/ojoa_logo_b.png" alt="logo" /></Link>
                         </div>
                         <div className="search">
                             <Modal />
@@ -44,7 +43,7 @@ function Header() {
                         {/* 상단 네비 */}
                         <div className="navBar">
                             <ul>
-                                <li><Link to="../Login">LOGIN </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/Login">LOGIN </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../MyPage">MYPAGE </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Order">ORDER </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>

@@ -1,0 +1,401 @@
+.Join {
+  background-color: white;
+  min-height: 450px;
+  width: 1240px;
+  margin: auto;
+  text-align: left;
+}
+
+/* ================ */
+.Join .path {
+  width: 1240px;
+  padding: 0;
+  display: flex;
+  color: #333;
+  font-size: 12px;
+  margin: 20px auto;
+  height: 30px;
+  line-height: 30px;
+  justify-content: end;
+}
+
+.Join .path span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  white-space: nowrap;
+  text-indent: 100%;
+  display: none;
+}
+
+.Join .path li {
+  float: left;
+  padding-left: 12px;
+  color: #333;
+}
+
+.Join .path li a {
+  color: #333;
+}
+
+.Join .title {
+  padding-top: 100px;
+  text-align: center;
+  color: #333;
+}
+
+.Join .title h2 {
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 3px;
+}
+
+.Join .title .txt_01 {
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  font-weight: 300;
+  padding-top: 7px;
+  padding-bottom: 20px;
+}
+
+/* ============================= */
+
+/*---입력정보 칸 시작---*/
+
+.Join .personal_join {
+  border-top: solid 2px black;
+  border-bottom: solid 1px black;
+  width: 80%;
+  margin: auto;
+}
+
+.Join .personal_join caption {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.Join .personal_join span {
+  color: red;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.Join .personal_join th,
+.Join .personal_join td {
+  border-top: solid 1px silver;
+  border-left: solid 1px silver;
+}
+
+.Join .personal_join th:first-child {
+  border-left: none;
+}
+
+.Join .personal_join tr:first-child th,
+.Join .personal_join tr:first-child td {
+  border-top: none;
+}
+
+.Join .personal_join th {
+  font-size: 13px;
+  text-align: center;
+  padding: 10px;
+}
+
+.Join .personal_join td {
+  padding-left: 10px;
+}
+
+.Join .personal_join label {
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+.Join .personal_join label input {
+  height: 25px;
+  /* vertical-align: center; */
+}
+
+.Join .personal_join input,
+.Join .personal_join select {
+  margin: 5px 0px;
+  box-sizing: border-box;
+  padding: 0px 5px;
+  height: 25px;
+  border: solid 1px gray;
+  border-radius: 5%;
+}
+
+.Join .personal_join input[type="text"],
+.Join .personal_join input[type="number"] {
+  width: 100px;
+
+}
+
+.Join .personal_join input[type="tel"] {
+  width: 50px;
+}
+
+
+.Join .personal_join input[type="password"],
+.Join .personal_join input[name="address"] {
+  border: solid 1px gray;
+  border-radius: 5%;
+  width: 200px;
+}
+
+.Join .input_address {
+  display: flex;
+}
+
+.Join .input_address input {
+  box-sizing: border-box;
+  margin: 5px;
+  margin-left: 0px;
+}
+
+.Join .inside_btn:hover {
+  background-color: silver;
+}
+
+.Join .agree_check {
+  line-height: 38px;
+}
+
+.Join input[type="radio"] {
+  height: 100%;
+  margin: 0;
+}
+
+
+.Join .join_btn {
+  display: flex;
+  justify-content: center;
+}
+
+.Join .out_btn2,
+.Join .out_btn3 {
+  height: 35px;
+  width: 150px;
+  font-weight: bold;
+  border: solid 1.5px black;
+  margin: 50px;
+}
+
+.Join .out_btn3 {
+  background-color: black;
+  color: white;
+}
+
+.Join .out_btn3:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.Join .input_warn {
+  color: red;
+  font-size: 12px;
+  margin: 10px 0 0 124px;
+}
+
+/* ======================================= */
+
+/* ================ */
+.Agree .path {
+  width: 1240px;
+  padding: 0;
+  display: flex;
+  color: #333;
+  font-size: 12px;
+  margin: 20px auto;
+  height: 30px;
+  line-height: 30px;
+  justify-content: end;
+}
+
+.Agree .path span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  white-space: nowrap;
+  text-indent: 100%;
+  display: none;
+}
+
+.Agree .path li {
+  float: left;
+  padding-left: 12px;
+  color: #333;
+}
+
+.Agree .path li a {
+  color: #333;
+}
+
+.Agree .title {
+  padding-top: 100px;
+  text-align: center;
+  color: #333;
+}
+
+.Agree .title h2 {
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 3px;
+}
+
+.Agree .title .txt_01 {
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  font-weight: 300;
+  padding-top: 7px;
+  padding-bottom: 20px;
+}
+
+
+
+
+/*------ 회원가입 페이지 시작------ */
+
+.Agree {
+  background-color: white;
+  /* min-height: 450px; */
+  width: 1240px;
+  margin: auto;
+}
+
+
+.Agree .join_header {
+  width: 80%;
+  margin: auto;
+}
+
+
+.Agree .join_header p {
+  text-align: center;
+  margin: 20px;
+  font-size: 15px;
+}
+
+
+.Agree .join_header h1 {
+  /* position: relative; */
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+.Agree .join_step {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+
+
+.Agree .join_step li {
+  /* position: absolute; */
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+}
+
+.Agree .join_step li:nth-of-type(2) {
+  font-weight: bold;
+  /* color: red; */
+}
+
+.Agree .step_img {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  /* text-align: center; */
+  /* color: black; */
+}
+
+
+.Agree .join_arr {
+  width: 15px;
+  height: 15px;
+  display: absolute;
+  margin: 13px;
+}
+
+/*----------여기서 부터는 약관 동의입니다.------------------*/
+
+.agree_total {
+  width: 80%;
+  margin: auto;
+}
+
+.agree_total h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.agree_mini {
+  margin: 60px 0px 20px 30px;
+  text-align: left;
+}
+
+
+.agree_text {
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+  margin: 0 0 0 25px;
+  padding: 30px;
+  overflow: auto;
+  height: 180px;
+  word-break: keep-all;
+  text-align: justify;
+}
+
+.agree_check {
+  text-align: left;
+}
+
+
+.Agree input[type="checkbox"] {
+  margin: 5px;
+  margin-left: 30px;
+  margin-top: 15px;
+  margin-right: 5px;
+  /* display: inline-block; */
+  display: left;
+}
+
+
+.Agree label {
+  /* display:inline-block; */
+  text-align: left;
+}
+
+
+.Agree .join_btn {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+.Agree .out_btn3 {
+  height: 35px;
+  width: 150px;
+  font-weight: bold;
+  border: solid 1.5px black;
+  margin: 50px;
+}
+
+.Agree .out_btn3 {
+  background-color: black;
+  color: white;
+}
+
+.Agree .out_btn3:hover {
+  background-color: whitesmoke;
+  color: black;
+}
