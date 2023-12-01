@@ -4,10 +4,10 @@ import React, { useState } from "react";
 
 // 배열 속성 writer 입력시 성만 따오기
 const lastName = (fullName) => {
-    if (fullName.length > 0) {
-        return fullName.charAt(0);
-    };
-    return;
+    //if (fullName.length() > 0) {
+    //    return fullName.charAt(0);
+   // };
+    return 'A';
 };
 
 function QnaListItem({ qnaList, filters }) {
