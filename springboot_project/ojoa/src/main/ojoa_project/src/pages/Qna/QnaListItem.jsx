@@ -53,6 +53,7 @@ function QnaListItem({ qnaList, filters }) {
         return true;
     });
 
+
     return (
         <tbody className='qna_ListItem_container'>
             {qnaList.map((item, i) => (

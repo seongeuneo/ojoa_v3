@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ojo.ojoa.DTO.CartDTO;
+import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.repository.CartRepository;
@@ -53,4 +55,10 @@ public class CartServiceImpl implements CartService {
 	return cartRepository.findCartProd();
 	   } 	
  	
+	// ** react selectAllList
+ 	@Override
+ 	public List<CartDTO> selectAllList() {
+ 		return cartRepository.findAllCartList();
+ 	}
+	
  } //class

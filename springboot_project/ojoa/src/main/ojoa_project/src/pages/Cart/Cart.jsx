@@ -4,7 +4,7 @@ import CartHeader from '../../pages/Cart/CartHeader';
 import CartList from '../../pages/Cart/CartList';
 import CartTotal from '../../pages/Cart/CartTotal';
 import { Link, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 
 
 const Cart = ({ cart, convertPrice }) => {
@@ -107,6 +107,18 @@ const Cart = ({ cart, convertPrice }) => {
     const handleCheckout = () => {
         navigate('/checkout')
     }
+
+    // Springboot 요청
+    useEffect(() => {
+        axios
+            .get("api/cart/allCartList")
+            .then((response) => {
+                setCartState(response.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
 
     return (
         <div className="Cart">

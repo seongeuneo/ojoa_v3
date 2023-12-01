@@ -35,10 +35,11 @@ public class QnaDTO {
 	@JsonProperty("date")
     private LocalDateTime qna_redate;
     
+	
+	
     public QnaDTO() {
     }
 
-//    	public QnaDTO(int qna_seq, String prod_mainimage, String prod_name, String qna_category, String qna_title, String qna_content, String id, LocalDateTime qna_redate) {
     public QnaDTO(int qna_seq, String prod_mainimage, String prod_name, String qna_category, String qna_title, String qna_content, String titleIcon, String id, LocalDateTime qna_redate) {
         this.qna_seq = qna_seq;
         this.prod_mainimage = prod_mainimage;

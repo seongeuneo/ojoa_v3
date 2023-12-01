@@ -25,7 +25,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/qna")
 public class QnaController {
    
-
 //   @CrossOrigin(origins="*")
 //   @GetMapping("/qnaList")
 //    public ResponseEntity<List<Qna>> productList(Model model) {

@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojo.ojoa.DTO.CartDTO;
+import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
 
@@ -27,6 +29,9 @@ public interface CartService {
 	
 // ** Join (장바구니 + 상품)
 	 List<CartProdDTO> findCartProd();
+	 
+	// ** react selectAllList
+	List<CartDTO> selectAllList();
 }
 	
 	

@@ -35,6 +35,21 @@ public class Cart {
 	   //@Column(nullable = false, columnDefinition = "int default 1")
 	   private int quantity;
        
+       @Column(name="shipping_name")
+       private String shipping_name;
+       
+       @Column(name="shipping_zipcode")
+       private String shipping_zipcode;
+       
+       @Column(name="shipping_address")
+       private String shipping_address;
+       
+       @Column(name="shipping_addressdetail")
+       private String shipping_addressdetail;
+       
+       @Column(name="shipping_phone")
+       private String shipping_phone;
+       
       //private String prod_mainimage;
 
 }
