@@ -58,10 +58,5 @@ function payNow(id) {
             alert('상품을 관심목록에 추가하는데 문제가 발생했습니다.');
         });
 }
-            console.error('결제 중 오류 발생:', error);
-            alert('상품을 결제하는데 문제가 발생했습니다.');
-        });
-}
-
 
 

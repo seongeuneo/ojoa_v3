@@ -3,6 +3,9 @@ package com.ojo.ojoa.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ojo.ojoa.domain.CartProdDTO;
+import com.ojo.ojoa.domain.WishDTO;
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.repository.CartRepository;
@@ -47,6 +50,12 @@ public class WishServiceImpl implements WishService {
  		wishRepository.deleteById(wish_num);
  		return wish_num ; // 삭제후 key return
  	}
+ 	
+ // ** (장바구니+상품) 테이블 Join 
+ 	@Override
+ 	public List<WishDTO> findWishProd(){
+ 	return wishRepository.findWishProd();
+ 	   } 
  	
  	
  } //class

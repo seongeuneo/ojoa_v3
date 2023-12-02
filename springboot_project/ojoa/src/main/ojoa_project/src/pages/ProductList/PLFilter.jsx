@@ -15,7 +15,6 @@ function PLFilter({ numOfList, setSortKey }) {
                     <li onClick={() => handleSortClick("상품명")}>상품명</li>
                     <li onClick={() => handleSortClick("낮은가격")}>낮은가격</li>
                     <li onClick={() => handleSortClick("높은가격")}>높은가격</li>
-                    <li onClick={() => handleSortClick("제조사")}>제조사</li>
                     <li onClick={() => handleSortClick("사용후기")}>사용후기</li>
                 </ul>
             </div>
