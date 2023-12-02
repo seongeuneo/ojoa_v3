@@ -91,6 +91,11 @@ public class MemberController {
 		else return "member/memberDetail";
 	} //memberDetail
 
+	//**************** 리액트 연결시 필요 테스트
+	
+
+	// ******************
+	
 	// ** Member Login & Logout
 	// => LoginForm : Get
 	// => 계층적 url 적용 

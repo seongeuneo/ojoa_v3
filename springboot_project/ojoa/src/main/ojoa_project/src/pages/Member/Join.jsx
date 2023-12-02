@@ -1,6 +1,7 @@
 import './Join.css';
 import { Link } from 'react-router-dom';
 import React, { useState, useRef } from 'react';
+import { ownerDocument } from '@mui/material';
 
 const Join = () => {
 
@@ -14,19 +15,16 @@ const Join = () => {
 
     // Ref 객체 추가
     const idInputRef = useRef(null); // 아이디 입력 필드의 Ref 객체
-    const idckbtnInputRef = useRef(null); // 아이디 중복확인 버튼의 Ref 객체
+    // const idckbtnInputRef = useRef(null); // 아이디 중복확인 버튼의 Ref 객체
     const passwordInputRef = useRef(null);
-    const pwdckInputRef = useRef(null);
-    const postcodeInputRef = useRef(null);
-    const postbtnInputRef = useRef(null);
+    const password2InputRef = useRef(null);
+    const zipcodeInputRef = useRef(null);
     const addressInputRef = useRef(null);
     const addressdetailInputRef = useRef(null);
-    const cell1InputRef = useRef(null);
-    const cell2InputRef = useRef(null);
-    const emailidInputRef = useRef(null);
-    const emailInputRef = useRef(null);
-
-
+    const phone2InputRef = useRef(null);
+    const phone3InputRef = useRef(null);
+    const email1InputRef = useRef(null);
+    const email2InputRef = useRef(null);
 
     // 이름
     const [name, setName] = useState(""); // 이름 상태와 변경 함수
@@ -44,9 +42,6 @@ const Join = () => {
         }
     };
 
-
-
-
     // 아이디 -> 중복확인은 아니고 그냥 아이디값 입력잘했는지
     const [id, setId] = useState("");  // 아이디 상태와 변경 함수
     const [idError, setIdError] = useState(""); // 이름 에러 메세지
@@ -56,15 +51,15 @@ const Join = () => {
         setId(newId);
         console.log(newId);
 
-        // 아이디 입력시 5자~15 입력했는지
-        if (newId.length < 5 || newId.length > 15) {
-            setIdError("아이디는 5~15자 이내이여야 합니다.");
+        // 아이디 입력시 4자~10 입력했는지
+        if (newId.length < 4 || newId.length > 10) {
+            setIdError("아이디는 4~10자 입니다.");
+        } else if (!/^[a-zA-Z0-9]+$/.test(newId)) { // 영문과 숫자만 입력되었는지 확인하는 정규식
+            setIdError("id 는 영문과 숫자만 입력하세요.");
         } else {
             setIdError("");
         }
     };
-
-
 
 
     // 비밀번호
@@ -76,61 +71,149 @@ const Join = () => {
         setPassword(newPassword);
 
         // 비밀번호 입력값 
-        const isValidPassword = newPassword.length >= 5 &&
-            newPassword.length <= 15 &&
+        const isValidPassword = newPassword.length < 4 &&
+            newPassword.length > 10 &&
             /[!@#$%^&*()_+{}\[\]:;<>,.?~\-]/.test(newPassword);
 
         if (!isValidPassword) {
-            setPasswordError("비밀번호는 5~15자 이내이며, 최소 1개의 특수문자를 포함해야 합니다.");
+            setPasswordError("비밀번호는 4~10자 이내이며, 최소 1개의 특수문자를 포함해야 합니다.");
         } else {
             setPasswordError("");
         }
     };
 
     // 비밀번호 확인
-    const [pwdck, setPwdck] = useState("");
-    const [pwdckError, setPwdckError] = useState(""); // 비밀번호 확인 오류 메세지
+    const [password2, setPassword2] = useState("");
+    const [password2Error, setPassword2Error] = useState(""); // 비밀번호 확인 오류 메세지
 
-    const handlePwdckChange = (event) => {
-        const newPwdck = event.target.value;
-        setPwdck(newPwdck);
+    const handlePassword2Change = (event) => {
+        const newPassword2 = event.target.value;
+        setPassword2(newPassword2);
 
         // 비밀번호 확인 입력값 비교
-        if (newPwdck !== password) {
-            setPwdckError("비밀번호가 일치하지 않습니다.");
+        if (newPassword2 !== password) {
+            setPassword2Error("비밀번호가 일치하지 않습니다.");
         } else {
-            setPwdckError("");
+            setPassword2Error("");
         }
     };
 
 
     // 우편번호 확인
-    const [postcode, setPostcode] = useState("");
-    const [postcodeError, setPostcodeError] = useState("");
-    const handlePostcodeChange = (event) => {
-        const newPostcode = event.target.value;
+    const [zipcode, setZipcode] = useState("");
+    const [zipcodeError, setZipcodeError] = useState("");
+    const handleZipcodeChange = (event) => {
+        const newZipcode = event.target.value;
 
         // 우편번호 입력값이 숫자와 "-"만으로 구성되어 있는지 확인
-        if (!/^[0-9-]*$/.test(newPostcode)) {
-            setPostcodeError("우편번호는 숫자와 기호 '-'만 가능합니다.");
+        if (!/^[0-9-]*$/.test(newZipcode)) {
+            setZipcodeError("우편번호는 숫자와 기호 '-'만 가능합니다.");
         } else {
             // 숫자와 "-"만으로 구성된 경우에만 우편번호 변경 및 오류 초기화
-            setPostcode(newPostcode);
-            setPostcodeError("");
+            setZipcode(newZipcode);
+            setZipcodeError("");
         }
     };
 
+    // 주소 확인
+    const [address, setAddress] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const handleAddressChange = (event) => {
+        const newAddress = event.target.value;
 
-
-    // 취소 버튼 클릭 시 -> 입력된거 초기화
-    const handleCancelClick = () => {
-        setName("");
-        setId("");
-        setPassword("");
-        setPwdck("");
-
+        // 주소 입력값이 4글자 이상으로 구성되엉 있는지 확인
+        if (newAddress.length < 4) {
+            setAddressError("주소는 4글자 이상이어야 합니다.");
+        } else {
+            setAddressError("");
+        }
     };
 
+    // 상세주소 확인
+    const [addressdetail, setAddressdetail] = useState("");
+    const [addressdetailError, setAddressdetailError] = useState("");
+    const handleAddressdetailChange = (event) => {
+        const newAddressdetail = event.target.value;
+
+        // 상세주소 입력값이 2글자 이상으로 구성되엉 있는지 확인
+        if (newAddressdetail.length < 2) {
+            setAddressdetailError("상세주소는 2글자 이상이어야 합니다.");
+        } else {
+            setAddressdetailError("");
+        }
+    };
+
+    // 연락처2 확인
+    const [phone2, setPhone2] = useState("");
+    const [phone2Error, setPhone2Error] = useState("");
+    const handlePhone2Change = (event) => {
+        const newPhone2 = event.target.value;
+
+        // 연락처2 입력값이 숫자4자리만으로 구성되어 있는지 확인
+        if (!/^[0-9]*$/.test(newPhone2)) {
+            setPhone2Error("연락처 중간번호는 숫자 4개만 가능합니다.");
+        } else {
+            // 숫자만으로 구성된 경우에만 중간번호 변경 및 오류 초기화
+            setPhone2(newPhone2);
+            setPhone2Error("");
+        }
+    };
+
+    // 연락처3 확인
+    const [phone3, setPhone3] = useState("");
+    const [phone3Error, setPhone3Error] = useState("");
+    const handlePhone3Change = (event) => {
+        const newPhone3 = event.target.value;
+
+        // 연락처3 입력값이 숫자4자리만으로 구성되어 있는지 확인
+        if (!/^\d{4}$/.test(newPhone3)) {
+            setPhone3Error("연락처 끝번호는 숫자 4자리로 입력해주세요.");
+        } else {
+            // 숫자 4자리로 구성된 경우에만 연락처 끝번호 변경 및 오류 초기화
+            setPhone3(newPhone3);
+            setPhone3Error("");
+        }
+    };
+
+    // 이메일1 확인
+    const [email1, setEmail1] = useState("");
+    const [email1Error, setEmail1Error] = useState("");
+    const handleEmail1Change = (event) => {
+        const newEmail1 = event.target.value;
+
+        // 이메일1 입력값이 알파벳과 숫자 만으로 구성되어 있는지 확인
+        if (!/^[a-zA-Z0-9]*$/.test(newEmail1)) {
+            setEmail1Error("연락처 끝번호는 알파벳과 숫자로만 입력 가능합니다.");
+        } else {
+            // 알파벳과 숫자로만 구성된 경우에만 연락처 끝번호 변경 및 오류 초기화
+            setEmail1(newEmail1);
+            setEmail1Error("");
+        }
+    };
+
+    // 이메일2 확인
+    const [email2, setEmail2] = useState("");
+    const [email2Error, setEmail2Error] = useState("");
+    const handleEmail2Change = (event) => {
+        const newEmail2 = event.target.value;
+
+        // 이메일2 입력값이 최소 3글자 이상의 알파벳과 숫자, 그리고 점('.')으로만 구성되어 있는지 확인
+        if (!/^[a-zA-Z0-9.]{3,}$/.test(newEmail2)) {
+            setEmail2Error("이메일은 최소 3글자의 알파벳, 숫자, '.'으로만 입력 가능합니다.");
+        } else {
+            // 알파벳과 숫자, 그리고 점('.')으로만 구성된 경우에만 이메일2 변경 및 오류 초기화
+            setEmail2(newEmail2);
+            setEmail2Error("");
+        }
+    };
+
+    // 취소 버튼 클릭 시 -> 입력된거 초기화
+    // const handleCancelClick = () => {
+    //     setName("");
+    //     setId("");
+    //     setPassword("");
+    //     setPassword2("");
+    // };
 
     return (
         <div className="Join">
@@ -160,7 +243,6 @@ const Join = () => {
                             <input type="text"
                                 name="name"
                                 minlength="2"
-                                maxlength="7"
                                 id="name"
                                 value={name}
                                 onChange={handleNameChange}
@@ -179,20 +261,21 @@ const Join = () => {
                         <td>
                             <input type="text"
                                 name="id"
-                                minlength="5"
-                                maxlength="15"
-                                id="userid"
+                                minlength="4"
+                                maxlength="10"
+                                id="id"
                                 value={id}
                                 onChange={handleidChange}
                                 ref={idInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, idckbtnInputRef)} // 다음 입력창의 Ref 객체 전달
+                                onKeyDown={(e) => handleKeyDown(e, passwordInputRef)} // 다음 입력창의 Ref 객체 전달
                                 required />&nbsp;
                             <input className="inside_btn"
                                 type="submit"
                                 name="overlap"
+                                id="idDup"
                                 value="중복확인"
-                                ref={idckbtnInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, passwordInputRef)}
+                            // ref={idDupCheck()} // Ref 객체 연결
+                            // onKeyDown={(e) => handleKeyDown(e, password2InputRef)}
                             />
                             {idError && (
                                 <span className="input_error">{idError}</span>)}
@@ -205,14 +288,14 @@ const Join = () => {
                         </th>
                         <td>
                             <input type="password"
-                                name="pwd"
-                                minlength="5"
-                                maxlength="15"
-                                id="pw"
+                                name="password"
+                                minlength="4"
+                                maxlength="10"
+                                id="password"
                                 value={password}
                                 onChange={handlePasswordChange}
                                 ref={passwordInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, pwdckInputRef)} // 다음 입력창의 Ref 객체 전달
+                                onKeyDown={(e) => handleKeyDown(e, password2InputRef)} // 다음 입력창의 Ref 객체 전달
                                 required
                             />
                             {passwordError && (
@@ -222,69 +305,67 @@ const Join = () => {
 
                     <tr>
                         <th>
-                            <label for="pwdcheck">비밀번호 확인</label>
+                            <label for="passwordcheck">비밀번호 확인</label>
                         </th>
                         <td>
                             <input type="password"
-                                name="pwdcheck"
-                                maxlength="15"
-                                id="pwdcheck"
-                                value={pwdck}
-                                onChange={handlePwdckChange}
-                                ref={pwdckInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, postcodeInputRef)} // 다음 입력창의 Ref 객체 전달
+                                name="password2"
+                                maxlength="10"
+                                id="password2"
+                                value={password2}
+                                onChange={handlePassword2Change}
+                                ref={password2InputRef} // Ref 객체 연결
+                                onKeyDown={(e) => handleKeyDown(e, zipcodeInputRef)} // 다음 입력창의 Ref 객체 전달
                                 required />
-                            {pwdckError && (
-                                <span className="input_error">{pwdckError}</span>)}
+                            {password2Error && (
+                                <span className="input_error">{password2Error}</span>)}
                         </td>
                     </tr>
 
                     <tr>
                         <th>
-                            <label for="address"><span>&#42;</span>주소</label>
+                            <label for="zipcode"><span>&#42;</span>주소</label>
                         </th>
                         <td>
-                            <div className="input_address">
+                            <div className="input_zipcode">
                                 <input type="text"
-                                    name="post_code"
-                                    maxlength="7"
+                                    name="zipcode"
+                                    minlength="2"
                                     placeholder="우편번호입력"
-                                    id="address"
-                                    value={postcode}
-                                    onChange={handlePostcodeChange}
-                                    ref={postcodeInputRef} // Ref 객체 연결
-                                    onKeyDown={(e) => handleKeyDown(e, postbtnInputRef)}
-                                    required />
-
-                                <form action="https://www.epost.kr/search.RetrieveIntegrationNewZipCdList.comm"
-                                    target="_blank">
-
-                                    <input
-                                        className="inside_btn"
-                                        type="submit"
-                                        name="find_postcode"
-                                        value="우편번호찾기"
-                                        ref={postbtnInputRef}
-                                        onKeyDown={(e) => handleKeyDown(e, addressInputRef)} />
-                                    {postcodeError && (
-                                        <span className="input_error">{postcodeError}</span>
-                                    )}
-
-
-                                </form>
+                                    id="zipcode"
+                                    value={zipcode}
+                                    onChange={handleZipcodeChange}
+                                    ref={zipcodeInputRef} // Ref 객체 연결
+                                    onKeyDown={(e) => handleKeyDown(e, addressInputRef)}
+                                    required />&nbsp;
+                                <input
+                                    className="inside_btn"
+                                    type="submit"
+                                    name="find_postcode"
+                                    value="우편번호찾기"
+                                // ref={postbtnInputRef}
+                                />{zipcodeError && (
+                                    <span className="input_error">{zipcodeError}</span>)}
                             </div>
                             <div>
                                 <input type="text"
                                     name="address"
+                                    id="address"
                                     // value={address}
                                     ref={addressInputRef} // Ref 객체 연결
                                     onKeyDown={(e) => handleKeyDown(e, addressdetailInputRef)}
                                     required />&nbsp;
                                 <input type="text"
-                                    name="address_detail"
+                                    name="addressdetail"
+                                    id="addressdetail"
+                                    onChange={handleAddressdetailChange}
                                     placeholder="상세주소"
                                     ref={addressdetailInputRef} // Ref 객체 연결
-                                    onKeyDown={(e) => handleKeyDown(e, cell1InputRef)} />
+                                    onKeyDown={(e) => handleKeyDown(e, phone2InputRef)} />
+                                {addressError && (
+                                    <span className="input_error">{addressError}</span>)}
+                                {addressdetailError && (
+                                    <span className="input_error">{addressdetailError}</span>)}
                             </div>
                         </td>
                     </tr>
@@ -296,49 +377,64 @@ const Join = () => {
                         <td>
                             <div>
                                 <input type="tel"
-                                    name="first_phone_number"
+                                    name="phone1"
                                     value="010"
                                     size="1"
+                                    id="phone1"
                                     readonly />
                                 &nbsp;&ndash;&nbsp;
 
                                 <input type="tel"
-                                    name="second_phone_number"
+                                    name="phone2"
                                     minlength="3"
                                     maxlength="4"
                                     size="1"
-                                    id="cellphone"
-                                    ref={cell1InputRef} // Ref 객체 연결
-                                    onKeyDown={(e) => handleKeyDown(e, cell2InputRef)}
+                                    id="phone2"
+                                    onChange={handlePhone2Change}
+                                    ref={phone2InputRef} // Ref 객체 연결
+                                    onKeyDown={(e) => handleKeyDown(e, phone3InputRef)}
                                     required />
                                 &nbsp;&ndash;&nbsp;
 
                                 <input type="tel"
-                                    name="last_phone_number"
+                                    name="phone3"
                                     minlength="4"
                                     maxlength="4"
                                     size="1"
-                                    ref={cell2InputRef} // Ref 객체 연결
-                                    onKeyDown={(e) => handleKeyDown(e, emailidInputRef)}
+                                    id="phone3"
+                                    onChange={handlePhone3Change}
+                                    ref={phone3InputRef} // Ref 객체 연결
+                                    onKeyDown={(e) => handleKeyDown(e, email1InputRef)}
                                     required />
                             </div>
+                            {phone2Error && (
+                                <span className="input_error">{phone2Error}</span>)}
+                            {phone3Error && (
+                                <span className="input_error">{phone3Error}</span>)}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            <label for="emailid"><span>&#42;</span>이메일</label>
+                            <label for="email1"><span>&#42;</span>이메일</label>
                         </th>
                         <td>
                             <input type="text"
-                                name="emailid"
-                                id="emailid"
-                                ref={emailidInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, emailInputRef)} />
+                                name="email1"
+                                id="email1"
+                                onChange={handleEmail1Change}
+                                ref={email1InputRef} // Ref 객체 연결
+                                onKeyDown={(e) => handleKeyDown(e, email2InputRef)} />
                             &nbsp;@&nbsp;
                             <input type="text"
-                                name="mail"
+                                name="email2"
+                                id="email2"
+                                onChange={handleEmail2Change}
                                 placeholder="직접 입력"
-                                ref={emailInputRef} />
+                                ref={email2InputRef} />
+                            {email1Error && (
+                                <span className="input_error">{email1Error}</span>)}
+                            {email2Error && (
+                                <span className="input_error">{email2Error}</span>)}
                         </td>
                     </tr>
 
@@ -636,9 +732,6 @@ const Join = () => {
 
                     <div className="join_btn">
                         <input className="out_btn3" type="submit" name="finish" value="회원가입 완료" />
-                        <div className="join_btn">
-                            <input className="out_btn2" type="reset" name="cancel" value="취소하기" onClick={handleCancelClick} />
-                        </div>
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
 import '../Member/Login.css';
-import React, { useState } from 'react';
+import React, { useMemo, useCallback, useReducer, useRef, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // axios 라이브러리 import
 import FindIdModal from './FindIdModal/FindIdModal';
@@ -8,9 +8,10 @@ import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
 
 
 const Login = () => {
+
     const [findIdModalVisible, setFindIdModalVisible] = useState(false);
     const [findPasswordModalVisible, setFindPasswordModalVisible] = useState(false);
-    const [username, setUsername] = useState(''); // 사용자명 상태값 추가
+    const [id, setId] = useState(''); // 사용자명 상태값 추가
     const [password, setPassword] = useState(''); // 비밀번호 상태값 추가
 
     function showFindIdModal() {
@@ -22,8 +23,8 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/member/login', {
-                id: username,
+            const response = await axios.post('http://localhost:8080/member/loginForm', {
+                id: id,
                 password: password
             });
 
@@ -34,6 +35,18 @@ const Login = () => {
             console.error('로그인 에러:', error);
         }
     };
+
+    // Springboot 요청
+    useEffect(() => {
+        axios
+            .get("member/loginForm")
+            .then((response) => {
+                setId(response.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    }, []);
 
     // 클릭버튼 handle
     // const handleNaverClick = () => {
@@ -76,8 +89,8 @@ const Login = () => {
                                             name="userID"
                                             placeholder="아이디"
                                             minLength="3"
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)} // 아이디 입력 값 업데이트
+                                            value={id}
+                                            onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
                                         />
                                     </label>
                                     <label className="login_password">
@@ -88,6 +101,7 @@ const Login = () => {
                                             minLength="3"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
+                                            autocomplete="current-password"
                                         />
                                     </label>
                                     <div className="login_btn">
