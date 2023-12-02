@@ -24,6 +24,5 @@ public interface QnaService {
 	// ** delete
 	int delete(int qna_seq);
 	
-	// ** react selectAllList
-	List<QnaDTO> selectAllList();
+	List<QnaDTO.QnaMainListDTO> selectAllList(String board_category, String search_date, String search_key, String search_query);
 }

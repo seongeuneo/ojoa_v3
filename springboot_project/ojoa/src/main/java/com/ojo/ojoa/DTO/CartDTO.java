@@ -13,7 +13,7 @@ public class CartDTO {
 	@JsonProperty("id")
 	private int cart_num;
 	
-	@JsonProperty("userid")
+	@JsonProperty("userId")
 	private String id;
 	
 	@JsonProperty("prod_num")
@@ -38,7 +38,7 @@ public class CartDTO {
 	//	  select 구문의 순서와 동일하게 모든 컬럼을 초기화하는 생성자 필요함. 
 	
 	public CartDTO(int cart_num, String id, int prod_num, int quantity,
-						String prod_mainimage,String prod_name, int prod_discount, int prod_price1) {
+						String prod_mainimage, String prod_name, int prod_discount, int prod_price1) {
 					 
 		super();
 		
@@ -52,7 +52,5 @@ public class CartDTO {
 		this.prod_price1 = prod_price1;
 	
 	}
-	
-	
-	
+			
 }

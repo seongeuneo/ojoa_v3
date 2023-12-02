@@ -14,20 +14,20 @@ function QnaModal({ closeModal }) {
         setContent(e.target.value);
     }; //onChangeContent
 
-//여기서부터 원희코드
- const onSubmit = async (e) => {
-     
-     try {
-         const formData = new FormData(document.getElementById('qnaform'));
-             // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
-             
-             // 다른 폼 필드를 여기에 추가하세요
-            
-            
+    //여기서부터 원희코드
+    const onSubmit = async (e) => {
+
+        try {
+            const formData = new FormData(document.getElementById('qnaform'));
+            // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
+
+            // 다른 폼 필드를 여기에 추가하세요
+
+
             // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
-            const response = await axios.post("/api/qna/saveQna", formData, 
-                            {headers:{"Content-Type":"application/json"}});
-            
+            const response = await axios.post("/api/qna/saveQna", formData,
+                { headers: { "Content-Type": "application/json" } });
+
             // 성공/실패에 따라 처리합니다.
             console.log("데이터 저장됨:", response.data);
             closeModal(false);
@@ -37,15 +37,15 @@ function QnaModal({ closeModal }) {
             // 선택적으로 사용자에게 에러 메시지 표시 가능
         }
         e.preventDefault();
-};
+    };
 
 
-//여기서부터가 희상언니 원래코드
+    //여기서부터가 희상언니 원래코드
     // const onSubmit = (e) => {
     //     e.preventDefault();
     //     closeModal(false);
     // };
-// 여기까지가 희상언니코드
+    // 여기까지가 희상언니코드
 
     // const onKeyDown = (e) => {
     //     if (e.keyCode === 13) { onSubmit(); }
@@ -93,28 +93,28 @@ function QnaModal({ closeModal }) {
                                 </tr>
 
                                 <tr>
-                                    <th scope="row"><label htmlFor="board_category1">구  분</label></th>
+                                    <th scope="row"><label htmlFor="board_category1">카테고리</label></th>
                                     <td className="qna_writetitle">
                                         <select name="qna_category" id="board_category1">
                                             <option value="1">전체</option>
-                                            <option value="2">상품문의</option>
-                                            <option value="3">배송문의</option>
-                                            <option value="4">주문/결제</option>
-                                            <option value="5">취소문의</option>
-                                            <option value="6">반품/교환</option>
-                                            <option value="7">환불문의</option>
-                                            <option value="8">재입고문의</option>
-                                            <option value="9">기타문의</option>
-                                            <option value="10"></option>
+                                            <option value="상품문의">상품문의</option>
+                                            <option value="배송문의">배송문의</option>
+                                            <option value="주문/결제">주문/결제</option>
+                                            <option value="취소문의">취소문의</option>
+                                            <option value="반품/교환">반품/교환</option>
+                                            <option value="환불문의">환불문의</option>
+                                            <option value="재입고문의">재입고문의</option>
+                                            <option value="기타문의">기타문의</option>
+                                            <option value=" "></option>
                                         </select>
                                         <select name="board_category" id="board_category2">
                                             <option>제품목록</option>
                                             <option value="1">의자</option>
-                                            {/* {mockList.map((item) => (
+                                            {mockList.map((item) => (
                                                 <React.Fragment key={item.id}>
                                                     <option value={item.imgNo}>{item.productName}</option>
                                                 </React.Fragment>
-                                            ))} */}
+                                            ))}
                                         </select>
                                     </td>
                                 </tr>
