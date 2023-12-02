@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ojo.ojoa.DTO.CartDTO;
-import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
 
