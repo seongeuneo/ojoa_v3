@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.ojo.ojoa.DTO.CartDTO;
-import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.repository.CartRepository;
@@ -18,8 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor 
 public class CartServiceImpl implements CartService {
 
-    private final CartRepository cartRepository;
-
+	private final CartRepository cartRepository;
+	
  // ** selectList
  	@Override
  	public List<Cart> selectList() {
