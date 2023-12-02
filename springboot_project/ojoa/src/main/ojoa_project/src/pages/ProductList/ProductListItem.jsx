@@ -42,6 +42,9 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
     };
 
 
+
+    
+
     // 장바구니 기능
     // 장바구니에 물건
     const handleAddToCart = () => {
@@ -64,6 +67,9 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
         handleCartClick();
     }
 
+//=================== 여기서부터 워니의 코드
+
+//============== 여기까지=================
 
     return (
         <div className="ProductListItem" onClick={onSelect}>
