@@ -13,7 +13,7 @@ public class CartDTO {
 	@JsonProperty("id")
 	private int cart_num;
 	
-	@JsonProperty("userid")
+	@JsonProperty("userId")
 	private String id;
 	
 	@JsonProperty("prod_num")

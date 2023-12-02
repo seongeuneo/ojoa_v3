@@ -13,10 +13,10 @@ import com.ojo.ojoa.entity.Qna;
 
 @Repository
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
-	List<Qna> findAll();
 	
-	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.id, q.qna_redate) FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num")
-    List<QnaDTO.QnaMainListDTO> findAllQnaList();
+	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.id, q.qna_redate) FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num ORDER BY q.qna_redate DESC")
+	List<QnaDTO.QnaMainListDTO> findAllQnaList();
+	
 	
 	//Filter 조건
 	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.id, q.qna_redate) "
@@ -35,12 +35,14 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 			//search_key = 'writer_name'이고, q.id가 주어진 search_query를 포함하는지 확인
 			+ "       (:search_key = 'product' AND p.prod_name LIKE %:search_query%)))")
 			//search_key = 'product'이고, p.prod_name이 주어진 search_query를 포함하는지 확인
-			
-		
-	List<QnaDTO.QnaMainListDTO> findConditionQnaList(@Param("board_category") String board_category,
+	List<QnaDTO.QnaMainListDTO> findConditionQnaList(
+			@Param("board_category") String board_category,
 	    	@Param("search_date") LocalDateTime search_date,
    		    @Param("search_key") String search_key,
    		    @Param("search_query") String search_query);
+	
+
+
 	
 } //class
 

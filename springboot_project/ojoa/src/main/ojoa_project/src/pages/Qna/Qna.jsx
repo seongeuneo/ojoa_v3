@@ -117,7 +117,7 @@ function Qna() {
     // Springboot 요청
     useEffect(() => {
         axios
-            .get("api/qna/allQnaList")
+            .get("/api/qna/allQnaList")
             .then((response) => {
                 setQnaList(response.data);
             })

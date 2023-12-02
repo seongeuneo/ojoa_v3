@@ -1,6 +1,5 @@
 package com.ojo.ojoa.controller;
 
-
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @AllArgsConstructor
 @Controller
 @Log4j2
-@RequestMapping("/qna")
+@RequestMapping("qna") 
 public class QnaController {
    
 //   @CrossOrigin(origins="*")
@@ -44,7 +43,7 @@ public class QnaController {
     
     // ** 새글등록: Insert 
     @GetMapping("/qnaInsert")
-    public void qnaInsert(Model model) {
+    public void qnaInsert(Model model) { 
        model.addAttribute("qna", qnaService.selectList());
     } // qnaInsert
   
@@ -52,7 +51,7 @@ public class QnaController {
    @PostMapping(value="/qnaInsert")
    public String qnaInsert(HttpServletRequest request,
          Qna entity, Model model) throws IOException  {
-      String uri = "qna/qnaInsert";
+      String uri = "redirect:/qna/qnaList";
    
       // 2. Service 처리
       try {
