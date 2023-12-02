@@ -29,7 +29,7 @@ public class Wish {
 	private String id;
 	
 	@Column(name="prod_num")
-	private String prod_num;  // FK for product(prodnum)
+	private int prod_num;  // FK for product(prodnum)
 	
 	
 	

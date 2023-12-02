@@ -20,6 +20,8 @@
 		<th>상품 인덱스</th>
 		<th>로그인 아이디</th>
 		<th>상품 번호</th>
+		<th>상품사진</th>
+		<th>상품이름</th>
 		<th>관심상품 제거</th>
 	</tr>
 
@@ -29,6 +31,8 @@
 					<td>${s.wish_num}</a></td>
 					<td>${s.id}</td>
 					<td>${s.prod_num}</td>
+					 <td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
+					<td>${s.prod_name}</td>
 					<td align="center"><a href="wdelete?wish_num=${s.wish_num}">삭제</a></td>
 				</tr>
 			</c:forEach>

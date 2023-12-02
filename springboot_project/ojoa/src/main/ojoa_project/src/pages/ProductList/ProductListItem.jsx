@@ -16,13 +16,24 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
     const [isClicked, setIsClicked] = useState(false); // 클릭 여부를 state로 관리
 
     const handleClick = () => {
+        // 관심상품 이미지 클릭 시 실행되는 함수
         if (isClicked) {
             setImageSrc("/images/emptyheart.png");
-            setIsClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
+            setIsClicked(false);
         } else {
             setImageSrc("/images/fullheart.png");
-            setIsClicked(true); // true일 땐 변경될 이미지 src
-            alert("해당 상품이 관심상품에 추가되었습니다.")
+            setIsClicked(true);
+
+            // 관심상품을 서버에 추가하는 요청 (예시 URL은 '/addWish'로 가정합니다)
+            axios.post('/wish/addWish', { prod_num: content.prod_num })
+                .then(response => {
+                    // 성공적으로 추가된 경우에 대한 로직을 작성할 수 있습니다.
+                    alert("해당 상품이 관심상품에 추가되었습니다.");
+                })
+                .catch(error => {
+                    // 오류 발생 시 처리할 로직을 작성할 수 있습니다.
+                    console.error('관심상품 추가 중 오류:', error);
+                });
         }
     };
 
@@ -88,7 +99,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                                 <a className="pd_cart">
                                     <img src={cartSrc}
                                         onClick={handleAddToCartAndhandleCartClick}
-                                        alt="관심상품"
+                                        alt="장바구니"
                                     />
                                 </a>
                                 <a className="pd_heart">
@@ -111,9 +122,9 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                         pathname: `/ProductDetail/${content.prod_num}`,
                         state: { productData: content }
                     }}>
-                        {/* {productPrice}원
-                        <span> {content.productPromotion}%</span> */}
-                        </Link></a></li>
+                        {content.prod_price1}원
+                        <span> {content.prod_discount}%</span>
+                    </Link></a></li>
                     <li className="pl_c"><a><Link to={{
                         key: content.prod_num,
                         pathname: `/ProductDetail/${content.prod_num}`,

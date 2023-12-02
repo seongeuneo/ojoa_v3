@@ -5,51 +5,17 @@ import Pagination from "../../components/Pagination/Pagination";
 import PLFilter from "./PLFilter";
 import { Link } from "react-router-dom";
 import mockList from '../../data/ItemsData'
-import axios from "axios";
+import { useProductList } from './useProductList';
+import { useSortProducts } from './useSortProducts';
 import Modal from 'react-modal';
 import { parse } from "qs";
 // import AddCart from './Modal/AddCart';
 
 
-
-
-function sortProducts(products, sortKey) {
-    switch (sortKey) {
-        case "신상품":
-            return products.slice().sort((a, b) => b.id - a.id);
-        case "상품명":
-            return products.slice().sort((a, b) => a.productName.localeCompare(b.productName));
-        case "낮은가격":
-            return products.slice().sort((a, b) => parseFloat(a.productPriceFormatted.replace(/,/g, "")) - parseFloat(b.productPriceFormatted.replace(/,/g, "")));
-        case "높은가격":
-            return products.slice().sort((a, b) => parseFloat(b.productPriceFormatted.replace(/,/g, "")) - parseFloat(a.productPriceFormatted.replace(/,/g, "")));
-        case "사용후기":
-            return products.slice().sort((a, b) => parseInt(b.productReview) - parseInt(a.productReview));
-        case "Best": // 새로 추가한 BEST 카테고리 정렬 (별점높은순)
-            return products.slice().sort((a, b) => parseFloat(b.productGrade) - parseFloat(a.productGrade));
-        case "New": // 새로 추가한 New 카테고리 정렬 (각 타입별 id의 숫자가 높은 순으로 - 2개)
-            return products.slice().sort((a, b) => parseFloat(b.productGrade) - parseFloat(a.productGrade));
-        default:
-            return products.slice().sort((a, b) => a.id - b.id);
-    }
-}
-
-
 //카테고리 : 의자
 function Chair({ cart, setCart, handleCart }) {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const chair_filter = data.filter((item) => item.prod_kind === '의자');
 
@@ -58,7 +24,7 @@ function Chair({ cart, setCart, handleCart }) {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(chair_filter, sortKey);
+    const sortedList = useSortProducts(chair_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -102,18 +68,7 @@ function Chair({ cart, setCart, handleCart }) {
 const Bed = ({ cart, setCart, handleCart }) => {
 
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const bed_filter = data.filter((item) => item.prod_kind === '침대');
 
@@ -122,7 +77,7 @@ const Bed = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(bed_filter, sortKey);
+    const sortedList = useSortProducts(bed_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -165,18 +120,7 @@ const Bed = ({ cart, setCart, handleCart }) => {
 
 const Sofa = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const sofa_filter = data.filter((item) => item.prod_kind === '소파');
 
@@ -185,7 +129,7 @@ const Sofa = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다
 
-    const sortedList = sortProducts(sofa_filter, sortKey);
+    const sortedList = useSortProducts(sofa_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -228,18 +172,7 @@ const Sofa = ({ cart, setCart, handleCart }) => {
 
 const Bookshelf = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const bookshelf_filter = data.filter((item) => item.prod_kind === '책장');
 
@@ -248,7 +181,7 @@ const Bookshelf = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(bookshelf_filter, sortKey);
+    const sortedList = useSortProducts(bookshelf_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -291,18 +224,7 @@ const Bookshelf = ({ cart, setCart, handleCart }) => {
 
 const Closet = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const closet_filter = data.filter((item) => item.prod_kind === '옷장');
 
@@ -312,7 +234,7 @@ const Closet = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(closet_filter, sortKey);
+    const sortedList = useSortProducts(closet_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -354,18 +276,7 @@ const Closet = ({ cart, setCart, handleCart }) => {
 
 const Lighting = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     const lighting_filter = data.filter((item) => item.prod_kind === '조명');
 
@@ -374,7 +285,7 @@ const Lighting = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(lighting_filter, sortKey);
+    const sortedList = useSortProducts(lighting_filter, sortKey);
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -417,18 +328,7 @@ const Lighting = ({ cart, setCart, handleCart }) => {
 
 const Best = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     // "BEST" 카테고리에 속하는 상품들을 필터링
     const bestProducts = data.filter((product) => parseFloat(product.productGrade) >= 4.8);
@@ -438,7 +338,7 @@ const Best = ({ cart, setCart, handleCart }) => {
 
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의합니다.
 
-    const sortedList = sortProducts(bestProducts, sortKey); // "Best" 카테고리에 대한 상품들을 정렬
+    const sortedList = useSortProducts(bestProducts, sortKey); // "Best" 카테고리에 대한 상품들을 정렬
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -481,18 +381,7 @@ const Best = ({ cart, setCart, handleCart }) => {
 
 const New = ({ cart, setCart, handleCart }) => {
     // Spring Boot 연결
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/api/productList')
-            .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-            }).catch((error) => {
-                console.log(error)
-            });
-    }, []);
+    const data = useProductList();
 
     // 각 타입별로 id의 숫자가 큰 아이템 2개씩 선택
 
@@ -508,9 +397,12 @@ const New = ({ cart, setCart, handleCart }) => {
     const [sortKey, setSortKey] = useState("New"); // "New" 카테고리를 기본 정렬 기준으로 설정
     const [currentPage, setCurrentPage] = useState(1);
 
+
+
     const itemsPerPage = 8; // 여기에 itemsPerPage를 정의
 
-    const sortedList = New_filter.sort((a, b) => b.id - a.id); // "New" 카테고리 정렬 (각 타입별로 id의 숫자가 큰 순서)
+    const sortedList = useSortProducts(New_filter, sortKey);
+    // const sortedList = New_filter.sort((a, b) => b.id - a.id); // "New" 카테고리 정렬 (각 타입별로 id의 숫자가 큰 순서)
 
     // 현재 페이지에 해당하는 상품들을 가져옴
     const displayedItems = sortedList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
