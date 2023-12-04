@@ -2,51 +2,42 @@ import '../Member/Login.css';
 import React, { useMemo, useCallback, useReducer, useRef, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // axios 라이브러리 import
-import FindIdModal from './FindIdModal/FindIdModal';
-import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
+// import FindIdModal from './FindIdModal/FindIdModal';
+// import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
 
 
 
 const Login = () => {
 
-    const [findIdModalVisible, setFindIdModalVisible] = useState(false);
-    const [findPasswordModalVisible, setFindPasswordModalVisible] = useState(false);
     const [id, setId] = useState(''); // 사용자명 상태값 추가
     const [password, setPassword] = useState(''); // 비밀번호 상태값 추가
 
-    function showFindIdModal() {
-        setFindIdModalVisible(true);
-    }
-    function showFindPasswordModal() {
-        setFindPasswordModalVisible(true);
-    }
-
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/member/loginForm', {
+            const response = await axios.post('http://localhost:8080/member/login', {
                 id: id,
                 password: password
             });
 
             // 로그인 성공 시 처리
-            console.log(response.data); // 서버에서 반환한 데이터
+            console.log(response.data); // 서버에서 반환한 데이터 처리
         } catch (error) {
             // 로그인 실패 시 처리
             console.error('로그인 에러:', error);
         }
     };
 
-    // Springboot 요청
-    useEffect(() => {
-        axios
-            .get("member/loginForm")
-            .then((response) => {
-                setId(response.data);
-            })
-            .catch((error) => {
-                console.error("Error: ", error);
-            });
-    }, []);
+    // // Springboot 요청
+    // useEffect(() => {
+    //     axios
+    //         .get("member/loginForm")
+    //         .then((response) => {
+    //             setId(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error: ", error);
+    //         });
+    // }, []);
 
     // 클릭버튼 handle
     // const handleNaverClick = () => {
@@ -58,10 +49,10 @@ const Login = () => {
 
     return (
         <div>
-            {findIdModalVisible && <FindIdModal setModalVisible={setFindIdModalVisible} />}
+            {/* {findIdModalVisible && <FindIdModal setModalVisible={setFindIdModalVisible} />}
             {findPasswordModalVisible && <FindPasswordModal setModalVisible={setFindPasswordModalVisible} />}
 
-            {/* <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> */}
+            <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> */}
 
             <div className="login_path">
                 <span>현재 위치</span>
@@ -76,7 +67,7 @@ const Login = () => {
             </div>
             <main className="login_page">
                 <div className="login_container">
-                    <form action="">
+                    <form>
                         <div className="login_content">
                             <div className="login">
                                 <fieldset className="login_fieldset">
@@ -86,9 +77,10 @@ const Login = () => {
                                             <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"> </Link>
                                         </span>
                                         <input type="text"
-                                            name="userID"
+                                            // name="userID"
                                             placeholder="아이디"
                                             minLength="3"
+                                            // autoComplete="username"
                                             value={id}
                                             onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
                                         />
@@ -96,16 +88,16 @@ const Login = () => {
                                     <label className="login_password">
                                         <span><img src="../images/password.png" alt="비밀번호" /></span>
                                         <input type="password"
-                                            name="userPSW"
+                                            // name="userPSW"
                                             placeholder="비밀번호"
                                             minLength="3"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
-                                            autocomplete="current-password"
+                                        // autocomplete="current-password"
                                         />
                                     </label>
                                     <div className="login_btn">
-                                        <Link onClick={handleLogin}>로그인</Link>
+                                        <button onClick={handleLogin}>로그인</button>
                                     </div>
                                     <div className="login_security">
                                         <img src="../images/ico_access.gif" alt="보안접속" />
@@ -119,11 +111,11 @@ const Login = () => {
                                     <div className="login_find">
                                         <ul>
                                             <li>
-                                                <button type="button" onClick={showFindIdModal}>아이디찾기</button>
+                                                <button type="button" >아이디찾기</button>
                                             </li>
                                             <li>&nbsp;|&nbsp;</li>
                                             <li>
-                                                <button type="button" onClick={showFindPasswordModal}>비밀번호찾기</button>
+                                                <button type="button" >비밀번호찾기</button>
                                             </li>
                                         </ul>
                                     </div>
