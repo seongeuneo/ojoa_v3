@@ -80,7 +80,7 @@ const Login = () => {
                                             // name="userID"
                                             placeholder="아이디"
                                             minLength="3"
-                                            // autoComplete="username"
+                                            autoComplete="username"
                                             value={id}
                                             onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
                                         />
@@ -93,7 +93,7 @@ const Login = () => {
                                             minLength="3"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
-                                        // autocomplete="current-password"
+                                            autocomplete="current-password"
                                         />
                                     </label>
                                     <div className="login_btn">
