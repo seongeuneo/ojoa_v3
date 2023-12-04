@@ -55,7 +55,7 @@ public class Product {
 	
 	@Column(name="prod_sellyn")
 	//@Column(nullable = false, columnDefinition = "CHAR(1) DEFAULT 'y' CHECK (prod_sellyn IN ('y', 'n'))")
-	private char prod_sellyn; // 판매: 'y' , 중단: 'n'
+	private String prod_sellyn; // 판매: 'y' , 중단: 'n'
 	
 	@Column(name="prod_regdate")
 	//@CreatedDate
@@ -75,5 +75,6 @@ public class Product {
 	private MultipartFile uploadfilef;
 	// => form 의 Upload_File 정보를 전달받기위한 필드
 	//    MultipartFile (Interface) -> CommonsMultipartFile
+
 	
 } //class
