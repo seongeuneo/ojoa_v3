@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
+import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.service.CartService;
 import com.ojo.ojoa.service.QnaService;
@@ -43,6 +44,25 @@ public class RestReactController {
     	return ResponseEntity.ok(cartList);
     }
 	
+//======================= 새로운 코드 추가 ==============================	
+	// 장바구니에 상품 추가
+    @PostMapping("cart/saveCart")
+    public ResponseEntity<String> saveCart(@RequestBody Cart entity) {
+        try {
+        	System.out.println("saveCart111111"+entity);
+        	// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
+            cartService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
+            System.out.println("saveCart22222222"+entity);
+            return ResponseEntity.ok("데이터 저장 성공");
+        } catch (Exception e) {
+            log.error("데이터 저장 중 에러: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+        }
+    }
+
+
+//===============================================================================		
+	
 	// 게시판 QnA 
 	@GetMapping("qna/allQnaList")
     public ResponseEntity<List<QnaDTO.QnaMainListDTO>> getAllQnaList(
@@ -71,4 +91,3 @@ public class RestReactController {
     }
 
 }
-

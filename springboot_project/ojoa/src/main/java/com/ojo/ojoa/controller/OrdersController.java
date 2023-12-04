@@ -1,6 +1,5 @@
 package com.ojo.ojoa.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -8,12 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Orders;
 import com.ojo.ojoa.entity.OrdersDetail;
+import com.ojo.ojoa.service.OrdersDetailService;
 import com.ojo.ojoa.service.OrdersService;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j2;
 public class OrdersController {
 
     OrdersService ordersService;
-
+    OrdersDetailService ordersdtService;
 
 // ** Orders List - 회원별 주문목록
     @GetMapping("/ordersList")
@@ -86,16 +86,18 @@ public class OrdersController {
 	
 	
 
-//=================  Order Detail  =======================
+//=====================  Orders Detail  =======================
 
-		
-//// ** Order Detail 
-//@GetMapping(value ="/ordersDetail")
-//public String ordersDetail(HttpServletRequest request, Model model, OrdersDetail entity) {
-//	model.addAttribute("ordersdt", ordersService.selectOne(entity.getOrders_num()));
-//	
-//	if ( "U".equals(request.getParameter("jCode")) )
-//		 return "orders/ordersUpdate";
-//	else return "orders/ordersDetail";
-//} //ordersDetail
+// 주문 상세 정보 - 주문 상세 정보 검색 및 표시
+
+// ** OrdersDetail
+
+// 주문 상세 정보 조회
+	    @GetMapping("/orders/{orderdt_num}")
+	    public String ordersDetail(@PathVariable("ordersdt_num") int ordersdt_num, Model model) {
+	        OrdersDetail ordersdt = ordersdtService.selectOne(ordersdt_num);
+	        model.addAttribute("ordersdt", ordersdt);
+	        return "orders/ordersDetail"; // ordersDetail.jsp로 반환
+	    }
+	
 }
