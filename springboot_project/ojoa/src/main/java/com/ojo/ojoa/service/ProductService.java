@@ -23,5 +23,7 @@ public interface ProductService {
 	// ** delete
 	int delete(int prod_num);
 
+	// 새로운 메서드 추가
+    Product getProductById(String productId);
     
 } //class
