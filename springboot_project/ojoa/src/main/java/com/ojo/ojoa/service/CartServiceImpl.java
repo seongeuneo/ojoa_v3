@@ -35,10 +35,11 @@ public class CartServiceImpl implements CartService {
 
  	// ** insert, update
  	@Override
- 	public String save(Cart entity) {
+ 	public int save(Cart entity) {
  		cartRepository.save(entity); // 저장 또는 수정
-         return entity.getId();   // 저장후 key return
+         return entity.getCart_num();   // 저장후 key return
  	}
+
  	 
  	// ** delete
  	@Override
@@ -47,12 +48,11 @@ public class CartServiceImpl implements CartService {
  		return cart_num ; // 삭제후 key return
  	}
  	
- 	
-// ** (장바구니+상품) 테이블 Join 
+ 	// ** (장바구니+상품) 테이블 Join 
 	@Override
 	public List<CartProdDTO> findCartProd(){
 	return cartRepository.findCartProd();
-	   } 	
+	} 	
  	
 	// ** react selectAllList
  	@Override

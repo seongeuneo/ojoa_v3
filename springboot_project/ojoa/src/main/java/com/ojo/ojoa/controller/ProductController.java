@@ -119,8 +119,8 @@ public class ProductController {
 	
 	// 상품 상세 정보 조회
     @GetMapping("/detail/{prod_num}")
-    public String productDetail(@PathVariable("prod_num") int prodNum, Model model) {
-        Product product = productService.selectOne(prodNum);
+    public String productDetail(@PathVariable("prod_num") int prod_num, Model model) {
+        Product product = productService.selectOne(prod_num);
         model.addAttribute("product", product);
         return "productdetail/productDetail"; // productDetail.jsp로 반환
     }

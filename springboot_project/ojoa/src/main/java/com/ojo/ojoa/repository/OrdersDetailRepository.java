@@ -3,10 +3,11 @@ package com.ojo.ojoa.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ojo.ojoa.entity.Orders;
+import com.ojo.ojoa.entity.OrdersDetail;
 
 @Repository
-public interface OrdersRepository extends JpaRepository<Orders, Integer> {
+public interface OrdersDetailRepository 
+extends JpaRepository<OrdersDetail, Integer> {
 
 
 	
