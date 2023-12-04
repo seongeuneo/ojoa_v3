@@ -107,7 +107,7 @@ function AddCartIcon() {
                     <li className="pl_thumb_img">
                         <a>
                             <Link to={{
-                                key: content.prod_num,
+                                key: content.prod_numS,
                                 pathname: `/ProductDetail/${content.prod_num}`,
                                 state: { productData: content } // 선택한 상품 정보를 state로 전달
                             }}>

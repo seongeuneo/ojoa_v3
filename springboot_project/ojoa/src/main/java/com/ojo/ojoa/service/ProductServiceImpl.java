@@ -17,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    
  // ** selectList
  	@Override
  	public List<Product> selectList() {
@@ -44,5 +45,12 @@ public class ProductServiceImpl implements ProductService {
  		productRepository.deleteById(prod_num);
  		return prod_num ; // 삭제후 key return
  	}
+ 	
+ 	@Override
+    public Product getProductById(String productId) {
+        int prodNum = Integer.parseInt(productId);
+        Optional<Product> result = productRepository.findById(prodNum);
+        return result.orElse(null);
+    }
  	
  } //class
