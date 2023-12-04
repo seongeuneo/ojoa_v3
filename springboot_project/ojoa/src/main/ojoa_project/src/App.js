@@ -43,9 +43,9 @@ function App() {
   };
 
   const convertPrice = (productPriceFormatted) => {
-    return productPriceFormatted
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return productPriceFormatted;
+      //.toString()
+      //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (

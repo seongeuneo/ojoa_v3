@@ -157,6 +157,7 @@ public class ProductController {
 	} // pdelete
 	
 	// 상품 상세 정보 조회
+<<<<<<< HEAD
     @GetMapping("/productDetail")
     public String showProductDetail(@RequestParam("prod_num") String productId, Model model) {
         // productId를 기반으로 상품 세부 정보 가져오기
@@ -164,6 +165,13 @@ public class ProductController {
         // 상품 세부 정보를 모델에 추가
         model.addAttribute("productDetails", productDetails);
         return "productdetail/productDetail"; // 상품 세부 정보를 표시할 JSP 페이지 이름 반환
+=======
+    @GetMapping("/detail/{prod_num}")
+    public String productDetail(@PathVariable("prod_num") int prod_num, Model model) {
+        Product product = productService.selectOne(prod_num);
+        model.addAttribute("product", product);
+        return "productdetail/productDetail"; // productDetail.jsp로 반환
+>>>>>>> main
     }
 
 	

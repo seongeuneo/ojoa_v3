@@ -7,14 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "orders_detail")
 
 public class OrdersDetail {
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ordersdt_num")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ordersdt_num;
     
     @Column(name="orders_num")
@@ -36,6 +41,7 @@ public class OrdersDetail {
     @Column(name="ordersdt_result")
 	//@Column(name = "ordersdt_result", columnDefinition = "CHAR(1) DEFAULT 'B'")
 	private char ordersdt_result;
+
 
 
 	
