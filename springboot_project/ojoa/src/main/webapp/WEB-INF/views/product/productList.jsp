@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>** Product List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
-<script src="/resources/myLib/productCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/myLib/productCheck.js"></script>
 </head>
 <body>
 <h2>** Product List **</h2>
@@ -60,7 +60,7 @@
 					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
 					<%-- <td align="center"><a href="/addCart?prod_num=${s.prod_num}" onclick="addCart()">장바구니담기</a></td> --%>
 					<td align="center"><button onclick="addWish(${s.prod_num})">관심목록 추가</button></td>
-					<td align="center"> <button onclick="addCart(${s.prod_num})">장바구니담기</button></td>
+					<td align="center"> <button onclick="addCart(`${s.prod_num}`)">장바구니담기</button></td>
 					<td align="center"> <button onclick="">상품수정</button></td>
 		<%-- </c:if> --%>
 				</tr>

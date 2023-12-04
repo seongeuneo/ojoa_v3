@@ -29,15 +29,12 @@ public class CartController {
     CartService cartService;
 
 
-// ** Cart List - 회원별 카트 목록 반환 
-    
-// ** Cart+Product Join List
+    // ** Cart List - 회원별 카트 목록 반환 
+    // ** Cart+Product Join List
     @GetMapping("/cartList")
     public void cartList(Model model) {
     	model.addAttribute("mycart", cartService.findCartProd());
     }
-
-
 
 	// ** Cart Delete - 장바구니 삭제
 	@GetMapping(value="/cdelete")

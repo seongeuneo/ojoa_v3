@@ -1,3 +1,4 @@
+"use strict"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom"
@@ -36,6 +37,31 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 });
         }
     };
+    
+    
+    //============================= 여기서부터 워니의 코드 =================================
+    
+    
+// 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
+function AddCartIcon() {
+    const productData = { prod_num: content.prod_num }; // 상품 정보를 담은 객체
+
+    axios.post('/api/cart/saveCart', productData) // POST 요청으로 수정 및 상품 정보 전달
+        .then(response => {
+            // 요청 성공 시 처리할 작업
+            console.log("장바구니 담기"+response.data);
+            alert('장바구니에 추가되었습니다!!!');
+            // 추가 작업이 필요하다면 여기에 작성
+        })
+        .catch(error => {
+            // 요청 실패 시 처리할 작업
+            console.error('장바구니 추가 중 오류:', error);
+            alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.');
+        });
+}
+
+    //====================================== 여기까지 ========================================
+
 
     // 장바구니 아이콘
     const [cartSrc, setCartSrc] = useState("/images/cartEmpty.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
@@ -52,29 +78,27 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
         }
     };
 
-
     // 장바구니 기능
     // 장바구니에 물건
-    const handleAddToCart = () => {
-        const cartItem = {
-            id: content.id,
-            imgNo: content.imgNo,
-            productName: content.productName,
-            //productPriceFormatted: content.productPriceFormatted,
-            productPromotion: content.productPromotion,
-            productInfo: content.productInfo,
-            productReview: content.productReview,
-            productGrade: content.productGrade,
-            quantity: content.count,
-        };
-        handleCart(cartItem);
-    };
+    // const handleAddToCart = () => {
+    //     const cartItem = {
+    //         id: content.id,
+    //         imgNo: content.imgNo,
+    //         productName: content.productName,
+    //         //productPriceFormatted: content.productPriceFormatted,
+    //         productPromotion: content.productPromotion,
+    //         productInfo: content.productInfo,
+    //         productReview: content.productReview,
+    //         productGrade: content.productGrade,
+    //         quantity: content.count,
+    //     };
+    //     handleCart(cartItem);
+    // };
 
-    function handleAddToCartAndhandleCartClick() {
-        handleAddToCart();
-        handleCartClick();
-    }
-
+    // function handleAddToCartAndhandleCartClickOld() {
+    //     handleAddToCart();
+    //     handleCartClick();
+    // }
 
     return (
         <div className="ProductListItem" onClick={onSelect}>
@@ -92,7 +116,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                             <div className="pl_icon">
                                 <a className="pd_cart">
                                     <img src={cartSrc}
-                                        onClick={handleAddToCartAndhandleCartClick}
+                                        onClick={AddCartIcon}
                                         alt="장바구니"
                                     />
                                 </a>
