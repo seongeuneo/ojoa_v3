@@ -30,6 +30,8 @@ import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
 // import ProductList from './pages/ProductList'
 
+import PaymentConfirmation from './pages/Checkout/PaymentConfirmation';
+
 
 function App() {
 
@@ -37,6 +39,7 @@ function App() {
   //장바구니
   const [cart, setCart] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(true);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const handleCart = (cartItem) => {
     setCart((prevCart) => [...prevCart, cartItem]);
@@ -47,6 +50,8 @@ function App() {
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
+
 
   return (
     <div className="App">
@@ -85,6 +90,7 @@ function App() {
           <Route path="/login/info/agree/popup" element={<Popup />} /> */}
           <Route path="/qna" element={<Qna />} />
           <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route path="/paymentconfirmation" element={<PaymentConfirmation cart={cart} />} />
         </Routes>
         <Footer />
         <TopButton />

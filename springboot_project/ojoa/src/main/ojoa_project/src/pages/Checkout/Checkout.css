@@ -51,7 +51,7 @@
     width: 150px;
 }
 
-.Checkout .checkbox-control+label {
+.Checkout .checkbox_control+label {
     margin-left: 5px;
 }
 

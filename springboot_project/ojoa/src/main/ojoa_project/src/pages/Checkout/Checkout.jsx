@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
+import PaymentConfirmation from './PaymentConfirmation';
+import { useNavigate } from 'react-router-dom';
 
 const mockData = [
   {
@@ -70,6 +72,14 @@ function Checkout({ cart }) {
 
   // 총 결제 금액
   const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
+
+  const navigate = useNavigate();
+
+  // 결제 성공 시 호출되는 함수
+  const handlePaymentSuccess = () => {
+    // history.push를 사용하여 '/payment-confirmation' 경로로 이동
+    navigate('/paymentconfirmation');
+  };
 
   // 결제진행
   // const handleSubmit = _handleSubmit(async (values) => {
@@ -305,7 +315,7 @@ function Checkout({ cart }) {
                 </textarea>
 
                 <div className='mt-10'>
-                  <input type="checkbox" className='checkbox-control' />
+                  <input type="checkbox" className='checkbox_control' />
                   <label htmlFor="">동의</label>
                 </div>
               </td>
@@ -317,7 +327,7 @@ function Checkout({ cart }) {
                   {"개인정보수집 이용동의"}
                 </textarea>
                 <div className='mt-10'>
-                  <input type="checkbox" className='checkbox-control' />
+                  <input type="checkbox" className='checkbox_control' />
                   <label htmlFor="">동의</label>
                 </div>
               </td>
@@ -374,7 +384,7 @@ function Checkout({ cart }) {
               <p>최종결제 금액</p>
               <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              <button type='submit' className='payment_btn'>결제하기</button>
+              <button type='submit' className='payment_btn' onClick={handlePaymentSuccess}>결제하기</button>
             </div>
           </div>
         </section>
