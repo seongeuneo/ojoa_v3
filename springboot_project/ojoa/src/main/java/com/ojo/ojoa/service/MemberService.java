@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ojo.ojoa.entity.Member;
 
+
 public interface MemberService {
 	
 	// ** selectList
@@ -20,5 +21,5 @@ public interface MemberService {
 	
 	// ** 패스워드 업데이트
     public boolean updatePassword(Member entity);
-	
+
 }

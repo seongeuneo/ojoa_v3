@@ -1,51 +1,53 @@
 import '../Member/Login.css';
-import React, { useMemo, useCallback, useReducer, useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // axios 라이브러리 import
-// import FindIdModal from './FindIdModal/FindIdModal';
-// import FindPasswordModal from './FindPasswordModal/FindPasswordModal';
-
-
+import axios from 'axios';
 
 const Login = () => {
 
-    const [id, setId] = useState(''); // 사용자명 상태값 추가
-    const [password, setPassword] = useState(''); // 비밀번호 상태값 추가
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleLogin = async () => {
-        try {
-            const response = await axios.post('http://localhost:8080/member/login', {
-                id: id,
-                password: password
-            });
+        const loginData = {
+            id: id,
+            password: password
+        };
 
-            // 로그인 성공 시 처리
-            console.log(response.data); // 서버에서 반환한 데이터 처리
+        console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력
+
+        try {
+            const response = await axios.post("http://localhost:8080/member/rlogin", loginData);
+            if (response.status === 200) {
+                if (response.data.includes('성공')) {
+                    setMessage('로그인 성공');
+
+                    // 로그인이 성공했을 때 원하는 작업 수행
+                } else {
+                    // 실패 메시지를 추출하여 표시
+                    const errorMessage = extractErrorMessage(response.data);
+                    setMessage('로그인 실패: ' + errorMessage);
+                }
+            } else {
+                setMessage('서버 오류');
+            }
         } catch (error) {
-            // 로그인 실패 시 처리
-            console.error('로그인 에러:', error);
+            if (error.response) {
+                setMessage('로그인 실패: ' + error.response.data);
+            } else {
+                setMessage('로그인 중 에러 발생');
+            }
+        }
+
+        // 실패 메시지 추출 함수
+        function extractErrorMessage(htmlResponse) {
+            // HTML 응답에서 실패 메시지를 추출하는 로직 작성
+            // 예를 들어, 특정 태그 내의 텍스트 또는 정규표현식을 사용하여 메시지 추출
+            // 실패 메시지를 가공하여 반환
         }
     };
 
-    // // Springboot 요청
-    // useEffect(() => {
-    //     axios
-    //         .get("member/loginForm")
-    //         .then((response) => {
-    //             setId(response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error: ", error);
-    //         });
-    // }, []);
-
-    // 클릭버튼 handle
-    // const handleNaverClick = () => {
-    //     const naverLoginButton = document.getElementById(
-    //         "naverIdLogin_loginButton"
-    //     );
-    //     if (naverLoginButton) naverLoginButton.click();
-    // };
 
     return (
         <div>
@@ -74,14 +76,14 @@ const Login = () => {
                                     <legend>회원로그인</legend>
                                     <label className="login_id">
                                         <span><img src="../images/account.png" alt="아이디" />
-                                            <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"> </Link>
+                                            {/* <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"> </Link> */}
                                         </span>
                                         <input type="text"
                                             // name="userID"
                                             placeholder="아이디"
                                             minLength="3"
-                                            autoComplete="username"
                                             value={id}
+                                            // autoComplete="username"
                                             onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
                                         />
                                     </label>
@@ -93,11 +95,12 @@ const Login = () => {
                                             minLength="3"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
-                                            autocomplete="current-password"
+                                        // autocomplete="current-password"
                                         />
                                     </label>
                                     <div className="login_btn">
-                                        <button onClick={handleLogin}>로그인</button>
+                                        <button type="button" onClick={handleLogin}>로그인</button>
+                                        {message && <p>{message}</p>}
                                     </div>
                                     <div className="login_security">
                                         <img src="../images/ico_access.gif" alt="보안접속" />
@@ -127,13 +130,13 @@ const Login = () => {
 
                                     <div className="login_sns">
                                         <p className="sns">
-                                            <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/" target="_blank"><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></Link>
+                                            {/* <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/" target="_blank"><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></Link> */}
                                         </p>
                                         <p className="sns">
-                                            <Link to="http://www.facebook.com/" target="_blank"><img src="../images/btn_facebook_login.gif" alt='페이스북로그인' /></Link>
+                                            {/* <Link to="http://www.facebook.com/" target="_blank"><img src="../images/btn_facebook_login.gif" alt='페이스북로그인' /></Link> */}
                                         </p>
                                         <p className="sns">
-                                            <Link to="https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo#login" target="_blank"><img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' /></Link>
+                                            {/* <Link to="https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo#login" target="_blank"><img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' /></Link> */}
                                         </p>
                                     </div>
                                     <div className="login_cboth"></div>

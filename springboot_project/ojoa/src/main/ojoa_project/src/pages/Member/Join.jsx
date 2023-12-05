@@ -1,6 +1,8 @@
 import './Join.css';
 import { Link } from 'react-router-dom';
 import React, { useState, useRef } from 'react';
+import axios from 'axios'; // axios 라이브러리 import
+
 //import { ownerDocument } from '@mui/material';
 
 const Join = () => {
@@ -27,7 +29,6 @@ const Join = () => {
 
     // Ref 객체 추가
     const idInputRef = useRef(null); // 아이디 입력 필드의 Ref 객체
-    // const idckbtnInputRef = useRef(null); // 아이디 중복확인 버튼의 Ref 객체
     const passwordInputRef = useRef(null);
     const password2InputRef = useRef(null);
     const zipcodeInputRef = useRef(null);
@@ -158,7 +159,7 @@ const Join = () => {
         const newPhone2 = event.target.value;
 
         // 연락처2 입력값이 숫자 4자리로 구성되어 있는지 확인
-        if (!/^[0-9]{4}$/.test(newPhone2)) {
+        if (!/^\d{4}$/.test(newPhone2)) {
             setPhone2Error("연락처 중간번호는 숫자 4자리만 가능합니다.");
         } else {
             setPhone2(newPhone2);
@@ -171,7 +172,7 @@ const Join = () => {
         const newPhone3 = event.target.value;
 
         // 연락처3 입력값이 숫자 4자리로 구성되어 있는지 확인
-        if (!/^[0-9]{4}$/.test(newPhone3)) {
+        if (!/^\d{4}$/.test(newPhone3)) {
             setPhone3Error("연락처 끝번호는 숫자 4자리로 입력해주세요.");
         } else {
             setPhone3(newPhone3);
@@ -186,7 +187,7 @@ const Join = () => {
         const newEmail1 = event.target.value;
 
         // 이메일1 입력값이 알파벳과 숫자 만으로 구성되어 있는지 확인
-        if (!/^[a-zA-Z0-9]*$/.test(newEmail1)) {
+        if (!/^[a-zA-Z0-9]+$/.test(newEmail1)) {
             setEmail1Error("이메일은 최소 3글자 이상의 알파벳과 숫자만 가능합니다.");
         } else {
             // 알파벳과 숫자로만 구성된 경우에만 연락처 끝번호 변경 및 오류 초기화
@@ -201,11 +202,10 @@ const Join = () => {
     const handleEmail2Change = (event) => {
         const newEmail2 = event.target.value;
 
-        // 이메일2 입력값이 최소 3글자 이상의 알파벳과 숫자, 그리고 점('.')으로만 구성되어 있는지 확인
-        if (!/^[a-zA-Z0-9.]$/.test(newEmail2)) {
+        // 이메일2 입력값이 최소 3글자 이상의 알파벳, 숫자, '.'로 구성되어 있는지 확인
+        if (!/^[a-zA-Z0-9.]+$/.test(newEmail2)) {
             setEmail2Error("이메일은 최소 3글자의 알파벳, 숫자, '.'으로만 입력 가능합니다.");
         } else {
-            // 알파벳과 숫자, 그리고 점('.')으로만 구성된 경우에만 이메일2 변경 및 오류 초기화
             setEmail2(newEmail2);
             setEmail2Error("");
         }
@@ -218,6 +218,71 @@ const Join = () => {
     //     setPassword("");
     //     setPassword2("");
     // };
+
+    const clickJoin = (e) => {
+
+        e.preventDefault();
+
+        // 각 항목별로 유효성 검사를 통과했는지를 나타내는 변수들
+        let isNameValid = nameError === '';
+        let isIdValid = idError === '';
+        let isPasswordValid = passwordError === '';
+        let isPassword2Valid = password2Error === '';
+        let isZipcodeValid = zipcodeError === '';
+        let isAddressValid = addressError === '';
+        let isAddressDetailValid = addressdetailError === '';
+        let isPhone2Valid = phone2Error === '';
+        let isPhone3Valid = phone3Error === '';
+        let isEmail1Valid = email1Error === '';
+        let isEmail2Valid = email2Error === '';
+
+        // 모든 항목의 유효성 검사를 통과했는지 확인하는 check 변수
+        let check =
+            isNameValid &&
+            isIdValid &&
+            isPasswordValid &&
+            isPassword2Valid &&
+            isZipcodeValid &&
+            isAddressValid &&
+            isAddressDetailValid &&
+            isPhone2Valid &&
+            isPhone3Valid &&
+            isEmail1Valid &&
+            isEmail2Valid;
+
+        if (check) {
+            axios
+                .post('/member/join', {
+                    name: name,
+                    id: id,
+                    password: password,
+                    password2: password2,
+                    address: address,
+                    addressdetail: addressdetail,
+                    phone2: phone2,
+                    phone3: phone3,
+                    email1: email1,
+                    email2: email2,
+                    // user_event_check: eventCheck,
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data > 0) {
+                        alert("회원가입이 완료되었습니다.");
+                        window.location.href = '/member/login';
+                    } else {
+                        alert("회원가입에 실패했습니다.");
+                    }
+
+                    console.log(`** checkdata 서버연결 성공 => ${response.data}`);
+                }).catch((err) => {
+                    alert(`** checkdata 서버연결 실패 => ${err.message}`);
+                });
+        } else {
+            alert("입력 내용을 확인해주세요.");
+        }
+    }
+
 
     return (
         <div className="Join">
@@ -233,7 +298,7 @@ const Join = () => {
                 <div className="txt_01">회원가입</div>
             </div>
 
-            <form action="/member/join" name="personalJoin">
+            <form onSubmit={e => { clickJoin(e) }}>
                 <table className="personal_join">
                     <caption>
                         <h3>회원정보</h3>
@@ -525,7 +590,7 @@ const Join = () => {
                     </div>
 
                     <div className="join_btn">
-                        <input className="out_btn3" type="submit" name="finish" value="회원가입 완료" />
+                        <button className="out_btn3" type="submit" name="finish" value="회원가입 완료" ></button>
                     </div>
                 </div>
 

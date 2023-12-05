@@ -162,7 +162,7 @@
     float: right;
 } */
 
-.login_fieldset .login_btn a {
+.login_fieldset .login_btn button {
     display: block;
     border: 1px solid;
     width: 90px;
