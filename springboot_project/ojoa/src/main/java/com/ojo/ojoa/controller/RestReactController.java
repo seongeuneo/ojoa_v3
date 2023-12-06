@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.entity.Cart;
+import com.ojo.ojoa.entity.CartId;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.service.CartService;
 import com.ojo.ojoa.service.QnaService;
@@ -45,10 +46,14 @@ public class RestReactController {
     }
 	
 //======================= 새로운 코드 추가 ==============================	
-	// 장바구니에 상품 추가
-    @PostMapping("cart/saveCart")
-    public ResponseEntity<String> saveCart(@RequestBody Cart entity) {
-        try {
+// 장바구니에 상품 추가
+
+	@PostMapping("cart/saveCart")
+    public ResponseEntity<?> saveCart(@RequestBody Cart entity) {
+        // 로그인 아이디는 추후 Session 에서 꺼내서 사용한다. 일단 임의로 함
+		entity.setId("admin");
+		
+		try {
         	System.out.println("saveCart111111"+entity);
         	// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
             cartService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
@@ -61,6 +66,45 @@ public class RestReactController {
     }
 
 
+	
+// 장바구니에 있는 상품 삭제
+
+//	@DeleteMapping("cdelete/{prod_num}")
+//	public String cdelete(@PathVariable("prod_num") int prod_num, HttpSession session, RedirectAttributes rttr) {
+//
+//		String uri = "redirect:/cart/cartList";
+//
+//		try {
+//			log.info("** cancel 성공  => " + cartService.delete(prod_num));
+//			rttr.addFlashAttribute("message", "~ 장바구니 상품 제거 성공!! ~~");
+//			if (((String) session.getAttribute("loginID")).equals("admin")) {
+//				// => 관리자에 의한 강제 주문취소 : orderList.jsp
+//				uri = "redirect:cartList";
+//			} else {
+//				session.invalidate();
+//			}
+//		} catch (Exception e) {
+//			log.info("** delete Exception => " + e.toString());
+//			rttr.addFlashAttribute("message", "~~ 취소 실패 ~~");
+//		}
+//
+//		return uri;
+//	}
+	
+
+    
+// 원래 카트    
+    @GetMapping("/cdelete")
+    public String cdelete(CartId cartid) {
+    	try {
+    		cartService.delete(cartid);
+    		System.out.println("** cart delete 삭제성공 **");
+    	} catch (Exception e) {
+    		System.out.println("** cart delete Exception => "+e.toString());
+    	}
+    	return "redirect:home" ;
+    }
+    
 //===============================================================================		
 	
 	// 게시판 QnA 

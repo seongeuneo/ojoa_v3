@@ -19,7 +19,6 @@
 </c:if>
 <table border="1" style="width:90%">
 	<tr bgcolor="Orange">
-		<th>카트번호</th>
 		<th>회원ID</th>
 		<th>상품번호</th>
 		<th>상품사진</th>
@@ -37,14 +36,13 @@
 		<c:if test="${not empty requestScope.mycart}">
 			<c:forEach var="s" items="${requestScope.mycart}">
 				<tr>
-					<td>${s.cart_num}</td>
 					<td>${s.id}</td>
 					<td>${s.prod_num}</td>
 				    <td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.prod_name}</td>
 					<td>${s.quantity}</td>
 					<td align="center"> <button onclick="payNow('${s.id}')">결제하기</button></td>
-					<td align="center"><a href="cdelete?cart_num=${s.cart_num}">삭제</a></td>
+					<td align="center"><a href="cdelete?prod_num=${s.prod_num}&id=${s.id}">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>

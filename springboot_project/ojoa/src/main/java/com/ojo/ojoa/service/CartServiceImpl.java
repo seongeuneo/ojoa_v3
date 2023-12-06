@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
+import com.ojo.ojoa.entity.CartId;
 import com.ojo.ojoa.repository.CartRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,26 +28,33 @@ public class CartServiceImpl implements CartService {
  	
  	// ** selectOne
  	@Override
- 	public Cart selectOne(int cart_num) {
- 		Optional<Cart> result = cartRepository.findById(cart_num);
+ 	public Cart selectOne(CartId cartid) {
+ 		Optional<Cart> result = cartRepository.findById(cartid);
      	if ( result.isPresent() ) return result.get();
      	else return null;
  	}
 
- 	// ** insert, update
- 	@Override
- 	public int save(Cart entity) {
- 		cartRepository.save(entity); // 저장 또는 수정
-         return entity.getCart_num();   // 저장후 key return
- 	}
-
+    // => insert
+    @Override
+    public void save(Cart entity) {
+    	cartRepository.save(entity); // 저장 또는 수정
+    }
  	 
  	// ** delete
  	@Override
- 	public int delete(int cart_num) {
- 		cartRepository.deleteById(cart_num);
- 		return cart_num ; // 삭제후 key return
+ 	public void delete(CartId cartid) {
+ 		cartRepository.deleteById(cartid);
+ 		//return cartid ; // 삭제후 key return
  	}
+ 	
+ 	
+	// ** DUPLICATE KEY UPDATE 구문
+    @Override
+    public void CartUpdate(String id, int prod_num, int quantity) {
+    	cartRepository.CartUpdate(id, prod_num, quantity);
+    }	
+ 	
+ 	
  	
  	// ** (장바구니+상품) 테이블 Join 
 	@Override
