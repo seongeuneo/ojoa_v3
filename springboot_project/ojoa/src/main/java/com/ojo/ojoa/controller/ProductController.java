@@ -93,6 +93,7 @@ public class ProductController {
 		return uri;
 	} // ProductInsert
 	
+	// 상품 수정
 	@PostMapping(value="/updateProduct")
 	public String updateProduct(HttpSession session, @ModelAttribute Product updatedProduct, Model model) throws IOException{
 		model.addAttribute("productDetails", updatedProduct);

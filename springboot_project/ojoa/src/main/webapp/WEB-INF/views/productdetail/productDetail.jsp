@@ -61,7 +61,7 @@
 		enctype="multipart/form-data">
 		<table>
 		<tr height="40">
-					<th bgcolor="Thistle">상품 번호 수정불가</th>
+					<th bgcolor="LemonChiffon">상품 번호 수정불가</th>
 					<td><input type="hidden" name="prod_num" value="${productDetails.prod_num}"></td>
 				</tr>
 				<tr>
@@ -134,6 +134,13 @@
 					</select> <br>
 					<span id="pdynMessage" class="eMessage"></span></td>
 				</tr>
+				<tr height="40">
+				<th bgcolor="LemonChiffon">재고 수량 변경</th>
+				<td><input type="text" id="prod_stock" name="prod_stock"
+						value="${productDetails.prod_stock}" placeholder="숫자만 입력"
+						size="10"> <br> <br> <span id="pdpMessage"
+						class="eMessage"></span></td>
+				</tr>
 				<!-- 기타 수정할 내용도 유사한 방식으로 추가 -->
 				<tr>
 					<td><input type="submit" value="수정"></td>
@@ -148,7 +155,7 @@
 	</form>
 	<hr>
 	&nbsp;
-	<a href="javascript:history.go(-1)">이전으로</a>&nbsp; &nbsp;
+	<a href="javascript:history.go(-2)">이전으로</a>&nbsp; &nbsp;
 	<a href="/home">Home</a>&nbsp;
 </body>
 </html>
