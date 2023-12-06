@@ -14,8 +14,17 @@ import com.ojo.ojoa.repository.WishRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.ojo.ojoa.domain.WishDTO;
+import com.ojo.ojoa.entity.Wish;
+import com.ojo.ojoa.repository.WishRepository;
+
+import lombok.RequiredArgsConstructor;
 
 //@Log4j2
 @Service

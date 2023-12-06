@@ -1,8 +1,11 @@
 
-// 관심목록 추가 함수
-function addCart(prod_num) {
+// 장바구니 추가 함수
+//function addCart(prod_num, quantity) {
+function addCart(prod_num, quantity) {
     // axios를 사용하여 관심목록에 상품을 추가하는 요청
-    axios.get(`/cart/addCart?prod_num=${prod_num}`)
+    //axios.post(`/cart/addCart`,{prod_num:prod_num, quantity:quantity})
+    alert(`prod_num=${prod_num}, quantity=${quantity}`);
+    axios.post(`/cart/addCart`,{prod_num:prod_num, quantity:quantity})
         .then(response => {
             // 요청이 성공한 경우
             console.log(response.data); // 추가 정보나 로그 등을 출력하거나 다른 작업 수행
@@ -66,5 +69,3 @@ function payNow(id) {
         // 예를 들어, 상품 수정 페이지로 이동하는 URL을 생성하거나 다른 작업을 수행할 수 있습니다.
        window.location.href = `productDetail?prod_num=${prod_num}`;
     }
-
-

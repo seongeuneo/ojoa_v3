@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Orders;
@@ -99,5 +100,16 @@ public class OrdersController {
 	        model.addAttribute("ordersdt", ordersdt);
 	        return "orders/ordersDetail"; // ordersDetail.jsp로 반환
 	    }
-	
+
+// 성으니꺼 참고하기	--------------------------------------
+		// 상품 상세 정보 조회
+//	    @GetMapping("/ordersDetail")
+//	    public String ordersDetail(@RequestParam("orders_num") String ordersNum, Model model) {
+//	        
+//	    	OrdersDetail ordersdt = ordersdtService.selectOne(ordersNum);
+//	        // 상품 세부 정보를 모델에 추가
+//	    	 model.addAttribute("ordersdt", ordersdt);
+//		        return "orders/ordersDetail"; // ordersDetail.jsp로 반환
+//		    }
+	    
 }
