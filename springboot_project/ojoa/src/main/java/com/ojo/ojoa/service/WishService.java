@@ -28,6 +28,7 @@ public interface WishService {
 	// ** Join (관심상품 + 상품)
 		 List<WishDTO> findWishProd();
 		 
-	
+	// ** react selectAllList
+		List<WishDTO> selectAllList();
     
 }

@@ -16,6 +16,9 @@
 <P>* Server_Time: ${serverTime}</P>
 <hr>
 
+<br>
+
+<h3>진기</h3>
 <!-- Login 전 -->
 <c:if test="${empty sessionScope.loginID}">
 	&nbsp;<a href="member/loginForm">Login</a>&nbsp;
@@ -29,23 +32,31 @@
 	<%-- &nbsp;<a href="member/memberShippingAddress?jCode=U&id=${sessionScope.loginID}">배송지정보</a>&nbsp;  --%> 
 	&nbsp;<a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a>&nbsp;       
 </c:if>
-<br>
-
 &nbsp;<a href="member/memberList">memberList</a>&nbsp; 
-<c:if test="${sessionScope.loginID == 'admin'}">
-   &nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
-</c:if>
-
-&nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
+<hr>
 <br>
+
+<h3>성은</h3>
+&nbsp;<a href="admin/adminmain">관리자페이지</a>&nbsp; 
+&nbsp;<a href="wish/wishlist">관심상품</a>&nbsp;
+&nbsp;<a href="product/productList">상품리스트 페이지</a>&nbsp; 
+&nbsp;<a href="review/reviewList">상품후기 페이지</a>&nbsp; 
+<hr>
+<br>
+
+<h3>희상</h3>
 &nbsp;<a href="qna/qnaInsert">게시판 글쓰기</a>&nbsp; 
 &nbsp;<a href="qna/qnaList">게시판QnA</a>&nbsp; 
+<hr>
+<br>
+
+<h3>원희</h3>
 &nbsp;<a href="cart/cartList">장바구니 리스트</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">주문리스트</a>&nbsp; 
 <!-- &nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp;  -->
-&nbsp;<a href="wish/wishlist">관심상품</a>&nbsp;
 &nbsp;<a href="product/productInsert">상품등록 페이지</a>&nbsp; 
-&nbsp;<a href="product/productList">상품리스트 페이지</a>&nbsp; 
+<hr>
+<br>
 
 
 </body>

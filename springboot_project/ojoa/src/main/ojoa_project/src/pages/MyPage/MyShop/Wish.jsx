@@ -9,9 +9,10 @@ function Wish() {
     // Spring Boot 연결
     const [data, setData] = useState([]);
 
+
     useEffect(() => {
         axios
-            .get("/wishR/wishListR")
+            .post("/api/wish/allWishList")
             .then((response) => {
                 setData(response.data);
                 console.log("서버연결성공 => ", response.data);
@@ -24,7 +25,7 @@ function Wish() {
 
     // axios를 사용하여 DELETE 요청 보내기
     const handleDelete = (wish_num) => {
-        axios.delete(`/wish/wdelete/${wish_num}`)
+        axios.delete(`/api//wdelete/${wish_num}`)
             .then((response) => {
                 // 삭제 요청이 성공하면 성공 메시지 출력 혹은 다른 작업 수행
                 console.log("삭제 요청 성공:", response);
