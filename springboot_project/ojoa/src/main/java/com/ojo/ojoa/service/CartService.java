@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.entity.Cart;
-import com.ojo.ojoa.entity.Product;
+import com.ojo.ojoa.entity.CartId;
 
 @Service
 @Transactional
@@ -15,17 +15,21 @@ public interface CartService {
 
 	// ** selectList
 	List<Cart> selectList();
-
+	
 	// ** selectOne
-	Cart selectOne(int cart_num);
+	Cart selectOne(CartId cartid);
 
-	// ** insert, update
-	int save(Cart entity);
+	// ** insert
+	void save(Cart entity);
 
 	// ** delete
-	int delete(int cart_num);
+	void delete(CartId cartid);
+	
+	
+	// ** DUPLICATE KEY UPDATE 구문
+	void CartUpdate(String id, int prod_num, int quantity);
 
-//=================================
+//=================================================================
 	
     // ** Join (장바구니 + 상품)
 	List<CartProdDTO> findCartProd();
