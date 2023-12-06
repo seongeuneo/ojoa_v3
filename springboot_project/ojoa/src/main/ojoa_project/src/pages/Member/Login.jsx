@@ -67,7 +67,7 @@ const Login = () => {
             {/* {findIdModalVisible && <FindIdModal setModalVisible={setFindIdModalVisible} />}
             {findPasswordModalVisible && <FindPasswordModal setModalVisible={setFindPasswordModalVisible} />}
 
-            <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> */}
+            <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
             {/* 로그인 성공 시 유저 이름 표시 */}
             {loggedInUsername && <p>로그인된 유저: {loggedInUsername}</p>}
 
