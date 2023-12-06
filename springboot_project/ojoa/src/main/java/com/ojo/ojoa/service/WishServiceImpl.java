@@ -1,20 +1,15 @@
 package com.ojo.ojoa.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Optional;
 
-import com.ojo.ojoa.domain.CartProdDTO;
+import org.springframework.stereotype.Service;
+
 import com.ojo.ojoa.domain.WishDTO;
-import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Wish;
-import com.ojo.ojoa.repository.CartRepository;
 import com.ojo.ojoa.repository.WishRepository;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
-import java.util.Optional;
 
 //@Log4j2
 @Service

@@ -44,13 +44,14 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
     
 // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
 function AddCartIcon() {
-    const productData = { prod_num: content.prod_num }; // 상품 정보를 담은 객체
+    //const productData = { prod_num: content.prod_num};
+    const productData = { prod_num: content.prod_num, quantity:1}; // 바로 구매시 수량은 1
 
     axios.post('/api/cart/saveCart', productData) // POST 요청으로 수정 및 상품 정보 전달
         .then(response => {
             // 요청 성공 시 처리할 작업
             console.log("장바구니 담기"+response.data);
-            alert('장바구니에 추가되었습니다!!!');
+            alert('장바구니에 추가되었습니다!');
             // 추가 작업이 필요하다면 여기에 작성
         })
         .catch(error => {

@@ -1,10 +1,10 @@
 package com.ojo.ojoa.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -12,44 +12,64 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "cart")
+//** MySql
+//=> 복합키 설정 (장바구니 구현시 참고) 
+/*
+	create  table testkey (    
+	id varchar(10),
+	no int,
+	name varchar(10),
+	count int,
+	CONSTRAINT pk_id PRIMARY KEY(id, no)
+	);
+	
+	-> 반복 실행 Test 
+	INSERT INTO testkey (id, no, name, count)
+     VALUES ('banana', 1, '홍길동', 1)
+     ON DUPLICATE KEY UPDATE count = count+5;
+*/
+
+// ** JPA 복합키 생성 특징
+// => JPA는 복합키를 생성할때 컬럼명의 알파벳 순으로 생성.
+//	  Entity Class에 정의된 순서로 생성되지않음 주의
+// => 방법은 2가지
+//	- @Embeddable : 좀더 객체지향적임
+//	- @IdClass : DB방식에 가까움
+
+// ** JPA 복합키 생성 실습 (@IdClass 이용방법) 
+// 1) 테이블의 복합키를 담고 있는 식별자 클래스 TestkeyId 생성
+//	- 식별자 클래스의 접근 지정자는 public
+//	- Serializable 상속
+//	- 디폴트 생성자 필수(Lombok의 @NoArgsConstructor 사용)
+//	- equals, hashCode 구현 (Lombok의 @Data 사용시 자동생성)
+//	- 식별자 클래스의 변수명과 엔티티에서 사용되는 변수명이 동일
+
+// 2) Entity 클래스 설정
+//	- Serializable (i) 구현
+//	- @IdClass(TestkeyId.class) 로 식별자 클래스를 매핑
+//	- 식별자클래스의 변수명과 엔티티의 변수명 동일
+//	- key 컬럼에 @Id 지정 
+
+// 3) Repository 생성
+// 	- TestkeyRepository : Key_Type 에 주의 
+
+// => https://velog.io/@fj2008/JPA-복합키-작성기초
+
+@Entity 
+@Table(name="cart")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+@IdClass(CartId.class)
+public class Cart implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-       @Id
-       @GeneratedValue(strategy = GenerationType.IDENTITY)
-       @Column(name="cart_num")
-	   private int cart_num; // pk
+	// => id+prod_num 에 P.key 적용
+	@Id
+	private String id;
+	@Id
+	private int prod_num;
+	private int quantity;
 	
-       @Column(name="id")
-	   private String id; // 장바구니 이용 회원 FK for user(id)
-	   
-       @Column(name="prod_num")
-	   private int prod_num; // 상품번호 FK for product(prod_num)
-	   
-       @Column(name="quantity")
-	   //@Column(nullable = false, columnDefinition = "int default 1")
-	   private int quantity;
-       
-       @Column(name="shipping_name")
-       private String shipping_name;
-       
-       @Column(name="shipping_zipcode")
-       private String shipping_zipcode;
-       
-       @Column(name="shipping_address")
-       private String shipping_address;
-       
-       @Column(name="shipping_addressdetail")
-       private String shipping_addressdetail;
-       
-       @Column(name="shipping_phone")
-       private String shipping_phone;
-       
-      //private String prod_mainimage;
-
-}
+} //class

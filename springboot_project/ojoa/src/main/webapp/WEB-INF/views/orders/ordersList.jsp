@@ -26,6 +26,7 @@
 		<th>결제액</th>
 		<th>결제 수단</th>
 		<th>배송지</th>
+		<th>주문 상세</th>
 		<th>*주문취소*</th>
 
 
@@ -44,6 +45,7 @@
 					<td>${s.orders_price}</td>
 					<td>${s.orders_method}</td>
 					<td>${s.orders_addresscheck}</td>
+					<td align="center"><a href="ordersdt?orders_num=${s.orders_num}">주문 상세</a></td>
 					<td align="center"><a href="ocancel?orders_num=${s.orders_num}">주문취소</a></td>
 				</tr>
 			</c:forEach>

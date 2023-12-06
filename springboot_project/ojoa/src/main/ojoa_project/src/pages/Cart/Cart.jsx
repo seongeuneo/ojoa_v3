@@ -44,11 +44,11 @@ const Cart = ({ cart, convertPrice }) => {
     }, [selectedItems]);
 
     // handleRemoveFromCart: ID를 기반으로 카트에서 항목을 제거하고 총 가격을 업데이트
-    const handleRemoveFromCart = (itemId) => {
-        const updatedCart = cartState.filter((item) => item.id !== itemId);
-        setCartState(updatedCart);
-        updateTotal();
-    };
+    // const handleRemoveFromCart = (itemId) => {
+    //     const updatedCart = cartState.filter((item) => item.id !== itemId);
+    //     setCartState(updatedCart);
+    //     updateTotal();
+    // };
 
 
     //handleCheckAll: isAllChecked 상태를 토글하고 
@@ -143,7 +143,7 @@ const Cart = ({ cart, convertPrice }) => {
                 onDecrease={onDecrease}
                 onIncrease={onIncrease}
                 handleAddToCart={addToCart} // 상품 추가 함수 전달
-                handleRemove={handleRemoveFromCart} // 상품 제거 함수 전달
+                //Remove={handleRemoveFromCart} // 상품 제거 함수 전달
                 convertPrice={convertPrice}
                 selectedItems={selectedItems} // 선택된 아이템 전달
                 setSelectedItems={setSelectedItems}
