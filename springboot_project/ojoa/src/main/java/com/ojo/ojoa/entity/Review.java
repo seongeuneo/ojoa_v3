@@ -26,15 +26,17 @@ public class Review {
     @Column(name="review_seq")
 	private int review_seq; //Primary key Auto increment
 	
-	@Column(name="id", nullable=false)
+	@Column(name="id")
 	private String id; //Foregin key
 	
-	@Column(name="review_title", nullable=false)
+	@Column(name="prod_num")
+	private int prod_num;
+	
+	@Column(name="review_title")
 	private String review_title;
 	
-	@Column(name="review_content", nullable=false)
+	@Column(name="review_content")
 	private String review_content;
-	
 	
 	@Column(name="review_image1")
 	private String review_image1;
@@ -45,7 +47,7 @@ public class Review {
 	@Column(name="review_date")
 	private String review_date;
 	
-	@Column(name="review_view", nullable = false) //columnDefinition = "int default 0")
+	@Column(name="review_view") //columnDefinition = "int default 0")
 	private int review_view;
 	
 } //class

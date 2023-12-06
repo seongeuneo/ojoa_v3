@@ -56,28 +56,16 @@ public class WishController {
         }
     }
 
-
-    
-    @DeleteMapping(value = "/wdelete/{wish_num}")
-    public String wdelete(@PathVariable("wish_num") int wish_num, HttpSession session, RedirectAttributes rttr) {
-
-        String uri = "redirect:/wish/wishlist";
-
-        try {
-            log.info("** cancel 성공  => " + wishService.delete(wish_num));
-            rttr.addFlashAttribute("message", "~ 관심상품 제거 성공!! ~~");
-            if (((String) session.getAttribute("loginID")).equals("admin")) {
-                // => 관리자에 의한 강제 주문취소 : orderList.jsp
-                uri = "redirect:wishlist";
-            } else {
-                // => 본인삭제 : home.jsp, session 무효화 -> ??????????
-                session.invalidate();
-            }
-        } catch (Exception e) {
-            log.info("** delete Exception => " + e.toString());
-            rttr.addFlashAttribute("message", "~~ 취소 실패 ~~");
-        }
-
-        return uri;
+    @DeleteMapping("/wdelete/{wish_num}")
+    // 경로로 오는거니깐.. @pathvariable 사용
+    public ResponseEntity<?> wdelete(@PathVariable("wish_num") int wish_num, Wish entity){
+       entity.setWish_num(wish_num);
+       if(wishService.delete(wish_num) > 0) {
+          log.info("axidelete HttpStatus.OK = " + HttpStatus.OK);
+          return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);      
+       } else {
+          log.info("axidelete HttpStatus.BAD_GATEWAY = " + HttpStatus.BAD_GATEWAY);
+          return new ResponseEntity<String>("삭제 실패, Data_Notfound", HttpStatus.BAD_GATEWAY);
+       }
     }
 }

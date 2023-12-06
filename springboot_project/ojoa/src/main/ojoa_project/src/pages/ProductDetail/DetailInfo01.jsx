@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import "./ProductDetail.css";
-import mockList from '../../data/ItemsData'
-import { useParams } from "react-router-dom"
 
 
 function DetailInfo01() {
-    // 상품목록리스트에서 id 값에 따라 상품 상세 반영하기
-    const { mockList_id } = useParams();
-    const indiItem = mockList.filter((content) => content.id === parseInt(mockList_id))
-    const { imgNo } = indiItem[0]
-  
+    const [data, setData] = useState([]);
+    console.log("data는?" + data);
+
+    useEffect(() => {
+        axios
+            .get('/api/prod_image/allProd_imageList')
+            .then((response) => {
+                setData(response.data);
+                console.log("서버연결성공 => ", response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    // console.log("data.prod_imagenum");
+
+
 
     return (
         <div className="DetailInfo01">
@@ -18,9 +30,8 @@ function DetailInfo01() {
                 {/* <!-- product detail dt 로 요약 --> */}
 
                 {/* <!-- 상품상세정보 --> */}
-
                 <div className="pd_part1">
-                    <img src={`/detailIMG/d_${imgNo}.jpg`} alt="" />
+                    <img src={`${data.prod_imagedetail}`} alt="" />
                 </div>
             </div>
         </div>

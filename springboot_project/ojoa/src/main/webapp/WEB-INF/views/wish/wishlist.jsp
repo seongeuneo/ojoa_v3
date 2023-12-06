@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Wish Product List</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
 <h2>Wish Product List</h2>
@@ -28,12 +30,12 @@
 		<c:if test="${not empty requestScope.mywish}">
 			<c:forEach var="s" items="${requestScope.mywish}">
 				<tr>
-					<td>${s.wish_num}</a></td>
+					<td>${s.wish_num}</td>
 					<td>${s.id}</td>
 					<td>${s.prod_num}</td>
 					 <td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.prod_name}</td>
-					<td align="center"><a href="wdelete?wish_num=${s.wish_num}">삭제</a></td>
+					<td align="center"><a class="textlink" onclick="wishDelete('${s.wish_num}')">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>

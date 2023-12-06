@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojo.ojoa.DTO.CartDTO;
 import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.domain.WishDTO;
 import com.ojo.ojoa.entity.Cart;
@@ -57,5 +58,10 @@ public class WishServiceImpl implements WishService {
  	return wishRepository.findWishProd();
  	   } 
  	
+ // ** react selectAllList
+  	@Override
+  	public List<WishDTO> selectAllList() {
+  		return wishRepository.findAllWishList();
+  	}
  	
  } //class

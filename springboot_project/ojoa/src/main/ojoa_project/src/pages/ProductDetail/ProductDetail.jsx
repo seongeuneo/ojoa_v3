@@ -1,62 +1,50 @@
 import React, { useState } from "react";
 import "./ProductDetail.css";
-import { NavLink, Routes, Route, useParams, Link, useLocation } from "react-router-dom"
+import { NavLink, Routes, Route, Link, useLocation } from "react-router-dom"
 import DetailInfo01 from './DetailInfo01';
 import OrderReview02 from './OrderReview02';
 import ProdQna03 from './ProdQna03';
 import PurGuide04 from './PurGuide04';
-import mockList from '../../data/ItemsData'
+import { useProductList } from '../ProductList/useProductList';
 import Modal from 'react-modal';
 import AddCart from './Modal/AddCart';
 
 
 function ProductDetail({ handleCart }) {
-
-    // 상품목록리스트에서 id 값에 따라 상품 상세 반영하기
-    const { mockList_id } = useParams();
-    const indiItem = mockList.filter((content) => content.id === parseInt(mockList_id))
-    const { id, imgNo, productName, productPriceFormatted, productPromotion, productInfo, productReview, productGrade } = indiItem[0]
+    // ProductListItem에서 데이터 받아오기 
+    const location = useLocation();
+    const productData = location.state.productData;
+    console.log("1. productData는 ???" + productData);
+    console.log("1. productData는 ???" + productData.prod_name);
     //======================================
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
-
-
-
+    
     // 장바구니 기능
     // 장바구니에 물건
     const handleAddToCart = () => {
         const cartItem = {
-            id: id,
-            imgNo: imgNo,
-            productName: productName,
-            productPriceFormatted: productPriceFormatted,
-            productPromotion: productPromotion,
-            productInfo: productInfo,
-            productReview: productReview,
-            productGrade: productGrade,
+            id: productData.prod_num,
+            imgNo: productData.prod_mainimage,
+            productName: productData.prod_name,
+            productPriceFormatted: productData.prod_price1,
+            productPromotion: productData.prod_discount,
+            productInfo: productData.prod_content,
+            productGrade: productData.prod_grade,
             quantity: count,
         };
         handleCart(cartItem);
     };
 
-
     // // 장바구니 추가 모달창 띄우기
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
-
 
     function handleCartAndOpenModal() {
         handleAddToCart();
         openModal();
     }
-    // if (indiItem.length > 0) {
-    //     return "상품 있음"
-    // } else {
-    //     return "상품 없음"
-    // }
-
 
     //======================================
     // 수량 변경한 만큼 가격에 계산
@@ -73,12 +61,15 @@ function ProductDetail({ handleCart }) {
         }
     }
 
-    const sellPrice = productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // 1000단위 끊기
+    const sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
+    const sum = count * sellPrice;
+    const result = sum.toLocaleString();
 
-    const sum = count * productPriceFormatted;
 
-    const result = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
+    //======================================
+    // 대표 썸네일 이미지 클릭시 변경
+    const [mainImg, setMainImg] = useState(`${productData.prod_mainimage}`);
     //======================================
     // 대표 썸네일 이미지 클릭시 변경
     const imgChange = (e) => {
@@ -86,31 +77,21 @@ function ProductDetail({ handleCart }) {
     };
 
     //======================================
-    // 대표 썸네일 이미지 클릭시 변경
-    const [mainImg, setMainImg] = useState(`../thumbs/${imgNo}_1.jpg`);
-
-
-
-
-
-    //======================================
-
-
     return (
         <div className="ProductDetail">
             <div className="path">
                 <span>현재 위치</span>
                 <ol>
                     <li><NavLink to="/">홈</NavLink></li>
-                    {/* <li><NavLink to="/ProductList">&gt; &nbsp;&nbsp;의자</NavLink></li> */}
+                    <li><NavLink to="/ProductList">&gt; &nbsp;&nbsp;의자</NavLink></li>
                     <li title="현재 위치">&gt; &nbsp;&nbsp;현재 위치</li>
                 </ol>
             </div>
+
             {/* <!-- main product detail --> */}
             {/* <!-- product detail dt 로 요약 --> */}
-
             <div className="product_view">
-                <h2>{productName}</h2>
+                <h2>{productData.prod_name}</h2>
                 <table>
                     <caption>
                         <details className="hide">
@@ -126,12 +107,13 @@ function ProductDetail({ handleCart }) {
                         </tr>
                         <tr>
                             <th>상품코드</th>
-                            <td>0000{id}</td>
+                            <td>{productData.prod_num}</td>
                         </tr>
-                        <tr>
+                        {/* 일단 kepp */}
+                        {/* <tr>
                             <th>제조사/공급사</th>
                             <td>OJOA &#47; 오조아생활연구소</td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <th>구매수량</th>
                             <td>
@@ -142,15 +124,16 @@ function ProductDetail({ handleCart }) {
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        {/* 일단 kepp */}
+                        {/* <tr>
                             <th>사용가능쿠폰</th>
                             <td>
                                 <select>
                                     <option>-</option>
-                                    {/* <option>신규가입쿠폰 5%</option> */}
+                                     <option>신규가입쿠폰 5%</option> 
                                 </select>
                             </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <th>옵션선택</th>
                             <td>
@@ -171,12 +154,12 @@ function ProductDetail({ handleCart }) {
                 </table>
 
                 <div className="pd_img">
-                    <img src={mainImg} alt="" id="mainImg" />
+                    <img src={productData.prod_mainimage} alt="" id="mainImg" />
                     <ul>
-                        <li><img onClick={() => imgChange(`../thumbs/${imgNo}_1.jpg`)} src={`../thumbs/${imgNo}_1.jpg`} alt="" id="thumb1" /></li>
-                        <li><img onClick={() => imgChange(`../thumbs/${imgNo}_2.jpg`)} src={`../thumbs/${imgNo}_2.jpg`} alt="" id="thumb2" /></li>
-                        <li><img onClick={() => imgChange(`../thumbs/${imgNo}_3.jpg`)} src={`../thumbs/${imgNo}_3.jpg`} alt="" id="thumb3" /></li>
-                        <li><img onClick={() => imgChange(`../thumbs/${imgNo}_4.jpg`)} src={`../thumbs/${imgNo}_4.jpg`} alt="" id="thumb4" /></li>
+                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb1" /></li>
+                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb2" /></li>
+                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb3" /></li>
+                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb4" /></li>
                     </ul>
                 </div>
 
@@ -203,9 +186,9 @@ function ProductDetail({ handleCart }) {
 
             <Routes>
                 <Route path="/*" element={<DetailInfo01 />} />
-                <Route path="/OrderReview02" element={<OrderReview02 />} />
-                <Route path="/ProdQna03" element={<ProdQna03 />} />
-                <Route path="/PurGuide04" element={<PurGuide04 />} />
+                <Route path="/OrderReview02/*" element={<OrderReview02 productData={productData} />} />
+                <Route path="/ProdQna03/*" element={<ProdQna03 />} />
+                <Route path="/PurGuide04/*" element={<PurGuide04 />} />
             </Routes>
         </div >
 
