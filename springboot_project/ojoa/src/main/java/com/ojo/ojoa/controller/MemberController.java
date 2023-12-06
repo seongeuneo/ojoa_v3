@@ -160,6 +160,23 @@ public class MemberController {
         }
     } //rlogin
 	
+	//=> 리액트 LogOut 처리
+	// => session 무효화, home으로 
+	@PostMapping(value="/rlogout")
+	public String rlogout(HttpServletRequest request) {
+		//세션을 삭제
+		HttpSession session = request.getSession(false); 
+        // session이 null이 아니라는건 기존에 세션이 존재했었다는 뜻이므로
+        // 세션이 null이 아니라면 session.invalidate()로 세션 삭제해주기.
+		if(session != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	} //rlogout
+
+	
+	
+	
 	// => Logout
 	// => session 무효화, home으로 
 	@GetMapping(value="/logout")

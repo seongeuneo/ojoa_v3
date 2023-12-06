@@ -172,6 +172,7 @@
     color: #222;
     font-size: 15px;
     position: absolute;
+    cursor: pointer;
     font-weight: 400;
     top: 0;
     right: 0;

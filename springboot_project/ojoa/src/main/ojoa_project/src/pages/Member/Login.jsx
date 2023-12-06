@@ -1,5 +1,5 @@
 import '../Member/Login.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +8,16 @@ const Login = () => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+
+    const [loggedInUsername, setLoggedInUsername] = useState('');
+
+    useEffect(() => {
+        // 세션 스토리지에서 유저 이름을 가져옴
+        const storedUsername = sessionStorage.getItem('username');
+        if (storedUsername) {
+            setLoggedInUsername(storedUsername);
+        }
+    }, []);
 
     const handleLogin = async () => {
         const loginData = {
@@ -22,7 +32,10 @@ const Login = () => {
             if (response.status === 200) {
                 if (response.data.includes('성공')) {
                     setMessage('로그인 성공');
-
+                    // 로그인 성공 시 유저 이름 세션 스토리지에 저장
+                    const loggedInUsername = response.data.username; // 예시: response.data.username
+                    sessionStorage.setItem('username', loggedInUsername);
+                    setLoggedInUsername(loggedInUsername);
                     // 로그인이 성공했을 때 원하는 작업 수행
                 } else {
                     // 실패 메시지를 추출하여 표시
@@ -55,6 +68,8 @@ const Login = () => {
             {findPasswordModalVisible && <FindPasswordModal setModalVisible={setFindPasswordModalVisible} />}
 
             <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> */}
+            {/* 로그인 성공 시 유저 이름 표시 */}
+            {loggedInUsername && <p>로그인된 유저: {loggedInUsername}</p>}
 
             <div className="login_path">
                 <span>현재 위치</span>
