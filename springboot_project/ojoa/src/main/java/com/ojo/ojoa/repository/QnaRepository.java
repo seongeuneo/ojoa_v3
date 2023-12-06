@@ -34,6 +34,7 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 			+ "       (:search_key = 'writer_name' AND q.id LIKE %:search_query%) OR "
 			//search_key = 'writer_name'이고, q.id가 주어진 search_query를 포함하는지 확인
 			+ "       (:search_key = 'product' AND p.prod_name LIKE %:search_query%)))")
+	
 			//search_key = 'product'이고, p.prod_name이 주어진 search_query를 포함하는지 확인
 	List<QnaDTO.QnaMainListDTO> findConditionQnaList(
 			@Param("board_category") String board_category,
