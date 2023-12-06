@@ -14,12 +14,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "member")
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

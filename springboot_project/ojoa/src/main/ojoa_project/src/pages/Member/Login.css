@@ -162,7 +162,7 @@
     float: right;
 } */
 
-.login_fieldset .login_btn a {
+.login_fieldset .login_btn button {
     display: block;
     border: 1px solid;
     width: 90px;
@@ -172,6 +172,7 @@
     color: #222;
     font-size: 15px;
     position: absolute;
+    cursor: pointer;
     font-weight: 400;
     top: 0;
     right: 0;

@@ -6,4 +6,5 @@ import com.ojo.ojoa.entity.Member;
 
 public interface MemberRepository 
 					extends JpaRepository<Member, String> {
+
 }
