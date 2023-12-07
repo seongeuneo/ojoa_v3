@@ -191,7 +191,7 @@ thead>tr>th:first-child {
 
 .CartList .cart_product_count {
   position: relative;
-  width: 90px;
+  width: 200px;
   height: 30px;
   border-radius: 5px;
   align-items: center;
@@ -227,12 +227,12 @@ thead>tr>th:first-child {
   border-bottom: none;
 }
 
-.CartList .cart_product_count .count>span {
+/* .CartList .cart_product_count .count>span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 
 
 
@@ -457,4 +457,60 @@ thead>tr>th:first-child {
   font-size: 14px;
   line-height: 18px;
   color: #767676;
+}
+
+/* ------------------ 장바구니 수량 ---------------------  */
+.CartList .cart_product_count.pd_length {
+  width: 71px;
+  height: 32px;
+  border: 1px solid #c6c6c6;
+}
+
+.CartList .cart_product_count .pd_length>input {
+  width: 100px;
+  height: 32px;
+  border: none;
+  text-align: center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.CartList .cart_product_count .pd_length button {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid black;
+  border-radius: 4px;
+  font-weight: border;
+  background-color: white;
+}
+
+.CartList .cart_product_count .pd_length a {
+  overflow: hidden;
+  right: 0;
+  top: 0;
+  width: 26px;
+  height: 16px;
+  color: transparent;
+  display: none;
+}
+
+.CartList .cart_product_count .pd_length>a:nth-of-type(1) {
+  top: 0;
+}
+
+.CartList .cart_product_count .pd_length>a:nth-of-type(1) {
+  bottom: 0;
+  border-top: 1px solid #c6c6c6;
+}
+
+.CartList .pd_length button:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  transition-duration: 1s;
+  cursor: pointer;
 }

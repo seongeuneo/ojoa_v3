@@ -27,8 +27,9 @@ public interface CartService {
 	
 	
 	// ** DUPLICATE KEY UPDATE 구문
-	void CartUpdate(String id, int prod_num, int quantity);
+	void CartUpdateUp(String id, int prod_num, int quantity);
 
+	void CartUpdateDown(String id, int prod_num, int quantity);
 //=================================================================
 	
     // ** Join (장바구니 + 상품)

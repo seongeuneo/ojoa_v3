@@ -44,8 +44,19 @@ extends JpaRepository<Cart, CartId> {
 	@Query( nativeQuery=true,
 			value = "insert into cart VALUES (:id, :prod_num, :quantity)"
 				 + " ON DUPLICATE KEY UPDATE quantity = quantity+:quantity")
-	void CartUpdate(@Param("id") String id, @Param("prod_num") int prod_num, 
+	void CartUpdateUp(@Param("id") String id, @Param("prod_num") int prod_num, 
 						@Param("quantity") int quantity);
+	
+
+	
+	// ** DUPLICATE KEY UPDATE 구문
+	@Modifying 
+	@Transactional
+	@Query( nativeQuery=true,
+	value = "insert into cart VALUES (:id, :prod_num, :quantity)"
+			+ " ON DUPLICATE KEY UPDATE quantity = quantity-:quantity")
+	void CartUpdateDown(@Param("id") String id, @Param("prod_num") int prod_num, 
+			@Param("quantity") int quantity);
 
 	
 }

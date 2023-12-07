@@ -50,10 +50,16 @@ public class CartServiceImpl implements CartService {
  	
 	// ** DUPLICATE KEY UPDATE 구문
     @Override
-    public void CartUpdate(String id, int prod_num, int quantity) {
-    	cartRepository.CartUpdate(id, prod_num, quantity);
+    public void CartUpdateUp(String id, int prod_num, int quantity) {
+    	cartRepository.CartUpdateUp(id, prod_num, quantity);
     }	
  	
+    // ** DUPLICATE KEY UPDATE 구문
+    @Override
+    public void CartUpdateDown(String id, int prod_num, int quantity) {
+    	cartRepository.CartUpdateDown(id, prod_num, quantity);
+    }	
+    
  	
  	
  	// ** (장바구니+상품) 테이블 Join 
