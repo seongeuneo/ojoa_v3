@@ -173,18 +173,27 @@ public class RestReactController {
 //===============================================================================		
 	
 	// 게시판 QnA 
+    // "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
+    // qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
 	@GetMapping("qna/allQnaList")
+	// "/qna/allQnaList"경로에 대한 HTTP GET요청을 처리함
     public ResponseEntity<List<QnaDTO.QnaMainListDTO>> getAllQnaList(
+    		// ResponseEntity를 반환
+    		// ResponseEntity는 <List<QnaDTO.QnaMainListDTO>타입의 데이터를 담고있다.
+    		// 그래서 QnaMainListDTO 객체들의 리스트를 반환함
     		@RequestParam(required = false) String board_category,
+    		//(required = false) -> 값이없어도 호출
     		@RequestParam(required = false) String search_date,
 	        @RequestParam(required = false) String search_key,
 	        @RequestParam(required = false) String search_query
     	        ) {
 		List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key, search_query);
-    	return ResponseEntity.ok(qnaList);
+    	// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
+		return ResponseEntity.ok(qnaList);
+		// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
     }
 	
-	 // 게시판 QnA - 게시글 등록	: 워니
+	 // 게시판 QnA - 게시글 등록
     @PostMapping("qna/saveQna")
     public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
         try {

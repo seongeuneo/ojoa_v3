@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojo.ojoa.DTO.OrdersDTO;
 import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Orders;
 
@@ -23,6 +24,8 @@ public interface OrdersService {
 	// ** delete
 	public int delete(int orders_num);
 	
+	// ** react selectAllList
+		List<OrdersDTO> selectAllList();
     
     
 }

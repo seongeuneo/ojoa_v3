@@ -9,7 +9,7 @@ import TopButton from './components/TopButton';
 import Main from './pages/Main/Main';
 import MyPage from './pages/MyPage/MyPage';
 import Store from './pages/Store/Store';
-import Order from './pages/Order/Order';
+import OrdersDetail from './pages/OrdersDetail/OrdersDetail';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from './pages/ProductList/ProductList';
 import NotFound from './pages/NotFound/NotFound';
@@ -23,14 +23,14 @@ import Mileage from './pages/MyPage/MyShop/Mileage';
 import Modify from './pages/Member/Modify';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
-import Checkout from "./pages/Checkout/Checkout";
+import Orders from "./pages/Orders/Orders";
 import Wish from "./pages/MyPage/MyShop/Wish";
 
 import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
 // import ProductList from './pages/ProductList'
 
-import PaymentConfirmation from './pages/Checkout/PaymentConfirmation';
+import PaymentConfirmation from './pages/Orders/PaymentConfirmation';
 
 
 function App() {
@@ -67,7 +67,7 @@ function App() {
           <Route path="/mypage/mileage/*" element={<Mileage />} />
           <Route path="/mypage/wish/*" element={<Wish />} />
           <Route path="/store/*" element={<Store />} />
-          <Route path="/order/*" element={<Order />} />
+          <Route path="/ordersdetail/*" element={<OrdersDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/member/login/" element={<Login />} />
           <Route path="/" element={<Main />} />
@@ -89,7 +89,7 @@ function App() {
           {/* <Route path="/login/info/agree" element={<Agree />} />
           <Route path="/login/info/agree/popup" element={<Popup />} /> */}
           <Route path="/qna" element={<Qna />} />
-          <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route path="/orders" element={<Orders cart={cart} />} />
           <Route path="/paymentconfirmation" element={<PaymentConfirmation cart={cart} />} />
         </Routes>
         <Footer />

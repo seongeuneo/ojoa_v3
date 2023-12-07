@@ -1,11 +1,12 @@
 import React from "react";
-import "./Order.css";
+import "./OrdersDetail.css";
 import { Link } from "react-router-dom"
+import axios from "axios"; // axios import 추가
 
 
-function Order() {
+function OrdersDetail() {
     return (
-        <div className="Order">
+        <div className="Orders_detail">
             <div className="path">
                 <span>현재 위치</span>
                 <ol>
@@ -87,4 +88,4 @@ function Order() {
     )
 };
 
-export default Order;
+export default OrdersDetail;

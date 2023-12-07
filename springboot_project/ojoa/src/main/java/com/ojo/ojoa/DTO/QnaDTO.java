@@ -10,6 +10,9 @@ public class QnaDTO {
 	
 	@Data
 	public static class QnaMainListDTO {
+		//가독성 및 유지보수 향상을 위해서 QnaMainListDTO를 만듦
+		//검색기능을 구현하기 위해 주요정보를 담는 DTO클래스를 만듦
+		
 		@JsonProperty("num")
 		private int qna_seq;
 		
@@ -38,6 +41,7 @@ public class QnaDTO {
 	    private LocalDateTime qna_redate;
 	    
 	    public QnaMainListDTO(int qna_seq, String prod_image, String prod_name, String qna_category, String qna_title, String qna_content, String titleIcon, String id, LocalDateTime qna_redate) {
+	    // 해당클래스의 객체를 생성할때 필요한 모든 필드를 인자로 받아 초기화하는 생성자
 	    	super();
 	        this.qna_seq = qna_seq;
 	        this.prod_image = prod_image;
@@ -50,6 +54,6 @@ public class QnaDTO {
 	        this.qna_redate = qna_redate;
 	    }
 	}
-    
 }
+
 
