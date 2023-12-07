@@ -9,23 +9,23 @@ import PaymentConfirmation from './PaymentConfirmation';
 import { Link, useNavigate } from 'react-router-dom';
 // import AddressPopup from './AddressPopup/AddressPopup';
 
-const mockData = [
-  {
-    "id": 101,
-    "imgNo": 101,
-    "productName": "조금 큰 나무 침대",
-    "productPriceFormatted": "385000",
-    "productPromotion": "7",
-    "productInfo": "안녕하세요 그렇습니다",
-    "productReview": "8",
-    "productGrade": "4.8",
-    "quantity": 1
-  }
-];
+// const mockData = [
+//   {
+//     "id": 101,
+//     "imgNo": 101,
+//     "productName": "조금 큰 나무 침대",
+//     "productPriceFormatted": "385000",
+//     "productPromotion": "7",
+//     "productInfo": "안녕하세요 그렇습니다",
+//     "productReview": "8",
+//     "productGrade": "4.8",
+//     "quantity": 1
+//   }
+// ];
 
 
 
-function Checkout({ cart }) {
+function Checkout({ cart, selectedItems }) {
 
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
@@ -54,21 +54,23 @@ function Checkout({ cart }) {
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
-
+  
   // 배송비
   const deliveryPrice = 0;
-
+  
   // 할인금액
   const discountPrice = 0;
+  
+  const selectedProducts = cart.filter(item => selectedItems.includes(item.id));
 
   const displayedCartList = useMemo(() => {
-    return cart.map(item => ({
+    return selectedProducts.map(item => ({
       ...item,
       dispalyedPrice: formatNumber(item.productPriceFormatted),
       totalPrice: item.quantity * Number(item.productPriceFormatted),
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
-  }, [cart]);
+  }, [selectedProducts]);
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
@@ -115,12 +117,12 @@ function Checkout({ cart }) {
             </thead>
             <tbody>
               {displayedCartList.map((item, index) => (
-                <tr key={item.id}>
+                <tr key={item.prod_num}>
                   <td>{index + 1}</td>
                   <td>
                     <img src={`/thumbs/${item.imgNo}_1.jpg`} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} />
                   </td>
-                  <td>{item.productName}</td>
+                  <td>{item.prod_name}</td>
                   <td>{item.dispalyedPrice}원</td>
                   <td>{item.quantity}</td>
                   <td>-</td>
