@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Member Login Form **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<title>오조아 로그인</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 </head>
 <body>
-<h2>** Member Login **</h2>
+<h2>오조아 로그인</h2>
 <form action="login" method="post">
 <table>
 	<tr height="40"><td><label for="id">ID</label></td>
@@ -25,11 +25,9 @@
 	</tr>
 </table>
 </form>
-<hr>
 <c:if test="${not empty requestScope.message}">
 => ${requestScope.message}<br>
 </c:if>	
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

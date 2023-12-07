@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** Password Update **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css" >
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script>
 	function pCheck() {
 		let pvalue = document.getElementById('password').value; 
@@ -46,12 +46,9 @@
 </table>
 </form>
 </div>
-<hr>
 <c:if test="${not empty requestScope.message}">
 	<b>=> ${requestScope.message}</b><br>
 </c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home" >[Home]</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

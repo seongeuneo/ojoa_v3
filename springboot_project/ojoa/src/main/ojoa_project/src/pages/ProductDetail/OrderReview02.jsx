@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./ProductDetail.css";
 import Modal from 'react-modal';
 import RModal from './Modal/RModal';
+import { useLocation } from "react-router-dom";
 
 // 배열 속성 writer 입력시 성만 따오기
 const lastName = (fullName) => {
@@ -13,14 +14,18 @@ const lastName = (fullName) => {
 };
 
 
-function OrderReview02({ productData }) {
+function OrderReview02() {
+    const location = useLocation();
+    const productData = location.state.productData;
+    console.log("OrderReview02!!!!");
+    console.log("무슨 번호가 나올까?? " + productData.prod_num)
+
     const [data, setData] = useState([]);
-    console.log("OrderReview02 !! data는?" + data);
-    console.log("productData => " + productData);
+    console.log("OrderReview02의 data => " + data);
 
     useEffect(() => {
         axios
-            .post('/reviewrest/review/allReviewList')
+            .get('/reviewrest/reviewR/allReviewList')
             .then((response) => {
                 setData(response.data);
                 console.log("서버연결성공 => ", response.data);
@@ -36,14 +41,19 @@ function OrderReview02({ productData }) {
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
 
-    // 리뷰리스트 mock 리스트 맵핑
+    // 리뷰리스트 리스트 맵핑
     const singleReviewLi = data.map((content) => {
         return (
             <tr>
                 <th>{content.review_seq}</th>
-                <td>{content.review_title}</td>
-                <td>{content.review_id}&#42;&#42;</td>
+                <td>{content.id}</td>
+                {/* <td>{productData.prod_num}</td> */}
+                {/* <td>{content.review_title}</td> */}
+                <td>{content.review_content}&#42;&#42;</td>
+                {/* <td>{content.review_image1}&#42;&#42;</td>
+                <td>{content.review_image2}&#42;&#42;</td> */}
                 <td>{content.review_date}</td>
+                <td>{content.review_rate}</td>
                 <td>{content.review_view}</td>
             </tr>
         );
@@ -79,17 +89,20 @@ function OrderReview02({ productData }) {
                     <tbody>
                         <tr>
                             <th>번호</th>
-                            <th>제목</th>
                             <th>작성자</th>
+                            {/* <th>상품번호</th>
+                            <th>제목</th> */}
+                            <th>내용</th>
                             <th>작성일</th>
-                            <th>조회</th>
+                            <th>평점</th>
+                            <th>조회수</th>
                         </tr>
                         {singleReviewLi}
                         <tr>
-                            <th colspan="5">
+                            <th colspan="6">
                                 <a onClick={openModal}>상품후기쓰기 </a>
-                                <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
-                                    <RModal closeModal={closeModal} onReviewTextChange={handleReviewTextChange} />
+                                <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal} state={{ productData: productData }}>
+                                    <RModal closeModal={closeModal} onReviewTextChange={handleReviewTextChange} state={{ productData: productData }} />
                                 </Modal>
                                 <a> 내가쓴글조회하기</a>
                             </th>

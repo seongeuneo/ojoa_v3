@@ -9,17 +9,27 @@ function Wish() {
     // Spring Boot 연결
     const [data, setData] = useState([]);
 
+    const prod_num = data.prod_num;
 
     useEffect(() => {
         axios
             .post("/api/wish/allWishList")
             .then((response) => {
-                setData(response.data);
-                console.log("서버연결성공 => ", response.data);
-                console.log("서버연결성공 => ", data);
-            }).catch((error) => {
-                //  alert(error);
-                console.log(error)
+                const currentWishlist = response.data; // 현재 관심 상품 목록
+                const isProductExists = currentWishlist.some(item => item.prod_num === prod_num);
+
+                if (isProductExists) {
+                    // 이미 관심목록에 있는 상품이라면 alert 창 띄우기
+                    alert("이미 관심목록에 있는 상품입니다.");
+                } else {
+                    // prod_num이 중복되지 않는다면 상태 업데이트
+                    setData(currentWishlist);
+                    console.log("서버연결성공 => ", currentWishlist);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
             });
     }, []);
 

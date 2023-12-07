@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Cart List **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<title>Cart List</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script src="/resources/myLib/productCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<h2>** Cart List **</h2>
+<h2>장바구니 목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
@@ -51,7 +50,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

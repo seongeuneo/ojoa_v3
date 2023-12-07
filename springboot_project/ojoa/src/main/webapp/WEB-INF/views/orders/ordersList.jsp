@@ -6,19 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>** Orders List **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/ordersList.css">
 <script src="/resources/myLib/productCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<h2>** Orders List **</h2>
+<h2>주문목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table border="1" style="width:90%">
-	<tr bgcolor="SkyBlue">
+	<tr >
 		<th>주문번호</th>
 		<th>회원ID</th>
 		<th>주문날짜</th>
@@ -55,7 +54,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

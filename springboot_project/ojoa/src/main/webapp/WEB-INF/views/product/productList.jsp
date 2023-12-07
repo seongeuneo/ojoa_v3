@@ -6,19 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>** Product List **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/productList.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/myLib/productCheck.js"></script>
 </head>
 <body>
-<h2>** Product List **</h2>
+<h2>상품 목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table border="1" style="width:90%">
-	<tr bgcolor="Orange">
+	<tr class="prod-columns">
 		<th>상품 번호</th>
 		<th>대표 썸네일 사진</th>
 		<th>상품 이름</th>
@@ -43,7 +42,7 @@
 		<c:if test="${not empty requestScope.product}">
 			<c:forEach var="s" items="${requestScope.product}">
 				<tr>
-					<td>${s.prod_num}</a></td>
+					<td>${s.prod_num}</td>
 					<td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.prod_name}</td>
 					<td>${s.prod_kind}</td>
@@ -72,7 +71,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

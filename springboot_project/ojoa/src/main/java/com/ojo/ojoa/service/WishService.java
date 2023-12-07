@@ -30,5 +30,10 @@ public interface WishService {
 		 
 	// ** react selectAllList
 		List<WishDTO> selectAllList();
+		
+	 // 사용자 ID와 상품 번호로 Wish를 찾는 메서드 추가
+    Wish selectOneByUserIdAndProdNum(String userId, int prodNum);
+		
+
     
 }

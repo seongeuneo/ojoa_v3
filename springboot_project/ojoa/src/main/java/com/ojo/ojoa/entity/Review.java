@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class Review extends ReviewBaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +43,14 @@ public class Review {
 	
 	@Column(name="review_image2")
 	private String review_image2;
-			
-	@Column(name="review_date")
-	private String review_date;
-	
+//			
+//	@Column(name="review_date")
+//	private String review_date;
+//	
 	@Column(name="review_view") //columnDefinition = "int default 0")
 	private int review_view;
+	
+	@Column(name="review_rate") 
+	private int review_rate;
 	
 } //class

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import "./ProductDetail.css";
 
 
 function DetailInfo01() {
+    const location = useLocation();
+    const productData = location.state.productData;
+    console.log("DetailInfo01?");
+
+
     const [data, setData] = useState([]);
     console.log("data는?" + data);
 
@@ -31,6 +37,7 @@ function DetailInfo01() {
 
                 {/* <!-- 상품상세정보 --> */}
                 <div className="pd_part1">
+                    <p>{data.prod_imagedetail}</p>
                     <img src={`${data.prod_imagedetail}`} alt="" />
                 </div>
             </div>

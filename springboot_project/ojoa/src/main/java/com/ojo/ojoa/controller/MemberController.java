@@ -104,7 +104,7 @@ public class MemberController {
 	}
 	
 	// => Login 처리 : Post
-	@PostMapping(value="/login")
+	@PostMapping(value="login")
 	public String login(HttpSession session, Model model, Member entity) {
 		// ** 로그인 Service 처리
 		// 1. 요청분석

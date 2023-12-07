@@ -6,21 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>** SpringBoot Qna_Insert **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 </head>
 <body>
-<h2>** SpringBoot Qna_Insert **</h2>
-
+<h2  style="text-align: center;">QnA Insert</h2>
 <form action="qnaInsert" method="Post" enctype="multipart/form-data" id="myform">
 <table>
-	<tr height="40"><th bgcolor="Pink">I D</th>
+	<tr height="40"><th>I D</th>
 		<td><input type="text" name="id" value="${sessionScope.loginID}" readonly size="20"></td></tr>
 	
-	 <!-- <tr height="40"><th bgcolor="Pink">상품 번호</th>
+	 <!-- <tr height="40"><th>상품 번호</th>
 		<td><input type="text" name="prod_num" value="prod_num" size="20"></td></tr> --> 
 	
 	<tr height="40">
-				<th bgcolor="Pink">카테고리</th>
+				<th>카테고리</th>
 				<td><select name="qna_category" id="qna_category">
 						<option value="상품 문의">상품 문의</option>
 						<option value="배송 문의">배송 문의</option>
@@ -34,10 +33,10 @@
 				<!-- <br><span id="pdkMessage" class="eMessage"></span> -->
 		</td></tr>
 	
-	<tr height="40"><th bgcolor="Pink">제 목</th>
+	<tr height="40"><th>제 목</th>
 		<td><input type="text" name="qna_title" id="qna_title" size="50"></td></tr>	
 	
-	<tr height="40"><th bgcolor="Pink">문의내용</th>
+	<tr height="40"><th>문의내용</th>
 		<td><textarea rows="5" cols="50" name="qna_content" id="qna_content"></textarea>
 		</td></tr>
 	
@@ -49,12 +48,9 @@
 						
 </table>
 </form>
-<hr>
 <c:if test="${not empty requestScope.message}">
 => ${requestScope.message}
 </c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>
