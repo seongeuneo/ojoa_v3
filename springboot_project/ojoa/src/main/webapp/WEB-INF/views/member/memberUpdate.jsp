@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** MemberUpdate **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
@@ -289,12 +289,9 @@ function inCheck() {
   </c:if>				
 </table>
 </form>
-<hr>
 <c:if test="${not empty requestScope.message}">
 => ${requestScope.message}
 </c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

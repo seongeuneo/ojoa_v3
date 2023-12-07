@@ -42,7 +42,7 @@
 		<c:if test="${not empty requestScope.product}">
 			<c:forEach var="s" items="${requestScope.product}">
 				<tr>
-					<td>${s.prod_num}</a></td>
+					<td>${s.prod_num}</td>
 					<td><img alt="MyImage" src="/${s.prod_mainimage}" width="80" height="70"></td>
 					<td>${s.prod_name}</td>
 					<td>${s.prod_kind}</td>

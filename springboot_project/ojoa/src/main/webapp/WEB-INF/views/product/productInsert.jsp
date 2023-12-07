@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>** Product Insert **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/productInsert.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
@@ -168,7 +169,7 @@ function inCheck() {
 	
 	<tr height="40"><th></th>
 		<!-- <td><input type="submit" id="submitTag" value="상품등록" onclick="return inCheck()"> -->
-		<td><input type="submit" id="submitTag" value="상품등록">
+		<td><input type="submit" id="submitTag" value="상품등록" onclick="productInsertAndMove()">
 			&nbsp;&nbsp;
 			<input type="reset" value="등록취소">&nbsp;&nbsp;
 		</td>

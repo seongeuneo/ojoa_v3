@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Member Detail **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<title>회원정보 페이지</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 </head>
 <body>
-<h2>** Member Detail **</h2>
+<h2>회원정보 페이지</h2>
 <table>
 <c:if test="${not empty requestScope.apple}">
 	<tr height="40"><th bgcolor="Thistle">I D</th>
@@ -47,8 +47,6 @@
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
 </c:if>
 </table>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

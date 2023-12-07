@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<link rel="stylesheet" type="text/css"
-	href="/resources/myLib/Header.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Header.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/myLib/wish.js"></script>
-</head>
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="/resources/myLib/inCheck.js"></script>
+<script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<P>Server Time: ${serverTime}</P>
@@ -29,8 +30,11 @@
 					<ul class="login-out">
 						<!-- Login 전 -->
 						<c:if test="${empty sessionScope.loginID}">
-							<li><a href="member/loginForm">Login</a></li>
-							<li><a href="member/memberJoin">Join</a></li>
+						<!-- 비동기 -->
+							<!-- <li onclick="loginChange()"><a>Login</a></li>
+							<li onclick="joinChange()"><a>Join</a></li> -->
+							<li onclick="loginChange()"><a href="member/loginForm">Login</a></li>
+							<li onclick="joinChange()"><a href="member/memberJoin">Join</a></li>
 						</c:if>
 						<!-- Login 후 -->
 						<c:if test="${not empty sessionScope.loginID}">

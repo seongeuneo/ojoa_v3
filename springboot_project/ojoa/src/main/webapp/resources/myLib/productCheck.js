@@ -74,5 +74,18 @@ function payNow(id) {
 function modifyProduct(prod_num) {
 	// prod_num을 사용하여 수정해야 할 상품의 ID를 전달하거나 작업을 수행합니다.
 	// 예를 들어, 상품 수정 페이지로 이동하는 URL을 생성하거나 다른 작업을 수행할 수 있습니다.
-	window.location.href = `productDetail?prod_num=${prod_num}`;
+   let url ="product/productDetail?prod_num=" + prod_num;
+   axios.get(
+      url
+        ).then(response => {
+        let list = response.data;
+      /*alert("** List 성공 **");*/
+      document.getElementById('contentArea').innerHTML=list;
+   }).catch(err => {
+      if(err.response.status=='502') alert(err.response.data);
+      else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+      document.getElementById('contentArea').innerHTML="";
+      });
+      
+    document.getElementById("contentArea").innerHTML="";       
 }
