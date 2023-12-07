@@ -137,13 +137,29 @@ public class MemberController {
             passwordEncoder.matches(member.getPassword(), entity.getPassword())) {
 	    	
 	    	// 세션에 로그인 정보 설정
-			session.setAttribute("loginID", entity.getId());
-			session.setAttribute("loginName", entity.getName()); // 세션에 사용자 정보 저장
+			session.setAttribute("loginID", entity.getId()); // 세션에 사용자 정보 저장
+			session.setAttribute("loginName", entity.getName());
+			session.setAttribute("loginAddress", entity.getAddress()); 
+			session.setAttribute("loginAddressdetail", entity.getAddressdetail());
+			session.setAttribute("loginMemberyn", entity.getMemberyn());
+			session.setAttribute("loginRegdate", entity.getRegdate());
+			session.setAttribute("loginMarketing_sms", entity.getMarketing_sms());
+			session.setAttribute("loginMarketing_email", entity.getMarketing_email());
+			session.setAttribute("loginEmail1", entity.getEmail1());
+			session.setAttribute("loginEmail2", entity.getEmail2());
 			session.setMaxInactiveInterval(1800); // 세션 유효 시간을 1800초(30분)으로 설정
 			
 			// 로그인 후 세션 확인을 위한 콘솔 로그
 	        System.out.println("세션 loginID: " + session.getAttribute("loginID"));
 	        System.out.println("세션 loginName: " + session.getAttribute("loginName"));
+	        System.out.println("세션 loginAddress: " + session.getAttribute("loginAddress"));
+	        System.out.println("세션 loginAddressdetail: " + session.getAttribute("loginAddressdetail"));
+	        System.out.println("세션 loginMemberyn: " + session.getAttribute("loginMemberyn"));
+	        System.out.println("세션 loginRegdate: " + session.getAttribute("loginRegdate"));
+	        System.out.println("세션 loginMarketing_sms: " + session.getAttribute("loginMarketing_sms"));
+	        System.out.println("세션 loginMarketing_email: " + session.getAttribute("loginMarketing_email"));
+	        System.out.println("세션 loginEmail1: " + session.getAttribute("loginEmail1"));
+	        System.out.println("세션 loginEmail2: " + session.getAttribute("loginEmail2"));
 			
 	        // 로그인 후 세션 시작 및 만료 시간 로그
 	        long creationTime = session.getCreationTime();

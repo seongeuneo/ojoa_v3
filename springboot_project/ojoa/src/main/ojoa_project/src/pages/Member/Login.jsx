@@ -28,7 +28,10 @@ const Login = () => {
         console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력
 
         try {
-            const response = await axios.post("http://localhost:8080/member/rlogin", loginData);
+            const response = await axios.post("http://localhost:8080/member/rlogin", loginData, {
+                headers: { "Content-Type": "application/json" }
+            });
+
             if (response.status === 200) {
                 if (response.data.includes('성공')) {
                     setMessage('로그인 성공');
