@@ -58,7 +58,7 @@ public class RestReactController {
 	
 //======================= 관심상품 새로운 코드 추가(성은) ==============================	
 	// 관심상품
-	@GetMapping("wish/allWishList")
+	@PostMapping("wish/allWishList")
     public ResponseEntity<List<WishDTO>> getAllWishList() {
 		List<WishDTO> wishList = wishService.selectAllList();
     	return ResponseEntity.ok(wishList);
@@ -66,10 +66,22 @@ public class RestReactController {
 	
 	// 괌심상품에 상품 추가
 	@PostMapping("wish/saveWish")
-	public ResponseEntity<String> saveWish(@RequestBody Wish entity) {
+	public ResponseEntity<String> saveWish(HttpSession session, @RequestBody Wish entity) {
+		String loginID = (String) session.getAttribute("loginID");
+		
 		try {
-			System.out.println("saveWish111111"+entity);
-			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
+			if (loginID == null) {
+                throw new Exception("loginID isNull");
+            }
+            
+         // 이미 추가하려는 상품이 사용자의 관심목록에 있는지 확인
+            Wish existingWish = wishService.selectOneByUserIdAndProdNum(loginID, entity.getProd_num());
+            if (existingWish != null) {
+                return ResponseEntity.badRequest().body("이미 관심목록에 추가된 상품입니다.");
+            }
+            
+            entity.setId(loginID);
+			
 			wishService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
 			System.out.println("saveWish22222222"+entity);
 			return ResponseEntity.ok("데이터 저장 성공");

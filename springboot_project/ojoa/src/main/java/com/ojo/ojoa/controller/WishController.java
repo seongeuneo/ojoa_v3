@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.service.ProductService;
 import com.ojo.ojoa.service.WishService;
@@ -36,19 +38,22 @@ public class WishController {
     } // wishlist
     
     @PostMapping(value = "/addWish")
-    public ResponseEntity<String> addWish(@RequestParam("prod_num") int prod_num, int wish_num, HttpSession session, RedirectAttributes rttr) {
+    public ResponseEntity<String> addWish(HttpSession session, @RequestBody Wish entity, RedirectAttributes rttr) {
         String loginID = (String) session.getAttribute("loginID");
         try {
             if (loginID == null) {
                 throw new Exception("loginID isNull");
             }
             
-            Wish wish = new Wish();
-            wish.setId(loginID);
-            wish.setProd_num(prod_num); // content.prod_num 값을 설정
-            wish.setWish_num(wish_num);
+         // 이미 추가하려는 상품이 사용자의 관심목록에 있는지 확인
+            Wish existingWish = wishService.selectOneByUserIdAndProdNum(loginID, entity.getProd_num());
+            if (existingWish != null) {
+                return ResponseEntity.badRequest().body("이미 관심목록에 추가된 상품입니다.");
+            }
             
-            wishService.save(wish); // 상품을 관심목록에 추가하는 서비스 메서드 호출
+            entity.setId(loginID);
+            
+            wishService.save(entity); // 상품을 관심목록에 추가하는 서비스 메서드 호출
             return ResponseEntity.ok("상품이 관심목록에 추가되었습니다.");
         } catch (Exception e) {
             System.out.println("addWish exception " + e.toString());

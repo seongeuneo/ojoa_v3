@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import './ModalBasic.css';
-import mockList from '../../data/ItemsData';
+import { useProductList } from '../../pages/ProductList/useProductList';
 
 // ** header search 모달 내용을 담당하는 컴포넌트 ** //
 
 function ModalBasic({ setModalOpen }) {
+
+    const data = useProductList();
 
     useEffect(() => {
         if (setModalOpen) {
@@ -38,8 +40,8 @@ function ModalBasic({ setModalOpen }) {
     const handleSearchButtonClick = () => {
         if (inputValue !== '') {
             // mockList에서 상품 이름으로 검색하여 결과를 필터링.
-            const searchResults = mockList.filter((product) =>
-                product.productName.includes(inputValue)
+            const searchResults = data.filter((product) =>
+                product.prod_name.includes(inputValue)
             ); // 검색 버튼 클릭 시, 입력된 값과 일치하는 상품을 mockList 에서 검색.
             setSearchResults(searchResults); // searchResults 상태 업데이트.
         }
@@ -104,17 +106,17 @@ function ModalBasic({ setModalOpen }) {
                         ) : (
                             searchResults.map((product) => (
                                 <Link
-                                    to={`/ProductDetail/${product.id}`}
-                                    key={product.id}
+                                    to={`/ProductDetail/${product.prod_num}`}
+                                    key={product.prod_num}
                                     className="search-result-item"
                                     onClick={closeModalAndNavigate} // 클릭 시 모달을 닫는 함수 호출
                                 >
                                     <img
-                                        src={`/thumbs/${product.imgNo}_1.jpg`}
-                                        alt={product.productName}
+                                        src={`{product.prod_mainimage}`}
+                                        alt={product.prod_name}
                                     />
-                                    <h3>&nbsp;&nbsp;{product.productName}</h3>
-                                    <p>&nbsp;&nbsp;&nbsp;{numberWithCommas(product.productPriceFormatted)}원</p>
+                                    <h3>&nbsp;&nbsp;{product.prod_name}</h3>
+                                    <p>&nbsp;&nbsp;&nbsp;{numberWithCommas(product.prod_price1)}원</p>
                                 </Link>
                             ))
                         )}

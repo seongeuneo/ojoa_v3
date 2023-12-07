@@ -6,10 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ojo.ojoa.domain.ReviewDTO;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.entity.Review;
+import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -42,13 +46,13 @@ public class ReviewController {
     } // qnaInsert
 	
 	
-	
-	@GetMapping("/allReviewList")
-    public ResponseEntity<List<ReviewDTO>> getAllReviewList(Model model) {
-		List<ReviewDTO> test = reviewService.selectAllList();
-    	model.addAttribute("Review", test);
-    	return ResponseEntity.ok(test);
-    }
+//	
+//	@GetMapping("/allReviewList")
+//    public ResponseEntity<List<ReviewDTO>> getAllReviewList(Model model) {
+//		List<ReviewDTO> test = reviewService.selectAllList();
+//    	model.addAttribute("Review", test);
+//    	return ResponseEntity.ok(test);
+//    }
     
    // => Review Insert Service 처리: POST
    @PostMapping(value="/reviewInsert")
@@ -71,27 +75,40 @@ public class ReviewController {
    } // reviewInsert
    
    // ** Review Delete - 게시글 삭제
-   @GetMapping(value="/rdelete")
-   public String qdelete(HttpSession session, Review entity, RedirectAttributes rttr) {
-      
-      String uri = "redirect:/review/reviewList";
-      
-      try {
-         log.info("** delete 성공  => "+reviewService.delete(entity.getReview_seq()));
-         rttr.addFlashAttribute("message", "게시글삭제 성공!!") ;   
-         if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
-            // => 관리자에 의한 강제삭제 : qnaList.jsp
-            uri="redirect:reviewList";
-         }else {
-            // => 본인삭제 : home.jsp, session 무효화 
-            session.invalidate();
-         }
-      } catch (Exception e) {
-         log.info("** delete Exception => "+e.toString());
-         rttr.addFlashAttribute("message", " 삭제 실패.. ");
+//   @GetMapping(value="/rdelete")
+//   public String qdelete(HttpSession session, Review entity, RedirectAttributes rttr) {
+//      
+//      String uri = "redirect:/review/reviewList";
+//      
+//      try {
+//         log.info("** delete 성공  => "+reviewService.delete(entity.getReview_seq()));
+//         rttr.addFlashAttribute("message", "게시글삭제 성공!!") ;   
+//         if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
+//            // => 관리자에 의한 강제삭제 : qnaList.jsp
+//            uri="redirect:reviewList";
+//         }else {
+//            // => 본인삭제 : home.jsp, session 무효화 
+//            session.invalidate();
+//         }
+//      } catch (Exception e) {
+//         log.info("** delete Exception => "+e.toString());
+//         rttr.addFlashAttribute("message", " 삭제 실패.. ");
+//      }
+//      
+//      return uri;
+//   } // qdelete
+   
+   @DeleteMapping("/rdelete/{review_seq}")
+   // 경로로 오는거니깐.. @pathvariable 사용
+   public ResponseEntity<?> rDelete(@PathVariable("review_seq") int review_seq, Review entity){
+      entity.setReview_seq(review_seq);
+      if(reviewService.delete(review_seq) > 0) {
+         log.info("axidelete HttpStatus.OK = " + HttpStatus.OK);
+         return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);      
+      } else {
+         log.info("axidelete HttpStatus.BAD_GATEWAY = " + HttpStatus.BAD_GATEWAY);
+         return new ResponseEntity<String>("삭제 실패, Data_Notfound", HttpStatus.BAD_GATEWAY);
       }
-      
-      return uri;
-   } // qdelete
+   }
 
 }

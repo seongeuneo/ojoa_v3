@@ -1,213 +1,92 @@
-
 @charset "UTF-8";
-/* 
-.header {
-    background-color: white;
-    min-height: 80px;
-    width: 1240px;
-    margin: auto;
-}
-
-======================================================
-header
-#mheader {
-    position: relative;
-    height: 100px;
-    margin: 0;
-    padding-top: 30px;
-}
-
-.header .navBar {
-    height: 30px;
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    top: -25px;
-}
-
-.header .logo {
-    float: left;
-    height: 100px;
-}
-
-.header .navBar ul {
-    float: right;
-    margin-top: 0;
-}
-
-.header .navBar li {
-    float: left;
-    margin-left: 10px;
-}
-
-.header .navBar a {
-    color: #333;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.header .navBar a span {
-    color: gainsboro;
-}
-
-.header .search {
-    top: 60px;
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    서치를 헤더 오른쪽 끝에 배치
-    align-items: center;
-}
-
-.header .search input {
-    width: 80%;
-    height: 110px;
-    font-size: 20px;
-    color: #333;
-    border: none;
-    border-bottom: 1px solid #333;
-}
-
-.header input:focus {
-    outline: none;
-}
-
-.header input:-webkit-autofill {
-   -webkit-box-shadow: 0 0 0 1000px #c6c6c6 inset;
-}
-
-======================================================
-category_navi_drop_bar
-#category_nav {
-    font: bold 16px;
-    width: 1240px;
-    height: 40px;
-    background: #000;
-    line-height: 40px;
-    margin: 0 auto;
-    z-index: 1;
-    margin-top: 20px;
-}
-
-#category_nav>ul {
-    text-align: center;
-    margin: 0 auto;
-    padding: 0;
-}
-
-#category_nav>ul>li {
-    width: 130px;
-    position: relative;
-    display: inline-block;
-}
-
-#category_nav>ul>li>ul {
-    width: 130px;
-    display: none;
-    position: absolute;
-    font-size: 15px;
-    background: #000;
-    margin: 0 auto;
-    padding: 0;
-}
-
-#category_nav a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    padding: 0 20px;
-}
-
-#category_nav>ul>li:hover>ul {
-    display: block;
-}
-
-#category_nav>ul>li>ul>li:hover {
-    background: #8f8f8f;
-    transition: ease 1s;
-}
-
-.sticky {
-    position: sticky;
-    top: 0;
-}
-
-=======================================================
-.header .mtalk img {
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    right: 1%;
-    bottom: 10%;
-    z-index: 1;
-    cursor: pointer;
-}
-
-.header .mchannel img {
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    right: 1%;
-    bottom: 2%;
-    z-index: 1;
-    cursor: pointer;
-} */
 
 /* body 스타일 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 /* h1 스타일 */
 h1 {
-    text-align: center;
-    margin-top: 20px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+/* 오조아 로고 */
+.centered-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 15px;
+}
+
+.centered-logo p {
+	font-size: 25px; /* 원하는 폰트 크기 */
+	font-weight: bold; /* 굵은 글꼴 */
+	margin-top: 30px;
+	margin-left: 10px;
+}
+
+.logo-link {
+	display: flex;
+	align-items: center;
+	text-decoration: none; /* 링크에 밑줄 제거 */
+	color: inherit; /* 링크 색상 상속 */
+	margin: 0; /* 기본 마진 제거 */
 }
 
 /* header 스타일 */
 .header {
-    background-color: #f2f2f2;
-    padding: 10px;
+	background-color: #f2f2f2;
+	padding: 10px;
 }
 
 /* 로고 이미지 스타일 */
 .logo {
-    width: 100px;
-    height: auto;
-  
+	margin-right: 5px; /* 이미지와 단락 사이 간격 조정 */
+	width: 100px;
+	height: auto;
 }
 
 .header {
 	display: grid;
-  place-items: center; /* 요소들을 가운데로 정렬 */
+	place-items: center; /* 요소들을 가운데로 정렬 */
 }
-
 
 /* 네비게이션 바 스타일 */
-.navBar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.navBar .admin-lists, .navBar .login-out {
+	flex-wrap: nowrap;
+	list-style-type: none;
 }
 
-.navBar ul li {
-    display: inline;
-    margin-right: 10px;
+.navBar .admin-lists li, .navBar .login-out li {
+	display: inline;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	flex-wrap: nowrap;
 }
 
-.navBar ul li:last-child {
-    margin-right: 0;
+.navBar .admin-lists li:last-child {
+	margin-right: 0;
 }
 
-.navBar ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+.navBar .admin-lists li a, .navBar .login-out li a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
 }
 
-.navBar ul li a:hover {
-    color: #ff6600;
+.navBar .admin-lists li a:hover {
+	color: #ff6600;
+}
+
+.login-out {
+	text-align: center;
+}
+
+.login-out li {
+	display: inline-block;
+	margin: 0px 10px; /* 리스트 간격 조정 */
+	font-size: 25px;
 }

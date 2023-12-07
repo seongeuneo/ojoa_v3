@@ -58,7 +58,7 @@ function App() {
       <BrowserRouter>
 
         <ScrollTop />
-        <a href="http://localhost:8080/admin/adminmain">관리자용</a>
+        <a href="http://localhost:8080/home">관리자용</a>
 
         <Header />
         <Routes>

@@ -6,18 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>** MemberList **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/memberList.css">
 </head>
 <body>
-<h2>** MemberList **</h2>
+<h2>오조아 회원목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table border="1" style="width:90%">
-	<tr bgcolor="Silver">
-		<th>ID</th><th>Password</th><th>Name</th><th>Email</th><th>domain</th><th>zip_code</th><th>address</th>
+	<tr >
+		<th>ID</th><th>Password</th><th>Name</th><th>Email</th><th>domain</th><th>zip code</th><th>address</th>
 		<th>address_detail</th><th>Phone1</th><th>Phone2</th><th>Phone3</th>
 		<th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th><th>적립금(mileage)</th><th>가입날짜</th><th>가입현황</th>
 		<!-- 관리자 기능 추가 -->
@@ -45,7 +44,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

@@ -1,0 +1,53 @@
+/* myStyle.css */
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	padding: 0;
+	background-color: #f8f8f8;
+}
+
+h2 {
+	text-align: center;
+}
+
+.prod-columns th {
+	background-color: #424242; /* 회색 계열의 배경색 */
+	text-align: center;
+	padding: 8px;
+	border: 1px solid #ddd;
+	color: #feffff;
+}
+
+table {
+	width: 90%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+td img {
+	display: block;
+	margin: auto;
+}
+
+.home-link {
+	text-align: center;
+	font-size: 20px;
+}
+
+.home-link a {
+	text-decoration: none; /* 밑줄 제거 */
+	color: inherit; /* 기본 텍스트 색상으로 설정 */
+	font-weight: bold;
+}

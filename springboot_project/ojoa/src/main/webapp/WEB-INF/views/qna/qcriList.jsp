@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** SpringBoot Board CriList **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script>
 //1. 검색조건 입력 후 버튼클릭
 // => 입력된 값들을 서버로 전송요청: location

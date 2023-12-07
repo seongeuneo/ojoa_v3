@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** Product Insert **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/productInsert.css">
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
@@ -79,19 +79,18 @@ function inCheck() {
 </head>
 
 <body>
-<h2>** Spring_Boot Product Insert 상품등록 **</h2>
-
+<h2 class="insert-title">상품등록</h2>
 <form action="productInsert" method="Post" enctype="multipart/form-data" id="myform">
 <table>
 
-	<tr height="40"><th bgcolor="aqua">상품이름</th>
+	<tr height="40"><th >상품이름</th>
 		<td><input type="text" name="prod_name" id="prod_name" size="30" autocomplete="id">
 			<button type="button" id="idDup" onclick="idDupCheck()">중복확인</button>
 			<br><span id="pdnMessage" class="eMessage"></span>
 		</td></tr>
 
 			<tr height="40">
-				<th bgcolor="aqua">상품 종류</th>
+				<th >상품 종류</th>
 				<td><select name="prod_kind" id="prod_kind">
 						<option value="침대">침대</option>
 						<option value="소파">소파</option>
@@ -103,22 +102,22 @@ function inCheck() {
 				<br><span id="pdkMessage" class="eMessage"></span></td>
 			</tr>
 
-			<tr height="40"><th bgcolor="aqua">할인률</th>
+			<tr height="40"><th >할인률</th>
 		<td><input type="text"  name="prod_discount" id="prod_discount" placeholder="숫자만 입력" size="10"> %<br>
 		</td></tr>
 			
-	<tr height="40"><th bgcolor="aqua">판매가</th>
+	<tr height="40"><th >판매가</th>
       	<td><input type="text" id="prod_price1" name="prod_price1"  placeholder="숫자만 입력" size="10"> 원<br>
       	<br><span id="pdpMessage" class="eMessage"></span></td>
         </td></tr>	
 
-	<tr height="40"><th bgcolor="aqua">상품 설명</th>
+	<tr height="40"><th >상품 설명</th>
 				<td><textarea rows="5" cols="50" id="prod_content" name="prod_content"></textarea>
 				<br><span id="pdcMessage" class="eMessage"></span>
 			</td></tr>
 			
 			
-	<tr height="40"><th bgcolor="aqua">판매 유무</th>
+	<tr height="40"><th >판매 유무</th>
 				<td><select name="prod_sellyn" id="prod_sellyn">
 						<option value="y">Y: 판매중</option>
 						<option value="n">N: 판매중단</option>
@@ -127,21 +126,21 @@ function inCheck() {
 				</td></tr> 
 			
 				
-	<tr height="40"><th bgcolor="aqua">재고 수량</th>
+	<tr height="40"><th >재고 수량</th>
 		<td><input type="text"  name="prod_stock" id="prod_stock" placeholder="숫자만 입력" size="10"> 개<br>
 		<br><span id="pdsMessage" class="eMessage"></span>
 		</td></tr>		
 
 	
  	<tr height="40">
-		<th bgcolor="aqua">등록일</th>
+		<th >등록일</th>
 		<td><input type="date" name="prod_regdate" id="prod_regdate" size="20"><br>
 		<span id="pdrMessage" class="eMessage"></span>
 	</td></tr> 
 			
 	
 	<tr height="40">
-		<th bgcolor="aqua">상품 대표 이미지</th>
+		<th >상품 대표 이미지</th>
 			<td><img src="" class="select_img"><br>
 				<input type="file" name="uploadfilef" id="uploadfilef" size="20">
 			</td></tr>
@@ -178,12 +177,9 @@ function inCheck() {
 						
 </table>
 </form>
-<hr>
 <c:if test="${not empty requestScope.message}">
 => ${requestScope.message}
 </c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

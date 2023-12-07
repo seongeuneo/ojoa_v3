@@ -23,7 +23,7 @@ th, td {
 }
 
 th {
-  background-color: #424242;
+  background-color: #aaa;
   color: white;
 }
 
@@ -43,7 +43,6 @@ a:hover {
 a:visited {
   color: purple;
 }
-
 
 .home-link {
 	text-align: center;

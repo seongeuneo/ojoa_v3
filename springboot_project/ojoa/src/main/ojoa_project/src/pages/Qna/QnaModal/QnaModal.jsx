@@ -24,7 +24,7 @@ function QnaModal({ closeModal }) {
             // 다른 폼 필드를 여기에 추가하세요
 
             // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
-            const response = await axios.post("/api/qna/saveQna", formData,
+            const response = await axios.post("/api/qna/saveQna/", formData,
                 { headers: { "Content-Type": "application/json" } });
 
             // 성공/실패에 따라 처리합니다.

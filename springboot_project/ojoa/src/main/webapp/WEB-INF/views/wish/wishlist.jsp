@@ -11,14 +11,13 @@
 <script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
-<h2>Wish Product List</h2>
+<h2>관심상품 목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table class="wishTable" border="1" style="width:90%">
-	<tr bgcolor="Orange">
+	<tr >
 		<th>상품 인덱스</th>
 		<th>로그인 아이디</th>
 		<th>상품 번호</th>
@@ -46,7 +45,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

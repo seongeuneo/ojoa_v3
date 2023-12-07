@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./ProductDetail.css";
-import { NavLink, Routes, Route, Link, useLocation } from "react-router-dom"
+import { Routes, Route, Link, useLocation } from "react-router-dom"
 import DetailInfo01 from './DetailInfo01';
 import OrderReview02 from './OrderReview02';
 import ProdQna03 from './ProdQna03';
 import PurGuide04 from './PurGuide04';
-import { useProductList } from '../ProductList/useProductList';
 import Modal from 'react-modal';
 import AddCart from './Modal/AddCart';
 
@@ -19,7 +18,7 @@ function ProductDetail({ handleCart }) {
     //======================================
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
-    
+
     // 장바구니 기능
     // 장바구니에 물건
     const handleAddToCart = () => {
@@ -82,8 +81,8 @@ function ProductDetail({ handleCart }) {
             <div className="path">
                 <span>현재 위치</span>
                 <ol>
-                    <li><NavLink to="/">홈</NavLink></li>
-                    <li><NavLink to="/ProductList">&gt; &nbsp;&nbsp;의자</NavLink></li>
+                    <li><Link to="/">홈</Link></li>
+                    <li><Link to="/ProductList">&gt; &nbsp;&nbsp;의자</Link></li>
                     <li title="현재 위치">&gt; &nbsp;&nbsp;현재 위치</li>
                 </ol>
             </div>
@@ -173,20 +172,24 @@ function ProductDetail({ handleCart }) {
             </div>
             <div className="PdIndex00">
                 <div className="pd_section">
-                    <a><NavLink to="./DetailInfo01" activeClassName="active" exact>
-                        <strong>상품상세정보</strong></NavLink></a>
-                    <a><NavLink to="./OrderReview02" activeClassName="active" >
-                        <strong>상품구매후기</strong></NavLink></a>
-                    <a><NavLink to="./ProdQna03" activeClassName="active" >
-                        <strong>상품 Q&amp;A</strong></NavLink></a>
-                    <a><NavLink to="./PurGuide04" activeClassName="active" >
-                        <strong>상품구매안내</strong></NavLink></a>
+                    <a><Link to={`/productDetail/${productData.prod_num}/DetailInfo01`}
+                        state={{ productData: productData }} activeClassName="active" exact>
+                        <strong>상품상세정보</strong></Link></a>
+                    <a><Link to={`/productDetail/${productData.prod_num}/OrderReview02`}
+                        state={{ productData: productData }} activeClassName="active" >
+                        <strong>상품구매후기</strong></Link></a>
+                    <a><Link to={`/productDetail/${productData.prod_num}/ProdQna03`}
+                        state={{ productData: productData }} activeClassName="active" >
+                        <strong>상품 Q&amp;A</strong></Link></a>
+                    <a><Link to={`/productDetail/${productData.prod_num}/PurGuide04`}
+                        state={{ productData: productData }} activeClassName="active" >
+                        <strong>상품구매안내</strong></Link></a>
                 </div>
             </div>
 
             <Routes>
                 <Route path="/*" element={<DetailInfo01 />} />
-                <Route path="/OrderReview02/*" element={<OrderReview02 productData={productData} />} />
+                <Route path="/OrderReview02/*" element={<OrderReview02 />} />
                 <Route path="/ProdQna03/*" element={<ProdQna03 />} />
                 <Route path="/PurGuide04/*" element={<PurGuide04 />} />
             </Routes>
