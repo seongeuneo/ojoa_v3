@@ -41,15 +41,17 @@ function App() {
   const [isAllChecked, setIsAllChecked] = useState(true);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
+  // 장바구니에 상품 추가
   const handleCart = (cartItem) => {
     setCart((prevCart) => [...prevCart, cartItem]);
   };
 
-  const convertPrice = (productPriceFormatted) => {
-    return productPriceFormatted;
-    //.toString()
-    //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  // 장바구니 상품 가격 쉼표
+  // const convertPrice = (productPriceFormatted) => {
+  //   return productPriceFormatted;
+  //   //.toString()
+  //   //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // };
 
 
 
@@ -83,7 +85,7 @@ function App() {
 
           {/* <Route path="/ProductList/ProductCategory/*" element={<ProductCategory cart={cart} setCart={setCart} handleCart={handleCart} />} /> */}
 
-          <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart} convertPrice={convertPrice}
+          <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart} 
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
           <Route path="/member/join" element={<Join />} />
           {/* <Route path="/login/info/agree" element={<Agree />} />
