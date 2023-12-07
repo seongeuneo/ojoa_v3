@@ -18,7 +18,7 @@ public interface ReviewRepository
 	
 	@Query("SELECT new com.ojo.ojoa.domain.ReviewDTO(A.review_seq, A.id, A.prod_num, A.review_title,  "
 			+ "  A.review_content, A.review_image1, A.review_image2,"
-			+ " A.review_date, A.review_view,B.prod_name, B.prod_mainimage) "
+			+ "  A.review_view, A.review_rate, B.prod_name, B.prod_mainimage) "
 			+ "FROM Review A LEFT JOIN Product B ON A.prod_num = B.prod_num")
     List<ReviewDTO> findAllReviewList();
 

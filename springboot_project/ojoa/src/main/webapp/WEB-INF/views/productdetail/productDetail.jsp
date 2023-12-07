@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세 수정페이지</title>
-<link rel="stylesheet" type="text/css"
-	href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/productList.css">
 </head>
 <body>
 
@@ -153,9 +152,6 @@
 			</c:if>
 		</table>
 	</form>
-	<hr>
-	&nbsp;
-	<a href="javascript:history.go(-2)">이전으로</a>&nbsp; &nbsp;
-	<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

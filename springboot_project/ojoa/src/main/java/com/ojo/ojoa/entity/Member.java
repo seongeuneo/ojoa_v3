@@ -78,6 +78,6 @@ public class Member {
 	private String phone3;
 	
 	@Column(name="mileage")
-	private int mileage; 
+	private Integer mileage; 
 	
 } //class

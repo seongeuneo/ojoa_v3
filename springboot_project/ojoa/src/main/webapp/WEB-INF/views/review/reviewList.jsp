@@ -6,11 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>상품리뷰</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
-<h2>상품리뷰목록</h2>
+<h2>상품후기목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
@@ -43,7 +45,7 @@
 				<td>${s.review_date}</td>
 				<td>${s.review_view}</td>
 				<td align="center"><a class="textlink"
-					onclick="reviewDelete('${s.review_seq}')">삭제</a></td>
+					onclick="reviewDelete(${s.review_seq})">삭제</a></td>
 			</tr>
 			</c:forEach>
 		</c:if>
@@ -54,8 +56,6 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
-&nbsp;
-<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

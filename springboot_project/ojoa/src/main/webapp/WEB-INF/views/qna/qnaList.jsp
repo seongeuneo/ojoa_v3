@@ -6,17 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>** SpringBoot QnaList **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 </head>
 <body>
-<h2>** SpringBoot QnaList **</h2>
+<h2>게시판 목록</h2>
 
-<hr>
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
 </c:if>
 <table style="width:100%">
-	<tr bgcolor="skyblue">
+	<tr >
 		<th>문의 번호</th>
 		<th>ID</th>
 		<th>카테고리</th>
@@ -41,11 +40,10 @@
 		</tr>
 	</c:if>
 </table>
-<hr>
 <!-- 로그인 한 경우에만 새글등록 가능 -->
 <c:if test="${not empty sessionScope.loginID}">
 	<!--&nbsp;<a href="qnaInsert">새글등록</a>&nbsp;-->
 </c:if>	
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

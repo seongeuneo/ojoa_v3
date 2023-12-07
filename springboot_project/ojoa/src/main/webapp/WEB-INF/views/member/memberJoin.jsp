@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Users Join **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<title>오조아 회원가입</title>
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
 <script> "use strict"
@@ -190,7 +190,7 @@ function inCheck() {
 
 </head>
 <body>
-<h2>** Member Join **</h2>
+<h2>오조아 회원가입</h2>
 
 <form action="join" method="Post" enctype="multipart/form-data" id="myform">
 <table>
@@ -262,12 +262,9 @@ function inCheck() {
 
 </table>
 </form>
-<hr>
 <c:if test="${not empty requestScope.message}">
 => ${requestScope.message}
 </c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

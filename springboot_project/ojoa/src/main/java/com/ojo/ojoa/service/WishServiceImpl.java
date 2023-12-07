@@ -1,15 +1,9 @@
 package com.ojo.ojoa.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.ojo.ojoa.DTO.CartDTO;
-import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.domain.WishDTO;
-import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.Wish;
-import com.ojo.ojoa.repository.CartRepository;
 import com.ojo.ojoa.repository.WishRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -72,5 +66,12 @@ public class WishServiceImpl implements WishService {
   	public List<WishDTO> selectAllList() {
   		return wishRepository.findAllWishList();
   	}
- 	
+  	
+ // 사용자 ID와 상품 번호로 Wish를 찾는 메서드 추가
+  	@Override
+  	public Wish selectOneByUserIdAndProdNum(String userId, int prodNum) {
+  		return wishRepository.findByUserIdAndProdNum(userId, prodNum);
+  	}
+  	
+
  } //class

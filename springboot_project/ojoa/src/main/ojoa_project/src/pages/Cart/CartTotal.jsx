@@ -1,7 +1,7 @@
 import '../../pages/Cart/Cart.css';
 import { useEffect, useState } from "react";
 
-const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
+const CartTotal = ({ cart, selectedItems, onCheckout }) => {
 
     // 선택된 아이템의 총 가격 상태
     const [selectedTotal, setSelectedTotal] = useState(0);
@@ -10,7 +10,7 @@ const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
     //                      총 가격을 계산하는 함수
     const calculateTotalPrice = () => {
         return selectedItems.reduce((total, itemId) => {
-            const selectedItem = cart.find(item => item.id === itemId);
+            const selectedItem = cart.find(item => item.prod_num === itemId);
             if (selectedItem) {
                 return total + selectedItem.productPriceFormatted * selectedItem.quantity;
             }
@@ -24,6 +24,14 @@ const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
         setSelectedTotal(total); //selectedTotal: 선택된 아이템들의 총 가격을 저장하는 상태
     }, [selectedItems, cart]);
 
+
+    // paynow 버튼 클릭 시 선택된 상품들만 Checkout 컴포넌트로 넘어가도록 처리
+    const paynow = () => {
+        const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
+        onCheckout(selectedCartItems);
+    };
+
+
     return (
         <div className="CartTotal">
 
@@ -31,7 +39,7 @@ const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
 
                 <div className="total_price">
                     <p className="cart_product_total_price">상품금액</p>
-                    <p className="cart_product_price">{convertPrice(selectedTotal)}원</p>
+                    <p className="cart_product_price">{selectedTotal}원</p>
                 </div>
 
 
@@ -49,9 +57,9 @@ const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
                 </div>
 
                 <div className="payment">
-                    <p className="cart_prouct_payment">결제 금액</p>
+                    <p className="cart_prouct_payment" name="prod_price1">결제 금액</p>
                     {/* <p className="cart_prouct_payment_price">{convertPrice(totalPayment)}원</p> */}
-                    <p className="cart_prouct_payment_price">{convertPrice(selectedTotal)}원</p> {/* 선택된 아이템 가격 합을 추가 */}
+                    <p className="cart_prouct_payment_price">{selectedTotal}원</p> {/* 선택된 아이템 가격 합을 추가 */}
                 </div>
             </div>
 
@@ -72,7 +80,7 @@ const CartTotal = ({ cart, convertPrice, selectedItems, onCheckout }) => {
                     </div>
                 </div>
 
-                <div className="button" onClick={onCheckout}>
+                <div className="button" onClick={paynow}>
                     <p className="btnText">PAY NOW</p>
                     <div className="btnTwo">
                         <p className="btnText2">GO!</p>

@@ -213,3 +213,22 @@ function addressdetailCheck() {
 
 
 
+//==============================================================================
+// productInsert 페이지 비동기 이동
+function productInsertAndMove() {
+   let url="product/productList";
+   
+   axios.get(url
+   ).then(response => {
+    //  alert("response 성공");
+      document.getElementById('contentArea').innerHTML=response.data;
+   }).catch(err => {
+      alert("response 실패 => 바보" + err.message);
+   });
+   document.getElementById("contentArea").innerHTML="";
+
+} //productInsert
+
+
+
+

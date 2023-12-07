@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import "./ProductDetail.css";
 import Modal from 'react-modal';
 import QModal from './Modal/QModal';
+import { useLocation } from "react-router-dom";
 
 function ProdQna03() {
+    const location = useLocation();
+    const productData = location.state.productData;
+    console.log("ProdQna03!!!!");
   
     // // 모달창 띄우기
     const [modalIsOpen, setModalIsOpen] = useState(false);

@@ -1,7 +1,12 @@
 import React from "react";
 import "./ProductDetail.css";
+import { useLocation } from "react-router-dom";
 
 function PurGuide04() {
+    const location = useLocation();
+    const productData = location.state.productData;
+    console.log("PurGuide04!!!!");
+
     return (
         <div className="PurGuide04">
             {/* <!-- main product detail --> */}
