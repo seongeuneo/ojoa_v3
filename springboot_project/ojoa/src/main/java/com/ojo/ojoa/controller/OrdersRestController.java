@@ -21,10 +21,10 @@ public class OrdersRestController {
 
 	OrdersService ordersService;
 	
-	@GetMapping("orders/allOrdersList")
-    public ResponseEntity<List<OrdersDTO>> getAllOrdrersList() {
-		List<OrdersDTO> ordersList = ordersService.selectAllList();
-    	//model.addAttribute("qna", test);
-    	return ResponseEntity.ok(ordersList);
-    }
+//	@GetMapping("orders/allOrdersList")
+//    public ResponseEntity<List<OrdersDTO>> getAllOrdrersList() {
+//		List<OrdersDTO> ordersList = ordersService.selectAllList();
+//    	//model.addAttribute("qna", test);
+//    	return ResponseEntity.ok(ordersList);
+//    }
 }

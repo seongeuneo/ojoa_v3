@@ -53,7 +53,7 @@
 <h3>원희</h3>
 &nbsp;<a href="cart/cartList">장바구니 리스트</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">주문리스트</a>&nbsp; 
-<!-- &nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp;  -->
+&nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp;
 &nbsp;<a href="product/productInsert">상품등록 페이지</a>&nbsp; 
 <hr>
 <br>

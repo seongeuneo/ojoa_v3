@@ -1,6 +1,7 @@
+
 /* ====================================================== */
 /* myPage_main */
-.Orders_detail {
+.Order {
   width: 1240px;
   margin: 0 auto;
   padding: 0;
@@ -9,7 +10,7 @@
 }
 
 /* ================== main / order페이지 ================== */
-.Orders_detail #od_backbody {
+.Order #od_backbody {
   max-width: 1240px;
   background-color: #fff;
   font-size: 13pt;
@@ -18,103 +19,103 @@
   margin: 0 auto;
 }
 
-.Orders_detail #od_frame {
+.Order #od_frame {
   width: 100%;
   margin: 0 auto;
   background-color: #fff;
 }
 
-.Orders_detail .od_backbody ol {
+.Order .od_backbody ol {
   list-style: square;
 }
 
-.Orders_detail #od_productInfo {
+.Order #od_productInfo {
   border: solid px #e0e0eb;
   border-collapse: collapse;
   width: 100%;
   font-size: 10pt;
 }
 
-.Orders_detail #od_productInfo th,
-.Orders_detail #od_productInfo td {
+.Order #od_productInfo th,
+.Order #od_productInfo td {
   border: solid 1px #e0e0eb;
   text-align: center;
   padding: 20px 0;
 }
 
-.Orders_detail #od_frame div:nth-of-type(1) span:nth-of-type(1) {
+.Order #od_frame div:nth-of-type(1) span:nth-of-type(1) {
   font-size: 16pt;
   font-weight: bold;
 }
 
-.Orders_detail #od_frame div:nth-of-type(2) {
+.Order #od_frame div:nth-of-type(2) {
   border: solid 1px #e0e0eb;
   padding: 10px 10px;
   font-size: 13pt
 }
 
-.Orders_detail #od_search {
+.Order #od_search {
   border: 1px solid #dedede;
   border-top: 1px solid black;
 }
 
-.Orders_detail #od_search select {
+.Order #od_search select {
   border: silver 1px solid;
   cursor: pointer;
 }
 
-.Orders_detail #od_search div:nth-of-type(1) {
+.Order #od_search div:nth-of-type(1) {
   border-bottom: solid 1px gray;
   padding: 20px;
 }
 
-.Orders_detail #od_search input {
+.Order #od_search input {
   border: silver 1px solid;
   border-radius: 5px;
   padding: 3px;
   cursor: pointer;
 }
 
-.Orders_detail #od_search ol {
+.Order #od_search ol {
   padding: 10px 20px;
   font-size: 10pt;
   color: gray;
 }
 
-.Orders_detail #od_search button {
+.Order #od_search button {
   border: 1px solid lightgrey;
   border-radius: 5px;
   padding: 3px;
   cursor: pointer;
 }
 
-.Orders_detail #od_frame br+span:nth-last-child(3) {
+.Order #od_frame br+span:nth-last-child(3) {
   font-size: 10pt;
   font-weight: bold;
   display: inline-block;
   padding: 10px 10px;
 }
 
-.Orders_detail #od_productInfo th:nth-of-type(3) {
+.Order #od_productInfo th:nth-of-type(3) {
   width: 550px;
 }
 
-.Orders_detail #od_frame div:last-child {
+.Order #od_frame div:last-child {
   text-align: center;
 }
 
-.Orders_detail .od_number {
+.Order .od_number {
   width: 100px;
 }
 
-.Orders_detail .od_amount {
+.Order .od_amount {
   width: 50px;
 }
 
 /* ========================================== */
 /* ====================================================== */
 /* navi_bar */
-.Orders_detail .path {
+.Order .path {
   color: #333;
   font-size: 12px;
   /* margin: 20px auto; */
@@ -123,7 +124,7 @@
   line-height: 30px;
 }
 
-.Orders_detail .path span {
+.Order .path span {
   position: absolute;
   width: 0;
   height: 0;
@@ -132,24 +133,24 @@
   display: none;
 }
 
-.Orders_detail .path li {
+.Order .path li {
   float: left;
   padding-left: 12px;
   margin: 0;
   color: #333;
 }
 
-.Orders_detail .path ol {
+.Order .path ol {
   float: right;
 }
 
 
 
-.Orders_detail .pageTlt {
+.Order .pageTlt {
   color: #333;
 }
 
-.Orders_detail .pageTlt h2 {
+.Order .pageTlt h2 {
   height: 60px;
   text-align: center;
   line-height: 90px;
@@ -159,7 +160,7 @@
   padding-bottom: 0px;
 }
 
-.Orders_detail .txt_01 {
+.Order .txt_01 {
   text-align: center;
   font-size: 14px;
   letter-spacing: -0.2px;

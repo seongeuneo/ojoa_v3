@@ -1,39 +1,39 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import DaumPostcode from "react-daum-postcode";
 // import Iamport, { PaymentRequest } from 'kamport'
-import './Orders.css';
+import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios"; // axios import 추가
+// import AddressPopup from './AddressPopup/AddressPopup';
 
-// const mockData = [
-//   {
-//     "id": 101,
-//     "imgNo": 101,
-//     "productName": "조금 큰 나무 침대",
-//     "productPriceFormatted": "385000",
-//     "productPromotion": "7",
-//     "productInfo": "안녕하세요 그렇습니다",
-//     "productReview": "8",
-//     "productGrade": "4.8",
-//     "quantity": 1
-//   }
-// ];
+const mockData = [
+  {
+    "id": 101,
+    "imgNo": 101,
+    "productName": "조금 큰 나무 침대",
+    "productPriceFormatted": "385000",
+    "productPromotion": "7",
+    "productInfo": "안녕하세요 그렇습니다",
+    "productReview": "8",
+    "productGrade": "4.8",
+    "quantity": 1
+  }
+];
 
 
 
-function Orders({ cart }) {
+function Checkout({ cart }) {
 
-  // const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
+  const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  // function showAddressPopupOpen() {
-  //   setIsAddressPopupOpen(true);
-  // }
+  function showAddressPopupOpen() {
+    setIsAddressPopupOpen(true);
+  }
 
 
   const { handleSubmit: _handleSubmit, register, setValue, getValues } = useForm({
@@ -86,22 +86,11 @@ function Orders({ cart }) {
   };
 
 
-  //Springboot 요청
-  useEffect(() => {
-    axios
-      .get("/api/orders/allOrdersList")
-      .then((response) => {
-        setOrdersList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-  }, []);
 
 
 
   return (
-    <div className="Orders">
+    <div className="Checkout">
       {/* <form onSubmit={handleSubmit}> */}
       <form>
         <h2 className="pay_title">주문서 작성</h2>
@@ -429,4 +418,4 @@ function Orders({ cart }) {
 };
 
 
-export default Orders;
+export default Checkout;
