@@ -34,7 +34,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @AllArgsConstructor
-@Controller
 @RestController
 @Log4j2
 @RequestMapping("/api")
@@ -149,9 +148,8 @@ public class RestReactController {
 	// => DUPLICATE KEY UPDATE
 	// 없으면 Save 있으면 Update
 	@PostMapping("/cartUp")
-	public String cartUp(@RequestBody Cart entity) {
+	public void cartUp(@RequestBody Cart entity) {
 		//System.out.println("***수량테스트***"+entity);
-		String uri = "redirect:/cart/cartList";
 		try {
 			// id에 "admin" 값을 할당하여 cartService.CartUpdateUp 메서드를 호출합니다.
 			String id = "admin";
@@ -159,23 +157,17 @@ public class RestReactController {
 		} catch (Exception e) {
 			log.info("Exception");
 		}
-	return uri;
 	}
 
 	
 	@PostMapping("/cartDown")
-	public String cartDown(@RequestBody Cart entity) {
-		
-		String uri = "redirect:/cart/cartList";
-		
+	public void cartDown(@RequestBody Cart entity) {
 		try {
 			// id에 "admin" 값을 할당하여 cartService.CartUpdateUp 메서드를 호출합니다.
-		
 			String id = "admin";
 			cartService.CartUpdateDown(id, entity.getProd_num(), entity.getQuantity());
 		} catch (Exception e) {
 		}
-		return uri;
 	}
 
 // 장바구니에 있는 상품 삭제
@@ -203,31 +195,34 @@ public class RestReactController {
 //	}
 
 //원래 카트    
-	@DeleteMapping("/cdelete")
-	public String cdelete(CartId cartid) {
-		cartid.setId("admin");
+//	@DeleteMapping("/cdelete")
+//	public void cdelete(CartId entity) {
+//		entity.setId("admin");
+//		System.out.println("");
+//		try {
+//			cartService.delete(entity);
+//			System.out.println("** cart delete 삭제성공 **");
+//		} catch (Exception e) {
+//			System.out.println("** cart delete Exception => " + e.toString());
+//		}
+//	}
+	
+	
+	@GetMapping("/cdelete")
+	public void cdelete(@RequestParam String user_id, @RequestParam String item_id, CartId cartid) {
+		log.info("****************" + user_id + item_id);
+		int item_id_ = Integer.parseInt(item_id);
+		cartid.setId(user_id);
+		cartid.setProd_num(item_id_);
+		log.info("++++++++++++++++++++++++++++++" + user_id + item_id);
 		try {
 			cartService.delete(cartid);
 			System.out.println("** cart delete 삭제성공 **");
 		} catch (Exception e) {
 			System.out.println("** cart delete Exception => " + e.toString());
 		}
-		return "redirect:home";
 	}
 	
-	
-//	@DeleteMapping("/cdelete")
-//	public String cdelete(@RequestBody CartId cartid) {
-//		cartid.setId("admin");
-//		try {
-//			cartService.delete(cartid);
-//			System.out.println("** cart delete 삭제성공 **");
-//		} catch (Exception e) {
-//			System.out.println("** cart delete Exception => " + e.toString());
-//		}
-//		return "redirect:home";
-//	}
-//	
 
 //===============================================================================		
 
