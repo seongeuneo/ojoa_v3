@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// const CartList = ({ id, productname, content, quantity, mainimage, discount, price, selectedItems, item, updateTotal }) => {
-//     const navigate = useNavigate();
-
-const CartList = ({ id, productname, content, quantity, mainimage, discount, price, selectedItems, setSelectedItems, item, updateTotal }) => {
+const CartList = ({ id, productname, content, quantity, mainimage, discount, price, selectedItems, setSelectedItems, won, setWon, updateTotal, setCart }) => {
     const navigate = useNavigate();
     const [itemQuantity, setItemQuantity] = useState(quantity);
 
@@ -53,9 +50,14 @@ const handleCheckboxChange = () => {
 
         axios.get(`/api/cdelete?item_id=${id}&user_id=${user_id}`)
             .then((response) => {
-                console.log("삭제 요청 성공:", response);
-                //alert('삭제 성공!');
-                //window.location.reload();
+                axios
+                .get("/api/cart/allCartList")
+                .then((response) => {
+                    setCart(response.data);
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
+                });
             })
             .catch((error) => {
                 console.error("삭제 요청 실패:", error);
@@ -70,7 +72,7 @@ const handleCheckboxChange = () => {
         axios.post('/api/cartUp', productData)
             .then(response => {
                 //alert('상품 수량이 증가되었습니다!');
-                navigate("/Cart");
+                setWon(won+1);
             })
             .catch(error => {
                 //alert('장바구니 수량 변경 중 문제가 발생했습니다!');
@@ -85,6 +87,7 @@ const handleCheckboxChange = () => {
             axios.post('/api/cartDown', productData)
                 .then(response => {
                     //alert('상품 수량이 감소되었습니다!');
+                    setWon(won+1);
                 })
                 .catch(error => {
                     //alert('장바구니 수량 변경 중 문제가 발생했습니다!');
@@ -93,6 +96,7 @@ const handleCheckboxChange = () => {
             alert('더 줄일 수 없는 수량입니다.');
         }
     }
+        
 
     return (
         <div className="CartListAll">
@@ -120,9 +124,10 @@ const handleCheckboxChange = () => {
                             <td>
                                 <div className="cart_product_count">
                                     <div className="pd_length">
-                                        <button onClick={onDecrease}>-</button>
+                                        {/* <button onClick={onDecrease}>-</button> */}
+                                        <button onClick={() => {onDecrease()}}>-</button>
                                         <input name="quantity" type="number" min="1" value={itemQuantity}/>
-                                        <button onClick={onIncrease}>+</button>
+                                        <button onClick={() => {onIncrease()}}>+</button>
                                     </div>
                                 </div>
                             </td>
