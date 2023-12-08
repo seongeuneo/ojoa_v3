@@ -53,8 +53,6 @@ function App() {
   //   //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // };
 
-
-
   return (
     <div className="App">
       <BrowserRouter>
