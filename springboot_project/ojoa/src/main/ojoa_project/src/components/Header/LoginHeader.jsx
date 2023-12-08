@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import '../../components/Header/Header.css';
+import '../../components/Header/UserHeader.css';
 import Modal from '../Modal/Modal';
 import React, { useState, useEffect } from 'react';
 
-function Header() {
+function UserHeader() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // 여기에 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
     useEffect(() => {
-        // 세션 정보 확인하여 로그인 상태를 설정
-        const sessionInfo = sessionStorage.getItem('loginInfo'); // 세션에서 로그인 정보 가져오기 (예시)
+        const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
         setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
     }, []);
 
@@ -52,26 +51,12 @@ function Header() {
                         {/* 상단 네비 */}
                         <div className="navBar">
                             <ul>
-                                {/* 로그인 상태에 따라 다르게 표시 */}
-                                {isLoggedIn ? (
-                                    <>
-                                        <li><Link to="../MyPage">MYPAGE </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Order">ORDER </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Qna">QNA </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Store">STORE </Link></li>
-                                        <li><Link to="../Member/rlogout">LOGOUT</Link>&nbsp;<span>|</span></li>
-                                    </>
-                                ) : (
-                                    <>
-                                        <li><Link to="../Member/Login">LOGIN </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../MyPage">MYPAGE </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Order">ORDER </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Qna">QNA </Link>&nbsp;<span>|</span></li>
-                                        <li><Link to="../Store">STORE </Link></li>
-                                    </>
-                                )}
+                                <li><Link to="../Member/Login">LOGIN </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/Login">MYPAGE </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/Login">ORDER </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/Login">QNA </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Store">STORE </Link></li>
                             </ul>
                         </div>
                     </div>
@@ -129,4 +114,4 @@ function Header() {
     );
 };
 
-export default Header;
+export default UserHeader;

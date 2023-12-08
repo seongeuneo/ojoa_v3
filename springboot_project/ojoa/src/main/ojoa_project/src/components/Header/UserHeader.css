@@ -36,6 +36,7 @@
 .header .navBar li {
     float: left;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .header .navBar a {

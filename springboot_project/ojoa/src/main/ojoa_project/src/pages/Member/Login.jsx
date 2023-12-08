@@ -1,23 +1,14 @@
 import '../Member/Login.css';
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+    const navigate = useNavigate(); // useNavigate  훅 사용
 
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-
-    const [loggedInUsername, setLoggedInUsername] = useState('');
-
-    useEffect(() => {
-        // 세션 스토리지에서 유저 이름을 가져옴
-        const storedUsername = sessionStorage.getItem('username');
-        if (storedUsername) {
-            setLoggedInUsername(storedUsername);
-        }
-    }, []);
 
     const handleLogin = async () => {
         const loginData = {
@@ -25,7 +16,7 @@ const Login = () => {
             password: password
         };
 
-        console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력
+        console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력 -> 성공시 페이지 이동으로 안보임
 
         try {
             const response = await axios.post("/member/rlogin", loginData);
@@ -38,8 +29,11 @@ const Login = () => {
                     sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
                     // 기존 코드에서는 username만을 받아온 형태이므로, 필요한 정보를 서버 응답에 맞게 변경하여 처리
                     // 다음과 같이 예시 데이터를 사용할 수 있습니다.
-                    setLoggedInUsername(loggedInUser.name); // 받아온 유저 정보 중 이름을 세팅
                     // 원하는 작업 수행
+                    setIsLoggedIn(true); // 로그인 성공 시 isLoggedIn 상태를 true로 변경
+                    console.log('isLoggedIn 상태:', isLoggedIn); // 여기에 추가
+                    //window.location.href = "/";
+                    navigate('/'); // 이 부분이 추가됨
                 } else {
                     setMessage('로그인 실패');
                 }
@@ -65,8 +59,7 @@ const Login = () => {
             {findPasswordModalVisible && <FindPasswordModal setModalVisible={setFindPasswordModalVisible} />}
 
             <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-            {/* 로그인 성공 시 유저 이름 표시 */}
-            {loggedInUsername && <p>로그인된 유저: {loggedInUsername}</p>}
+            */}
 
             <div className="login_path">
                 <span>현재 위치</span>
