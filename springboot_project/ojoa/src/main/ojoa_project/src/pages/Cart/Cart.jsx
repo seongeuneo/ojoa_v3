@@ -6,103 +6,44 @@ import CartTotal from '../../pages/Cart/CartTotal';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 const Cart = ({ cart, setCart }) => {
-// const Cart = () => {
-    const navigate = useNavigate()
-
-    // // 상태 관리할 state 추가
-    // const [cartState, setCartState] = useState([]);
-
-
-
-    // 전체 선택 체크 여부 상태
+    const navigate = useNavigate();
     const [isAllChecked, setIsAllChecked] = useState(false);
-    // 선택된 아이템 상태
     const [selectedItems, setSelectedItems] = useState([]);
-    // 선택된 상품들의 합계들의 총합(결제금액) 상태 추가
-    // *selectedItemsTotal: 선택된 항목의 총 가격을 저장
     const [selectedItemsTotal, setSelectedItemsTotal] = useState(0);
 
-
-    // 선택한 아이템의 합계를 업데이트하는 함수
-    //updateTotal: 선택된 항목의 총 가격을 계산하고 업데이트
     const updateTotal = () => {
         const total = calculateSelectedTotal();
         setSelectedItemsTotal(total);
     };
 
-
-    // 장바구니에 상품이 추가되거나 삭제될 때마다 가격이 업데이트
     useEffect(() => {
-        //setCartState(cart); 
         updateTotal();
-    }, [cart]);
+    }, [cart, selectedItems]);
+
+// Cart 컴포넌트의 handleCheckAll 함수 내부에서 selectedItems 상태를 업데이트합니다.
+const handleCheckAll = () => {
+    setIsAllChecked((prevIsAllChecked) => !prevIsAllChecked);
+    const updatedSelectedItems = !isAllChecked ? cart.map((item) => item.prod_num) : [];
+    setSelectedItems(updatedSelectedItems);
+};
+
+// Cart 컴포넌트에서 handleCheckout 함수도 수정하여 선택된 상품들의 데이터를 Checkout 컴포넌트로 전달합니다.
+// const handleCheckout = () => {
+//     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
+//     navigate('/checkout', { state: { selectedCartItems } });
+// };
 
 
-    // 선택된 아이템 변경 시 실행
-    //selectedItems 배열이 변경될 때마다 선택된 항목의 총 가격을 업데이트
-    useEffect(() => {
-        updateTotal(); // 선택된 아이템이 변경될 때마다 합계 업데이트
-    }, [selectedItems]);
-
-    // handleRemoveFromCart: ID를 기반으로 카트에서 항목을 제거하고 총 가격을 업데이트
-    // const handleRemoveFromCart = (itemId) => {
-    //     const updatedCart = cartState.filter((item) => item.id !== itemId);
-    //     setCartState(updatedCart);
-    //     updateTotal();
-    // };
+// const handleCheckout = () => {
+//     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.id));
+//     navigate('/checkout', { state: { selectedCartItems } });
+// };
 
 
-    //handleCheckAll: isAllChecked 상태를 토글하고 
-    //selectedItems 배열을 그에 맞게 업데이트
-    // const handleCheckAll = () => {
-    //     setIsAllChecked(!isAllChecked);
-    //     const updatedSelectedItems = !isAllChecked ? cartState.map((item) => item.id) : [];
-    //     setSelectedItems(updatedSelectedItems);
-    // };
-
-    const handleCheckAll = () => {
-        setIsAllChecked(isAllChecked);
-        const updatedSelectedItems = isAllChecked ? cart.map((item) => item.id) : [];
-        setSelectedItems(updatedSelectedItems);
-    };
-
-
-
-//    수량 감소 -> 합계 변동
-    // const onDecrease = (itemId) => {
-    //     setCartState((prevCart) =>
-    //         prevCart.map((item) =>
-    //             item.prod_num === itemId
-    //                 ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
-    //         )
-    //     );
-    //     updateTotal();
-    // };
-
-
-    // // 수량 증가 -> 합계 변동
-    // const onIncrease = (itemId) => {
-    //     setCartState((prevCart) =>
-    //         prevCart.map((item) =>
-    //         item.prod_num === itemId ? { ...item, quantity: item.quantity + 1 } : item
-    //         )
-    //     );
-    //     updateTotal();
-    // };
-
-
-    // 카트에 상품 추가하는 함수
-    // const addToCart = (cartItem) => {
-    //     setCartState((prevCart) => [...prevCart, cartItem]);
-    //     updateTotal(); // 상품 추가 시 선택한 아이템의 합계 업데이트
-    // };
-
-    //calculateSelectedTotal: 선택된 모든 항목의 총 가격을 계산
     const calculateSelectedTotal = () => {
         return selectedItems.reduce((total, itemId) => {
-            const selectedItem = cart.find((item) => item.id === itemId);
+            const selectedItem = cart.find((item) => item.prod_num === itemId);
             if (selectedItem) {
                 return total + selectedItem.productPriceFormatted * selectedItem.quantity;
             }
@@ -110,16 +51,7 @@ const Cart = ({ cart, setCart }) => {
         }, 0);
     };
 
-    
-// * 주문 정보 DB 저장 후, 결제페이지로 이동  
-// Cart 컴포넌트의 handleCheckout 함수 수정
-const handleCheckout = () => {
-    const selectedCartItems = cart.filter(item => selectedItems.includes(item.id));
-    navigate('/checkout', { state: { selectedCartItems } });
-};
 
-
-    // Springboot 요청
     useEffect(() => {
         axios
             .get("/api/cart/allCartList")
@@ -129,48 +61,53 @@ const handleCheckout = () => {
             .catch((error) => {
                 console.error("Error: ", error);
             });
-    }, []);
+    }, [cart]);
+
+    const cartList = cart.map((item) => (
+        <CartList
+            id={item.prod_num}
+            productname={item.prod_name}
+            content={item.prod_content}
+            quantity={item.quantity}
+            mainimage={item.imgNo}
+            discount={item.productPromotion}
+            price={item.productPriceFormatted}
+        />
+    ));
+
+    // useEffect(() => {
+        
+    // }, [cart]);
 
     return (
         <div className="Cart">
-            <div className="path">
-                <span>현재 위치</span>
-                <ol>
-                    <li>
-                        <Link to="/">홈</Link>
-                    </li>
-                    <li title="현재 위치"> &gt; &nbsp; Cart</li>
-                </ol>
-            </div>
-            <div className="title">
-                <h2>CART</h2>
-                <div className="txt_01">장바구니에 담긴 상품</div>
-            </div>
-
-            <CartHeader isAllChecked={isAllChecked} handleCheckAll={handleCheckAll} />
-
-            <CartList
-                cart={cart} // 수정된 상태를 전달
-                // onDecrease={onDecrease}
-                // onIncrease={onIncrease}
-                // handleAddToCart={addToCart} // 상품 추가 함수 전달
-                //Remove={handleRemoveFromCart} // 상품 제거 함수 전달
-                //convertPrice={convertPrice}
-                selectedItems={selectedItems} // 선택된 아이템 전달
-                setSelectedItems={setSelectedItems}
-                updateTotal={updateTotal}
+            <CartHeader 
+                isAllChecked={isAllChecked} 
+                handleCheckAll={handleCheckAll}
             />
-
+            {cart.map((item) => (
+                <CartList
+                    key={item.prod_num}
+                    id={item.prod_num}
+                    productname={item.prod_name}
+                    content={item.prod_content}
+                    quantity={item.quantity}
+                    mainimage={item.imgNo}
+                    discount={item.productPromotion}
+                    price={item.productPriceFormatted}
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                    updateTotal={updateTotal}
+                />
+            ))}
             <CartTotal
                 cart={cart}
-                //convertPrice={convertPrice}
-                selectedItems={selectedItems} // 선택된 아이템 리스트 전달
-                selectedItemsTotal={selectedItemsTotal} // 선택된 아이템 합계 전달
-                onCheckout={handleCheckout}
+                selectedItems={selectedItems}
+                selectedItemsTotal={selectedItemsTotal}
+                //onCheckout={handleCheckout}
             />
         </div>
     );
 };
-
 
 export default Cart;

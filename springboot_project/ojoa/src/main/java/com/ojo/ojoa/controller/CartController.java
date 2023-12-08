@@ -34,8 +34,10 @@ public class CartController {
     // ** Cart+Product Join List
     @GetMapping("/cartList")
     public void cartList(Model model) {
+		String uri = "redirect:/cart/cartList";
     	model.addAttribute("mycart", cartService.findCartProd());
     }
+    
 
 	// ** Cart Delete - 장바구니 삭제
 //	@GetMapping(value="/cdelete")
