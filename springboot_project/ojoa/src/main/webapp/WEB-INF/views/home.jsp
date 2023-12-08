@@ -35,6 +35,7 @@
 								 <li onclick="joinChange()"><a>Join</a></li> -->
 							<li onclick="loginChange()"><a>Login</a></li>
 							<li onclick="joinChange()"><a>Join</a></li>
+
 						</c:if>
 						<!-- Login 후 -->
 						<c:if test="${not empty sessionScope.loginID}">
@@ -46,17 +47,17 @@
 						</c:if>
 					</ul>
 					<ul class="admin-lists">
-						<li onclick="productChange()"><a>상품관리 </a>&nbsp;<span>|</span></li>
-						<li onclick="productInsertChange()"><a>상품등록 </a>&nbsp;<span>|</span></li>
-						<li onclick="memberChange()"><a>회원관리 </a>&nbsp;<span>|</span></li>
+						<li onclick="productChange()" style="cursor: pointer;"><a>상품관리 </a>&nbsp;<span>|</span></li>
+						<li onclick="productInsertChange()" style="cursor: pointer;"><a>상품등록 </a>&nbsp;<span>|</span></li>
+						<li onclick="memberChange()" style="cursor: pointer;"><a>회원관리 </a>&nbsp;<span>|</span></li>
 						<!--  <li><a href="/admindeliever/admindelieverlist">배송관리 </a>&nbsp;<span>|</span></li> -->
-						<li onclick="ordersChange()"><a>주문관리 </a>&nbsp;<span>|</span></li>
+						<li onclick="ordersChange()" style="cursor: pointer;"><a>주문관리 </a>&nbsp;<span>|</span></li>
 						<!-- <li><a href="wish/wishlist">관심상품관리 </a>&nbsp;<span>|</span></li> -->
-						<li onclick="wishChange()"><a>관심상품관리 </a>&nbsp;<span>|</span></li>
-						<li onclick="reviewChange()"><a>상품후기관리 </a>&nbsp;<span>|</span></li>
-						<li><a onclick="qnaChange()">게시판QnA관리 </a>&nbsp;<a
-							 onclick="qnaInsertChange()">게시판 글쓰기</a>&nbsp;<span>|</span></li>
-						<li onclick="cartChange()"><a>장바구니관리 </a></li>
+						<li onclick="wishChange()" style="cursor: pointer;"><a>관심상품관리 </a>&nbsp;<span>|</span></li>
+						<li onclick="reviewChange()" style="cursor: pointer;"><a>상품후기관리 </a>&nbsp;<span>|</span></li>
+						<li><a onclick="qnaChange()" style="cursor: pointer;">게시판QnA관리 </a>&nbsp;<a
+							 onclick="qnaInsertChange()" style="cursor: pointer;">게시판 글쓰기</a>&nbsp;<span>|</span></li>
+						<li onclick="cartChange()" style="cursor: pointer;"><a>장바구니관리 </a></li>
 						<!-- <li><a href="orders/ordersDetail">주문상세 페이지 </a></li> -->
 					</ul>
 				</div>

@@ -8,7 +8,7 @@ import mockList from '../../../data/ItemsData'
 
 
 
-function QModal({ closeModal, onReviewTextChange }) {
+function QModal({ closeModal }) {
 
     // 상품목록리스트에서 id 값에 따라 상품 상세 반영하기
     const { mockList_id } = useParams();

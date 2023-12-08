@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,6 +46,14 @@ public class Review extends ReviewBaseEntity{
 	
 	@Column(name="review_image2")
 	private String review_image2;
+	
+	@Transient // SQL에서 제외시켜야함 
+	private MultipartFile review_image1f;
+
+	@Transient // SQL에서 제외시켜야함 
+	private MultipartFile review_image2f;
+	// => form 의 Upload_File 정보를 전달받기위한 필드
+	//    MultipartFile (Interface) -> CommonsMultipartFile
 //			
 //	@Column(name="review_date")
 //	private String review_date;
