@@ -19,6 +19,7 @@
 <table style="width:100%">
 	<tr >
 		<th>문의 번호</th>
+		<th>상품 번호</th>
 		<th>ID</th>
 		<th>카테고리</th>
 		<th>문의 제목</th>
@@ -30,6 +31,7 @@
 	<c:if test="${not empty requestScope.qna}">
 		<c:forEach var="s" items="${requestScope.qna}">
 		<tr><td>${s.qna_seq}</td>	
+			<td>${s.prod_num}</td>	
 			<td>${s.id}</td>
 			<td>${s.qna_category}</td>
 			<td>${s.qna_title}</td>
