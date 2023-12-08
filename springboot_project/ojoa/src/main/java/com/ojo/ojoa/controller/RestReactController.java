@@ -69,25 +69,19 @@ public class RestReactController {
 	@PostMapping("wish/saveWish")
 	public ResponseEntity<String> saveWish(HttpSession session, @RequestBody Wish entity) {
 		String loginID = (String) session.getAttribute("loginID");
-		
 		try {
-
 			if (loginID == null) {
                 throw new Exception("loginID isNull");
             }
-            
          // 이미 추가하려는 상품이 사용자의 관심목록에 있는지 확인
             Wish existingWish = wishService.selectOneByUserIdAndProdNum(loginID, entity.getProd_num());
             if (existingWish != null) {
                 return ResponseEntity.badRequest().body("이미 관심목록에 추가된 상품입니다.");
             }
-            
             entity.setId(loginID);
-			
 
 			System.out.println("saveWish111111" + entity);
 			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-
 			wishService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
 			System.out.println("saveWish22222222" + entity);
 			return ResponseEntity.ok("데이터 저장 성공");

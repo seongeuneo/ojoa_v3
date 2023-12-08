@@ -274,3 +274,34 @@ table .qna_table2 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
+.qna_write_content input[type="text"] {
+    width: 100%;
+    /* 현재 폭을 100%로 설정하여 가로폭을 최대한으로 설정합니다. */
+    height: 150px;
+    /* 원하는 다른 스타일을 추가로 지정할 수 있습니다. */
+}
+
+/* 
+.reviewContent {
+    height: 300px;
+} */
+
+.qna_write_content input[name="review_date"] {
+    display: none;
+}
+
+.hiddenDate {
+    display: none;
+}
+
+.qna_write_content {
+    text-align: center;
+}
+
+.main_score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 다른 스타일링 */
+}
