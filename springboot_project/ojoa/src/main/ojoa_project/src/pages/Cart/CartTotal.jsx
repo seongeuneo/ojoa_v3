@@ -9,12 +9,14 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
         return selectedItems.reduce((total, itemId) => {
             const selectedItem = cart.find(item => item.prod_num === itemId);
             if (selectedItem) {
-                return total + selectedItem.productPriceFormatted * selectedItem.quantity;
+                total+=selectedItem.productPriceFormatted * selectedItem.quantity; 
+                console.log("********total="+total);
+                return total;
             }
+            
             return total;
         }, 0);
     };
-
 
     useEffect(() => {
         const total = calculateTotalPrice();

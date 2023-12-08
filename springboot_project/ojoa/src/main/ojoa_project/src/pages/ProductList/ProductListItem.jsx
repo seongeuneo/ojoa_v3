@@ -69,7 +69,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
 
 
     // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
-    function AddCartIcon() {
+    function AddToCart() {
         //const productData = { prod_num: content.prod_num};
         const productData = { prod_num: content.prod_num, quantity: 1 }; // 바로 구매시 수량은 1
 
@@ -141,7 +141,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                             <div className="pl_icon">
                                 <a className="pd_cart">
                                     <img src={cartSrc}
-                                        onClick={AddCartIcon}
+                                        onClick={AddToCart}
                                         alt="장바구니"
                                     />
                                 </a>

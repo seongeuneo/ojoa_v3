@@ -123,7 +123,7 @@ public class RestReactController {
 		return ResponseEntity.ok(prod_imageList);
 	}
 //======================= 새로운 코드 추가 ==============================	
-// 장바구니에 상품 추가
+// 상품리스트에서 장바구니 아이콘으로 상품 추가
 
 	@PostMapping("cart/saveCart")
 	public ResponseEntity<?> saveCart(@RequestBody Cart entity) {
