@@ -6,11 +6,13 @@ import QModal from './Modal/QModal';
 import { useLocation } from "react-router-dom";
 
 function ProdQna03() {
-    // // 모달창 띄우기
+
+    // 모달창 띄우기=====================================================
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
+    // ===============================================================
 
     function reducer(state, action) {
         switch (action.type) {
@@ -26,79 +28,97 @@ function ProdQna03() {
         }; //switch
     } //reducer
 
-    // ** Local Storage 적용 1
-    // => LocalStorage 의 Data 읽어, todo 초기화 하기  
-    const [todo, dispatch] = useReducer(reducer, []);
+
+
+    // Springboot 요청=====================================================
     const [qnaList, setQnaList] = useState([]);
-
-    const idRef = useRef(0);
-    const [isDataLoaded, setIsDataLoaded] = useState(false);
-    // ** localData Loading
-    // => Mount시 1회 실행 하도록 useEffect 에 빈 배열 전달
-    useEffect(() => {
-        const rawData = localStorage.getItem("todo");
-        // => LocalStorage 의 Data 존재 확인
-        if (!rawData) {
-            setIsDataLoaded(true);
-            return;
-        }
-        const localData = JSON.parse(rawData);
-        if (localData.length === 0) {
-            setIsDataLoaded(true);
-            return;
-        }
-        // => localData 가 존재하면
-        //  -> create시 id값 생성을 위한 idRef 값 할당
-        //  -> Loading 된 Data를 State 변수 todo에 담기위해 dispatch 호출
-        //  -> setIsDataLoaded(true) : Loading 완료됨 표시 
-        idRef.current = localData.length;
-        dispatch({ type: "INIT", dataList: localData });
-        setIsDataLoaded(true);
-    }, []); //useEffect
-
-    // 게시판 필터
-    const [filters, setFilters] = useState({ category: "", date: "", key: "", query: "" });
-
-    // 필터조건 요청
-    const handleFilterChange = (filterValue) => {
-        axios.get('/api/qna/allQnaList', { params: filterValue })
-            .then(response => {
-                setQnaList(response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    };
-
-    // Springboot 요청
     useEffect(() => {
         axios
             .get("/api/qna/allQnaList")
             .then((response) => {
-                setQnaList(response.data);
+                // "상품 문의" 카테고리만 필터링하여 가져오기
+                const productQuestions = response.data.filter(item => item.category == '상품 문의');
+                setQnaList(productQuestions);
+                // setQnaList(response.data); 
+                console.log("response.data", response.data);
             })
             .catch((error) => {
                 console.error("Error: ", error);
             });
     }, []);
+    console.log("qnaList +" + qnaList);
 
-    // 배열 속성 writer 입력시 성만 따오기
+
+
+    // ====================================================================
+
+    // 해당하는 상품의 리뷰 필터링
+    const location = useLocation();
+    const productData = location.state.productData;
+    const matchingReviews = qnaList.filter((prodqna) => prodqna.prod_num === productData.prod_num);
+    console.log("matchingReviews => " + matchingReviews);
+
+    // 아마 값전달 ...? =====================================================
+    // ** Local Storage 적용 1
+    // => LocalStorage 의 Data 읽어, todo 초기화 하기  
+    // const [todo, dispatch] = useReducer(reducer, []);
+    // const idRef = useRef(0);
+    // const [isDataLoaded, setIsDataLoaded] = useState(false);
+    // // ** localData Loading
+    // // => Mount시 1회 실행 하도록 useEffect 에 빈 배열 전달
+    // useEffect(() => {
+    //     const rawData = localStorage.getItem("todo");
+    //     // => LocalStorage 의 Data 존재 확인
+    //     if (!rawData) {
+    //         setIsDataLoaded(true);
+    //         return;
+    //     }
+    //     const localData = JSON.parse(rawData);
+    //     if (localData.length === 0) {
+    //         setIsDataLoaded(true);
+    //         return;
+    //     }
+    //     // => localData 가 존재하면
+    //     //  -> create시 id값 생성을 위한 idRef 값 할당
+    //     //  -> Loading 된 Data를 State 변수 todo에 담기위해 dispatch 호출
+    //     //  -> setIsDataLoaded(true) : Loading 완료됨 표시 
+    //     idRef.current = localData.length;
+    //     dispatch({ type: "INIT", dataList: localData });
+    //     setIsDataLoaded(true);
+    // }, []); //useEffect
+    // ====================================================================
+
+
+
+
+    // 배열 속성 writer 입력시 성만 따오기========================================
     const lastName = (fullName) => {
         if (fullName.length > 0) {
             return fullName.charAt(0);
         }
         // fullName이 비어있을 때 처리할 내용을 추가할 수 있습니다.
     };
+    // ====================================================================
 
-    // 한 페이지당 몇 개의 글을 보여줄 것인지 정의
+
+
+
+
+    // 한 페이지당 몇 개의 글을 보여줄 것인지 정의===================================
     const itemsPerPage = 10;
     // 현재 페이지 상태와 페이지 변경 함수
     const [currentPage, setCurrentPage] = useState(1);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    let pagedQnaList = qnaList.slice(startIndex, endIndex);
+    let pagedQnaList = matchingReviews.slice(startIndex, endIndex);
+    // ====================================================================
 
+
+
+
+
+    // 클릭시 내용물 오픈~=====================================================
     const [expandedId, setExpandedId] = useState(null);
 
     const handleTitleClick = (id) => {
@@ -108,38 +128,34 @@ function ProdQna03() {
             setExpandedId(id);
         }
     };
+    // ====================================================================
 
-    // 내용 필터링
-    pagedQnaList = pagedQnaList.filter((item) => {
-        if (filters.category && item.category != filters.category)
-            return false;
+    // axios Post=======================================================
+    const onSubmit = (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData(document.getElementById('reviewform'));
+            formData.append('prod_num', productData.prod_num);
+            // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
 
-        //모든기간 필터
-        if (filters.date) {
-            const date = new Date(item.date);
-            const diff_days = ((new Date()) - date) / 1000 / 60 / 60 / 24;
-            if (filters.date == "week" && diff_days > 7)
-                return false;
-            else if (filters.date == "month" && diff_days > 30)
-                return false;
-            else if (filters.date == "month3" && diff_days > 90)
-                return false;
+            // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
+            const response = axios.post("/reviewrest/reviewR/saveReview/", formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+
+            // 성공/실패에 따라 처리합니다.
+            console.log("데이터 저장됨:", response.data);
+            closeModal(false);
+        } catch (error) {
+            // 에러 처리
+            console.error("데이터 저장 중 에러:", error);
+            // 선택적으로 사용자에게 에러 메시지 표시 가능
         }
+    };
 
-        //제목 필터
-        if (filters.key && filters.query) {
-            if (filters.key == "subject" && !item.title.includes(filters.query))
-                return false;
-            else if (filters.key == "content" && !item.notification.includes(filters.query))
-                return false;
-            else if (filters.key == "writer_name" && !item.writer.includes(filters.query))
-                return false;
-            else if (filters.key == "product" && !item.itemInfo.includes(filters.query))
-                return false;
-        }
-
-        return true;
-    });
     return (
         <div className="OrderReview02">
             {/* <!-- main product detail --> */}
@@ -151,9 +167,9 @@ function ProdQna03() {
                         <tr>
                             {/* <th>번호</th> */}
                             <th>문의번호</th>
-                            {/* <th>상품번호</th>*/}
+                            {/* <th>상품번호</th> */}
                             <th>상품이미지</th>
-                            <th>문의 제목</th>
+                            <th>문의 내용</th>
                             <th>작성자</th>
                             <th>작성일</th>
                             {/* <th>조회수</th> */}
@@ -164,7 +180,10 @@ function ProdQna03() {
                                     (item.num == "공지") ? (
                                         <tr key={item.review_seq}>
                                             <td>{item.num}</td>
-                                            <td>{item.itemInfo}</td>
+                                            {/* <td>{item.prod_num}</td> */}
+                                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
+
+                                            <td>{item.notification}</td>
                                             {/* <td>{item.category}</td> */}
                                             <td>
                                                 <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
@@ -174,24 +193,23 @@ function ProdQna03() {
                                         </tr>
                                     ) : (
                                         <tr>
-                                            <td>{item.num}</td>
+                                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
+                                            {/* <td>{item.prod_num}</td> */}
                                             <td>
-                                                <div><img src={`${item.imgNo}`} alt='상품' /></div>
-                                                <div>{item.itemInfo}</div>
+                                                <div> <a onClick={() => handleTitleClick(i)}><img src={`${item.imgNo}`} alt='상품' /></a></div>
+                                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
                                             </td>
+                                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
                                             {/* <td>{item.category}</td> */}
-                                            <td>
-                                                <a onClick={() => handleTitleClick(i)}>{item.title}</a>
-                                            </td>
-                                            <td>{lastName(item.writer)}&#42;&#42;</td>
-                                            <td>{item.date}</td>
+                                            <td> <a onClick={() => handleTitleClick(i)}>{lastName(item.writer)}&#42;&#42;</a></td>
+                                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
                                         </tr>
                                     )
                                 }
                                 {expandedId === i && (
                                     <tr>
-                                        <td colSpan="8">
-                                            {item.notification}
+                                        <td colSpan="7">
+                                            {item.qna_reply}
                                         </td>
                                     </tr>
                                 )}
@@ -200,8 +218,8 @@ function ProdQna03() {
                         <tr>
                             <th colspan="7">
                                 <a onClick={openModal}>상품문의하기 </a>
-                                <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
-                                    <QModal closeModal={closeModal} />
+                                <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal} pagedQnaList={pagedQnaList} >
+                                    <QModal closeModal={closeModal} pagedQnaList={pagedQnaList} productData={productData} />
                                 </Modal>
                                 <a> 내가쓴글조회하기</a>
                             </th>

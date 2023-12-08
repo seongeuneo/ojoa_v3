@@ -26,6 +26,9 @@ function DetailInfo01() {
     }, []);
 
     // console.log("data.prod_imagenum");
+    // 해당하는 상품의 리뷰 필터링
+    const matchingReviews = data.filter((image) => image.prod_num === productData.prod_num);
+
 
 
 
@@ -37,8 +40,13 @@ function DetailInfo01() {
 
                 {/* <!-- 상품상세정보 --> */}
                 <div className="pd_part1">
-                    <p>{data.prod_imagedetail}</p>
-                    <img src={`${data.prod_imagedetail}`} alt="" />
+                    {matchingReviews.map((images, prod_imagenum) => (
+                        <div key={prod_imagenum}>
+                            <p>상품상세페이지 입니다!!{images.prod_imagedetail}</p>
+                            <img src={`${images.prod_imagedetail}`} alt="상품상세이미지" />
+                        </div>
+                    ))}
+
                 </div>
             </div>
         </div>
