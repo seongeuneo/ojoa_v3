@@ -1,19 +1,15 @@
 package com.ojo.ojoa.controller;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -104,7 +100,7 @@ public class MemberController {
 	}
 	
 	// => Login 처리 : Post
-	@PostMapping(value="login")
+	@PostMapping(value="/login")
 	public String login(HttpSession session, Model model, Member entity) {
 		// ** 로그인 Service 처리
 		// 1. 요청분석
@@ -126,57 +122,7 @@ public class MemberController {
 		}
 		return uri;
 	} //login_Post
-	
-	// => 리액트 Login 처리 : Post
-	@PostMapping(value="/rlogin")
-	public ResponseEntity<?> rlogin(@RequestBody Member member, HttpSession session) {
-		
-	    Member entity = service.selectOne(member.getId());
-	    
-	    if (entity != null && entity.getPassword() != null &&
-            passwordEncoder.matches(member.getPassword(), entity.getPassword())) {
-	    	
-	    	// 세션에 로그인 정보 설정
-			session.setAttribute("loginID", entity.getId());
-			session.setAttribute("loginName", entity.getName()); // 세션에 사용자 정보 저장
-			session.setMaxInactiveInterval(1800); // 세션 유효 시간을 1800초(30분)으로 설정
-			
-			// 로그인 후 세션 확인을 위한 콘솔 로그
-	        System.out.println("세션 loginID: " + session.getAttribute("loginID"));
-	        System.out.println("세션 loginName: " + session.getAttribute("loginName"));
-			
-	        // 로그인 후 세션 시작 및 만료 시간 로그
-	        long creationTime = session.getCreationTime();
-	        int maxInactiveInterval = session.getMaxInactiveInterval();
-	        long expirationTime = creationTime + (maxInactiveInterval * 1000); // 세션 만료 시간
 
-	        log.info("세션 생성 시간: " + new Date(creationTime));
-	        log.info("세션 만료 시간: " + new Date(expirationTime));
-	        
-	        return ResponseEntity.ok("성공");
-        } else {
-            // 아이디 또는 비밀번호가 일치하지 않을 경우 로그인 실패
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("아이디를 찾을 수 없습니다. 다시 시도하세요");
-        }
-    } //rlogin
-	
-	//=> 리액트 LogOut 처리
-	// => session 무효화, home으로 
-	@PostMapping(value="/rlogout")
-	public String rlogout(HttpServletRequest request) {
-		//세션을 삭제
-		HttpSession session = request.getSession(false); 
-        // session이 null이 아니라는건 기존에 세션이 존재했었다는 뜻이므로
-        // 세션이 null이 아니라면 session.invalidate()로 세션 삭제해주기.
-		if(session != null) {
-			session.invalidate();
-		}
-		return "redirect:/";
-	} //rlogout
-
-	
-	
-	
 	// => Logout
 	// => session 무효화, home으로 
 	@GetMapping(value="/logout")

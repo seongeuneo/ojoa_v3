@@ -17,7 +17,6 @@
 
 function idOK() {
 	// 1) 
-	//opener.document.getElementById('id').value=document.getElementById('id').value;
 	// => 현재창의 input Tag 의 id 값을 부모창의 id 값으로 전달
 	opener.document.getElementById('id').value='${param.id}';
 	// => EL 활용: jsp 문서에서는 script 구문의 문자열 내부에 있는 EL은 처리해줌
@@ -56,7 +55,7 @@ function idOK() {
 	<h4>Parameter id값 확인</h4>
 	=> Parameter_ID : ${param.id}<br>
 	<hr>
-	<form action="idDupCheck" method="get">
+	<form action="member/idDupCheck" method="get">
 		User_ID : 
 		<input type="text" name="id" id="id" value="${param.id}">	
 		<input type="submit" value="ID중복확인" onclick="return idCheck()"><br>

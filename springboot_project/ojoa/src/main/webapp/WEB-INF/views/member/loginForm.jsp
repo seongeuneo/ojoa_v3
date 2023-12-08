@@ -10,7 +10,7 @@
 </head>
 <body>
 <h2>오조아 로그인</h2>
-<form action="login" method="post">
+<form action="member/login" method="post">
 <table>
 	<tr height="40"><td><label for="id">ID</label></td>
 		<td><input type="text" id="id" name="id" autocomplete="username"></td>

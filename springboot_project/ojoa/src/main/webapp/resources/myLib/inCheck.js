@@ -229,6 +229,46 @@ function productInsertAndMove() {
 
 } //productInsert
 
+//==============================================================================
+// 로그인 페이지 비동기 이동
+function loginChange() {
+   let url = "member/loginForm";
+   
+   axios.get(url)
+     .then(response => {
+        document.getElementById('contentArea').innerHTML = response.data;
+     })
+     .catch(err => {
+        alert("response 실패 => " + err.message);
+     });
+} //loginChange
+
+//==============================================================================
+// 회원가입 페이지 비동기 이동
+function joinChange() {
+   let url="member/memberJoin";
+   
+   axios.get(url
+   ).then(response => {
+    //  alert("response 성공");
+      document.getElementById('contentArea').innerHTML=response.data;
+   }).catch(err => {
+      alert("response 실패 => 바보" + err.message);
+   });
+   document.getElementById("contentArea").innerHTML="";
+
+} //joinChange
+
+//==========================================================
+// 로그인폼 아이디유효성체크 버튼
+function idCheck() {
+
+	
+} //idCheck()
+	
+//==========================================================
+// 내정보 페이지 비동기 이동
 
 
-
+//==========================================================
+// 로그인폼 아이디유효성체크 버튼
