@@ -7,6 +7,7 @@ import ProdQna03 from './ProdQna03';
 import PurGuide04 from './PurGuide04';
 import Modal from 'react-modal';
 import AddCart from './Modal/AddCart';
+import axios from "axios";
 
 
 function ProductDetail({ handleCart }) {
@@ -21,27 +22,55 @@ function ProductDetail({ handleCart }) {
 
     // 장바구니 기능
     // 장바구니에 물건
-    const handleAddToCart = () => {
-        const cartItem = {
-            id: productData.prod_num,
-            imgNo: productData.prod_mainimage,
-            productName: productData.prod_name,
-            productPriceFormatted: productData.prod_price1,
-            productPromotion: productData.prod_discount,
-            productInfo: productData.prod_content,
-            productGrade: productData.prod_grade,
-            quantity: count,
-        };
-        handleCart(cartItem);
-    };
+    // const AddToCart = () => {
+        
+    //     const cartItem = {
+    //         id: productData.prod_num,
+    //         imgNo: productData.prod_mainimage,
+    //         productName: productData.prod_name,
+    //         productPriceFormatted: productData.prod_price1,
+    //         productPromotion: productData.prod_discount,
+    //         productInfo: productData.prod_content,
+    //         productGrade: productData.prod_grade,
+    //         quantity: count,
+    //     };
+    //     handleCart(cartItem);
+    // };
+
+
+
+    //============================= 여기서부터 워니의 코드 =================================
+
+
+    // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
+    function AddToCart() {
+        //const prodData = { prod_num: productData.prod_num};
+        const prodata = { prod_num: productData.prod_num, quantity: count }; // 바로 구매시 수량은 1
+
+        axios.post('/api/cart/saveCart', prodata) // POST 요청으로 수정 및 상품 정보 전달
+            .then(response => {
+                // 요청 성공 시 처리할 작업
+                //console.log("장바구니 담기" + response.data);
+                alert('장바구니에 추가되었습니다!');
+                // 추가 작업이 필요하다면 여기에 작성
+            })
+            .catch(error => {
+                // 요청 실패 시 처리할 작업
+                console.error('장바구니 추가 중 오류:', error);
+                //alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.');
+            });
+    }
+
+    //====================================== 여기까지 ========================================
+
+
 
     // // 장바구니 추가 모달창 띄우기
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
 
-    function handleCartAndOpenModal() {
-        handleAddToCart();
+    function CartOpenModal() {
         openModal();
     }
 
@@ -163,11 +192,11 @@ function ProductDetail({ handleCart }) {
                 </div>
 
                 <div className="pd_btns">
-                    <a onClick={handleCartAndOpenModal} className="pd_btn1">장바구니</a>
+                    <a onClick={CartOpenModal} className="pd_btn1">장바구니</a>
                     <Modal className="ModalContent" handleCart={handleCart} isOpen={modalIsOpen} onRequestClose={closeModal}>
-                        <AddCart closeModal={closeModal} />
+                        <AddCart closeModal={closeModal} AddToCart={AddToCart}/>
                     </Modal>
-                    <Link to='../Cart/Cart' className="pd_btn2" onClick={() => handleAddToCart()}>구매하기</Link>
+                    <Link to='../Cart/Cart' className="pd_btn2" onClick={AddToCart}>구매하기</Link>
                 </div>
             </div>
             <div className="PdIndex00">

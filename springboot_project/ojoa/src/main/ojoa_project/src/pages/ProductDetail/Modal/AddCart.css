@@ -25,7 +25,7 @@
 
 
 .sf_popup_bottom {
-    width: 100%;
+    /* width: 100%; */
     text-align: center;
     padding: 0;
     margin-top: 15px;
@@ -43,19 +43,22 @@
     cursor: pointer;
 }
 
+
 .sf_popup_bottom .btn:disabled {
     opacity: 0.8;
     cursor: not-allowed;
 }
 
 .sf_popup_bottom .btn.write {
+    width: 130%;
     background-color: #292929;
     color: white;
+    margin-left: -5px;
 }
 
 .sf_popup_bottom .btn.later {
     border: 1px solid #e6e6e6;
     background-color: white;
     color: black;
-    float: left;
+    /* float: left; */
 }

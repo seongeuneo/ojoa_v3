@@ -42,8 +42,8 @@ function App() {
   const [isAllChecked, setIsAllChecked] = useState(true);
 
   // 장바구니에 상품 추가
-  const handleCart = (cartItem) => {
-    setCart((prevCart) => [...prevCart, cartItem]);
+  const handleCart = () => {
+    // setCart((prevCart) => [...prevCart, cartItem]);
   };
 
   // 장바구니 상품 가격 쉼표

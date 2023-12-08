@@ -17,6 +17,8 @@ const Cart = ({ cart, setCart }) => {
         setSelectedItemsTotal(total);
     };
 
+    const [won, setWon] = useState(1);
+
     useEffect(() => {
         updateTotal();
     }, [cart, selectedItems]);
@@ -40,7 +42,6 @@ const handleCheckAll = () => {
 //     navigate('/checkout', { state: { selectedCartItems } });
 // };
 
-
     const calculateSelectedTotal = () => {
         return selectedItems.reduce((total, itemId) => {
             const selectedItem = cart.find((item) => item.prod_num === itemId);
@@ -51,7 +52,6 @@ const handleCheckAll = () => {
         }, 0);
     };
 
-
     useEffect(() => {
         axios
             .get("/api/cart/allCartList")
@@ -61,8 +61,9 @@ const handleCheckAll = () => {
             .catch((error) => {
                 console.error("Error: ", error);
             });
-    }, [cart]);
+    }, [won]);
 
+    
     const cartList = cart.map((item) => (
         <CartList
             id={item.prod_num}
@@ -72,12 +73,15 @@ const handleCheckAll = () => {
             mainimage={item.imgNo}
             discount={item.productPromotion}
             price={item.productPriceFormatted}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+            updateTotal={updateTotal}
+            won={won}
+            setWon={setWon}
+            setCart={setCart}
         />
     ));
 
-    // useEffect(() => {
-        
-    // }, [cart]);
 
     return (
         <div className="Cart">
@@ -85,21 +89,7 @@ const handleCheckAll = () => {
                 isAllChecked={isAllChecked} 
                 handleCheckAll={handleCheckAll}
             />
-            {cart.map((item) => (
-                <CartList
-                    key={item.prod_num}
-                    id={item.prod_num}
-                    productname={item.prod_name}
-                    content={item.prod_content}
-                    quantity={item.quantity}
-                    mainimage={item.imgNo}
-                    discount={item.productPromotion}
-                    price={item.productPriceFormatted}
-                    selectedItems={selectedItems}
-                    setSelectedItems={setSelectedItems}
-                    updateTotal={updateTotal}
-                />
-            ))}
+            {cartList}
             <CartTotal
                 cart={cart}
                 selectedItems={selectedItems}
