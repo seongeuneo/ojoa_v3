@@ -1,5 +1,7 @@
 package com.ojo.ojoa.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -21,6 +23,11 @@ public class ReviewDTO {
 	    private String review_image1;
 		
 	    private String review_image2;
+	    
+	    private MultipartFile review_image1f;
+	    private MultipartFile review_image2f;
+		// => form 의 Upload_File 정보를 전달받기위한 필드
+		//    MultipartFile (Interface) -> CommonsMultipartFile
 		
 //	    private String review_date;
 
