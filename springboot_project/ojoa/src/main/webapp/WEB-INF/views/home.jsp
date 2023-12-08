@@ -15,6 +15,12 @@
 </head>
 <body>
 	<P>Server Time: ${serverTime}</P>
+<%-- <c:if test="${not empty sessionScope.loginID}">
+	=> ${sessionScope.loginName}님 안녕하세요 ~~<br> 
+</c:if>
+<c:if test="${not empty requestScope.message}">
+	=> ${requestScope.message}<br>
+</c:if> --%>
 	<header class='header'>
 		<div id="mheader">
 			<!-- header -->

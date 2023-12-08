@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Header from './components/Header/Header';
+import UserHeader from './components/Header/UserHeader';
+import LoginHeader from './components/Header/LoginHeader';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton';
 import Main from './pages/Main/Main';
@@ -34,12 +35,11 @@ import PaymentConfirmation from './pages/Checkout/PaymentConfirmation';
 
 
 function App() {
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
 
   //장바구니
   const [cart, setCart] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(true);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   // 장바구니에 상품 추가
   const handleCart = () => {
@@ -53,17 +53,28 @@ function App() {
   //   //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // };
 
-
-
+  useEffect(() => {
+    // 여기서 sessionStorage를 확인하여 관리자로 로그인한 경우 isLoggedIn을 true로 설정합니다.
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    if (loggedInUser === 'admin') {
+      setIsLoggedIn(true);
+    }
+  }, []); // 컴포넌트가 마운트될 때만 실행되도록 빈 배열을 전달합니다.
 
   return (
     <div className="App">
       <BrowserRouter>
 
         <ScrollTop />
-        <a href="http://localhost:8080/home">관리자용</a>
+        {isLoggedIn && sessionStorage.getItem('loggedInUser') === 'admin' ? (
+          <a href="http://localhost:8080/home">관리자용</a>
+        ) : null}
 
-        <Header />
+        {isLoggedIn ? (
+          <UserHeader setIsLoggedIn={setIsLoggedIn} />
+        ) : (
+          <LoginHeader setIsLoggedIn={setIsLoggedIn} />
+        )}
         <Routes>
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/member/*" element={<Modify />} />
@@ -72,7 +83,7 @@ function App() {
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/member/login/" element={<Login />} />
+          <Route path="/member/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />
@@ -86,7 +97,8 @@ function App() {
 
           {/* <Route path="/ProductList/ProductCategory/*" element={<ProductCategory cart={cart} setCart={setCart} handleCart={handleCart} />} /> */}
 
-          <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart} 
+
+          <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart}
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
           <Route path="/member/join" element={<Join />} />
           {/* <Route path="/login/info/agree" element={<Agree />} />
