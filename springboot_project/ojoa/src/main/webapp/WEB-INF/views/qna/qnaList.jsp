@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>** SpringBoot QnaList **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
 <h2>게시판 목록</h2>
@@ -21,6 +23,7 @@
 		<th>카테고리</th>
 		<th>문의 제목</th>
 		<th>문의 내용</th>
+		<th>답글 달기</th>
 		<th>삭제</th>
 		
 	</tr>
@@ -31,7 +34,8 @@
 			<td>${s.qna_category}</td>
 			<td>${s.qna_title}</td>
 			<td>${s.qna_content}</td>
-			<td align="center"><a href="qdelete?qna_seq=${s.qna_seq}">글 삭제</a></td>
+			<td align="center"><a class="texlink" onclick="replyAnswerForm('${s.qna_seq}')">답글 달기</a></td>
+			<td align="center"><a class="texlink" onclick="qnaDelete('${s.qna_seq}')">글 삭제</a></td>
 		</tr>	
 		</c:forEach>
 	</c:if>
@@ -40,10 +44,7 @@
 		</tr>
 	</c:if>
 </table>
-<!-- 로그인 한 경우에만 새글등록 가능 -->
-<c:if test="${not empty sessionScope.loginID}">
-	<!--&nbsp;<a href="qnaInsert">새글등록</a>&nbsp;-->
-</c:if>	
+
 <div class="home-link"><a href="/home">Home</a></div>
 </body>
 </html>

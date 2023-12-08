@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,8 +23,13 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	// 반환되는 DTO에는 QnA 항목의 주요정보가 포함되어있다.
 	List<QnaDTO.QnaMainListDTO> findAllQnaList();
 	
+	// 2.reply 기능
+//	 @Modifying
+//	 @Query("INSERT INTO QnaReply(qna_seq, id, qna_reply) VALUES (:qna_seq, :id, :qna_reply)")
+//	 int insertQnaReply(@Param("qna_seq") int qna_seq, @Param("id") String id, @Param("qna_reply") String qna_reply);
 	
-	// 2.검색 기능 조건 추가
+	
+	// 3.검색 기능 조건 추가
 	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.id, q.qna_redate) "
 			+ "FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num "
 			+ "WHERE (:board_category IS NULL OR :board_category = '' OR q.qna_category = :board_category) "

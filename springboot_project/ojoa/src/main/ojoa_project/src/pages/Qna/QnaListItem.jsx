@@ -102,6 +102,8 @@ function QnaListItem({ qnaList, filters }) {
                     )} */}
                 </React.Fragment>
             ))}
+
+
         </tbody>
     );
 } //QnaListItem

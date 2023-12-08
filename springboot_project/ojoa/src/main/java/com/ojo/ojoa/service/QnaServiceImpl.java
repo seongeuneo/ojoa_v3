@@ -49,6 +49,10 @@ public class QnaServiceImpl implements QnaService {
 	 		return qna_seq ; // 삭제후 key return
 	 	}
 	 	
+	 	// ** reply
+	    
+	 	
+	 	
 	 	// QnA 목록 조회 (selectAllList를 구현)
 	 	@Override
 	 	public List<QnaDTO.QnaMainListDTO> selectAllList(String board_category, String search_date, String search_key, String search_query) {

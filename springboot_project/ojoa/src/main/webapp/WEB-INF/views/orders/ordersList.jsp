@@ -15,7 +15,7 @@
 
 <c:if test="${not empty requestScope.message}">
 	=> ${requestScope.message}<br><hr>
-</c:if>
+</c:if> 
 <table border="1" style="width:90%">
 	<tr >
 		<th>주문번호</th>

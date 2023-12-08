@@ -1,18 +1,25 @@
 package com.ojo.ojoa.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.entity.Qna;
+import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.service.QnaService;
 
 import lombok.AllArgsConstructor;
@@ -67,29 +74,40 @@ public class QnaController {
       return uri;
    } // QnaInsert
    
-   // ** Qna Delete - 게시글 삭제
-   @GetMapping(value="/qdelete")
-   public String qdelete(HttpSession session, Qna entity, RedirectAttributes rttr) {
-      
-      String uri = "redirect:/qna/qnaList";
-      
-      try {
-         log.info("** delete 성공  => "+qnaService.delete(entity.getQna_seq()));
-         rttr.addFlashAttribute("message", "게시글삭제 성공!!") ;   
-         if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
-            // => 관리자에 의한 강제삭제 : qnaList.jsp
-            uri="redirect:qnaList";
-         }else {
-            // => 본인삭제 : home.jsp, session 무효화 
-            session.invalidate();
-         }
-      } catch (Exception e) {
-         log.info("** delete Exception => "+e.toString());
-         rttr.addFlashAttribute("message", " 삭제 실패.. ");
+   // ** Qna Delete - 게시글 삭제 (성은코드참조)
+   @DeleteMapping("/qdelete/{qna_seq}")
+   public ResponseEntity<?> qdelete(@PathVariable("qna_seq") int qna_seq, Qna entity){
+      entity.setQna_seq(qna_seq);
+      if(qnaService.delete(qna_seq) > 0) {
+         log.info("axidelete HttpStatus.OK = " + HttpStatus.OK);
+         return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);      
+      } else {
+         log.info("axidelete HttpStatus.BAD_GATEWAY = " + HttpStatus.BAD_GATEWAY);
+         return new ResponseEntity<String>("삭제 실패, Data_Notfound", HttpStatus.BAD_GATEWAY);
       }
-      
-      return uri;
-   } // qdelete
+   }
+
+   // ** replyInsert
+   // => replyInsert Form 출력 메서드
+   @GetMapping("/replyAnswer")
+   public String replyAnswer(HttpServletRequest request,
+	         Qna entity, Model model) {
+      model.addAttribute("qna", qnaService.selectOne(entity.getQna_seq()));
+   return "qna/replyAnswerForm";
    
+   } // qnaList
+   
+   @PostMapping(value="/replyAnswerForm")
+   public String replyAnswerForm(HttpSession session,
+         Qna entity, Model model) throws IOException  {
+	   qnaService.save(entity);
+	   model.addAttribute("list",entity); //list변수명 역할을 잘 모르겠음
+	   
+	   return "qna/qnaList";
+   }
+    
+   
+   
+ 
    
 }

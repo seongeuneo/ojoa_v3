@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>** Orders Detail **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/ordersDetail.css">
+<script src="/resources/myLib/productCheck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <h2>** Orders Detail 주문 후 확인 **</h2>
