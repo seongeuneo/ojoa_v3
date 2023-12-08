@@ -11,7 +11,7 @@ import com.ojo.ojoa.entity.OrdersDetail;
 public interface OrdersDetailService {
 
 	// ** selectList
-	List<OrdersDetail> selectList();
+	List<OrdersDetail> selectList(int orders_num);
 
 	// ** selectOne
 	OrdersDetail selectOne(int ordersdt_num);
@@ -22,7 +22,6 @@ public interface OrdersDetailService {
 	// ** delete
 	int delete(int ordersdt_num);
 	
-    
 }
 
 

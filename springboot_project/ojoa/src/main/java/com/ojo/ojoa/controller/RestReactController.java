@@ -236,7 +236,7 @@ public class RestReactController {
 //	
 
 //===============================================================================		
-<<<<<<< HEAD
+
 	
 	// 게시판 QnA 
     // "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
@@ -275,32 +275,8 @@ public class RestReactController {
     }
     
     
-=======
 
-	// 게시판 QnA
-	@GetMapping("qna/allQnaList")
-	public ResponseEntity<List<QnaDTO.QnaMainListDTO>> getAllQnaList(
-			@RequestParam(required = false) String board_category, @RequestParam(required = false) String search_date,
-			@RequestParam(required = false) String search_key, @RequestParam(required = false) String search_query) {
-		List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key,
-				search_query);
-		return ResponseEntity.ok(qnaList);
-	}
 
-	// 게시판 QnA - 게시글 등록 : 워니
-	@PostMapping("qna/saveQna")
-	public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
-		try {
-			System.out.println("111111" + entity);
-			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-			qnaService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-			System.out.println("22222222" + entity);
-			return ResponseEntity.ok("데이터 저장 성공");
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
-	}
->>>>>>> main
+
 
 }

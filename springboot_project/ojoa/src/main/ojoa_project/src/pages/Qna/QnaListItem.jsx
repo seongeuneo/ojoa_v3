@@ -93,6 +93,13 @@ function QnaListItem({ qnaList, filters }) {
                             </td>
                         </tr>
                     )}
+                    {/* {expandedId === i && (
+                        <tr className='qna_board_st7'>
+                            <td colSpan="8" className='notification_row'>
+                                {item.notification}
+                            </td>
+                        </tr>
+                    )} */}
                 </React.Fragment>
             ))}
         </tbody>

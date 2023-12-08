@@ -11,7 +11,7 @@
 <body>
 <h2>** SpringBoot Qna Detail **</h2>
 <table>
-<c:if test="${not empty requestScope.apple}">
+<c:if test="${not empty requestScope.qna}">
 	<tr height="40"><th bgcolor="Plum">Qna_seq</th>
 		<td>${requestScope.apple.qna_seq}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Prod_num</th>
@@ -31,7 +31,7 @@
 	<tr height="40"><th bgcolor="Plum">Qna_indate</th>
 		<td>${requestScope.apple.qna_indate}</td></tr>
 </c:if>
-<c:if test="${empty requestScope.apple}">
+<c:if test="${empty requestScope.qna}">
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
 </c:if>
 </table>

@@ -44,7 +44,7 @@
 					<td>${s.orders_price}</td>
 					<td>${s.orders_method}</td>
 					<td>${s.orders_addresscheck}</td>
-					<td align="center"><a href="ordersdt?orders_num=${s.orders_num}">주문 상세</a></td>
+					<td align="center"><a href="/orders/ordersdt?orders_num=${s.orders_num}">주문 상세</a></td>
 					<td align="center"><a href="ocancel?orders_num=${s.orders_num}">주문 취소</a></td>
 				</tr>
 			</c:forEach>

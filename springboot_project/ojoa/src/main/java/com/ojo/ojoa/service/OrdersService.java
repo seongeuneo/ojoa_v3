@@ -13,16 +13,16 @@ import com.ojo.ojoa.entity.Orders;
 public interface OrdersService {
 
 	// ** selectList
-	public List<Orders> selectList();
+	List<Orders> selectList();
 
 	// ** selectOne
-	public Orders selectOne(int orders_num);
+	Orders selectOne(int orders_num);
 
 	// ** save : insert, update
-	public String save(Orders entity);
+	String save(Orders entity);
 		
 	// ** delete
-	public int delete(int orders_num);
+	int delete(int orders_num);
 	
 	// ** react selectAllList
 //		List<OrdersDTO> selectAllList();

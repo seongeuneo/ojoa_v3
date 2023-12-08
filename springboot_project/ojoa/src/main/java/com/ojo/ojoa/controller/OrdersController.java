@@ -90,13 +90,11 @@ public class OrdersController {
 
 // 주문 상세 정보 - 주문 상세 정보 검색 및 표시
 
-// ** OrdersDetail
-
+// ** OrdersDetail		
 // 주문 상세 정보 조회
-	    @GetMapping("/orders/{orderdt_num}")
-	    public String ordersDetail(@PathVariable("ordersdt_num") int ordersdt_num, Model model) {
-	        OrdersDetail ordersdt = ordersdtService.selectOne(ordersdt_num);
-	        model.addAttribute("ordersdt", ordersdt);
+	    @GetMapping(value="/ordersdt")
+	    public String ordersDetail(OrdersDetail ordersdt, Model model) {
+	        model.addAttribute("ordersdt", ordersdtService.selectList(ordersdt.getOrders_num()));
 	        return "orders/ordersDetail"; // ordersDetail.jsp로 반환
 	    }
 

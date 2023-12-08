@@ -10,34 +10,43 @@
 </head>
 <body>
 <h2>** Orders Detail 주문 후 확인 **</h2>
-<table>
-<c:if test="${not empty requestScope.ordersdt}">
 
-	<tr height="40"><th bgcolor="Thistle">주문처리번호</th>
-		<td>${requestScope.ordersdt.ordersdt_num}</td></tr>
-		
-	<tr height="40"><th bgcolor="Thistle">주문번호</th>
-		<td>${requestScope.ordersdt.orders_num}</td></tr>	
-		
-	<tr height="40"><th bgcolor="Thistle">상품번호</th>
-		<td>${requestScope.ordersdt.prod_num}</td></tr>
-		
-	<tr height="40"><th bgcolor="Thistle">수량</th>
-		<td>${requestScope.ordersdt.quantity}</td></tr>	
-		
-	<tr height="40"><th bgcolor="Thistle">배송비</th>
-		<td>${requestScope.ordersdt.ordersdt_shippingfee}</td></tr>	
-		
-	<tr height="40"><th bgcolor="Thistle">총액</th>
-		<td>${requestScope.ordersdt.ordersdt_totalprice}</td></tr>
-		
-	<tr height="40"><th bgcolor="Thistle">처리유무</th>
-		<td>${requestScope.ordersdt.ordersdt_result}</td></tr>
-</c:if>
-<c:if test="${empty requestScope.ordersdt}">
-	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>
-</c:if>
+<table border="1" style="width:90%">
+	<tr >
+		<th>주문처리번호</th>
+		<th>주문번호</th>
+		<th>상품번호</th>
+		<th>수량</th>
+		<th>배송비</th>
+		<th>총액</th>
+		<th>처리유무</th>
+
+
+		<!-- 관리자 기능 추가 -->
+		<c:if test="${sessionScope.loginID=='admin'}">
+		</c:if>
+	</tr>
+
+		<c:if test="${not empty requestScope.ordersdt}">
+			<c:forEach var="s" items="${requestScope.ordersdt}">
+				<tr>
+					<td>${s.ordersdt_num}</td>
+					<td>${s.orders_num}</td>
+					<td>${s.prod_num}</td>
+					<td>${s.quantity}</td>
+					<td>${s.ordersdt_shippingfee}</td>
+					<td>${s.ordersdt_totalprice}</td>
+					<td>${s.ordersdt_result}</td>
+					
+				</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty requestScope.ordersdt}">
+		<tr><td colspan="8">주문을 하고나면 나올껄???</td>
+		</tr>
+	</c:if>
 </table>
+
 <hr>
 &nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
 &nbsp;<a href="/home">Home</a>&nbsp;

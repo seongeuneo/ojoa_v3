@@ -13,7 +13,7 @@
 
 <form action="bupdate" method="Post">
 <table>
-  <c:if test="${not empty requestScope.apple}">
+  <c:if test="${not empty requestScope.qna}">
 	<tr height="40"><th bgcolor="Chocolate">Qna_Seq</th>
 		<td><input type="text" name="qna_seq" value="${requestScope.apple.qna_seq}" size="20" readonly></td></tr>
 	<tr height="40"><th bgcolor="Chocolate">I D</th>

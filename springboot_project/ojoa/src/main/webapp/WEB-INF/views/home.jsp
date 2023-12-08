@@ -72,7 +72,6 @@
 	<div class="content" id="contentArea"></div>
 
 
-<<<<<<< HEAD
 <h3>진기</h3>
 <!-- Login 전 -->
 <c:if test="${empty sessionScope.loginID}">
@@ -100,20 +99,19 @@
 <br>
 
 <h3>희상</h3>
-&nbsp;<a href="qna/qnaInsert">게시판 글쓰기</a>&nbsp; 
 &nbsp;<a href="qna/qnaList">게시판QnA</a>&nbsp; 
+&nbsp;<a href="qna/qnaInsert">게시판 글쓰기</a>&nbsp; 
+&nbsp;<a href="qna/replyInsert">게시판 문의댓글</a>&nbsp; 
+<!-- &nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp; -->
 <hr>
 <br>
 
 <h3>원희</h3>
 &nbsp;<a href="cart/cartList">장바구니 리스트</a>&nbsp; 
 &nbsp;<a href="orders/ordersList">주문리스트</a>&nbsp; 
-&nbsp;<a href="orders/ordersDetail">주문상세 페이지</a>&nbsp;
 &nbsp;<a href="product/productInsert">상품등록 페이지</a>&nbsp; 
 <hr>
 <br>
-=======
->>>>>>> main
 
 
 </body>
