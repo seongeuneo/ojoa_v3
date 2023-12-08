@@ -192,7 +192,7 @@ function inCheck() {
 <body>
 <h2>오조아 회원가입</h2>
 
-<form action="join" method="Post" enctype="multipart/form-data" id="myform">
+<form action="member/join" method="Post" enctype="multipart/form-data" id="myform">
 <table>
 
 	<tr height="40"><th bgcolor="silver">Name</th>

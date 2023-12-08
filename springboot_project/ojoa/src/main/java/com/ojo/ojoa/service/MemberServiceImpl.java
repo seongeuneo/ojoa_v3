@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ojo.ojoa.domain.MemberDTO;
 import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.repository.MemberRepository;
 
@@ -62,5 +63,6 @@ public class MemberServiceImpl implements MemberService {
 		repository.deleteById(id);
 		return id;  // 삭제후 key return 
 	}
+	
 	
 } //class

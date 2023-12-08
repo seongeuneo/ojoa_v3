@@ -11,37 +11,7 @@ function wishDelete(wish_num) {
    });
 };
 
-//==============================================================================
-// 로그인 페이지 비동기 이동
-function loginChange() {
-   let url="member/loginForm";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
 
-}
-
-//==============================================================================
-// 회원가입 페이지 비동기 이동
-function joinChange() {
-   let url="member/memberJoin";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
-
-}
 
 //==============================================================================
 // 상품관리 페이지 비동기 이동

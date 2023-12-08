@@ -28,22 +28,20 @@ const Login = () => {
         console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력
 
         try {
-            const response = await axios.post("http://localhost:8080/member/rlogin", loginData, {
-                headers: { "Content-Type": "application/json" }
-            });
+            const response = await axios.post("/member/rlogin", loginData);
 
             if (response.status === 200) {
-                if (response.data.includes('성공')) {
+                if (response.data) {
                     setMessage('로그인 성공');
-                    // 로그인 성공 시 유저 이름 세션 스토리지에 저장
-                    const loggedInUsername = response.data.username; // 예시: response.data.username
-                    sessionStorage.setItem('username', loggedInUsername);
-                    setLoggedInUsername(loggedInUsername);
-                    // 로그인이 성공했을 때 원하는 작업 수행
+                    // 응답으로 받은 데이터를 세션 스토리지에 저장
+                    const loggedInUser = response.data;
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+                    // 기존 코드에서는 username만을 받아온 형태이므로, 필요한 정보를 서버 응답에 맞게 변경하여 처리
+                    // 다음과 같이 예시 데이터를 사용할 수 있습니다.
+                    setLoggedInUsername(loggedInUser.name); // 받아온 유저 정보 중 이름을 세팅
+                    // 원하는 작업 수행
                 } else {
-                    // 실패 메시지를 추출하여 표시
-                    const errorMessage = extractErrorMessage(response.data);
-                    setMessage('로그인 실패: ' + errorMessage);
+                    setMessage('로그인 실패');
                 }
             } else {
                 setMessage('서버 오류');
@@ -58,12 +56,8 @@ const Login = () => {
 
         // 실패 메시지 추출 함수
         function extractErrorMessage(htmlResponse) {
-            // HTML 응답에서 실패 메시지를 추출하는 로직 작성
-            // 예를 들어, 특정 태그 내의 텍스트 또는 정규표현식을 사용하여 메시지 추출
-            // 실패 메시지를 가공하여 반환
         }
     };
-
 
     return (
         <div>
@@ -142,19 +136,15 @@ const Login = () => {
                                     </div>
                                     <div className="login_cboth"></div>
 
-
-                                    {/* <div onClick={handleNaverClick}><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></div>
-                                    <div id="naverIdLogin" style={{ display: "none" }} /> */}
-
                                     <div className="login_sns">
                                         <p className="sns">
-                                            {/* <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/" target="_blank"><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></Link> */}
+                                            <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/" target="_blank"><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></Link>
                                         </p>
                                         <p className="sns">
-                                            {/* <Link to="http://www.facebook.com/" target="_blank"><img src="../images/btn_facebook_login.gif" alt='페이스북로그인' /></Link> */}
+                                            <Link to="http://www.facebook.com/" target="_blank"><img src="../images/btn_facebook_login.gif" alt='페이스북로그인' /></Link>
                                         </p>
                                         <p className="sns">
-                                            {/* <Link to="https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo#login" target="_blank"><img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' /></Link> */}
+                                            <Link to="https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo#login" target="_blank"><img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' /></Link>
                                         </p>
                                     </div>
                                     <div className="login_cboth"></div>
