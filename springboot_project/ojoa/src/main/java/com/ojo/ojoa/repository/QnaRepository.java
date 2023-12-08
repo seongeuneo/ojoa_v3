@@ -28,14 +28,10 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 //	 @Query("INSERT INTO QnaReply(qna_seq, id, qna_reply) VALUES (:qna_seq, :id, :qna_reply)")
 //	 int insertQnaReply(@Param("qna_seq") int qna_seq, @Param("id") String id, @Param("qna_reply") String qna_reply);
 	
-<<<<<<< HEAD
 	
 	// 3.검색 기능 조건 추가
-	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.id, q.qna_redate) "
-=======
 	// 2.검색 기능 조건 추가
 	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, q.prod_num,p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.qna_reply, q.id, q.qna_redate) "
->>>>>>> main
 			+ "FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num "
 			+ "WHERE (:board_category IS NULL OR :board_category = '' OR q.qna_category = :board_category) "
 			//board_category가 null이거나 빈 문자열이면 무시, OR q.qna_category가 주어진 board_category와 일치하는지 확인
