@@ -30,5 +30,8 @@ extends JpaRepository<Wish, Integer> {
     Wish findByUserIdAndProdNum(@Param("userId") String userId, @Param("prodNum") int prodNum);
     
 	void save(int prod_num);
+	
+	 @Query("SELECT CASE WHEN COUNT(w) > 0 THEN true ELSE false END FROM Wish w WHERE w.prod_num = :prodNum")
+	    boolean existsByProdNum(@Param("prodNum") int prodNum);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.CartId;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.entity.Wish;
+import com.ojo.ojoa.repository.WishRepository;
 import com.ojo.ojoa.service.CartService;
 import com.ojo.ojoa.service.Prod_imageService;
 import com.ojo.ojoa.service.QnaService;
@@ -43,6 +45,7 @@ public class RestReactController {
 	CartService cartService;
 	WishService wishService;
 	Prod_imageService prod_imageService;
+	private final WishRepository wishRepository; 
 //	MemberService memberService;
 //	ProductService productService;
 //	OrderService orderService;
@@ -65,20 +68,46 @@ public class RestReactController {
 		return ResponseEntity.ok(wishList);
 	}
 
+	
 	// 괌심상품에 상품 추가
 	@PostMapping("wish/saveWish")
 	public ResponseEntity<?> saveWish(HttpSession session, @RequestBody Wish entity) {
 		entity.setId("admin");
 
 		try {
+			  // 이미 존재하는지 확인
+	        boolean exists = wishRepository.existsByProdNum(entity.getProd_num());
+	        
+	        // 이미 존재한다면 에러 처리
+	        if(exists) {
+	            return ResponseEntity.badRequest().body("이미 존재하는 상품입니다.");
+	        }
+	        
+	        // 존재하지 않으면 저장
+	        wishService.save(entity); 
 			System.out.println("saveCart111111" + entity);
-			wishService.save(entity); 
 			System.out.println("saveCart22222222" + entity);
 			return ResponseEntity.ok("데이터 저장 성공");
 		} catch (Exception e) {
 			log.error("데이터 저장 중 에러: {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
+//		Member loggedInMember = (Member) session.getAttribute("loggedInMember");
+//
+//		try {
+//			 if (loggedInMember == null) {
+//		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+//		        }
+//
+//		        String loginID = loggedInMember.getId();
+//		        entity.setId(loginID);
+//
+//			System.out.println("saveCart22222222" + entity);
+//			return ResponseEntity.ok("데이터 저장 성공");
+//		} catch (Exception e) {
+//			log.error("데이터 저장 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//		}
 	}
 	
 	// 관심상품 삭제
