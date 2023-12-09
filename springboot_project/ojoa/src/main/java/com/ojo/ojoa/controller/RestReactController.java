@@ -67,30 +67,20 @@ public class RestReactController {
 
 	// 괌심상품에 상품 추가
 	@PostMapping("wish/saveWish")
-	public ResponseEntity<String> saveWish(HttpSession session, @RequestBody Wish entity) {
-		String loginID = (String) session.getAttribute("loginID");
-		try {
-			if (loginID == null) {
-                throw new Exception("loginID isNull");
-            }
-         // 이미 추가하려는 상품이 사용자의 관심목록에 있는지 확인
-            Wish existingWish = wishService.selectOneByUserIdAndProdNum(loginID, entity.getProd_num());
-            if (existingWish != null) {
-                return ResponseEntity.badRequest().body("이미 관심목록에 추가된 상품입니다.");
-            }
-            entity.setId(loginID);
+	public ResponseEntity<?> saveWish(HttpSession session, @RequestBody Wish entity) {
+		entity.setId("admin");
 
-			System.out.println("saveWish111111" + entity);
-			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-			wishService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-			System.out.println("saveWish22222222" + entity);
+		try {
+			System.out.println("saveCart111111" + entity);
+			wishService.save(entity); 
+			System.out.println("saveCart22222222" + entity);
 			return ResponseEntity.ok("데이터 저장 성공");
 		} catch (Exception e) {
 			log.error("데이터 저장 중 에러: {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
 	}
-
+	
 	// 관심상품 삭제
 	@DeleteMapping(value = "/wdelete/{wish_num}")
 	public String wdelete(@PathVariable("wish_num") int wish_num, HttpSession session, RedirectAttributes rttr) {

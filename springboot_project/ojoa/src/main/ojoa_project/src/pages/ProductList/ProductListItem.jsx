@@ -21,7 +21,13 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
 
         const productData = { prod_num: content.prod_num }; // 상품 정보를 담은 객체
 
-        axios.post('/api/wish/saveWish', productData) // POST 요청으로 수정 및 상품 정보 전달
+        axios.post('/api/wish/saveWish', productData, {
+            headers: {
+                'Content-Type': 'application/json', // 예시로 JSON 형식으로 보내는 경우
+                // 다른 헤더를 설정하고자 할 때 추가로 작성
+                // 'Authorization': `Bearer ${token}`, // 예시: 인증 토큰 설정
+            }
+        }) // POST 요청으로 수정 및 상품 정보 전달
             .then(response => {
                 // 요청 성공 시 처리할 작업
                 console.log("관심상품 담기" + response.data);
