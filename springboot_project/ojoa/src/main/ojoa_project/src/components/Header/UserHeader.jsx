@@ -6,7 +6,13 @@ import axios from 'axios';
 
 function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
+    console.log('sessionInfo:', sessionInfo);
+
+    const isAdmin = sessionInfo && sessionInfo.id === 'admin'; // 'admin' 아이디인 경우를 관리자로 판단
+    console.log('isAdmin:', isAdmin); // 콘솔에 isAdmin 값 출력
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
 
     // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
     useEffect(() => {
@@ -57,6 +63,7 @@ function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
                     {/*---------------------------------------------------------*/}
                     {/* header */}
                     <div>
+
                         {/* 상단 로고 */}
                         <div>
                             <Link to="/"><img className="logo" src="/images/ojoa_logo_b.png" alt="logo" /></Link>
@@ -65,8 +72,12 @@ function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
                             <Modal />
                         </div>
                         {/* 상단 네비 */}
+
                         <div className="navBar">
                             <ul>
+                                {isAdmin && (
+                                    <a href="http://localhost:8080/home">&nbsp;&nbsp; &laquo;관리자 페이지&raquo;</a>
+                                )}
                                 <li onClick={handleLogout}><a>LOGOUT</a>&nbsp;<span>|</span></li>
                                 <li><Link to="../MyPage">MYPAGE </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Order">ORDER </Link>&nbsp;<span>|</span></li>
