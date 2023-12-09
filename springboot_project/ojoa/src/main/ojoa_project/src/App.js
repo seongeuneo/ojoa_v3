@@ -36,8 +36,6 @@ import PaymentConfirmation from './pages/Checkout/PaymentConfirmation';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
-  const [isAdmin, setIsAdmin] = useState(false); // 관리자 여부를 추적
-
 
   //장바구니
   const [cart, setCart] = useState([]);
@@ -55,26 +53,11 @@ function App() {
   //   //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // };
 
-  useEffect(() => {
-    const loggedInUser = sessionStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      setIsLoggedIn(true);
-
-      // 만약 관리자로 로그인한 경우에 isAdmin 상태를 true로 설정합니다.
-      if (loggedInUser === 'admin') {
-        setIsAdmin(true);
-      }
-    }
-  }, []); // 컴포넌트가 마운트될 때만 실행되도록 빈 배열을 전달합니다.
-
   return (
     <div className="App">
       <BrowserRouter>
 
         <ScrollTop />
-        {isLoggedIn && isAdmin && (
-          <a href="http://localhost:8080/home">관리자 페이지</a>
-        )}
 
         {isLoggedIn ? (
           <UserHeader setIsLoggedIn={setIsLoggedIn} />

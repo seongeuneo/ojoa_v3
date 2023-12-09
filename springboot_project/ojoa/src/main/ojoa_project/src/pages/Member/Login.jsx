@@ -11,8 +11,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        console.log('isLoggedIn 상태 변경:', isLoggedIn);
-    }, [isLoggedIn]); // isLoggedIn 상태가 변경될 때마다 useEffect 실행
+        console.log('isLoggedIn 상태 변경:', isLoggedIn); // 상태 변경 시 로그 확인
+    }, [isLoggedIn]); // isLoggedIn 상태가 변경될 때마다 실행
 
     const handleLogin = async () => {
         const loginData = {
@@ -32,7 +32,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                     const loggedInUser = response.data;
                     sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
                     setIsLoggedIn(true); // 로그인 성공 시 isLoggedIn 상태를 true로 변경
-                    console.log('isLoggedIn 상태:', isLoggedIn); // 여기에 추가
+                    //console.log('isLoggedIn 상태:', isLoggedIn); // 여기에 추가
+                    //console.log('isLoggedIn 상태:', true);
                     navigate('/');
                 } else {
                     setMessage('로그인 실패');
@@ -40,6 +41,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
             } else {
                 setMessage('서버 오류');
             }
+            //console.log('isLoggedIn 상태:', isLoggedIn);
         } catch (error) {
             if (error.response) {
                 setMessage('로그인 실패: ' + error.response.data);
