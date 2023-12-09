@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.CartId;
+import com.ojo.ojoa.entity.Review;
 import com.ojo.ojoa.service.CartService;
 
 import lombok.AllArgsConstructor;
@@ -64,17 +67,31 @@ public class CartController {
 //	} // cdelete
 
 //===========================================
-    @GetMapping("/cdelete")
-    public String cdelete(CartId cartid) {
-       try {
-          cartService.delete(cartid);
-          System.out.println("** cart delete 삭제성공 **");
-       } catch (Exception e) {
-          System.out.println("** cart delete Exception => "+e.toString());
-       }
-       return "redirect:cartList" ;
+//    @GetMapping("/cdelete")
+//    public String cdelete(CartId cartid) {
+//       try {
+//          cartService.delete(cartid);
+//          System.out.println("** cart delete 삭제성공 **");
+//       } catch (Exception e) {
+//          System.out.println("** cart delete Exception => "+e.toString());
+//       }
+//       return "redirect:cartList" ;
+//    }
+
+    
+ // 장바구니 상품 삭제 요청을 처리하는 엔드포인트
+    @DeleteMapping("/cart/cdelete/{id}/{prod_num}")
+    public ResponseEntity<String> cDelete(@PathVariable("id") String id, @PathVariable("prod_num") int prod_num) {
+        try {
+            cartService.delete(new CartId(id, prod_num));
+            return new ResponseEntity<>("삭제 성공", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("삭제 실패: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
+    
+    
 //==============================================================
 
 
