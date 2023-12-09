@@ -6,31 +6,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrdersDTO {
 	
-	@JsonProperty("")
+	@JsonProperty("orders_num")
 	private int orders_num;
 	
 	@JsonProperty("id")
 	private String id;
 	
-	@JsonProperty("")
+	@JsonProperty("orders_indate")
 	private LocalDateTime orders_indate;
 	
-	@JsonProperty("displayedPrice")
+	@JsonProperty("orders_totalprice")
 	private int orders_totalprice;
 	
-	@JsonProperty("displatedTotalPrice")
+	@JsonProperty("orders_price")
 	private int orders_price;
 	
-	@JsonProperty("")
+	@JsonProperty("orders_method")
 	private String orders_method;
 
-	@JsonProperty("")
+	@JsonProperty("orders_addresscheck")
 	private String orders_addresscheck;
 
-	
 	public OrdersDTO(int orders_num, String id, LocalDateTime orders_indate,
 			int orders_totalprice, int orders_price, String orders_method, String orders_addresscheck) {
-		 
 		super();
 
 		this.orders_num = orders_num;

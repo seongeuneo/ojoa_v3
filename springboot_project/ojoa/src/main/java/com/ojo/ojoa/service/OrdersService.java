@@ -25,7 +25,7 @@ public interface OrdersService {
 	int delete(int orders_num);
 	
 	// ** react selectAllList
-//		List<OrdersDTO> selectAllList();
+	List<OrdersDTO> selectAllList();
     
     
 }
