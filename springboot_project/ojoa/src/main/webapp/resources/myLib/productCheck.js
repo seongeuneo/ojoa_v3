@@ -48,6 +48,20 @@ function addWish(prod_num) {
 		});
 
 }
+//=========================================================================================
+
+// 장바구니 삭제
+function cartDelete(prod_num, id) {
+   let url = `/cart/cdelete/${id}/${prod_num}`; // URL 형식 수정
+   axios.delete(url).then(response => {
+      alert("삭제 성공 => " + response.data);
+      // 페이지 새로고침을 통해 업데이트된 장바구니 목록을 불러올 수 있습니다.
+      window.location.reload();
+   }).catch(err => {
+      alert("삭제 실패 => " + err.message);
+   });
+};
+
 
 
 //==========================================================================================
