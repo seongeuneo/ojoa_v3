@@ -1,5 +1,5 @@
 import '../Member/Login.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,6 +9,10 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        console.log('isLoggedIn 상태 변경:', isLoggedIn);
+    }, [isLoggedIn]); // isLoggedIn 상태가 변경될 때마다 useEffect 실행
 
     const handleLogin = async () => {
         const loginData = {
@@ -27,13 +31,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                     // 응답으로 받은 데이터를 세션 스토리지에 저장
                     const loggedInUser = response.data;
                     sessionStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-                    // 기존 코드에서는 username만을 받아온 형태이므로, 필요한 정보를 서버 응답에 맞게 변경하여 처리
-                    // 다음과 같이 예시 데이터를 사용할 수 있습니다.
-                    // 원하는 작업 수행
                     setIsLoggedIn(true); // 로그인 성공 시 isLoggedIn 상태를 true로 변경
                     console.log('isLoggedIn 상태:', isLoggedIn); // 여기에 추가
-                    //window.location.href = "/";
-                    navigate('/'); // 이 부분이 추가됨
+                    navigate('/');
                 } else {
                     setMessage('로그인 실패');
                 }
