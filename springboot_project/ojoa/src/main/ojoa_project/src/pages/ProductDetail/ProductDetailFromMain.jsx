@@ -10,7 +10,7 @@ import AddCart from './Modal/AddCart';
 import axios from "axios";
 
 
-function ProductDetail({ handleCart }) {
+function ProductDetailFromMain({ handleCart }) {
     // ProductListItem에서 데이터 받아오기 
     // 상품목록(ProductListItem)에서 오는 state값
     const location = useLocation();
@@ -228,4 +228,4 @@ function ProductDetail({ handleCart }) {
     )
 };
 
-export default ProductDetail;
+export default ProductDetailFromMain;

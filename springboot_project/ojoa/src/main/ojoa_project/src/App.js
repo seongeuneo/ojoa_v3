@@ -13,6 +13,7 @@ import MyPage from './pages/MyPage/MyPage';
 import Store from './pages/Store/Store';
 import Order from './pages/Order/Order';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import ProductDetailFromMain from './pages/ProductDetail/ProductDetailFromMain';
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from './pages/ProductList/ProductList';
 import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Member/Login';
@@ -88,6 +89,7 @@ function App() {
           <Route path="/member/rlogin" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
+          <Route path="/ProductDetailFromMain/:prod_num/*" element={<ProductDetailFromMain cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/Best/*" element={<Best cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/Chair/*" element={<Chair cart={cart} setCart={setCart} handleCart={handleCart} />} />

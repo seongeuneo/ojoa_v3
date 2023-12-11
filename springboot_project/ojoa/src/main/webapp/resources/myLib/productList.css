@@ -51,3 +51,55 @@ td img {
 	color: inherit; /* 기본 텍스트 색상으로 설정 */
 	font-weight: bold;
 }
+
+
+ .filterArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;
+}
+
+
+
+.filterArea div {
+     display: flex; /* 이 부분이 추가되었습니다 */
+    align-items: center; /* 세로 중앙 정렬을 위해 추가되었습니다 */
+}
+
+.filterArea select, .filterArea input[type="text"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+      margin-right: 10px; /* 각 요소 사이의 간격을 조절합니다 */
+}
+
+.filterArea button {
+  padding: 8px 15px; /* Adjust padding for better appearance */
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.filterArea button:hover {
+    background-color: #45a049;
+}
+
+.filterArea select {
+    width: 100px; /* or a specific width */
+    margin-left: 10px; /* Provide some space between elements */
+    margin-right: 10px; /* Provide some space between elements */
+}
+
+.filterArea1 {
+	width: 250px;
+	display: flex;
+    justify-content: space-between;
+}
+
