@@ -103,3 +103,177 @@ function modifyProduct(prod_num) {
       
     document.getElementById("contentArea").innerHTML="";       
 }
+
+//==========================================================================================
+// 상품 정렬
+
+function sortTable(columnIndex) {
+    const table = document.querySelector('table');
+    const rows = table.querySelectorAll('tr');
+    let shouldSwitch = false;
+
+    // 스위칭 변수 설정
+    let switching = true;
+    let direction = 'asc'; // 초기 정렬 방향
+
+    while (switching) {
+        switching = false;
+        const rowsArray = [];
+        for (let i = 1; i < rows.length; i++) {
+            rowsArray.push(rows[i]);
+        }
+
+        for (let i = 0; i < rowsArray.length - 1; i++) {
+            let shouldSwitch = false;
+            let x = rowsArray[i].querySelectorAll('td')[columnIndex].innerHTML.toLowerCase();
+            let y = rowsArray[i + 1].querySelectorAll('td')[columnIndex].innerHTML.toLowerCase();
+
+            if (direction === 'asc') {
+                if (x > y) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (direction === 'desc') {
+                if (x < y) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        if (shouldSwitch) {
+            rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
+            switching = true;
+        } else {
+            if (direction === 'asc') {
+                direction = 'desc';
+                switching = true;
+            }
+        }
+    }
+}
+
+//==========================================================================================
+// 상품 정렬 :filterProducts
+
+function filterProducts() {
+    var filterKind = document.getElementById("filterKind"); // select 요소 가져오기
+    var selectedKind = filterKind.options[filterKind.selectedIndex].value; // 선택된 옵션 값 가져오기
+
+    // 선택된 카테고리에 따라 제품 필터링하는 로직
+    var rows = document.querySelectorAll("table tr");
+    for (var i = 1; i < rows.length; i++) { // 헤더 행을 건너뛰기 위해 인덱스 1부터 시작
+        var category = rows[i].getElementsByTagName("td")[3].textContent; // 카테고리가 있는 네 번째 열을 가정
+        if (selectedKind === "all" || category === selectedKind) {
+            rows[i].style.display = ""; // 해당 행 보이기
+        } else {
+            rows[i].style.display = "none"; // 해당 행 숨기기
+        }
+    }
+}
+
+
+//==========================================================================================
+// 상품 검색 
+function filterProductsByName() {
+    var input, filter, table, tr, td, productName, i, txtValue;
+    input = document.getElementById("productNameInput"); // 검색어 입력 요소 가져오기
+    filter = input.value.toUpperCase(); // 검색어를 대문자로 변환하여 일치 검색하기 위해 사용
+    table = document.querySelector("table"); // 테이블 요소 가져오기
+    tr = table.getElementsByTagName("tr"); // 테이블의 각 행 가져오기
+
+    // 각 행을 순회하며 검색어와 일치하는 제품 이름이 있는지 확인
+    for (i = 1; i < tr.length; i++) { // 헤더 행을 건너뛰기 위해 인덱스 1부터 시작
+        td = tr[i].getElementsByTagName("td")[2]; // 제품 이름이 있는 세 번째 열을 가정
+        if (td) {
+            productName = td.textContent || td.innerText;
+            if (productName.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // 검색어와 일치하는 제품이면 보이기
+            } else {
+                tr[i].style.display = "none"; // 검색어와 일치하지 않는 제품은 숨기기
+            }
+        }
+    }
+}
+
+
+//==========================================================================================
+// 회원 ID 검색 
+function filterMembersByName() {
+    var input, filter, table, tr, td, memberId, i, txtValue;
+    input = document.getElementById("productNameInput"); // 검색어 입력 요소 가져오기
+    filter = input.value.toUpperCase(); // 검색어를 대문자로 변환하여 일치 검색하기 위해 사용
+    table = document.querySelector("table"); // 테이블 요소 가져오기
+    tr = table.getElementsByTagName("tr"); // 테이블의 각 행 가져오기
+
+    // 각 행을 순회하며 검색어와 일치하는 제품 이름이 있는지 확인
+    for (i = 1; i < tr.length; i++) { // 헤더 행을 건너뛰기 위해 인덱스 1부터 시작
+        td = tr[i].getElementsByTagName("td")[0]; // 회원 ID가 있는 첫 번째 열을 가정
+        if (td) {
+            memberId = td.textContent || td.innerText;
+            if (memberId.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // 검색어와 일치하는 제품이면 보이기
+            } else {
+                tr[i].style.display = "none"; // 검색어와 일치하지 않는 제품은 숨기기
+            }
+        }
+    }
+}
+
+
+//==========================================================================================
+// 페이지네이션 
+// 페이지당 아이템 수 정의
+// 페이지당 아이템 수 정의
+const itemsPerPage = 5;
+
+// 제품 행 가져오고 총 페이지 계산
+const productRows = document.querySelectorAll('table tr:not(.prod-columns)');
+const totalPages = Math.ceil(productRows.length / itemsPerPage);
+
+// 페이지 번호에 따라 아이템 표시하는 함수
+function displayItems(pageNumber) {
+    productRows.forEach((row, index) => {
+        const startIndex = (pageNumber - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        if (index >= startIndex && index < endIndex) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// 초기 페이지 표시
+displayItems(1);
+
+// 페이지 번호 생성 함수
+function generatePageNumbers() {
+    let pageNumbersHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbersHTML += `<button onclick="displayItems(${i})">${i}</button>`;
+    }
+    document.getElementById('pageNumbers').innerHTML = pageNumbersHTML;
+}
+
+// 초기 페이지 번호 표시
+generatePageNumbers();
+
+// 페이지네이션 버튼 이벤트 리스너
+document.getElementById('prevPage').addEventListener('click', () => {
+    const currentPage = parseInt(document.querySelector('#pageNumbers button.active').innerText);
+    if (currentPage > 1) {
+        displayItems(currentPage - 1);
+    }
+});
+
+document.getElementById('nextPage').addEventListener('click', () => {
+    const currentPage = parseInt(document.querySelector('#pageNumbers button.active').innerText);
+    if (currentPage < totalPages) {
+        displayItems(currentPage + 1);
+    }
+});
+
+
+

@@ -213,6 +213,28 @@ function reviewDelete(review_seq) {
    });
 };
 
+//==========================================================================================
+// 회원 ID 검색 
+function filterMembersByName() {
+    var input, filter, table, tr, td, memberId, i, txtValue;
+    input = document.getElementById("productNameInput"); // 검색어 입력 요소 가져오기
+    filter = input.value.toUpperCase(); // 검색어를 대문자로 변환하여 일치 검색하기 위해 사용
+    table = document.querySelector("table"); // 테이블 요소 가져오기
+    tr = table.getElementsByTagName("tr"); // 테이블의 각 행 가져오기
+
+    // 각 행을 순회하며 검색어와 일치하는 제품 이름이 있는지 확인
+    for (i = 1; i < tr.length; i++) { // 헤더 행을 건너뛰기 위해 인덱스 1부터 시작
+        td = tr[i].getElementsByTagName("td")[0]; // 회원 ID가 있는 첫 번째 열을 가정
+        if (td) {
+            memberId = td.textContent || td.innerText;
+            if (memberId.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // 검색어와 일치하는 제품이면 보이기
+            } else {
+                tr[i].style.display = "none"; // 검색어와 일치하지 않는 제품은 숨기기
+            }
+        }
+    }
+}
 
 
 

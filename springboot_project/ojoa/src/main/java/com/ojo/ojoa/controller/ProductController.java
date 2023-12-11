@@ -72,7 +72,7 @@ public class ProductController {
 					uploadfilef.transferTo(new File(file1)); //해당경로에 저장(붙여넣기)
 					
 					// 1.3.2) Table 저장경로 완성 (file2)
-					file2 = "resources/uploadImages/" + uploadfilef.getOriginalFilename();
+					file2 =  uploadfilef.getOriginalFilename();
 				} // Image 선택한 경우
 				
 				// 1.4) 완성된 경로를 dto 에 set

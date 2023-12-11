@@ -7,6 +7,7 @@ import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from '../../
 
 const ProductListItem = ({ content, onSelect, handleCart }) => {
 
+
     //const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     // 수량 변경한 만큼 가격에 계산
@@ -27,7 +28,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
         } else {
             setWishSrc("/images/fullheart.png");
             setIsWishClicked(true); // true일 땐 변경될 이미지 src
-            alert("해당 상품이 장바구니에 추가되었습니다.")
+            alert("해당 상품이 관심상품에 추가되었습니다.")
         }
     };
 
@@ -51,7 +52,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 } else {
                     // prod_num이 중복되지 않는다면 상태 업데이트
                     console.log("서버연결성공 => ", currentWishlist);
-                    alert("해당 상품이 장바구니에 추가되었습니다.");
+                    alert("해당 상품이 관심상품에 추가되었습니다.");
                     handleWishClick();
                 }
             })
@@ -67,10 +68,6 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             });
 
     };
-
-
-
-
 
     //============================= 여기서부터 워니의 코드 =================================
 
@@ -112,28 +109,6 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
         }
     };
 
-    // 장바구니 기능
-    // 장바구니에 물건
-    // const handleAddToCart = () => {
-    //     const cartItem = {
-    //         id: content.id,
-    //         imgNo: content.imgNo,
-    //         productName: content.productName,
-    //         //productPriceFormatted: content.productPriceFormatted,
-    //         productPromotion: content.productPromotion,
-    //         productInfo: content.productInfo,
-    //         productReview: content.productReview,
-    //         productGrade: content.productGrade,
-    //         quantity: content.count,
-    //     };
-    //     handleCart(cartItem);
-    // };
-
-    // function handleAddToCartAndhandleCartClickOld() {
-    //     handleAddToCart();
-    //     handleCartClick();
-    // }
-
     return (
         <div className="ProductListItem" onClick={onSelect}>
             <section className="pl_section">
@@ -143,7 +118,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                             <Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`}
                                 state={{ productData: content }} >
                                 {/* 선택한 상품정보를 state로 값전달  */}
-                                <img src={`/thumbs/${content.prod_mainimage}_1.jpg`} alt={`Product ${content.prod_num}`} />
+                                <img src={`${content.prod_mainimage}`} alt={`Product ${content.prod_num}`} />
                             </Link>
                             <div className="pl_icon">
                                 <a className="pd_cart">
