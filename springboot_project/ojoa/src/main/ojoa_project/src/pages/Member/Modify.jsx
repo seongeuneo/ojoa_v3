@@ -32,6 +32,19 @@ function Modify() {
         })
     }
 
+    const handleDelete = async () => {
+        console.log(enroll_company.id);
+        try {
+            const response = await axios.delete(`/member/rmemberdelete?id=${enroll_company.id}`);
+            console.log(response.data); // 성공적으로 삭제되었을 때의 응답 확인
+            // 삭제 후에 필요한 작업 수행
+            // 예를 들어, 회원 탈퇴 후 로그인 페이지로 이동 등
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            // 에러 처리 로직 추가
+        }
+    };
+
     useEffect(() => {
         // const loggedInUser = sessionStorage.getItem('loggedInUser');
         // if (loggedInUser) {
@@ -73,7 +86,7 @@ function Modify() {
         e.preventDefault();
         try {
             // 백엔드로 POST 요청을 보냄
-            const response = await axios.post('/member/rmemberUpdate', enroll_company);
+            const response = await axios.put('/member/rmemberUpdate', enroll_company);
             // 업데이트된 데이터 전달
 
             console.log(response.data); // 요청 결과 확인
@@ -124,7 +137,7 @@ function Modify() {
                                     id="id"
                                     //readOnly
                                     autocomplete="username"
-                                    value={enroll_company.id}
+                                    
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -140,7 +153,7 @@ function Modify() {
                                     id="name"
                                     //readOnly
                                     autocomplete="username"
-                                    value={enroll_company.name}
+                                    
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -156,7 +169,7 @@ function Modify() {
                                     id="password"
                                     //readOnly
                                     autocomplete="new-password"
-                                    value={enroll_company.password}
+                                    
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -172,7 +185,7 @@ function Modify() {
                                     id="password2"
                                     //readOnly
                                     autocomplete="new-password"
-                                    value={enroll_company.password2}
+                                    
                                 />
 
                                 <span className="input_error"></span>
@@ -232,7 +245,7 @@ function Modify() {
                                         name="phone2"
                                         size="1"
                                         id="phone2"
-                                        value={enroll_company.phone2}
+
                                         required
                                     />
                                     &nbsp;&ndash;&nbsp;
@@ -240,7 +253,7 @@ function Modify() {
                                         name="phone3"
                                         id="phone3"
                                         size="1"
-                                        value={enroll_company.phone3}
+
                                         required
                                     />
                                 </div>
@@ -255,14 +268,14 @@ function Modify() {
                                 <input type="text"
                                     name="email1"
                                     id="email1"
-                                    value={enroll_company.email1}
+                                    
                                 />
                                 &nbsp;@&nbsp;
                                 <input type="text"
                                     name="email2"
                                     id="email2"
                                     placeholder="직접 입력"
-                                    value={enroll_company.email2}
+                                    
                                 />
                             </td>
                         </tr>
@@ -294,7 +307,7 @@ function Modify() {
                         {/* <a href="" className="out_btn2">취소하기</a> */}
                         <button type="submit" className="out_btn3">수정완료</button>
                         <button className="out_btn2"><Link to="./member/pUpdateForm">비밀번호변경</Link></button>
-                        <button className="out_btn4" >회원탈퇴</button>
+                        <button className="out_btn4" onClick={handleDelete}>회원탈퇴</button>
                     </div>
                 </form>
             </div>
