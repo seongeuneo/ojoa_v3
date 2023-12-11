@@ -81,6 +81,85 @@ function Checkout({ cart }) {
         navigate('/paymentconfirmation');
     };
 
+    // 결제진행
+    // const handleSubmit = _handleSubmit(async (values) => {
+    //   await Iamport.initialize();
+
+    // 아임포트 프로세스 - 결제시스템을 연결. 결제 API 서비스
+    // const imp = new Iamport("iamport"); // your iamport key
+
+    // merchant_uid 생성 - 결제요청
+    // const merchant_uid = `ORDER_${new Date().getTime()}`;
+
+    // const displayProductName = `${cart[0].productName} ${cart.length > 1 ? `${cart.length - 1}개` : ''}`;
+
+    // request 객체 생성
+    // const req = new PaymentRequest({
+    // param - 결제를 위한 요청 객체를 초기화하고, 이니시스 결제 게이트웨이와 상호작용하기 위한 정보를 포함
+    //pg: "html5_inicis",
+    //이니시스결제시스템사용
+    //   pay_method: values.paymentMethod,
+    //   merchant_uid: merchant_uid,
+    //   name: displayProductName,
+    //   amount: totalCheckoutPrice,
+    //   buyer_email: `${values.name}@${values.email.provider}`,
+    //   buyer_name: values.buyer_name,
+    //   buyer_tel: `${values.phone1}-${values.phone2}-${values.phone3}`,
+    //   buyer_addr: "서울특별시 강남구 신사동",
+    //   buyer_postcode: "01181",
+    // });
+
+    //   try {
+    //     // 결제요청
+    //     const payment = await imp.requestPay(req);
+    //     alert('결제성공')
+    //   } catch (e) {
+    //     // 결제실패
+    //     alert('결제실패')
+    //     console.error(e);
+    //   }
+    // })
+
+
+    //우편번호 API
+    // const [isPostOpen, setIsPostOpen] = useState(true);
+    // const [isZoneCode, setIsZoneCode] = useState("");
+    // const [isAddress, setIsAddress] = useState("");
+
+    // const handleComplete = (data) => {
+    //   let fullAddress = data.address;
+    //   let extraAddress = "";
+
+    //   if (data.addressType === "R") {
+    //     if (data.bname !== "") {
+    //       extraAddress += data.bname;
+    //     }
+    //     if (data.buildingName !== "") {
+    //       extraAddress +=
+    //         extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+    //     }
+    //     fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    //   }
+    //   setIsZoneCode(data.zonecode);
+    //   setIsAddress(fullAddress);
+    //   setIsPostOpen(true);
+
+    //   if (cart && cart.length > 0) {
+    //     const displayProductName = `${cart[0].productName} ${cart.length > 1 ? `${cart.length - 1}개` : ""
+    //       }`;
+
+    //     const postCodeStyle = {
+    //       display: "block",
+    //       position: "absolute",
+    //       top: "50%",
+    //       width: "400px",
+    //       height: "500px",
+    //       padding: "7px",
+    //     }
+    //   }
+    // };
+
+
     return (
         <div className="Checkout">
             {/* <form onSubmit={handleSubmit}> */}

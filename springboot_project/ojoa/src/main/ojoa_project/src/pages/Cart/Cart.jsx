@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Cart = ({ cart, setCart }) => {
-    
+
     const navigate = useNavigate();
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
@@ -24,23 +24,23 @@ const Cart = ({ cart, setCart }) => {
         updateTotal();
     }, [cart, selectedItems]);
 
-// Cart 컴포넌트의 handleCheckAll 함수 내부에서 selectedItems 상태를 업데이트합니다.
-const handleCheckAll = () => {
-    setIsAllChecked((prevIsAllChecked) => !prevIsAllChecked);
-    const updatedSelectedItems = !isAllChecked ? cart.map((item) => item.prod_num) : [];
-    setSelectedItems(updatedSelectedItems);
-};
+    // Cart 컴포넌트의 handleCheckAll 함수 내부에서 selectedItems 상태를 업데이트합니다.
+    const handleCheckAll = () => {
+        setIsAllChecked((prevIsAllChecked) => !prevIsAllChecked);
+        const updatedSelectedItems = !isAllChecked ? cart.map((item) => item.prod_num) : [];
+        setSelectedItems(updatedSelectedItems);
+    };
 
-// Cart 컴포넌트에서 handleCheckout 함수도 수정하여 선택된 상품들의 데이터를 Checkout 컴포넌트로 전달합니다.
-// const handleCheckout = () => {
-//     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
-//     navigate('/checkout', { state: { selectedCartItems } });
-// };
+    // Cart 컴포넌트에서 handleCheckout 함수도 수정하여 선택된 상품들의 데이터를 Checkout 컴포넌트로 전달합니다.
+    // const handleCheckout = () => {
+    //     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
+    //     navigate('/checkout', { state: { selectedCartItems } });
+    // };
 
-const onCheckout = () => {
-    const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
-    navigate('/checkout', { state: { selectedCartItems : selectedCartItems } });
-};
+    const onCheckout = () => {
+        const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
+        navigate('/checkout', { state: { selectedCartItems: selectedCartItems } });
+    };
 
     const calculateSelectedTotal = () => {
         return selectedItems.reduce((total, itemId) => {
@@ -53,7 +53,7 @@ const onCheckout = () => {
     };
 
     useEffect(() => {
-        const loggedInUser  = JSON.parse(sessionStorage.getItem("loggedInUser"));
+        const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
         const loginID = loggedInUser.id;
 
         axios
@@ -65,9 +65,9 @@ const onCheckout = () => {
                 console.error("Error: ", error);
             });
     }, [won]);
-    
 
-    
+
+
     const cartList = cart.map((item) => (
         <CartList
             id={item.prod_num}
@@ -89,8 +89,8 @@ const onCheckout = () => {
 
     return (
         <div className="Cart">
-            <CartHeader 
-                isAllChecked={isAllChecked} 
+            <CartHeader
+                isAllChecked={isAllChecked}
                 handleCheckAll={handleCheckAll}
             />
             {cartList}

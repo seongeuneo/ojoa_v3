@@ -30,15 +30,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequestMapping("qna") 
 public class QnaController {
-   
-//   @CrossOrigin(origins="*")
-//   @GetMapping("/qnaList")
-//    public ResponseEntity<List<Qna>> productList(Model model) {
-//      
-//      List<Qna> test = qnaService.selectList();
-//       //model.addAttribute("qna", test);
-//       return ResponseEntity.ok(test);
-//    }
 
    QnaService qnaService;
    

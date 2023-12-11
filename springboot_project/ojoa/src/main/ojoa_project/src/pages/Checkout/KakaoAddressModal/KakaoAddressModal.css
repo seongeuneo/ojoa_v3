@@ -1,0 +1,28 @@
+
+#addressModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    transform: translate(-50%, -50%);
+
+}
+
+.addressModal_container {
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+#addressModal .addressModal_btn_close {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    float: right;
+}
+
+#addressModal .addressModal_btn_close:hover {
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
