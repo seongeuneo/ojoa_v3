@@ -81,7 +81,7 @@ public class CartController {
     
  // 장바구니 상품 삭제 요청을 처리하는 엔드포인트
     @DeleteMapping("/cart/cdelete/{id}/{prod_num}")
-    public ResponseEntity<String> cDelete(@PathVariable("id") String id, @PathVariable("prod_num") int prod_num) {
+    public ResponseEntity<?> cDelete(@PathVariable("id") String id, @PathVariable("prod_num") int prod_num) {
         try {
             cartService.delete(new CartId(id, prod_num));
             return new ResponseEntity<>("삭제 성공", HttpStatus.OK);

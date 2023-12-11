@@ -44,5 +44,15 @@ public class Orders {
 	
 	@Column(name="orders_addresscheck")
 	private String orders_addresscheck; // 배송지
+	
+	private String shipping_name;
+	
+	private String shipping_zipcode;
+	
+	private String shipping_address;
+	
+	private String shipping_addressdetail;
+	
+	private String shipping_phone;
 
 }
