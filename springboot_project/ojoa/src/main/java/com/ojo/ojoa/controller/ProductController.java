@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -134,8 +135,8 @@ public class ProductController {
     
 
 	// ** Product Delete - 상품 삭제
-	@GetMapping(value="/pdelete")
-	public String pdelete(HttpSession session, Product entity, RedirectAttributes rttr) {
+	@DeleteMapping(value="/pdelete")
+	public String pdelete(@PathVariable("prod_num") int prod_num, HttpSession session, Product entity, RedirectAttributes rttr) {
 		
 		String uri = "redirect:/product/productList";
 		

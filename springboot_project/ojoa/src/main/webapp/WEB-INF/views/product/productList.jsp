@@ -84,9 +84,7 @@
 					<td>${s.prod_stock}</td>
 					<td>${s.prod_grade}</td>
 
-					<!-- 관리자 기능 추가 -->
-					<%-- <c:if test="${sessionScope.loginID=='admin'}"> --%>
-					<td align="center"><a href="pdelete?prod_num=${s.prod_num}">상품삭제</a></td>
+					<td align="center"><button onclick="productDelete(${s.prod_num})">상품삭제</button></td>
 					<td align="center"><button onclick="addWish(${s.prod_num})">관심목록
 							추가</button></td>
 					<td align="center">
@@ -95,7 +93,6 @@
 					<td align="center">
 						<button onclick="modifyProduct(${s.prod_num})">상품수정</button>
 					</td>
-					<%-- </c:if> --%>
 				</tr>
 			</c:forEach>
 		</c:if>
