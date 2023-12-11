@@ -16,6 +16,22 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
     const [imageSrc, setImageSrc] = useState("/images/emptyheart.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
     const [isClicked, setIsClicked] = useState(false); // 클릭 여부를 state로 관리
 
+    // 관심상품 아이콘
+    const [wishSrc, setWishSrc] = useState("/images/emptyheart.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
+    const [isWishClicked, setIsWishClicked] = useState(false); // 클릭 여부를 state로 관리
+
+    const handleWishClick = () => {
+        if (isWishClicked) {
+            setWishSrc("/images/emptyheart.png");
+            setIsWishClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
+        } else {
+            setWishSrc("/images/fullheart.png");
+            setIsWishClicked(true); // true일 땐 변경될 이미지 src
+            alert("해당 상품이 장바구니에 추가되었습니다.")
+        }
+    };
+
+    /// ====================================================================================== 
     function AddWishIcon() {
         // 관심상품 이미지 클릭 시 실행되는 함수
 
@@ -25,8 +41,9 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             .then(response => {
                 // 요청 성공 시 처리할 작업
                 console.log("관심상품 담기" + response.data);
-                const currentWishlist = response.data; // 현재 관심 상품 목록
-                const isProductExists = currentWishlist.some(item => item.prod_num === productData.prod_num);
+                // const currentWishlist = response.data; // 현재 관심 상품 목록
+                const currentWishlist = Array.isArray(response.data) ? response.data : [];
+                const isProductExists = currentWishlist.some(item => item.prod_num == productData.prod_num);
 
                 if (isProductExists) {
                     // 이미 관심목록에 있는 상품이라면 alert 창 띄우기
@@ -34,6 +51,8 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 } else {
                     // prod_num이 중복되지 않는다면 상태 업데이트
                     console.log("서버연결성공 => ", currentWishlist);
+                    alert("해당 상품이 장바구니에 추가되었습니다.");
+                    handleWishClick();
                 }
             })
             .catch(error => {
@@ -49,20 +68,8 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
 
     };
 
-    // 관심상품 아이콘
-    const [wishSrc, setWishSrc] = useState("/images/emptyheart.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
-    const [isWishClicked, setIsWishClicked] = useState(false); // 클릭 여부를 state로 관리
 
-    const handleWishClick = () => {
-        if (isWishClicked) {
-            setWishSrc("/images/emptyheart.png");
-            setIsWishClicked(false); // 초기 상태 false 일 땐 초기 상태 이미지 src
-        } else {
-            setWishSrc("/images/fullheart.png");
-            setIsWishClicked(true); // true일 땐 변경될 이미지 src
-            alert("해당 상품이 장바구니에 추가되었습니다.")
-        }
-    };
+
 
 
     //============================= 여기서부터 워니의 코드 =================================
@@ -171,8 +178,6 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             </section >
         </div >
     )
-
-
 }; //ProductList
 
 export default ProductListItem;
