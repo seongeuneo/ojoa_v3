@@ -84,7 +84,7 @@ function QnaModal({ closeModal }) {
                                     <td className="qna_writeid" name="id">
                                         <input
                                             type="text"
-                                            name="bID"
+                                            name="id"
                                             id="qna_bID"
                                             onChange={onChangeContent}
                                             placeholder="작성자명을 입력하세요." />

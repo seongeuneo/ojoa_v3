@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>** Orders List **</title>
 <link rel="stylesheet" type="text/css" href="/resources/myLib/ordersList.css">
-<script src="/resources/myLib/productCheck.js"></script>
+<script src="/resources/myLib/OrdersCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -45,7 +45,7 @@
 					<td>${s.orders_method}</td>
 					<td>${s.orders_addresscheck}</td>
 					<td align="center"><a href="/orders/ordersdt?orders_num=${s.orders_num}">주문 상세</a></td>
-					<td align="center"><a href="ocancel?orders_num=${s.orders_num}">주문 취소</a></td>
+					<td align="center"><a onclick="ordersDelete(${s.orders_num})">주문 취소</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>

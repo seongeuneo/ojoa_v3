@@ -11,6 +11,7 @@
 <script src="/resources/myLib/wish.js"></script>
 <script src="/resources/myLib/productCheck.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
+<script src="/resources/myLib/OrdersCheck.js"></script>
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script>let loggedInUserID = "${sessionScope.loginID}";</script>
 </head>

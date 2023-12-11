@@ -42,7 +42,7 @@
 					<td>${s.quantity}</td>
 					<td align="center"> <button onclick="payNow('${s.id}')">결제하기</button></td>
 					<%-- <td align="center"><a href="cdelete?prod_num=${s.prod_num}&id=${s.id}">삭제</a></td> --%>
-					<td align="center"><a class="textlink" onclick="cartDelete('${s.prod_num}', '${s.id}')">삭제</a></td>
+					<td align="center"><a class="textlink" onclick="cartDelete('${s.id}','${s.prod_num}')">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</c:if>
