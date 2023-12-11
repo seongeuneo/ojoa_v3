@@ -2,7 +2,7 @@ import '../../pages/Cart/Cart.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const CartTotal = ({ cart, selectedItems, onCheckout}) => {
+const CartTotal = ({ cart, selectedItems, onCheckout }) => {
 
     const [selectedTotal, setSelectedTotal] = useState(0);
 
@@ -10,11 +10,11 @@ const CartTotal = ({ cart, selectedItems, onCheckout}) => {
         return selectedItems.reduce((total, itemId) => {
             const selectedItem = cart.find(item => item.prod_num === itemId);
             if (selectedItem) {
-                total+=selectedItem.productPriceFormatted * selectedItem.quantity; 
-                console.log("********total="+total);
+                total += selectedItem.productPriceFormatted * selectedItem.quantity;
+                console.log("********total=" + total);
                 return total;
             }
-            
+
             return total;
         }, 0);
     };
@@ -24,7 +24,15 @@ const CartTotal = ({ cart, selectedItems, onCheckout}) => {
         setSelectedTotal(total);
     }, [selectedItems, cart]);
 
-
+    const paynow = () => {
+        if (selectedItems && selectedItems.length > 0) {
+            const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
+            onCheckout(selectedCartItems);
+        } else {
+            console.error("No selected items.");
+            // 선택된 항목이 없음을 사용자에게 알릴 수 있는 처리
+        }
+    };
 
     return (
         <div className="CartTotal">
@@ -79,7 +87,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout}) => {
                 <div className="button" onClick={onCheckout}>
                     <p className="btnText">PAY NOW</p>
                     <div className="btnTwo">
-                    <p className="btnText2">GO!</p>
+                        <p className="btnText2">GO!</p>
                     </div>
                 </div>
 

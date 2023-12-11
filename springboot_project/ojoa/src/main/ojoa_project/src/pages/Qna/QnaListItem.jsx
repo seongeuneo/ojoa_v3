@@ -21,6 +21,18 @@ function QnaListItem({ qnaList, filters }) {
         }
     };
 
+
+    function formatDate(originalDate) {
+        const dateObject = new Date(originalDate);
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObject.getDate()).padStart(2, '0');
+        const hours = String(dateObject.getHours()).padStart(2, '0');
+        const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+
+        return `${year}.${month}.${day} ${hours}:${minutes}`;
+    }
+
     // 내용 필터링
     qnaList = qnaList.filter((item) => {
         if (filters.category && item.category != filters.category)
@@ -59,7 +71,7 @@ function QnaListItem({ qnaList, filters }) {
             {qnaList.map((item, i) => (
                 <React.Fragment key={i}>
                     {
-                        (item.num == "공지") ? (
+                        (item.category === "공지사항") ? (
                             <tr className='qna_Tboard_st'>
                                 <td className='qna_board_st1'>{item.num}</td>
                                 <td className='qna_Tboard_st2'>{item.itemInfo}</td>
@@ -68,7 +80,7 @@ function QnaListItem({ qnaList, filters }) {
                                     <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
                                 </td>
                                 <td className='qna_board_st5'>{item.writer}</td>
-                                <td className='qna_board_st6'>{item.date}</td>
+                                <td className='qna_board_st6'>{formatDate(item.date)}</td>
                             </tr>
                         ) : (
                             <tr className='qna_Lboard_st'>
@@ -82,7 +94,7 @@ function QnaListItem({ qnaList, filters }) {
                                     <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
                                 </td>
                                 <td className='qna_board_st5'>{lastName(item.writer)}&#42;&#42;</td>
-                                <td className='qna_board_st6'>{item.date}</td>
+                                <td className='qna_board_st6'>{formatDate(item.date)}</td>
                             </tr>
                         )
                     }
