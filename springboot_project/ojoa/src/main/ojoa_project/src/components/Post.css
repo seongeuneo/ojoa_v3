@@ -1,0 +1,51 @@
+.postmodal {
+    background: rgba(0, 0, 0, 0.25);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 400px;
+    width: 700px;
+    max-width: 90%;
+    /* 화면 크기에 따라 최대 너비 조정 */
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.close-btn {
+    position: absolute;
+    bottom: 10px;
+    /* 아래쪽 여백 조정 */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-weight: bold;
+    color: black;
+}
+
+.close-btn:hover {
+    background-color: #dddddd;
+}
+
+.post_search {
+    color: #000;
+    border: 1px solid gray;
+    padding: 2px 5px;
+    border-radius: 1px;
+    cursor: pointer;
+
+}
+
+.post_search:hover {
+    background-color: silver;
+}

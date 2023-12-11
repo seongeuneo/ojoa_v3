@@ -31,11 +31,11 @@ function MileageCouponList() {
                                     </thead>
                                     <tbody className=" center">
                                         <tr className="ec-base-table">
-                                            <td>2023-06-07</td>
-                                            <td className="right">5,000원</td>
-                                            <td>철의 왕좌</td>
-                                            <td className="left">2023-09-08</td>
-                                            <td className="left">킹쿤타 회원 (VIP)</td>
+                                            <td>-</td>
+                                            <td className="right">-</td>
+                                            <td>-</td>
+                                            <td className="left">-</td>
+                                            <td className="left">-</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -49,4 +49,4 @@ function MileageCouponList() {
     )
 }
 
-export default MileageCouponList;
+//export default MileageCouponList;

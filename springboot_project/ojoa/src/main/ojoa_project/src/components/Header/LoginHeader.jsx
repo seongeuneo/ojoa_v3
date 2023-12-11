@@ -51,11 +51,11 @@ function UserHeader() {
                         {/* 상단 네비 */}
                         <div className="navBar">
                             <ul>
-                                <li><Link to="../Member/Login">LOGIN </Link>&nbsp;<span>|</span></li>
-                                <li><Link to="../Member/Login">MYPAGE </Link>&nbsp;<span>|</span></li>
-                                <li><Link to="../Member/Login">ORDER </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/rLogin">LOGIN </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/rLogin">MYPAGE </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/rLogin">ORDER </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>
-                                <li><Link to="../Member/Login">QNA </Link>&nbsp;<span>|</span></li>
+                                <li><Link to="../Member/rLogin">QNA </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Store">STORE </Link></li>
                             </ul>
                         </div>

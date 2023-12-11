@@ -13,33 +13,33 @@ const OrderState = () => {
                     <ul className="order">
                         <li>
                             <strong>입금전</strong>
-                            <Link to="../order" className="count">1</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                         <li>
                             <strong>배송준비중</strong>
-                            <Link to="../order" className="count">1</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                         <li>
                             <strong>배송중</strong>
-                            <Link to="../order" className="count">1</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                         <li>
                             <strong>배송완료</strong>
-                            <Link to="../order" className="count">6</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                     </ul>
                     <ul className="cs">
                         <li>
                             <strong>· 취소 : </strong>
-                            <Link to="../order" className="count">0</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                         <li>
                             <strong>· 교환 : </strong>
-                            <Link to="../order" className="count">0</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                         <li>
                             <strong>· 반품 : </strong>
-                            <Link to="../order" className="count">0</Link>
+                            <Link to="../order" className="count">-</Link>
                         </li>
                     </ul>
                 </div>

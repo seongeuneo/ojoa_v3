@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../../pages/MyPage/MyPage.css';
 import ThumbNail from '../../pages/MyPage/ThumbNail';
 import AsyncBankBook from '../../pages/MyPage/AsyncBankBook';

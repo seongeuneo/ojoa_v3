@@ -260,6 +260,50 @@ function joinChange() {
 } //joinChange
 
 //==========================================================
+// 내정보 페이지 비동기 이동
+function detailChange() {
+   let url = "member/memberDetail?id=" + loggedInUserID;
+
+    // AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
+    axios.get(url)
+        .then(response => {
+            document.getElementById('contentArea').innerHTML = response.data;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+} //detailChange()
+  
+//==========================================================
+// 내정보수정 비동기 이동
+function updateChange() {
+   let url = "member/memberDetail?jCode=U&id=" + loggedInUserID;
+
+    // AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
+    axios.get(url)
+        .then(response => {
+            document.getElementById('contentArea').innerHTML = response.data;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+} //updateChange()
+    
+//==========================================================
+/*// 탈퇴 비동기 이동
+function deleteChange() {
+   let url = "member/memberdelete?id=" + loggedInUserID;
+
+    axios.get(url)
+     .then(response => {
+        document.getElementById('contentArea').innerHTML = response.data;
+     })
+     .catch(err => {
+        alert("response 실패 => " + err.message);
+     });
+} //deleteChange()*/
+        
+//==========================================================
 // 로그인폼 아이디유효성체크 버튼
 function idCheck() {
 
@@ -271,4 +315,37 @@ function idCheck() {
 
 
 //==========================================================
-// 로그인폼 아이디유효성체크 버튼
+// 회원관리 admin 강퇴 버튼
+function memberdelete(id) {
+   axios.get(`/member/memberdelete?id=${id}`)
+    .then(response => {
+      alert("강퇴 성공: " + response.data.message);
+      // 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
+    })
+    .catch(error => {
+      alert("강퇴 실패: " + error.message);
+    });
+} //memberdelete
+
+//==========================================================
+// 회원관리 / 회원디테일 비동기 이동
+function memberDetail(id) {
+   axios.get(`/member/memberDetail?id=${id}`)
+    .then(response => {
+
+      // 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
+    })
+    .catch(error => {
+      alert("실패: " + error.message);
+    });
+} //memberDetail
+
+//==========================================================
+// 회
+
+
+
+
+//==========================================================
+
+

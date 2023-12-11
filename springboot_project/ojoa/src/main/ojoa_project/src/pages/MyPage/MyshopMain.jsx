@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const MyshopMain = () => {
 
-    const handleLinkClick = () => {
-        alert('해당 페이지는 현재 준비중 입니다.');
-    };
+    // const handleLinkClick = () => {
+    //     alert('해당 페이지는 현재 준비중 입니다.');
+    // };
 
     return (
         <div className="container">
