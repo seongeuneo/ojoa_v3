@@ -8,19 +8,18 @@ const Join = () => {
     const navigate = useNavigate();
 
     const handleIdDuplication = () => {
-        axios.get(`/member/idDupCheck?id=${id}`)
+        axios.get(`/member/ridDupCheck?id=${id}`)
             .then((response) => {
                 console.log("응답 데이터:", response.data); // 응답 데이터 확인
-                if (response.data === 'duplicate') {
-                    alert("중복된 ID입니다. 다른 ID를 입력해주세요.");
-                } else {
-                    alert("가입 가능한 ID입니다.");
-                    // 다른 처리(가입 가능한 ID일 때 할 작업) 추가 가능
-                }
+                alert("가입 가능한 ID입니다.");
             })
             .catch((error) => {
-                console.error("중복 확인 에러:", error);
-                alert("중복 확인 중 오류가 발생했습니다.");
+                if (error.response.status == '502')
+                    alert("중복된 ID입니다. 다른 ID를 입력해주세요.");
+                else {
+                    alert("중복 확인 에러:", error.message);
+                    console.error("중복 확인 에러:", error.message);
+                }
             });
     };
 
@@ -30,7 +29,6 @@ const Join = () => {
             alert("ID를 입력해주세요.");
             return;
         }
-
         handleIdDuplication();
     };
 

@@ -78,7 +78,7 @@ function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
                                 {isAdmin && (
                                     <a href="http://localhost:8080/home">&nbsp;&nbsp; &laquo;관리자 페이지&raquo;</a>
                                 )}
-                                <li onClick={handleLogout}><a>LOGOUT</a>&nbsp;<span>|</span></li>
+                                <li onClick={handleLogout}><a>LOGOUT </a>&nbsp;<span>|</span></li>
                                 <li><Link to="../MyPage">MYPAGE </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Order">ORDER </Link>&nbsp;<span>|</span></li>
                                 <li><Link to="../Cart">CART </Link>&nbsp;<span>|</span></li>

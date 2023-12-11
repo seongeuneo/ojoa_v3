@@ -16,7 +16,7 @@
   margin: 20px auto;
   height: 30px;
   line-height: 30px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .Join .path span {
@@ -210,7 +210,7 @@
   margin: 20px auto;
   height: 30px;
   line-height: 30px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .Agree .path span {
