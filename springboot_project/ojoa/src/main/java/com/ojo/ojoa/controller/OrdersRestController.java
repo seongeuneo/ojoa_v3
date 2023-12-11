@@ -39,6 +39,10 @@ public class OrdersRestController {
             // OrdersDTO 데이터를 이용하여 Orders 테이블에 저장하는 로직을 추가
             // ordersService.save(ordersDTO) 등의 코드 작성
         	ordersService.save(entity);
+        	
+        	//Ordersdetail 도 저장해야함!!!
+        	//주문품목은 Cart 목록에서 삭제 코드 넣기!!
+        	
             return ResponseEntity.ok("상품이 결제되었습니다.");
         } catch (Exception e) {
             log.error("Error while processing Pay API: " + e.toString());
