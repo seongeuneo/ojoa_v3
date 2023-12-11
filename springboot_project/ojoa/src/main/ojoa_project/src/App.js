@@ -43,6 +43,12 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(true);
 
+  useEffect(() => {
+    // 페이지 로딩 시 세션 스토리지에서 로그인 정보 확인
+    const sessionInfo = sessionStorage.getItem('loggedInUser');
+    setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false
+  }, []);
+
   // 장바구니에 상품 추가
   const handleCart = () => {
     // setCart((prevCart) => [...prevCart, cartItem]);
