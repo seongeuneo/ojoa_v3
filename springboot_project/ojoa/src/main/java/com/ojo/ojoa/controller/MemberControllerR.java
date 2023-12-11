@@ -116,7 +116,6 @@ public class MemberControllerR {
 		}
 		return result;
 	} //rjoin
-	
-	
+
 } //class
 

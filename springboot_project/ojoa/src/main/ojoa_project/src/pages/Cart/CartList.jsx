@@ -6,24 +6,24 @@ const CartList = ({ id, productname, content, quantity, mainimage, discount, pri
     const navigate = useNavigate();
     const [itemQuantity, setItemQuantity] = useState(quantity);
 
-const totalprice = (price * itemQuantity);
-//console.log("totalprice =>" +totalprice);
+    const totalprice = (price * itemQuantity);
+    //console.log("totalprice =>" +totalprice);
 
     // 체크박스가 선택되어 있는지 여부를 상태로 관리
     const [isChecked, setIsChecked] = useState(false);
 
-// totalPriceState를 state로 관리
-//const [totalPriceState, setTotalPriceState] = useState(totalprice);
+    // totalPriceState를 state로 관리
+    //const [totalPriceState, setTotalPriceState] = useState(totalprice);
 
     // useEffect(() => {
 
     // },[totalprice])
 
-   // totalprice를 계산하는 함수
+    // totalprice를 계산하는 함수
 
-   useEffect(() => {
-    updateTotal();
-}, [itemQuantity]); // 수량이 변경될 때마다 합계를 다시 계산
+    useEffect(() => {
+        updateTotal();
+    }, [itemQuantity]); // 수량이 변경될 때마다 합계를 다시 계산
 
 
     const calculateTotalPrice = () => {
@@ -31,32 +31,33 @@ const totalprice = (price * itemQuantity);
     };
 
 
-// CartList 컴포넌트에서 handleCheckboxChange 함수를 수정하여 선택된 아이템들의 ID를 업데이트합니다.
-const handleCheckboxChange = () => {
-    setSelectedItems(prevSelectedItems => {
-      if (Array.isArray(prevSelectedItems) && prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter(item => item !== id);
-      } else if (Array.isArray(prevSelectedItems)) {
-        return [...prevSelectedItems, id];
-      } else {
-        return [id]; // 초기값 설정
-      }
-    });
-  };
-    
+    // CartList 컴포넌트에서 handleCheckboxChange 함수를 수정하여 선택된 아이템들의 ID를 업데이트합니다.
+    const handleCheckboxChange = () => {
+        setSelectedItems(prevSelectedItems => {
+            if (Array.isArray(prevSelectedItems) && prevSelectedItems.includes(id)) {
+                return prevSelectedItems.filter(item => item !== id);
+            } else if (Array.isArray(prevSelectedItems)) {
+                return [...prevSelectedItems, id];
+            } else {
+                return [id]; // 초기값 설정
+            }
+        });
+        updateTotal(); // updateTotal 함수 호출(없었는데 추가)
+    };
+
     const handleRemove = () => {
         const user_id = "admin";
 
         axios.get(`/api/cdelete?item_id=${id}&user_id=${user_id}`)
             .then((response) => {
                 axios
-                .get("/api/cart/allCartList")
-                .then((response) => {
-                    setCart(response.data);
-                })
-                .catch((error) => {
-                    console.error("Error: ", error);
-                });
+                    .get("/api/cart/allCartList")
+                    .then((response) => {
+                        setCart(response.data);
+                    })
+                    .catch((error) => {
+                        console.error("Error: ", error);
+                    });
             })
             .catch((error) => {
                 console.error("삭제 요청 실패:", error);
@@ -71,7 +72,7 @@ const handleCheckboxChange = () => {
         axios.post('/api/cartUp', productData)
             .then(response => {
                 //alert('상품 수량이 증가되었습니다!');
-                setWon(won+1);
+                setWon(won + 1);
             })
             .catch(error => {
                 //alert('장바구니 수량 변경 중 문제가 발생했습니다!');
@@ -86,7 +87,7 @@ const handleCheckboxChange = () => {
             axios.post('/api/cartDown', productData)
                 .then(response => {
                     //alert('상품 수량이 감소되었습니다!');
-                    setWon(won+1);
+                    setWon(won + 1);
                 })
                 .catch(error => {
                     //alert('장바구니 수량 변경 중 문제가 발생했습니다!');
@@ -95,7 +96,7 @@ const handleCheckboxChange = () => {
             alert('더 줄일 수 없는 수량입니다.');
         }
     }
-        
+
 
     return (
         <div className="CartListAll">
@@ -124,9 +125,9 @@ const handleCheckboxChange = () => {
                                 <div className="cart_product_count">
                                     <div className="pd_length">
                                         {/* <button onClick={onDecrease}>-</button> */}
-                                        <button onClick={() => {onDecrease()}}>-</button>
-                                        <input name="quantity" type="number" min="1" value={itemQuantity}/>
-                                        <button onClick={() => {onIncrease()}}>+</button>
+                                        <button onClick={() => { onDecrease() }}>-</button>
+                                        <input name="quantity" type="number" min="1" value={itemQuantity} />
+                                        <button onClick={() => { onIncrease() }}>+</button>
                                     </div>
                                 </div>
                             </td>

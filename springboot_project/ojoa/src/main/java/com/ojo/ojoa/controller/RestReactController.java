@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.DTO.CartDTO;
+import com.ojo.ojoa.DTO.OrdersReqDTO;
+import com.ojo.ojoa.DTO.OrdersResDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.Prod_imageDTO;
 import com.ojo.ojoa.domain.WishDTO;
@@ -28,6 +30,7 @@ import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.repository.WishRepository;
 import com.ojo.ojoa.service.CartService;
+import com.ojo.ojoa.service.OrdersService;
 import com.ojo.ojoa.service.Prod_imageService;
 import com.ojo.ojoa.service.QnaService;
 import com.ojo.ojoa.service.WishService;
@@ -46,9 +49,8 @@ public class RestReactController {
 	WishService wishService;
 	Prod_imageService prod_imageService;
 	private final WishRepository wishRepository; 
-//	MemberService memberService;
-//	ProductService productService;
-//	OrderService orderService;
+	OrdersService ordersService;
+
 
 	// 장바구니
 	@GetMapping("cart/allCartList")
@@ -252,7 +254,7 @@ public class RestReactController {
     // qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
 	@GetMapping("qna/allQnaList")
 	// "/qna/allQnaList"경로에 대한 HTTP GET요청을 처리함
-    public ResponseEntity<List<QnaDTO.QnaMainListDTO>> getAllQnaList(
+    public ResponseEntity<?> getAllQnaList(
     		// ResponseEntity를 반환
     		// ResponseEntity는 <List<QnaDTO.QnaMainListDTO>타입의 데이터를 담고있다.
     		// 그래서 QnaMainListDTO 객체들의 리스트를 반환함
@@ -262,10 +264,14 @@ public class RestReactController {
 	        @RequestParam(required = false) String search_key,
 	        @RequestParam(required = false) String search_query
     	        ) {
-		List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key, search_query);
-    	// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
-		return ResponseEntity.ok(qnaList);
-		// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
+		try {
+			List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key, search_query);
+	    	// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
+			return ResponseEntity.ok(qnaList);
+			// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
     }
 	
 	 // 게시판 QnA - 게시글 등록
@@ -283,6 +289,48 @@ public class RestReactController {
         }
     }
     
+    // 주문결제
+    @PostMapping("order/orderPayment")
+    public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
+        try {
+        	String loginID = (String) session.getAttribute("loginID");
+        	OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            log.error("데이터 저장 중 에러: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+        }
+    }
+    
+    // 비회원 주문결제
+    @GetMapping("order/nonMemberOrder")
+    public ResponseEntity<?> getNonMemberOrder(
+    		@RequestParam(required = false) String orderNumber,
+    		@RequestParam(required = false) String password) {
+        try {
+        	List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            log.error("데이터 저장 중 에러: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+        }
+    }
+    
+    // 주문목록
+    @GetMapping("order/orderList")
+    public ResponseEntity<?> getOrderList(HttpSession session,
+    		@RequestParam(required = false) String startDate,
+    		@RequestParam(required = false) String endDate,
+    		@RequestParam(required = false) String orderNumber) {
+        try {
+        	String loginID = (String) session.getAttribute("loginID");
+        	List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate, orderNumber);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            log.error("데이터 저장 중 에러: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+        }
+    }
     
 
 

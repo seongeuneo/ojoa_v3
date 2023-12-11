@@ -1,90 +1,63 @@
+
 import React, { useState } from 'react';
-// import DaumPostcode from "react-daum-postcode";
 // import Iamport, { PaymentRequest } from 'kamport'
 import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from "axios";
-// import AddressPopup from './AddressPopup/AddressPopup';
+import { Link, useNavigate } from 'react-router-dom';
+import Post from './KakaoAddressModal/KakaoAddressModal';
+import axios from 'axios';
+import AddressPopup from './AddressPopup/AddressPopup';
+
+
+// const mockData = [
+//   {
+//     "id": 101,
+//     "imgNo": 101,
+//     "productName": "조금 큰 나무 침대",
+//     "productPriceFormatted": "385000",
+//     "productPromotion": "7",
+//     "productInfo": "안녕하세요 그렇습니다",
+//     "productReview": "8",
+//     "productGrade": "4.8",
+//     "quantity": 1
+//   }
+// ];
+
 
 
 function Checkout({ cart }) {
-  const location = useLocation();
-  const selectedCartItems = location.state.selectedCartItems;
-
-
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
-
+  const [isMember, setIsMember] = useState(false);
   const navigate = useNavigate();
 
   function showAddressPopupOpen() {
     setIsAddressPopupOpen(true);
   }
 
-
-  // const { handleSubmit: _handleSubmit, register, setValue, getValues } = useForm({
-  //   defaultValues: {
-  //     paymentMethod: 'card', // cart , vbank
-  //     email: {
-  //       name: '',
-  //       provider: ''
-  //     },
-  //     phone1: '',
-  //     phone2: '',
-  //     phone3: '',
-  //     buyer_name: '',
-  //   }
-  // })
-
- //======================================================================= 
-  // 주문
-  function inOrders() {
-    const Orders = {
-      id: "id",
-      orders_totalprice: totalProductPrice + deliveryPrice,
-      orders_price: totalCheckoutPrice,
-      orders_method: "payMethod",
-      orders_addresscheck: "orders_addresscheck",
-      shipping_name: "shipping_name",
-      shipping_zipcode: "zipcode",
-      shipping_address: "shipping_address",
-      shipping_addressdetail: "shipping_addressdetail",
-      shipping_phone: "shipping_phone"
-  };
-  
-  axios.post('/api/orders/saveOrders', Orders)
-  .then(response => {
-    alert("주문완료이 완료되었습니다:)");
-    navigate("/");
-  })
-  .catch(error => {
-    alert('주문에 실패했습니다!!!!!!');
-  });
-}
-  
-//========================================================================
-
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
-  
+
   // 배송비
   const deliveryPrice = 0;
-  
+
   // 할인금액
   const discountPrice = 0;
 
+  //const selectedProducts = cart.filter(item => selectedItems.includes(item.prod_num));
+  const selectedProducts = cart;
 
   const displayedCartList = useMemo(() => {
-    return selectedCartItems.map(item => ({
+    return selectedProducts.map(item => ({
       ...item,
       dispalyedPrice: formatNumber(item.productPriceFormatted),
       totalPrice: item.quantity * Number(item.productPriceFormatted),
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
-  }, [selectedCartItems]);
+  }, [selectedProducts]);
+  // }, [selectedCartItems]);
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
@@ -101,44 +74,102 @@ function Checkout({ cart }) {
     navigate('/paymentconfirmation');
   };
 
+  const [orderInfo, setOrderInfo] = useState({
+    memberCheck: '',
+    orders_method: 'card', // cart , vbank
+    buyer: '',
+    postNumber: '',
+    address1: '',
+    address2: '',
+    phone1: '010',
+    phone2: '',
+    phone3: '',
+    email1: '',
+    email2: '',
+    message: '',
+    orders_totalprice: totalProductPrice,
+    orders_price: totalCheckoutPrice,
+    ordersDetail: cart
+  });
 
-//===========================================================================================
+  const getUserInfo = () => {
+    axios
+      .get("/member/rinfo")
+      .then((response) => {
+        let data = response.data;
+        if (data != null && data !== "") {
+          setIsMember(true);
+          orderInfo.buyer = data.name;
+          orderInfo.address1 = data.address;
+          orderInfo.address2 = data.addressdetail;
+          orderInfo.email1 = data.email1;
+          orderInfo.email2 = data.email2;
+          orderInfo.phone1 = data.phone1;
+          orderInfo.phone2 = data.phone2;
+          orderInfo.phone3 = data.phone3;
+          orderInfo.postNumber = data.zipcode;
+        } else {
+          setIsMember(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
 
-// const inOrders = () => {
+  getUserInfo();
 
-//   axios.post('/api/orders/saveOrders', selectedCartItems) // POST 요청으로 수정 및 상품 정보 전달
-//   .then(response => {
-//   })
-//   .catch(error => {
-//   });
 
-// };
-//===========================================================================================
-    // const inOrders = async () => {
 
-    //     try {
-    //         const ordersData = new FormData(document.getElementById('ordersform'));
+  const [popup, setPopup] = useState(false);
 
-    //         // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
-    //         const response = await axios.post("/api/orders/saveOrders/", ordersData,
-    //             { headers: { "Content-Type": "application/json" } });
+  const handleInput = (e) => {
+    setOrderInfo({
+      ...orderInfo,
+      [e.target.name]: e.target.value,
+    })
+  }
 
-    //         // 성공/실패에 따라 처리합니다.
-    //         console.log("결제 완료됨:", response.data);
-    //     } catch (error) {
-    //         // 에러 처리
-    //         console.error("결제 중 에러:", error);
-    //         // 선택적으로 사용자에게 에러 메시지 표시 가능
-    //     }
-    //     //e.preventDefault();
-    // };
+  const handleComplete = (data) => {
+    setPopup(!popup);
+  }
 
-//====================================================================================
+
+  const handleOrderInfo = (e) => {
+    const { name, value } = e.target;
+    setOrderInfo({ ...orderInfo, [name]: value });
+  };
+
+  const orderPayment = () => {
+    if (isMember === false && orderInfo.memberCheck === '') {
+      alert("주문조회 비밀번호를 입력하세요.");
+      return false;
+    }
+    axios
+      .post("/api/order/orderPayment", orderInfo, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        let orderData = response.data;
+        if (orderData != null && orderData !== "") {
+          navigate('/paymentconfirmation', { state: { orderData, cart } });
+        } else {
+          alert('결제 실패');
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
 
   return (
     <div className="Checkout">
       {/* <form onSubmit={handleSubmit}> */}
-      <form id='ordersform'>
+      <form>
         <h2 className="pay_title">주문서 작성</h2>
 
         <section className="pay_orderlist-area">
@@ -207,75 +238,62 @@ function Checkout({ cart }) {
               <col width="200px" />
             </colgroup>
 
-            {/* 회원일 경우 */}
-            <tr>
-              <th>배송지 선택</th>
-              <td>
-                <div class="address">
-                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" />
-                  <label for="sameaddr0">회원 정보와 동일</label>
-                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" />
-                  <label for="sameaddr1">새로운 배송지</label>
-                  <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
-                  {/* <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
-                    주소록 보기
-                  </Link>
-                  {isAddressPopupOpen && <AddressPopup />} */}
-                </div>
-              </td>
-            </tr>
-
-
-            {/* 비회원일 경우 */}
-            {/* <tr>
-              <th className="pay_table_th">주문조회 비밀번호 *</th>
-              <td>
-                <input type="password" className="input_control" />
-                <span className="help_text">{`(영문대소문자/숫자/특수문자 중 2가지 이상 조합, 6자~16자)`}</span>
-              </td>
-            </tr>
-            <tr>
-              <th>주문조회 비밀번호 확인 *</th>
-              <td>
-                <input type="password" className="input_control" />
-              </td>
-            </tr> */}
-
+            {isMember ? (
+              <tr>
+                <th>배송지 선택</th>
+                <td>
+                  <div class="address">
+                    <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" />
+                    <label for="sameaddr0">회원 정보와 동일</label>
+                    <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" />
+                    <label for="sameaddr1">새로운 배송지</label>
+                    <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
+                    <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
+                      주소록 보기
+                    </Link>
+                    {isAddressPopupOpen && <AddressPopup />}
+                  </div>
+                </td>
+              </tr>
+            ) : (
+              <>
+                <tr>
+                  <th className="pay_table_th">주문조회 비밀번호 *</th>
+                  <td>
+                    <input type="password" name="memberCheck" className="input_control" onChange={handleOrderInfo} value={orderInfo.memberCheck} />
+                    <span className="help_text">{`(영문대소문자/숫자/특수문자 중 2가지 이상 조합, 6자~16자)`}</span>
+                  </td>
+                </tr>
+              </>
+            )}
 
             <tr>
               <th>받으시는 분 *</th>
               <td>
-                {/* <input type="text" className="input_control" name='shipping_name'{...register('buyer_name')} /> */}
-                <input type="text" className="input_control" name='shipping_name' />
+                <input type="text" name="buyer" className="input_control" onChange={handleOrderInfo} value={orderInfo.buyer} />
               </td>
             </tr>
             <tr>
               <th>주소 *</th>
               <td>
-                <input type="text" className="input_control" name='shipping_zipcode' />
+                <input type="text" name="postNumber" className="input_control" onChange={handleOrderInfo} value={orderInfo.postNumber} />
                 {/* <button className="btn-control" onClick={() => setIsPostOpen(true)}>우편번호</button> */}
-                <button className="btn-control" name='shipping_zipcode'>우편번호</button>
+                <button type="button" className="btn-control" onClick={handleComplete}>우편번호</button>
                 <br />
                 {/* <input type="text" className="input_control" value={isZoneCode} readOnly /> */}
-                <input type="text" className="input_control" name='shipping_addresscheck' />
+                <input type="text" name="address1" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address1} readOnly />
                 <p className="help_text">{`기본주소`}</p>
                 <br />
                 {/* <input type="text" className="input_control_help" value={isAddress} readOnly /> */}
-                <input type="text" className="input_control_help" name='shipping_addressdetail' />
+                <input type="text" name="address2" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address2} />
                 <p className="help_text">{`나머지주소(선택입력가능)`}</p>
-                {/* {isPostOpen && (
-                  <DaumPostcode
-                    onComplete={handleComplete}
-                    autoClose
-                  />
-                )} */}
+                {popup && <Post closeModal={setPopup} company={orderInfo} setcompany={setOrderInfo}></Post>}
               </td>
             </tr>
             <tr>
               <th>휴대전화 *</th>
               <td>
-                {/* <select name="shipping_phone" id="" className="input_control"  {...register('phone1')}> */}
-                <select name="shipping_phone" id="" className="input_control">
+                <select name="phone1" id="" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone1}>
                   <option value="010">010</option>
                   <option value="011">011</option>
                   <option value="016">016</option>
@@ -284,23 +302,18 @@ function Checkout({ cart }) {
                   <option value="019">019</option>
                 </select>
                 {" - "}
-                {/* <input type="text" className="input_control" {...register('phone2')} /> */}
-                <input type="text" className="input_control" />
+                <input name="phone2" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone2} />
                 {" - "}
-                {/* <input type="text" className="input_control"  {...register('phone3')} /> */}
-                <input type="text" className="input_control" />
+                <input name="phone3" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone3} />
               </td>
             </tr>
             <tr>
               <th>이메일 *</th>
               <td>
-                {/* <input type="text" className="input_control" {...register('email.name')} /> */}
-                <input type="text" className="input_control" />
+                <input name="email1" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.email1} />
                 {" @ "}
-                {/* <input type="text" className="input_control" {...register('email.provider')} /> */}
-                <input type="text" className="input_control" />
-                {/* <select name="" id="" className="input_control" {...register('email.provider')}> */}
-                <select name="" id="" className="input_control" >
+                <input name="email2" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.email2} />
+                <select name="email2" id="" className="input_control" onChange={handleOrderInfo}>
                   <option value="">직접입력</option>
                   <option value="naver.com">naver.com</option>
                   <option value="daum.net">daum.net</option>
@@ -311,7 +324,7 @@ function Checkout({ cart }) {
             <tr>
               <th>배송메시지</th>
               <td>
-                <textarea name="" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }}></textarea>
+                <textarea name="message" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }} onChange={handleOrderInfo}></textarea>
               </td>
             </tr>
           </table>
@@ -358,7 +371,7 @@ function Checkout({ cart }) {
           <div className='total_checkout_section'>
             <ul className='border'>
               <li>
-                <span className='bg-cell' name='orders_totalprice'>총 주문 금액 <button>내역보기</button></span>
+                <span className='bg-cell'>총 주문 금액 <button>내역보기</button></span>
                 <span>{formatNumber(totalProductPrice)}원</span>
               </li>
               <li>
@@ -366,7 +379,7 @@ function Checkout({ cart }) {
                 <span>- {discountPrice}원</span>
               </li>
               <li>
-                <span className='bg-cell' name='orders_price'>총 결제예정 금액</span>
+                <span className='bg-cell'>총 결제예정 금액</span>
                 <span>= {formatNumber(totalCheckoutPrice)}원</span>
               </li>
             </ul>
@@ -390,22 +403,20 @@ function Checkout({ cart }) {
             <div className='pay_select_payment_method_types'>
               <div className='pay_select_payment_method_types_selector'>
                 <div>
-                  {/* <input type="radio" name="orders_method" value="card" id="paymethod_card" defaultChecked {...register('paymentMethod')} /> */}
                   <input type="radio" name="orders_method" value="card" id="paymethod_card" defaultChecked />
                   <label htmlFor="paymethod_card">카드결제</label>
                 </div>
                 <div>
-                  {/* <input type="radio" name="orders_method" value="vbank" id="paymethod_vbank" {...register('paymentMethod')} /> */}
                   <input type="radio" name="orders_method" value="vbank" id="paymethod_vbank" />
                   <label htmlFor="paymethod_vbank">가상계좌</label>
                 </div>
               </div>
             </div>
-            <div className='pay_select_payment_method_total' >
+            <div className='pay_select_payment_method_total'>
               <p>최종결제 금액</p>
-              <p className='total_price'name='orders_price'>{formatNumber(totalCheckoutPrice)}원</p>
+              <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              <button type='submit' className='payment_btn' onClick={(e)=> {e.preventDefault(); handlePaymentSuccess(); inOrders();}}>결제하기</button>
+              <button type='button' className='payment_btn' onClick={orderPayment}>결제하기</button>
             </div>
           </div>
         </section>

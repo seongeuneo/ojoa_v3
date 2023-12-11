@@ -1,9 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Order.css";
 import { Link } from "react-router-dom"
-
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function Order() {
+    const location = useLocation();
+    const { orderData, orderNumber } = location.state || {};
+    const [orderList, setOrderList] = useState([]);
+
+    const [searchConditions, setSearchConditions] = useState({
+        startDate: '',
+        endDate: '',
+        orderNumber: orderNumber
+    });
+
+    function formatDate(originalDate) {
+        const dateObject = new Date(originalDate);
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObject.getDate()).padStart(2, '0');
+        const hours = String(dateObject.getHours()).padStart(2, '0');
+        const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+
+        return `${year}.${month}.${day} ${hours}:${minutes}`;
+    }
+
+    function orderResultConvert(orderResult) {
+        let result = "";
+        if (orderData === 'B') {
+            result = "배송 준비 중";
+        } else if (orderData === 'C') {
+            result = "배송 중";
+        }
+
+        return result;
+    }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setSearchConditions({ ...searchConditions, [name]: value });
+    };
+
+    const allOrderList = () => {
+        axios
+            .get("/api/order/orderList")
+            .then((response) => {
+                setOrderList(response.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    };
+
+    const searchOrderList = () => {
+        const reqData = {
+            startDate: searchConditions.startDate,
+            endDate: searchConditions.endDate,
+            orderNumber: searchConditions.orderNumber
+        };
+
+        axios
+            .get("/api/order/orderList", { params: reqData })
+            .then((response) => {
+                setOrderList(response.data);
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    };
+
+    useEffect(() => {
+        if (orderData == null || orderData === '') {
+            allOrderList();
+        } else {
+            setOrderList(orderData);
+        }
+    }, []);
     return (
         <div className="Order">
             <div className="path">
@@ -26,7 +99,7 @@ function Order() {
                             <br />
                             <div id="od_search">
                                 <div>
-                                    <select>
+                                    {/* <select>
                                         <option>전체 주문처리상태</option>
                                         <option>입금전</option>
                                         <option>배송준비중</option>
@@ -35,11 +108,17 @@ function Order() {
                                         <option>취소</option>
                                         <option>교환</option>
                                         <option>반품</option>
-                                    </select>&nbsp;
+                                    </select>&nbsp; */}
+                                    {!orderNumber ? (
+                                        <>
+                                            <input type="date" name="startDate" onChange={handleInputChange} /> ~ <input type="date" name="endDate" onChange={handleInputChange} />&nbsp;
+                                            <button type="button" onClick={searchOrderList}>조회</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                        </>
+                                    )}
 
-                                    <input type="date" /> ~ <input type="date" />&nbsp;
-
-                                    <button type="submit">조회</button>
                                 </div>
 
                                 <ol>
@@ -66,15 +145,37 @@ function Order() {
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-
-                                    </tr>
+                                    {orderList.length > 0 ? (
+                                        orderList.map((item, i) => (
+                                            <React.Fragment key={i}>
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div>{formatDate(item.orders_indate)}</div>
+                                                            <div>[{item.orders_num_confirm}]</div>
+                                                        </td>
+                                                        <td>
+                                                            <div><img src={`../thumbs/${item.prod_mainimage}_1.jpg`} alt='상품' /></div>
+                                                        </td>
+                                                        <td>{item.prod_name}</td>
+                                                        <td>{item.quantity}</td>
+                                                        <td>{item.ordersdt_totalprice}</td>
+                                                        <td>{orderResultConvert(item.ordersdt_result)}</td>
+                                                        <td></td>
+                                                    </tr>
+                                                }
+                                            </React.Fragment>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td className="od_no_content" colSpan={7}>
+                                                주문 내역이 없습니다.
+                                            </td>
+                                        </tr>)}
                                 </tbody>
                             </table>
 
-                            <div>
-                                <span>주문 내역이 없습니다.</span>
-                            </div>
+
 
                         </form>
                     </div>

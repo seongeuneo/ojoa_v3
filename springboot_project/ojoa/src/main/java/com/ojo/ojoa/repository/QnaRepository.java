@@ -45,7 +45,8 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 			//search_key = 'content'이고, q.qna_content가 주어진 search_query를 포함하는지 확인
 			+ "       (:search_key = 'writer_name' AND q.id LIKE %:search_query%) OR "
 			//search_key = 'writer_name'이고, q.id가 주어진 search_query를 포함하는지 확인
-			+ "       (:search_key = 'product' AND p.prod_name LIKE %:search_query%)))")
+			+ "       (:search_key = 'product' AND p.prod_name LIKE %:search_query%))) "
+			+ "ORDER BY CASE WHEN q.qna_category = '공지사항' THEN 0 ELSE 1 END, q.qna_redate DESC")
 			//search_key = 'product'이고, p.prod_name이 주어진 search_query를 포함하는지 확인
 	List<QnaDTO.QnaMainListDTO> findConditionQnaList(
 			//@Param: 메서드의 매개변수와 JPQL 쿼리에서 사용되는 매개변수를 매핑
