@@ -36,7 +36,11 @@ public interface CartService {
 	List<CartProdDTO> findCartProd();
 	 
 	// ** react selectAllList
-	List<CartDTO> selectAllList();
+	//List<CartDTO> selectAllList();
+
+	List<CartDTO> selectAllList(String loginID);
+
+
 }
 	
 	

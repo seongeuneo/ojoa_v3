@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,13 +48,6 @@ public class RestReactController {
 //	ProductService productService;
 //	OrderService orderService;
 
-	// 장바구니
-	@GetMapping("cart/allCartList")
-	public ResponseEntity<List<CartDTO>> getAllCartList() {
-		List<CartDTO> cartList = cartService.selectAllList();
-		// model.addAttribute("qna", test);
-		return ResponseEntity.ok(cartList);
-	}
 
 //======================= 관심상품 새로운 코드 추가(성은) ==============================	
 	// 관심상품
@@ -144,50 +135,104 @@ public class RestReactController {
 //======================= 새로운 코드 추가 ==============================	
 
 // 상품리스트에서 장바구니 아이콘으로 상품 추가
-
-	@PostMapping("cart/saveCart")
-	public ResponseEntity<?> saveCart(@RequestBody Cart entity) {
-		// 로그인 아이디는 추후 Session 에서 꺼내서 사용한다. 일단 임의로 함
-		entity.setId("admin");
-
-		try {
-			System.out.println("saveCart111111" + entity);
-			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-			cartService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-			System.out.println("saveCart22222222" + entity);
-			return ResponseEntity.ok("데이터 저장 성공");
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
+//
+//	@PostMapping("cart/saveCart")
+//	public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
+//
+//		try {
+//			String id = (String) session.getAttribute("loginID");
+//			if (id != null && !id.isEmpty()) {
+//				// 세션에서 가져온 로그인된 사용자의 ID로 entity의 ID를 설정합니다
+//				entity.setId(id);
+//				System.out.println("saveCart111111" + entity);
+//
+//				// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
+//				cartService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
+//				System.out.println("saveCart22222222" + entity);
+//				return ResponseEntity.ok("데이터 저장 성공");
+//			} else {
+//				// 로그인되지 않은 사용자 처리
+//				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
+//			}
+//		} catch (Exception e) {
+//			log.error("데이터 저장 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//		}
+//	}
+	
+//============================================================================================================	
+	// 장바구니
+	@GetMapping("cart/allCartList")
+	public ResponseEntity<List<CartDTO>> getAllCartList(@RequestParam String loginID) {
+	    List<CartDTO> cartList = cartService.selectAllList(loginID);
+	    return ResponseEntity.ok(cartList);
 	}
+	
+	
+//	@GetMapping("cart/allCartList")
+//	public ResponseEntity<List<CartDTO>> getAllCartList() {
+//	    try {
+//	        // 여기서 사용자 ID를 이용하여 해당 사용자의 장바구니 목록만 가져오도록 필터링
+//	        List<CartDTO> cartList = cartService.selectAllList(); // 예상되는 메서드명은 selectUserCartList
+//
+//	        return ResponseEntity.ok(cartList);
+//	    } catch (Exception e) {
+//	        log.error("장바구니 목록을 가져오는 중 오류: {}", e.getMessage());
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//	    }
+//	}	
+	
 
+@PostMapping("cart/saveCart")
+public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
+	try {
+        String id = (String) session.getAttribute("loginID");
+        if (id != null && !id.isEmpty()) {
+            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+            entity.setId(id);
+            cartService.save(entity);
+            return ResponseEntity.ok("데이터 저장 성공");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
+        }
+    } catch (Exception e) {
+        log.error("데이터 저장 중 에러: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+    }
+}
+	
+	
+	
 //============================================================================================
 // 장바구니 상품 수량 변경
 
 	// => DUPLICATE KEY UPDATE
 	// 없으면 Save 있으면 Update
 	@PostMapping("/cartUp")
-	public void cartUp(@RequestBody Cart entity) {
-		//System.out.println("***수량테스트***"+entity);
-		try {
-			// id에 "admin" 값을 할당하여 cartService.CartUpdateUp 메서드를 호출합니다.
-			String id = "admin";
-			cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
-		} catch (Exception e) {
-			log.info("Exception");
+	public void cartUp(@RequestBody Cart entity, HttpSession session) {
+		 try {
+		        String id = (String) session.getAttribute("loginID");
+		        if (id != null && !id.isEmpty()) {
+		            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+		            entity.setId(id);
+		            cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
+		        }
+		    } catch (Exception e) {
+		        log.error("Exception: {}", e.getMessage());
+		    }
 		}
-	}
 
 	
 	@PostMapping("/cartDown")
-	public void cartDown(@RequestBody Cart entity) {
-		try {
-			// id에 "admin" 값을 할당하여 cartService.CartUpdateUp 메서드를 호출합니다.
-			String id = "admin";
-			cartService.CartUpdateDown(id, entity.getProd_num(), entity.getQuantity());
-		} catch (Exception e) {
-		}
+	public void cartDown(@RequestBody Cart entity, HttpSession session) {
+	    try {
+	        // HttpSession에서 현재 로그인된 사용자의 ID를 가져옵니다.
+	        String id = (String) session.getAttribute("loginID");
+	        // cartService.CartUpdateDown 메서드를 호출할 때 실제 로그인된 사용자의 ID를 사용합니다.
+	        cartService.CartUpdateDown(id, entity.getProd_num(), entity.getQuantity());
+	    } catch (Exception e) {
+	        log.info("Exception");
+	    }
 	}
 
 // 장바구니에 있는 상품 삭제
@@ -227,14 +272,14 @@ public class RestReactController {
 //		}
 //	}
 	
-	
-	@GetMapping("/cdelete")
-	public void cdelete(@RequestParam String user_id, @RequestParam String item_id, CartId cartid) {
-		log.info("****************" + user_id + item_id);
-		int item_id_ = Integer.parseInt(item_id);
+//===============================================================================
+	@DeleteMapping("/cdelete")
+	public void cdelete(@RequestParam String user_id, @RequestParam String prod_num, CartId cartid) {
+		log.info("****************" + user_id + prod_num);
+		int prod_num_ = Integer.parseInt(prod_num);
 		cartid.setId(user_id);
-		cartid.setProd_num(item_id_);
-		log.info("++++++++++++++++++++++++++++++" + user_id + item_id);
+		cartid.setProd_num(prod_num_);
+		log.info("++++++++++++++++++++++++++++++" + user_id + prod_num_);
 		try {
 			cartService.delete(cartid);
 			System.out.println("** cart delete 삭제성공 **");
@@ -243,7 +288,6 @@ public class RestReactController {
 		}
 	}
 	
-
 //===============================================================================		
 
 	

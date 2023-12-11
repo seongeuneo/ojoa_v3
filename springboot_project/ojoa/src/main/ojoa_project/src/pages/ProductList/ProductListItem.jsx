@@ -74,8 +74,11 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
 
     // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
     function AddToCart() {
+        //const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        //const loginID = loggedInUser.id;
         //const productData = { prod_num: content.prod_num};
-        const productData = { prod_num: content.prod_num, quantity: 1 }; // 바로 구매시 수량은 1
+        //const productData = { prod_num: content.prod_num, quantity: 1, loginID: loginID }; 
+        const productData = { prod_num: content.prod_num, quantity: 1}; // 바로 구매시 수량은 1
 
         axios.post('/api/cart/saveCart', productData) // POST 요청으로 수정 및 상품 정보 전달
             .then(response => {

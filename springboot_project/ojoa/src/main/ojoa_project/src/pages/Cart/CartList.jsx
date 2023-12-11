@@ -43,27 +43,30 @@ const handleCheckboxChange = () => {
       }
     });
   };
-    
-    const handleRemove = () => {
-        const user_id = "admin";
 
-        axios.get(`/api/cdelete?item_id=${id}&user_id=${user_id}`)
+//============================================================================
+const handleRemove = () => {
+    //const user_id = "loggedInUser";
+    const loggedInUser  = JSON.parse(sessionStorage.getItem("loggedInUser"));
+    const loginID = loggedInUser.id;
+    
+    axios.delete(`/api/cdelete?prod_num=${id}&user_id=${loginID}`)
+        .then((response) => {
+            axios
+            .get("/api/cart/allCartList")
             .then((response) => {
-                axios
-                .get("/api/cart/allCartList")
-                .then((response) => {
-                    setCart(response.data);
-                })
-                .catch((error) => {
-                    console.error("Error: ", error);
-                });
+                setCart(response.data);
             })
             .catch((error) => {
-                console.error("삭제 요청 실패:", error);
-                alert('삭제 중 문제가 발생했습니다!');
+                console.error("Error: ", error);
             });
-    };
-
+        })
+        .catch((error) => {
+            console.error("삭제 요청 실패:", error);
+            alert('삭제 중 문제가 발생했습니다!');
+        });
+};
+//=========================================================================
     const onIncrease = () => {
         setItemQuantity(itemQuantity + 1);
 

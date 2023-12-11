@@ -70,8 +70,8 @@ public class CartServiceImpl implements CartService {
  	
 	// ** react selectAllList
  	@Override
- 	public List<CartDTO> selectAllList() {
- 		return cartRepository.findAllCartList();
+ 	public List<CartDTO> selectAllList(String loginID) {
+ 		return cartRepository.findAllUserID(loginID);
  	}
 	
  } //class
