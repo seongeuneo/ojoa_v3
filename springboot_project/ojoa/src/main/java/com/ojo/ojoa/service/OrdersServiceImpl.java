@@ -48,8 +48,8 @@ public class OrdersServiceImpl implements OrdersService {
  	}
  	
  // ** react selectAllList
-//  	@Override
-//  	public List<OrdersDTO> selectAllList() {
-//  		return ordersRepository.findAllOrdersList();
-//  	}
+  	@Override
+  	public List<OrdersDTO> selectAllList() {
+  		return ordersRepository.findAllOrdersList();
+  	}
  } //class

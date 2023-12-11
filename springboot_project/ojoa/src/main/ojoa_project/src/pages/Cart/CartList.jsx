@@ -34,16 +34,15 @@ const totalprice = (price * itemQuantity);
 // CartList 컴포넌트에서 handleCheckboxChange 함수를 수정하여 선택된 아이템들의 ID를 업데이트합니다.
 const handleCheckboxChange = () => {
     setSelectedItems(prevSelectedItems => {
-        if (Array.isArray(prevSelectedItems) && prevSelectedItems.includes(id)) {
-            return prevSelectedItems.filter(item => item !== id);
-        } else if (Array.isArray(prevSelectedItems)) {
-            return [...prevSelectedItems, id];
-        } else {
-            return [id]; // 초기값 설정
-        }
+      if (Array.isArray(prevSelectedItems) && prevSelectedItems.includes(id)) {
+        return prevSelectedItems.filter(item => item !== id);
+      } else if (Array.isArray(prevSelectedItems)) {
+        return [...prevSelectedItems, id];
+      } else {
+        return [id]; // 초기값 설정
+      }
     });
-    updateTotal(); // updateTotal 함수 호출
-};
+  };
     
     const handleRemove = () => {
         const user_id = "admin";
