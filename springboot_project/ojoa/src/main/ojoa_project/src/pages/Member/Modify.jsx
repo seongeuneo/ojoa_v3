@@ -33,20 +33,47 @@ function Modify() {
     }
 
     useEffect(() => {
-        // 세션 스토리지에서 사용자 이름 가져오기
-        const loggedInUser = sessionStorage.getItem('loggedInUser');
-        if (loggedInUser) {
-            const user = JSON.parse(loggedInUser);
-            // 사용자 이름 설정
-            setUserName(user.name); // 세션에 저장된 사용자 정보에서 이름 가져와 설정
-        }
+        // const loggedInUser = sessionStorage.getItem('loggedInUser');
+        // if (loggedInUser) {
+        //     const user = JSON.parse(loggedInUser);
+        //     // 사용자 이름 설정
+        //     setUserName(user.name); // 세션에 저장된 사용자 정보에서 이름 가져와 설정
+
+        // 사용자 정보를 불러오는 API 엔드포인트로 GET 요청을 보냅니다.
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.put('/member/rmemberUpdate'); // API 엔드포인트에 맞게 수정하세요
+                const user = response.data;
+
+
+                // 사용자 정보 설정
+                setEnroll_company({
+                    ...enroll_company,
+                    id: user.id, // 로그인한 사용자의 아이디 설정
+                    name: user.name,
+                    password: user.password,
+                    password2: user.password2,
+                    zipcode: user.zipcode,
+                    address: user.address,
+                    addressdetail: user.addressdetail,
+                    phone1: user.phone1,
+                    phone2: user.phone2,
+                    phone3: user.phone3,
+                    email1: user.email1,
+                    email2: user.email2,
+                });
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+        fetchUserData(); // 사용자 정보 불러오기
     }, []); // 컴포넌트 마운트 시 한 번만 실행
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             // 백엔드로 POST 요청을 보냄
-            const response = await axios.post('/member/memberUpdate', enroll_company);
+            const response = await axios.post('/member/rmemberUpdate', enroll_company);
             // 업데이트된 데이터 전달
 
             console.log(response.data); // 요청 결과 확인
@@ -177,7 +204,7 @@ function Modify() {
                                         id="address"
                                         onChange={handleInput}
                                         value={enroll_company.address}
-                                        //readOnly
+                                    //readOnly
                                     />&nbsp;
                                     <input type="text"
                                         name="addressdetail"
@@ -198,7 +225,7 @@ function Modify() {
                                         name="phone1"
                                         id="phone1"
                                         size="1"
-                                        //readOnly
+                                    //readOnly
                                     />
                                     &nbsp;&ndash;&nbsp;
                                     <input type="tel"
@@ -266,7 +293,8 @@ function Modify() {
                     <div className="join_btn">
                         {/* <a href="" className="out_btn2">취소하기</a> */}
                         <button type="submit" className="out_btn3">수정완료</button>
-                        <button href="" className="out_btn4" >회원탈퇴</button>
+                        <button className="out_btn2"><Link to="./member/pUpdateForm">비밀번호변경</Link></button>
+                        <button className="out_btn4" >회원탈퇴</button>
                     </div>
                 </form>
             </div>

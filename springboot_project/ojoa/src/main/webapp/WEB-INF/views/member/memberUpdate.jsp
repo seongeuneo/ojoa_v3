@@ -235,7 +235,7 @@ function inCheck() {
       	<td><input type="password" id="password2" placeholder="재입력 확인" value="${requestScope.apple.password}" size="20" autocomplete="new-password" readonly><br>
         </td>
     </tr>
-        
+    
 	<tr height="40">
     <th bgcolor="silver">주소</th>
     	<td colspan="2">

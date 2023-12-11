@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,20 +35,20 @@ public class MemberControllerR {
 	MemberService service;
 	PasswordEncoder passwordEncoder;
 	
+	
 	//**** => 리액트 ridDupCheck
 	@GetMapping("/ridDupCheck")
-	public String ridDupCheck(@RequestParam("id") String id, Model model) {
+	public ResponseEntity<?> ridDupCheck(@RequestParam("id") String id) {
 	    // 1) newID 확인
 	    if (service.selectOne(id) != null) {
 	        // => 존재 : 사용불가
-	        model.addAttribute("idUse", "F");
-	        log.info("** 존재: 사용불가 - ID: " + id);
+	        log.info("** 중복 : 사용불가 - ID: " + id);
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("duplicate");
 	    } else {
 	        // => 없으면: 사용가능
-	        model.addAttribute("idUse", "T");
-	        log.info("** 존재: 사용가능 - ID: " + id);
+	    	log.info("** 사용가능 - ID: " + id);
+	        return ResponseEntity.status(HttpStatus.OK).body("사용 가능한 아이디 입니다.");
 	    }
-	    return "member/idDupCheck";
 	} //ridDupCheck
 	
 	
@@ -87,6 +89,7 @@ public class MemberControllerR {
 		return result;
 	} //rlogin
 	
+	
 	//**** => 리액트 rLogout
 	// => session 무효화, home으로 
 	@PostMapping(value="/rlogout")
@@ -95,6 +98,7 @@ public class MemberControllerR {
 	    rttr.addFlashAttribute("message", "로그아웃 성공");
 	    return "";
 	} //rlogout
+	
 	
 	//**** => 리액트 rJoin
 	@PostMapping(value = "/rjoin")
@@ -118,5 +122,67 @@ public class MemberControllerR {
 	} //rjoin
 	
 	
+	// **** => 리액트 rUpdate
+	// => 요청: home 에서 내정보수정 -> 내정보수정Form (memberUpdate.jsp) 출력
+	// => 수정후 submit -> 수정 Service 
+	//		-> 성공: detail
+	//		-> 실패: 재시도 유도 (rmemberUpdate.jsp)
+	@PutMapping(value="/rmemberUpdate")
+	public ResponseEntity<?> rmemberUpdate(@RequestBody Member entity) throws IOException {
+		// 클라이언트로부터 받은 엔티티로 회원 정보 업데이트
+	    try {
+	        Member existingMember = service.selectOne(entity.getId()); // 해당 ID로 기존 회원 정보 조회
+	        if (existingMember != null) {
+	            // 업데이트할 필드들을 새로운 엔티티의 값으로 업데이트
+	            existingMember.setName(entity.getName());
+	            existingMember.setAddress(entity.getAddress());
+	            // 업데이트된 회원 정보를 저장
+	            service.save(existingMember);
+	            return ResponseEntity.status(HttpStatus.OK).body("회원 정보가 업데이트되었습니다.");
+	        } else {
+	            // 해당 ID의 회원이 존재하지 않을 경우
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 회원을 찾을 수 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        // 업데이트 중 문제 발생 시
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 정보 업데이트 중 오류가 발생했습니다.");
+	    }
+	} //rmemberUpdate
+	
+	
+	// ** Member Delete: 회원탈퇴
+	@DeleteMapping(value="/rmemberdelete")
+	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id) {
+	    // ID 확인
+	    if (service.selectOne(id) != null) {
+	        // => 존재 : 삭제가능
+	        log.info("아이디 삭제 완료: " + id);
+	        return ResponseEntity.status(HttpStatus.OK).body("아이디 삭제 완료: " + id);
+	    } else {
+	        // => 없으면: 삭제불가
+	    	log.info("아이디 삭제 중 오류 발생: " + id);
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("아이디 삭제 중 오류 발생");
+	    }
+	} //rmemberdelete
+	
+	
+	//***** 결제페이지 회원정보 가져오기 : 희상추가
+	@GetMapping(value="/rinfo")
+	public  ResponseEntity<?> rinfo(HttpSession session) {
+	   try {
+		   String loginID = (String) session.getAttribute("loginID");
+	       if (loginID == null) {
+	    	   return null;
+	       } else {
+	           Member result = service.selectOne(loginID);
+	           return ResponseEntity.ok(result);   
+	       }
+	   } catch (Exception e) {
+	       log.error("데이터 가져오기 중 에러: {}", e.getMessage());
+	       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 가져오기 실패");
+	       }
+	   } //rinfo
+	   
+	   
 } //class
 
