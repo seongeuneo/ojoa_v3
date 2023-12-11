@@ -55,7 +55,7 @@ function Modify() {
         // 사용자 정보를 불러오는 API 엔드포인트로 GET 요청을 보냅니다.
         const fetchUserData = async () => {
             try {
-                const response = await axios.put('/member/rmemberUpdate'); // API 엔드포인트에 맞게 수정하세요
+                const response = await axios.put('/member/rmemberUpdate');
                 const user = response.data;
 
 
@@ -85,7 +85,7 @@ function Modify() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // 백엔드로 POST 요청을 보냄
+            // 백엔드로 요청을 보냄
             const response = await axios.put('/member/rmemberUpdate', enroll_company);
             // 업데이트된 데이터 전달
 
