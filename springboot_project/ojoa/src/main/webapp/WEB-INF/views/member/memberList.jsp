@@ -21,20 +21,19 @@
 		<th>마케팅 동의(sms)</th><th>마케팅 동의(email)</th><th>적립금(mileage)</th><th>가입날짜</th><th>가입현황</th>
 		<!-- 관리자 기능 추가 -->
 		<c:if test="${sessionScope.loginID=='admin'}">
-			<th>Delete</th>
+			<th>강퇴</th>
 		</c:if>
 	</tr>
 	<c:if test="${not empty requestScope.banana}">
 		<c:forEach var="s" items="${requestScope.banana}">
-		<tr><td><a href="memberDetail?id=${s.id}">${s.id}</a></td>
-			
+		<tr><td>${s.id}</td>
 			<td>${s.password}</td><td>${s.name}</td><td align="center">${s.email1}</td><td align="center">${s.email2}</td><td>${s.zipcode}</td>
 			<td>${s.address}</td><td>${s.addressdetail}</td><td align="center">${s.phone1}</td><td align="center">${s.phone2}</td>
 			<td align="center">${s.phone3}</td><td align="center">${s.marketing_sms}</td>
 			<td align="center">${s.marketing_email}</td><td align="center">${s.mileage}</td><td align="center">${s.regdate}</td><td align="center">${s.memberyn}</td>
 			<!-- 관리자 기능 추가 -->
 			<c:if test="${sessionScope.loginID=='admin'}">
-				<td align="center"><a href="memberdelete?id=${s.id}">삭제</a></td>
+				<td align="center"><a class="texlink" onclick="memberdelete('${s.id}')">강퇴</a></td>
 			</c:if>
 		</tr>	
 		</c:forEach>

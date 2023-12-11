@@ -1,5 +1,4 @@
 import '../../pages/NotFound/NotFound.css'
-import React, { useEffect } from 'react';
 
 const NotFound = () => {
 

@@ -200,8 +200,6 @@
   margin-bottom: 80px;
 }
 
-/* ======================================= */
-
 /* ================ */
 .Agree .path {
   width: 1240px;
@@ -348,7 +346,7 @@
 .agree_text {
   border-top: solid 2px black;
   border-bottom: solid 2px black;
-  
+
   padding: 30px;
   overflow: auto;
   height: 180px;

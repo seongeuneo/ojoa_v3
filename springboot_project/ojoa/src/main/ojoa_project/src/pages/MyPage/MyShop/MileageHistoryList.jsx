@@ -46,10 +46,10 @@ function MileageHistoryList() {
                                     </thead>
                                     <tbody className=" center">
                                         <tr className="ec-base-table">
-                                            <td>2023-06-05</td>
-                                            <td className="right">1,000원</td>
                                             <td>-</td>
-                                            <td className="left">신규회원 적립금</td>
+                                            <td className="right">-</td>
+                                            <td>-</td>
+                                            <td className="left">-</td>
                                         </tr>
                                     </tbody>
                                 </table>

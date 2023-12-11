@@ -4,6 +4,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+
+    // 카카오 로그인 함수를 실행시키면 아래에 설정해 놓은 KAKAO_AUTH_URL 주소로 이동한다.
+    // 이동 된 창에서 kakao 계정 로그인을 시도할 수 있으며 로그인 버튼 클릭 시 Redirect URI로 이동하면서 빈화면과 함께
+    // 인가 코드가 발급된다.( 인가코드는 파라미터 값에 들어가 있다.)
+    const REST_API_KEY = '2f9b2c7502a2208b4674aae7c158d54f';
+    const REDIRECT_URI = 'http://localhost:3000/kakaoLogin';
+    const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?
+    client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    const loginHandler = () => {
+        window.location.href = KAKAO_AUTH_URL;
+    }
+
+    const handleLinkClick = () => {
+        alert('해당 페이지는 현재 준비중 입니다.');
+    };
+
     const navigate = useNavigate(); // useNavigate  훅 사용
 
     const [id, setId] = useState('');
@@ -20,7 +37,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
             password: password
         };
 
-        console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력 -> 성공시 페이지 이동으로 안보임
+        console.log('로그인 데이터:', loginData); // 로그인 데이터 콘솔 출력
 
         try {
             const response = await axios.post("/member/rlogin", loginData);
@@ -50,9 +67,10 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
             }
         }
 
-        // 실패 메시지 추출 함수
-        function extractErrorMessage(htmlResponse) {
-        }
+        // // 실패 메시지 추출 함수
+        // function extractErrorMessage(htmlResponse) {
+        // }
+
     };
 
     return (
@@ -86,9 +104,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                             {/* <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/"> </Link> */}
                                         </span>
                                         <input type="text"
-                                            // name="userID"
+                                            name="id"
+                                            id="id"
                                             placeholder="아이디"
-                                            minLength="3"
                                             value={id}
                                             // autoComplete="username"
                                             onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
@@ -97,9 +115,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                     <label className="login_password">
                                         <span><img src="../images/password.png" alt="비밀번호" /></span>
                                         <input type="password"
-                                            // name="userPSW"
+                                            name="password"
+                                            id="password"
                                             placeholder="비밀번호"
-                                            minLength="3"
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
                                         // autocomplete="current-password"
@@ -114,18 +132,28 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                         &quot;보안접속&quot;
                                     </div>
                                     <div className="login_forget">
-                                        <label>
-                                            <input type="checkbox" />아이디 기억하기
-                                        </label>
+                                        {/* <label for="idSet" class="sign_checkbox">
+                                            <input
+                                                type="checkbox"
+                                                id="idSet"
+                                                // onChange={handleOnChange}
+                                                // checked={isRemember}
+                                            />{""}
+                                            <span class="cbx">
+                                                <svg width="5px" height="15px" viewBox="0 0 15 15">
+                                                </svg>
+                                            </span>
+                                            <span>아이디 기억하기</span>
+                                        </label> */}
                                     </div>
                                     <div className="login_find">
                                         <ul>
                                             <li>
-                                                <button type="button" >아이디찾기</button>
+                                                <button type="button" onClick={handleLinkClick}>아이디찾기</button>
                                             </li>
                                             <li>&nbsp;|&nbsp;</li>
                                             <li>
-                                                <button type="button" >비밀번호찾기</button>
+                                                <button type="button" onClick={handleLinkClick}>비밀번호찾기</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -133,13 +161,15 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
 
                                     <div className="login_sns">
                                         <p className="sns">
-                                            <Link to="https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver.com/" target="_blank"><img src="../images/btn_naver_login.gif" alt='네이버로그인' /></Link>
+                                            <img src="../images/btn_naver_login.gif" onClick={handleLinkClick} alt='네이버로그인' />
                                         </p>
                                         <p className="sns">
-                                            <Link to="http://www.facebook.com/" target="_blank"><img src="../images/btn_facebook_login.gif" alt='페이스북로그인' /></Link>
+                                            <img src="../images/btn_facebook_login.gif" onClick={handleLinkClick} alt='페이스북로그인' />
                                         </p>
                                         <p className="sns">
-                                            <Link to="https://accounts.kakao.com/login/?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo#login" target="_blank"><img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' /></Link>
+                                            <React.Fragment>
+                                                <img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' type="button" onClick={loginHandler}/>
+                                            </React.Fragment>
                                         </p>
                                     </div>
                                     <div className="login_cboth"></div>
@@ -153,7 +183,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                     &quot;회원을 위한 다양한 혜택이 준비되어 있습니다.&quot;
                                 </div>
                                 <div className="login_join_btn">
-                                    <Link to="/member/join">회원가입</Link>
+                                    <Link to="/member/rjoin">회원가입</Link>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import '../MyShop/Mileage.css';
 import { NavLink, Routes, Route, useParams, Link } from 'react-router-dom';
 import MileageHistoryList from './MileageHistoryList';
 import MileageUnavailList from './MileageUnavailList';
-import MileageCouponList from './MileageCouponList';
+//import MileageCouponList from './MileageCouponList';
 import MileageHelp from './MileageHelp';
 
 class MileageInfo {
@@ -14,10 +14,10 @@ class MileageInfo {
 }
 
 export const mileageInfoList = [
-    new MileageInfo("총 적립금 : ", "35,640원"),
-    new MileageInfo("사용가능 적립금 : ", "10,000원"),
-    new MileageInfo("사용된 적립금 : ", "25,640원"),
-    new MileageInfo("미가용 적립금 : ", "300,000원"),
+    new MileageInfo("총 적립금 : ", "0원"),
+    new MileageInfo("사용가능 적립금 : ", "0원"),
+    new MileageInfo("사용된 적립금 : ", "0원"),
+    new MileageInfo("미가용 적립금 : ", "0원"),
     new MileageInfo("환불예정 적립금 : ", "0원"),
 ];
 
@@ -61,7 +61,7 @@ function Mileage() {
                 <ul className='menu'>
                     <li><a><NavLink to="./pages/MyPage/MyShop/MileageHistoryList">적립내역보기</NavLink></a></li>
                     <li className='selected'><a><NavLink to="./pages/MyPage/MyShop/MileageUnavailList">미가용적립내역보기</NavLink></a></li>
-                    <li><a><NavLink to="./pages/MyPage/MyShop/MileageCouponList">미가용쿠폰/회원등급적립내역</NavLink></a></li>
+                    {/* <li><a><NavLink to="./pages/MyPage/MyShop/MileageCouponList">미가용쿠폰/회원등급적립내역</NavLink></a></li> */}
                 </ul >
             </div >
             
@@ -69,7 +69,7 @@ function Mileage() {
             <Routes>
                 <Route path="/pages/mypage/myshop/mileagehistorylist" element={<MileageHistoryList />} />
                 <Route path="/pages/mypage/myshop/mileageunavaillist" element={<MileageUnavailList />} />
-                <Route path="/pages/mypage/myshop/mileagecouponlist" element={<MileageCouponList />} />
+                {/* <Route path="/pages/mypage/myshop/mileagecouponlist" element={<MileageCouponList />} /> */}
             </Routes>
 
             <MileageHelp />

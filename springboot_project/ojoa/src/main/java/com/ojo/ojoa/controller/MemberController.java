@@ -173,13 +173,10 @@ public class MemberController {
 	@PostMapping(value="/memberUpdate")
 	public String memberUpdate(HttpSession session, HttpServletRequest request,
 							  Member entity, Model model) throws IOException {
-		
 		// => 처리결과에 따른 화면 출력을 위해서 dto 의 값을 Attribute에 보관
 		model.addAttribute("apple", entity);
 		String uri="member/memberDetail";
-		
-		// ** password는 수정불가
-		
+		// ** password는 단독 링크의 폼에서 수정
 		// => Service 처리
 		try {
 			log.info("** update 성공 id => "+service.save(entity));
@@ -191,9 +188,8 @@ public class MemberController {
 			model.addAttribute("message", "회원정보 수정 실패. 다시 하세요.");
 			uri="member/memberUpdate";
 		}
-		
 		return uri;
-	} //memberUpdte
+	} //memberUpdate
 	
 	// ** Member Delete: 회원탈퇴
 	@GetMapping(value="/memberdelete")
@@ -215,7 +211,6 @@ public class MemberController {
 			log.info("** delete Exception => "+e.toString());
 			rttr.addFlashAttribute("message", "탈퇴 실패.");
 		}
-		
 		return uri;
 	} //memberdelete
 	

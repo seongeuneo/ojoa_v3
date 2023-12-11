@@ -7,6 +7,7 @@ import UserHeader from './components/Header/UserHeader';
 import LoginHeader from './components/Header/LoginHeader';
 import Footer from './components/Footer/Footer';
 import TopButton from './components/TopButton';
+import Post from './components/Post';
 import Main from './pages/Main/Main';
 import MyPage from './pages/MyPage/MyPage';
 import Store from './pages/Store/Store';
@@ -26,6 +27,7 @@ import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
 import Wish from "./pages/MyPage/MyShop/Wish";
+import LoginHandeler from "./pages/Member/LoginHandeler";
 
 import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
@@ -65,6 +67,9 @@ function App() {
           <LoginHeader setIsLoggedIn={setIsLoggedIn} />
         )}
         <Routes>
+          <Route path="/kakaoLogin/*" //redirect_url
+            element={<LoginHandeler />} //당신이 redirect_url에 맞춰 꾸밀 컴포넌트
+          />
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/member/*" element={<Modify />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
@@ -72,7 +77,7 @@ function App() {
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/member/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/member/rlogin" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />
@@ -89,7 +94,7 @@ function App() {
 
           <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart}
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
-          <Route path="/member/join" element={<Join />} />
+          <Route path="/member/rjoin" element={<Join />} />
           {/* <Route path="/login/info/agree" element={<Agree />} />
           <Route path="/login/info/agree/popup" element={<Popup />} /> */}
           <Route path="/qna" element={<Qna />} />

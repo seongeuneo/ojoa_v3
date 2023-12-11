@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
+<script>let loggedInUserID = "${sessionScope.loginID}";</script>
 <script> "use strict"
 
 //** 입력값의 무결성 점검 ***************************
@@ -206,7 +207,7 @@ function inCheck() {
 <body>
 <h2>** MemberUpdate **</h2>
 
-<form action="memberUpdate" method="Post" enctype="multipart/form-data">
+<form action="member/memberUpdate" method="Post" enctype="multipart/form-data">
 <table>
 
   <c:if test="${not empty requestScope.apple}">
@@ -267,13 +268,13 @@ function inCheck() {
 	</tr>
 	
 	<tr height="40"><th bgcolor="Silver">SMS 수신 여부</th>
-		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>수신함</label>
-            <input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_sms" id="marketing_sms" value="y"><label>SMS</label>
+            <input type="radio" name="marketing_sms" id="marketing_smsNone" value="n" checked><label>수신받지않음</label>
             <span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span>
        	</td></tr>	
 	<tr height="40"><th bgcolor="Silver">이메일 수신 여부</th>
-		<td><input type="radio" name="marketing_email" id="marketing_email" value="y"><label>수신함</label>
-            <input type="radio" name="marketing_email" id="marketing_emailNone" value="n" checked><label>수신안함</label>
+		<td><input type="radio" name="marketing_email" id="marketing_email" value="y"><label>이메일</label>
+            <input type="radio" name="marketing_email" id="marketing_emailNone" value="n" checked><label>수신받지않음</label>
             <span style="font-size: 12px; color: black;">&nbsp;&nbsp;&nbsp;쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span>
        	</td></tr>	
 	

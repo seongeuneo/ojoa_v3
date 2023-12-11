@@ -187,9 +187,10 @@
     line-height: 38px;
 }
 
-.Modify input[type="radio"] {
+.Modify .agree_check input[type="radio"] {
     height: 100%;
     margin: 0;
+    margin-right: 5px;
 }
 
 
@@ -220,6 +221,8 @@
 .Modify .out_btn3 {
     background-color: black;
     color: white;
+    margin-left: 500px;
+    cursor: pointer;
 }
 
 .Modify .out_btn3:hover,
@@ -231,7 +234,7 @@
 .Modify .input_warn {
     color: red;
     font-size: 12px;
-    margin: 10px 0 0 124px;
+    margin: 10px 0 0 40px;
 }
 
 .Modify .out_btn4 {
@@ -247,7 +250,6 @@
     background-color: white;
     color: black;
     font-size: 12px;
-    margin-left: 200px;
+    margin-left: 350px;
+    cursor: pointer;
 }
-
-

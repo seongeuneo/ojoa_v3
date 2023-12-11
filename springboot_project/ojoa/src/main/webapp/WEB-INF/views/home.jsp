@@ -12,15 +12,16 @@
 <script src="/resources/myLib/productCheck.js"></script>
 <script src="/resources/myLib/inCheck.js"></script>
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
+<script>let loggedInUserID = "${sessionScope.loginID}";</script>
 </head>
 <body>
 	<P>Server Time: ${serverTime}</P>
-<%-- <c:if test="${not empty sessionScope.loginID}">
-	=> ${sessionScope.loginName}님 안녕하세요 ~~<br> 
+	<c:if test="${not empty requestScope.message}">
+→ ${requestScope.message}<br>
+</c:if>	
+<c:if test="${not empty sessionScope.loginID}">
+	→ ${sessionScope.loginName}님 접속중 입니다.<br> 
 </c:if>
-<c:if test="${not empty requestScope.message}">
-	=> ${requestScope.message}<br>
-</c:if> --%>
 	<header class='header'>
 		<div id="mheader">
 			<!-- header -->
@@ -36,20 +37,16 @@
 					<ul class="login-out">
 						<!-- Login 전 -->
 						<c:if test="${empty sessionScope.loginID}">
-						<!-- 비동기 -->
-							<!-- <li onclick="loginChange()"><a>Login</a></li>
-								 <li onclick="joinChange()"><a>Join</a></li> -->
-							<li onclick="loginChange()"><a>Login</a></li>
-							<li onclick="joinChange()"><a>Join</a></li>
-
+							<!-- <li onclick="loginChange()"><a>Login</a></li> -->
+							<!-- <li onclick="joinChange()"><a>Join</a></li> -->
 						</c:if>
 						<!-- Login 후 -->
 						<c:if test="${not empty sessionScope.loginID}">
-							<li><a href="member/logout">Logout</a></li>
-							<li onclick="detailChange()"><a href="member/memberDetail?id=${sessionScope.loginID}">내정보</a></li>
-							<li onclick="updateChange()"><a href="member/memberDetail?jCode=U&id=${sessionScope.loginID}">내정보수정</a></li>
+							<!-- <li><a href="member/logout">Logout</a></li> -->
+							<!-- <li onclick="detailChange()"><a>내정보</a></li> -->
+							<li onclick="updateChange()"><a>내정보수정</a></li>
 							<%-- <li><a href="member/memberShippingAddress?jCode=U&id=${sessionScope.loginID}">배송지정보</a></li> --%>
-							<li onclick="deleteChange()"><a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a></li>
+							<%-- <li><a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a></li> --%>
 						</c:if>
 					</ul>
 					<ul class="admin-lists">
