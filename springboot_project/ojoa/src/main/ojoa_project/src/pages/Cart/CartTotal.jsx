@@ -2,7 +2,7 @@ import '../../pages/Cart/Cart.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const CartTotal = ({ cart, selectedItems}) => {
+const CartTotal = ({ cart, selectedItems, onCheckout}) => {
 
     const [selectedTotal, setSelectedTotal] = useState(0);
 
@@ -24,27 +24,6 @@ const CartTotal = ({ cart, selectedItems}) => {
         setSelectedTotal(total);
     }, [selectedItems, cart]);
 
-//===========================================================================================
-
-const payNow = () => {
-    if (selectedItems && selectedItems.length > 0) {
-        const selectedCartItems = cart.filter(item => selectedItems.includes(item.id)); // 수정된 부분: item.prod_num -> item.id로 변경
-
-        axios.post('/api/orders/saveOrders', { selectedCartItems })
-          .then(response => {
-            // 주문 성공 시의 처리
-            console.log("주문이 성공적으로 처리되었습니다.", response);
-          })
-          .catch(error => {
-            // 주문 실패 시의 처리
-            console.error("주문 처리 중 오류 발생:", error);
-          });
-      } else {
-        console.error("선택된 항목이 없습니다.");
-        // 선택된 항목이 없을 때의 처리
-      }
-};
-//===========================================================================================
 
 
     return (
@@ -97,7 +76,7 @@ const payNow = () => {
                     </div>
                 </div>
 
-                <div className="button" onClick={payNow}>
+                <div className="button" onClick={onCheckout}>
                     <p className="btnText">PAY NOW</p>
                     <div className="btnTwo">
                     <p className="btnText2">GO!</p>

@@ -36,11 +36,10 @@ const handleCheckAll = () => {
 //     navigate('/checkout', { state: { selectedCartItems } });
 // };
 
-
-// const handleCheckout = () => {
-//     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.id));
-//     navigate('/checkout', { state: { selectedCartItems } });
-// };
+const onCheckout = () => {
+    const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
+    navigate('/checkout', { state: { selectedCartItems : selectedCartItems } });
+};
 
     const calculateSelectedTotal = () => {
         return selectedItems.reduce((total, itemId) => {
@@ -62,7 +61,6 @@ const handleCheckAll = () => {
                 console.error("Error: ", error);
             });
     }, [won]);
-
     
     const cartList = cart.map((item) => (
         <CartList
@@ -94,7 +92,7 @@ const handleCheckAll = () => {
                 cart={cart}
                 selectedItems={selectedItems}
                 selectedItemsTotal={selectedItemsTotal}
-                //onCheckout={handleCheckout}
+                onCheckout={onCheckout}
             />
         </div>
     );
