@@ -31,9 +31,4 @@ public class Wish {
 	@Column(name="prod_num")
 	private int prod_num;  // FK for product(prodnum)
 	
-	
-	
-	
-	
-
 }
