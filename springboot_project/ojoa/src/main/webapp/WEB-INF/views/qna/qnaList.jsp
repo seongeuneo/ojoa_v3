@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,42 +11,60 @@
 <script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
-<h2>게시판 목록</h2>
+	<h2>게시판 목록</h2>
 
-<c:if test="${not empty requestScope.message}">
-	=> ${requestScope.message}<br><hr>
-</c:if>
-<table style="width:100%">
-	<tr >
-		<th>문의 번호</th>
-		<th>상품 번호</th>
-		<th>ID</th>
-		<th>카테고리</th>
-		<th>문의 제목</th>
-		<th>문의 내용</th>
-		<th>답글 달기</th>
-		<th>삭제</th>
-		
-	</tr>
-	<c:if test="${not empty requestScope.qna}">
-		<c:forEach var="s" items="${requestScope.qna}">
-		<tr><td>${s.qna_seq}</td>	
-			<td>${s.prod_num}</td>	
-			<td>${s.id}</td>
-			<td>${s.qna_category}</td>
-			<td>${s.qna_title}</td>
-			<td>${s.qna_content}</td>
-			<td align="center"><a class="texlink" onclick="replyAnswerForm('${s.qna_seq}')">답글 달기</a></td>
-			<td align="center"><a class="texlink" onclick="qnaDelete('${s.qna_seq}')">글 삭제</a></td>
-		</tr>	
-		</c:forEach>
+	<c:if test="${not empty requestScope.message}">
+	=> ${requestScope.message}<br>
+		<hr>
 	</c:if>
-	<c:if test="${empty requestScope.qna}">
-		<tr><td colspan="5">뭐라도 좀 써죠라~~</td>
+
+	<div class="filterArea">
+		<div>
+			<input type="text" id="productNameInput" placeholder="회원 ID 검색">
+			<!-- 검색어 입력 필드 -->
+			<button onclick="filterMembersByName()">검색</button>
+			<!-- 검색 버튼 -->
+		</div>
+	</div>
+
+
+	<table style="width: 100%">
+		<tr>
+			<th>문의 번호</th>
+			<th>상품 번호</th>
+			<th>ID</th>
+			<th>카테고리</th>
+			<th>문의 제목</th>
+			<th>문의 내용</th>
+			<th>답글 달기</th>
+			<th>삭제</th>
+
 		</tr>
-	</c:if>
-</table>
+		<c:if test="${not empty requestScope.qna}">
+			<c:forEach var="s" items="${requestScope.qna}">
+				<tr>
+					<td>${s.qna_seq}</td>
+					<td>${s.prod_num}</td>
+					<td>${s.id}</td>
+					<td>${s.qna_category}</td>
+					<td>${s.qna_title}</td>
+					<td>${s.qna_content}</td>
+					<td align="center"><a class="texlink"
+						onclick="replyAnswerForm('${s.qna_seq}')">답글 달기</a></td>
+					<td align="center"><a class="texlink"
+						onclick="qnaDelete('${s.qna_seq}')">글 삭제</a></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty requestScope.qna}">
+			<tr>
+				<td colspan="5">뭐라도 좀 써죠라~~</td>
+			</tr>
+		</c:if>
+	</table>
 
-<div class="home-link"><a href="/home">Home</a></div>
+	<div class="home-link">
+		<a href="/home">Home</a>
+	</div>
 </body>
 </html>
