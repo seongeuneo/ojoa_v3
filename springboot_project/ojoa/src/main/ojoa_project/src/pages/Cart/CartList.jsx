@@ -31,7 +31,6 @@ const CartList = ({ id, productname, content, quantity, mainimage, discount, pri
     };
 
 
-<<<<<<< HEAD
     // CartList 컴포넌트에서 handleCheckboxChange 함수를 수정하여 선택된 아이템들의 ID를 업데이트합니다.
     const handleCheckboxChange = () => {
         setSelectedItems(prevSelectedItems => {
@@ -43,38 +42,16 @@ const CartList = ({ id, productname, content, quantity, mainimage, discount, pri
                 return [id]; // 초기값 설정
             }
         });
-        updateTotal(); // updateTotal 함수 호출(없었는데 추가)
     };
 
+    //============================================================================
     const handleRemove = () => {
-        const user_id = "admin";
-=======
-// CartList 컴포넌트에서 handleCheckboxChange 함수를 수정하여 선택된 아이템들의 ID를 업데이트합니다.
-const handleCheckboxChange = () => {
-    setSelectedItems(prevSelectedItems => {
-      if (Array.isArray(prevSelectedItems) && prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter(item => item !== id);
-      } else if (Array.isArray(prevSelectedItems)) {
-        return [...prevSelectedItems, id];
-      } else {
-        return [id]; // 초기값 설정
-      }
-    });
-  };
->>>>>>> main
+        //const user_id = "loggedInUser";
+        const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+        const loginID = loggedInUser.id;
 
-//============================================================================
-const handleRemove = () => {
-    //const user_id = "loggedInUser";
-    const loggedInUser  = JSON.parse(sessionStorage.getItem("loggedInUser"));
-    const loginID = loggedInUser.id;
-    
-    axios.delete(`/api/cdelete?prod_num=${id}&user_id=${loginID}`)
-        .then((response) => {
-            axios
-            .get("/api/cart/allCartList")
+        axios.delete(`/api/cdelete?prod_num=${id}&user_id=${loginID}`)
             .then((response) => {
-<<<<<<< HEAD
                 axios
                     .get("/api/cart/allCartList")
                     .then((response) => {
@@ -83,20 +60,13 @@ const handleRemove = () => {
                     .catch((error) => {
                         console.error("Error: ", error);
                     });
-=======
-                setCart(response.data);
->>>>>>> main
             })
             .catch((error) => {
-                console.error("Error: ", error);
+                console.error("삭제 요청 실패:", error);
+                alert('삭제 중 문제가 발생했습니다!');
             });
-        })
-        .catch((error) => {
-            console.error("삭제 요청 실패:", error);
-            alert('삭제 중 문제가 발생했습니다!');
-        });
-};
-//=========================================================================
+    };
+    //=========================================================================
     const onIncrease = () => {
         setItemQuantity(itemQuantity + 1);
 

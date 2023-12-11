@@ -120,9 +120,7 @@ public class MemberControllerR {
 		}
 		return result;
 	} //rjoin
-<<<<<<< HEAD
 
-=======
 	
 	
 	// **** => 리액트 rUpdate
@@ -187,6 +185,6 @@ public class MemberControllerR {
 	   } //rinfo
 	   
 	   
->>>>>>> main
+
 } //class
 

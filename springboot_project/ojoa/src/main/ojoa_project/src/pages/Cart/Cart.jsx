@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Cart = ({ cart, setCart }) => {
-    
+
     const navigate = useNavigate();
     const [isAllChecked, setIsAllChecked] = useState(false);
     const [selectedItems, setSelectedItems] = useState([]);
@@ -53,7 +53,7 @@ const Cart = ({ cart, setCart }) => {
     };
 
     useEffect(() => {
-        const loggedInUser  = JSON.parse(sessionStorage.getItem("loggedInUser"));
+        const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
         const loginID = loggedInUser.id;
 
         axios
@@ -65,13 +65,9 @@ const Cart = ({ cart, setCart }) => {
                 console.error("Error: ", error);
             });
     }, [won]);
-<<<<<<< HEAD
 
-=======
-    
 
-    
->>>>>>> main
+
     const cartList = cart.map((item) => (
         <CartList
             id={item.prod_num}
