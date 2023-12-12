@@ -45,7 +45,7 @@
 						<c:if test="${not empty sessionScope.loginID}">
 							<!-- <li><a href="member/logout">Logout</a></li> -->
 							<!-- <li onclick="detailChange()"><a>내정보</a></li> -->
-							<li onclick="updateChange()"><a>내정보수정</a></li>
+							<!-- <li onclick="updateChange()"><a>내정보수정</a></li> -->
 							<%-- <li><a href="member/memberShippingAddress?jCode=U&id=${sessionScope.loginID}">배송지정보</a></li> --%>
 							<%-- <li><a href="member/memberdelete?id=${sessionScope.loginID}">탈퇴</a></li> --%>
 						</c:if>
