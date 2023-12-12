@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
 // 배열 속성 writer 입력시 성만 따오기
-  const lastName = (fullName) => {
+const lastName = (fullName) => {
     if (fullName.length > 0) {
         return fullName.charAt(0);
     }
@@ -69,16 +69,13 @@ const QnaListItem = ({ qnaList, filters }) => {
 
 
 
-<<<<<<< HEAD
-=======
 
-//=========================================================================
+    //=========================================================================
 
 
 
 
 
->>>>>>> main
     return (
         <tbody className='qna_ListItem_container'>
             {qnaList.map((item, i) => (
@@ -111,27 +108,20 @@ const QnaListItem = ({ qnaList, filters }) => {
                             </tr>
                         )
                     }
-<<<<<<< HEAD
-                    {expandedId === i && (
-=======
                     {/* {expandedId === i && (
->>>>>>> main
                         <tr className='qna_board_st7'>
                             <td colSpan="8" className='notification_row'>
                                 {item.notification}
                             </td>
                         </tr>
-<<<<<<< HEAD
-=======
                     )} */}
                     {expandedId === i && (
                         <tr className='qna_board_st7'>
                             <td colSpan="8" className='notification_row'>
-                            <p>[문의 내용] : {item.notification}</p>
-                            <p>[답변내용] : {item.titleIcon}</p>
+                                <p>[문의 내용] : {item.notification}</p>
+                                <p>[답변내용] : {item.titleIcon}</p>
                             </td>
                         </tr>
->>>>>>> main
                     )}
                 </React.Fragment>
             ))}

@@ -6,12 +6,8 @@ import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
 import { useProductList } from '../../ProductList/useProductList';
 
-<<<<<<< HEAD
 function QnaModal({ closeModal, onFilterChange }) {
-=======
-function QnaModal({ closeModal }) {
     const data = useProductList();
->>>>>>> main
 
     const [content, setContent] = useState("");
     // => new 일정 처리할  onChangeContent 이벤트 핸들러 
@@ -100,31 +96,10 @@ function QnaModal({ closeModal }) {
                                         {/* <select name="board_category" id="board_category2"> */}
                                         <select name="prod_kind" id="board_category2" >
                                             <option>제품목록</option>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                            <option value="1">침대</option>
-                                            <option value="2">소파</option>
-                                            <option value="3">책장</option>
-                                            <option value="4">옷장</option>
-                                            <option value="5">조명</option>
-                                            <option value="6">의자</option>
-=======
-                                            <option value="침대">침대</option>
-                                            <option value="소파">소파</option>
-                                            <option value="책장">책장</option>
-                                            <option value="옷장">옷장</option>
-                                            <option value="조명">조명</option>
-                                            <option value="의자">의자</option>
->>>>>>> main
-                                            {mockList.map((item) => (
-                                                <React.Fragment key={item.id}>
-                                                    <option value={item.imgNo}>{item.productName}</option>
-=======
                                             {/* <option value="1">의자</option> */}
                                             {data.map((item) => (
                                                 <React.Fragment key={item.prod_num}>
                                                     <option value={item.prod_num}>{item.prod_name}</option>
->>>>>>> main
                                                 </React.Fragment>
                                             ))}
                                         </select>
