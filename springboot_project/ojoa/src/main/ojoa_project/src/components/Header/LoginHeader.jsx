@@ -71,40 +71,40 @@ function UserHeader() {
                     <li><Link to={generateToLink("New")}>NEW</Link></li>
                     {/* <li><Link to="/ProductList/NewList">NEW</Link></li> */}
                     <li><Link to='/ProductList/Bed'>침대</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>싱글</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>더블</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                     <li><Link to={generateToLink("소파")}>소파</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>2인</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>3인</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                     <li><Link to={generateToLink("책장")}>책장</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>2단</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>3단</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                     <li><Link to={generateToLink("옷장")}>옷장</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>2칸</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>3칸</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                     <li><Link to={generateToLink("조명")}>조명</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>스탠드형</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>탈부착형</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                     <li><Link to={generateToLink("의자")}>의자</Link>
-                        <ul>
+                        {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>탁상의자</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>주방의자</Link></li>
-                        </ul>
+                        </ul> */}
                     </li>
                 </ul>
 
