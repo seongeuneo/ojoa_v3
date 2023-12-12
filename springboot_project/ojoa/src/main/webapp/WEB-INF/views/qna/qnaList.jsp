@@ -36,7 +36,8 @@
 			<th>카테고리</th>
 			<th>문의 제목</th>
 			<th>문의 내용</th>
-			<th>답글 달기</th>
+			<th>답변 여부</th>
+			<th>답변 하기</th>
 			<th>삭제</th>
 
 		</tr>
@@ -47,10 +48,17 @@
 					<td>${s.prod_num}</td>
 					<td>${s.id}</td>
 					<td>${s.qna_category}</td>
+				<%-- 	<td><a href="/qna/qdetail?qna_seq=${s.qna_seq}">
+							${s.qna_title}</a></td> --%>
 					<td>${s.qna_title}</td>
 					<td>${s.qna_content}</td>
+
+					<td>여기에 qna state</td>
+					<%-- <td>${s.qna_state}</td> --%>
+
 					<td align="center"><a class="texlink"
-						onclick="replyAnswerForm('${s.qna_seq}')">답글 달기</a></td>
+						onclick="replyAnswerForm(${s.qna_seq})">답변 하기</a></td>
+
 					<td align="center"><a class="texlink"
 						onclick="qnaDelete('${s.qna_seq}')">글 삭제</a></td>
 				</tr>
