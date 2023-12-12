@@ -24,7 +24,7 @@ import Join from './pages/Member/Join';
 import Qna from './pages/Qna/Qna';
 import Mileage from './pages/MyPage/MyShop/Mileage';
 import Modify from './pages/Member/Modify';
-import pUpdateForm from './pages/Member/pUpdateForm';
+import PUpdateForm from './pages/Member/PUpdateForm';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
@@ -89,13 +89,13 @@ function App() {
           />
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/member/*" element={<Modify setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/modify/*" element={<pUpdateForm />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
           <Route path="/mypage/wish/*" element={<Wish />} />
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/member/rlogin" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/member/modify/PUpdateForm" element={<PUpdateForm />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/ProductDetailFromMain/:prod_num/*" element={<ProductDetailFromMain cart={cart} setCart={setCart} handleCart={handleCart} />} />

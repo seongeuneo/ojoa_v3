@@ -201,7 +201,8 @@
 }
 
 .Modify .out_btn2,
-.Modify .out_btn3 {
+.Modify .out_btn3,
+.Modify .out_btn5 {
     display: inline-block;
     height: 35px;
     width: 150px;
@@ -227,8 +228,16 @@
     cursor: pointer;
 }
 
+.Modify .out_btn5 {
+    background-color: black;
+    color: white;
+    margin-left: 0px;
+    cursor: pointer;
+}
+
 .Modify .out_btn3:hover,
-.Modify .out_btn4:hover {
+.Modify .out_btn4:hover,
+.Modify .out_btn5:hover {
     background-color: whitesmoke;
     color: black;
 }
