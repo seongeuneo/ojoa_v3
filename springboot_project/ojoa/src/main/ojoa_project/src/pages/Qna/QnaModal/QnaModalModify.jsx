@@ -4,9 +4,9 @@ import { TodoDispatchContext } from "../Qna";
 import { useModal } from "../QnaModal/ModalContext";
 import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
-import { useProductList } from "../../ProductList/useProductList";
+import { useProductList } from '../../ProductList/useProductList';
 
-function QnaModalModify({ closeModal }) {
+function QnaModalModify({ closeModal, onFilterChange }) {
     const data = useProductList();
 
     const [content, setContent] = useState("");
@@ -20,22 +20,28 @@ function QnaModalModify({ closeModal }) {
 
         try {
             const formData = new FormData(document.getElementById('qnaform'));
+            // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
 
+
+            // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
             const response = await axios.post("/api/qna/saveQna/", formData,
                 { headers: { "Content-Type": "application/json" } });
 
             // 성공/실패에 따라 처리합니다.
             console.log("데이터 저장됨:", response.data);
             closeModal(false);
+            onFilterChange();
         } catch (error) {
             // 에러 처리
             console.error("데이터 저장 중 에러:", error);
             // 선택적으로 사용자에게 에러 메시지 표시 가능
         }
         e.preventDefault();
+
     };
 
     return (
+
         <div id="QnaModal_Background">
             <div className="qnaModal_container2">
                 <img
@@ -54,6 +60,7 @@ function QnaModalModify({ closeModal }) {
                     <div className='qna_writeArea'>
                         <h2>Q & A</h2>
                     </div>
+
 
                     <form className="qna_write_info" action="" method="post" id="qnaform">
                         <table className="qna_board_table">
@@ -84,14 +91,15 @@ function QnaModalModify({ closeModal }) {
                                             <option value="환불문의">환불문의</option>
                                             <option value="재입고문의">재입고문의</option>
                                             <option value="기타문의">기타문의</option>
-                                            <option value=" "></option>
+                                            {/* <option value=" "></option> */}
                                         </select>
-                                        <select name="board_category" id="board_category2">
+                                        {/* <select name="board_category" id="board_category2"> */}
+                                        <select name="prod_kind" id="board_category2" >
                                             <option>제품목록</option>
-                                            <option value="1">의자</option>
+                                            {/* <option value="1">의자</option> */}
                                             {data.map((item) => (
-                                                <React.Fragment key={item.id}>
-                                                    <option value={item.imgNo}>{item.productName}</option>
+                                                <React.Fragment key={item.prod_num}>
+                                                    <option value={item.prod_num}>{item.prod_name}</option>
                                                 </React.Fragment>
                                             ))}
                                         </select>
@@ -100,7 +108,6 @@ function QnaModalModify({ closeModal }) {
                                 <tr>
                                     <th scope="row"><label htmlFor="qna_bTitle" name="qna_title">제  목</label></th>
                                     <td className="qna_writetitle" name="qna_title">
-                                        {/*<input type="text" name="bTitle" id="qna_bTitle" ref={inputRef} value={content} onChange={onChangeContent} placeholder="제목을 입력하세요." />*/}
                                         <input
                                             type="text"
                                             name="qna_title"
@@ -118,14 +125,10 @@ function QnaModalModify({ closeModal }) {
                                             placeholder="내용을 입력하세요." />
                                     </td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                     <th scope="row"><label htmlFor="qna_bPassword">비밀번호</label></th>
                                     <td className="qna_writepassword"><input type="text" name="bPassword" id="qna_bPassword" /></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><label htmlFor="qna_bPassword">비밀번호확인</label></th>
-                                    <td className="qna_writepassword"><input type="text" name="bPassword" id="qna_bPassword" /></td>
-                                </tr>
+                                </tr> */}
                             </tbody>
                         </table>
                         <div className="qna_btnSet">
