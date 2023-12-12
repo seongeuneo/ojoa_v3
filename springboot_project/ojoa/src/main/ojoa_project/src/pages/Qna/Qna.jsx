@@ -151,7 +151,7 @@ function Qna() {
                             <QnaTitleList />
                             <QnaListItem qnaList={pagedQnaList} filters={filters} />
                         </table>
-                        <QnaModifyBtn onFilterChange={allQnaList} />
+                        {/* <QnaModifyBtn onFilterChange={allQnaList} /> */}
                         <QnaWriteBtn onFilterChange={allQnaList} />
                         <Pagination
                             currentPage={currentPage}
