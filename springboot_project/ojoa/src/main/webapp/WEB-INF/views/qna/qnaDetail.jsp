@@ -12,24 +12,26 @@
 <h2>** SpringBoot Qna Detail **</h2>
 <table>
 <c:if test="${not empty requestScope.qna}">
+
 	<tr height="40"><th bgcolor="Plum">Qna_seq</th>
-		<td>${requestScope.apple.qna_seq}</td></tr>
+		<td>${requestScope.qna.qna_seq}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Prod_num</th>
-		<td>${requestScope.apple.prod_num}</td></tr>	
+		<td>${requestScope.qna.prod_num}</td></tr>	
 	<tr height="40"><th bgcolor="Plum">I D</th>
-		<td>${requestScope.apple.id}</td></tr>	
+		<td>${requestScope.qna.id}</td></tr>	
 	<tr height="40"><th bgcolor="Plum">Qna_category</th>
-		<td>${requestScope.apple.qna_category}</td></tr>	
+		<td>${requestScope.qna.qna_category}</td></tr>	
 	<tr height="40"><th bgcolor="Plum">Qna_Title</th>
-		<td>${requestScope.apple.qna_title}</td></tr>
+		<td>${requestScope.qna.qna_title}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Qna_content</th>
-		<td>${requestScope.apple.qna_content}</td></tr>
+		<td>${requestScope.qna.qna_content}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Qna_reply</th>
-		<td>${requestScope.apple.qna_reply}</td></tr>
+		<td>${requestScope.qna.qna_reply}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Qna_redate</th>
-		<td>${requestScope.apple.qna_redate}</td></tr>
+		<td>${requestScope.qna.qna_redate}</td></tr>
 	<tr height="40"><th bgcolor="Plum">Qna_indate</th>
-		<td>${requestScope.apple.qna_indate}</td></tr>
+		<td>${requestScope.qna.qna_indate}</td></tr>
+		
 </c:if>
 <c:if test="${empty requestScope.qna}">
 	<tr><td colspan="2">~~ 출력할 자료가 없습니다 ~~</td></tr>

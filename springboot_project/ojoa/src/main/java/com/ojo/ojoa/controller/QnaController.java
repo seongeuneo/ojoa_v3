@@ -1,7 +1,6 @@
 package com.ojo.ojoa.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,11 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.entity.Qna;
-import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.service.QnaService;
 
 import lombok.AllArgsConstructor;
@@ -33,11 +29,14 @@ public class QnaController {
 
    QnaService qnaService;
    
+   
    // ** Qna List - 회원별 카트 목록 반환 
     @GetMapping("/qnaList")
     public void qnaList(Model model) {
        model.addAttribute("qna", qnaService.selectList());
     } // qnaList
+    
+    
     
     // ** 새글등록: Insert 
     @GetMapping("/qnaInsert")
@@ -45,10 +44,11 @@ public class QnaController {
        model.addAttribute("qna", qnaService.selectList());
     } // qnaInsert
   
+    
+    
    // => Qna Insert Service 처리: POST
    @PostMapping(value="/qnaInsert")
-   public String qnaInsert(HttpServletRequest request,
-         Qna entity, Model model) throws IOException  {
+   public String qnaInsert(HttpServletRequest request, Qna entity, Model model) throws IOException  {
       String uri = "redirect:/qna/qnaList";
    
       // 2. Service 처리
@@ -60,10 +60,11 @@ public class QnaController {
          model.addAttribute("message", "게시글등록 실패. 다시 하세요.");
          uri="qna/qnaInsert";
       }
-      
       // 3. View 
       return uri;
    } // QnaInsert
+   
+   
    
    // ** Qna Delete - 게시글 삭제 (성은코드참조)
    @DeleteMapping("/qdelete/{qna_seq}")
@@ -78,27 +79,37 @@ public class QnaController {
       }
    }
 
+   
+   
    // ** replyInsert
    // => replyInsert Form 출력 메서드
-   @GetMapping("/replyAnswer")
-   public String replyAnswer(HttpServletRequest request,
-	         Qna entity, Model model) {
-      model.addAttribute("qna", qnaService.selectOne(entity.getQna_seq()));
+   @GetMapping("/replyAnswer/{qna_seq}")
+   public String replyAnswer(@PathVariable("qna_seq") int qna_seq, Qna entity, Model model) {
+      model.addAttribute("qna", qnaService.selectOne(qna_seq));
    return "qna/replyAnswerForm";
    
    } // qnaList
    
+   
+   
+// 답변 여부 보여주는거   
    @PostMapping(value="/replyAnswerForm")
-   public String replyAnswerForm(HttpSession session,
-         Qna entity, Model model) throws IOException  {
-	   qnaService.save(entity);
-	   model.addAttribute("list",entity); //list변수명 역할을 잘 모르겠음
-	   
-	   return "qna/qnaList";
+   public String replyAnswerForm(HttpSession session, Qna entity, Model model) throws IOException  {
+	   System.out.println("*******"+entity);
+	   qnaService.replyUpdate(entity.getQna_seq(), entity.getQna_reply());
+	   //model.addAttribute("qna",entity); //list변수명 역할을 잘 모르겠음
+	   model.addAttribute("qna", qnaService.selectList());
+	   return "/qna/qnaList";
    }
     
    
-   
+//   @PostMapping(value="/replyinsert")
+//   public String replyinsert(Qna entity) {
+//      
+//	   qnaService.replyinsert(entity.getQna_seq(), entity.getQna_reply());
+//      String uri="redirect:qnaList";
+//      return uri;
+//   }
  
    
 }

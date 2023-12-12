@@ -239,41 +239,7 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 
 // 장바구니에 있는 상품 삭제
 
-//	@DeleteMapping("cdelete/{prod_num}")
-//	public String cdelete(@PathVariable("prod_num") int prod_num, HttpSession session, RedirectAttributes rttr) {
-//
-//		String uri = "redirect:/cart/cartList";
-//
-//		try {
-//			log.info("** cancel 성공  => " + cartService.delete(prod_num));
-//			rttr.addFlashAttribute("message", "~ 장바구니 상품 제거 성공!! ~~");
-//			if (((String) session.getAttribute("loginID")).equals("admin")) {
-//				// => 관리자에 의한 강제 주문취소 : orderList.jsp
-//				uri = "redirect:cartList";
-//			} else {
-//				session.invalidate();
-//			}
-//		} catch (Exception e) {
-//			log.info("** delete Exception => " + e.toString());
-//			rttr.addFlashAttribute("message", "~~ 취소 실패 ~~");
-//		}
-//
-//		return uri;
-//	}
 
-//원래 카트    
-//	@DeleteMapping("/cdelete")
-//	public void cdelete(CartId entity) {
-//		entity.setId("admin");
-//		System.out.println("");
-//		try {
-//			cartService.delete(entity);
-//			System.out.println("** cart delete 삭제성공 **");
-//		} catch (Exception e) {
-//			System.out.println("** cart delete Exception => " + e.toString());
-//		}
-//	}
-	
 //===============================================================================
 	@DeleteMapping("/cdelete")
 	public void cdelete(@RequestParam String user_id, @RequestParam String prod_num, CartId cartid) {
@@ -318,7 +284,7 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 		}
     }
 	
-	 // 게시판 QnA - 게시글 등록
+//	 // 게시판 QnA - 게시글 등록
     @PostMapping("qna/saveQna")
     public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
         try {
@@ -333,6 +299,24 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
         }
     }
     
+    
+// 게시판 답변등록
+//    @PostMapping("qna/SaveAnswer/${qna_seq}")
+//    public ResponseEntity<String> replyAnswer(@RequestBody Qna entity) {
+//    	try {
+//    		System.out.println("111111"+entity);
+//    		// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
+//    		qnaService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
+//    		System.out.println("22222222"+entity);
+//    		return ResponseEntity.ok("데이터 저장 성공");
+//    	} catch (Exception e) {
+//    		log.error("데이터 저장 중 에러: {}", e.getMessage());
+//    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//    	}
+//    }
+//    
+
+//===========================================================================    
     // 주문결제
     @PostMapping("order/orderPayment")
     public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
