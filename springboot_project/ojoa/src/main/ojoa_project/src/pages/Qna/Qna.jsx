@@ -7,6 +7,7 @@ import QnaListItem from './QnaListItem';
 import QnaTitleList from './QnaTitleList';
 import Modal from 'react-modal';
 import QnaWriteBtn from './QnaWriteBtn';
+import QnaModifyBtn from './QnaModifyBtn';
 import React, { useMemo, useCallback, useReducer, useRef, useEffect, useState } from "react";
 import Pagination from "../../components/Pagination/Pagination";
 import axios from 'axios';
@@ -114,8 +115,8 @@ function Qna() {
             });
     };
 
-    // Springboot 요청
-    useEffect(() => {
+    // 전체 요청
+    const allQnaList = () => {
         axios
             .get("/api/qna/allQnaList")
             .then((response) => {
@@ -124,6 +125,11 @@ function Qna() {
             .catch((error) => {
                 console.error("Error: ", error);
             });
+    };
+
+    // Springboot 요청
+    useEffect(() => {
+        allQnaList();
     }, []);
 
     // 현재 페이지에 해당하는 게시물 선택
@@ -145,7 +151,8 @@ function Qna() {
                             <QnaTitleList />
                             <QnaListItem qnaList={pagedQnaList} filters={filters} />
                         </table>
-                        <QnaWriteBtn />
+                        <QnaModifyBtn onFilterChange={allQnaList} />
+                        <QnaWriteBtn onFilterChange={allQnaList} />
                         <Pagination
                             currentPage={currentPage}
                             totalPages={Math.ceil(qnaList.length / itemsPerPage)}  // 전체 페이지 수 계산

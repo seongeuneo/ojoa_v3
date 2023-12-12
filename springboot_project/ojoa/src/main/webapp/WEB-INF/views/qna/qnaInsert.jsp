@@ -20,7 +20,10 @@
 	
 	<tr height="40">
 				<th>카테고리</th>
-				<td><select name="qna_category" id="qna_category">
+				<td>공지사항</td>
+   </tr>
+				<!-- <select name="qna_category" id="qna_category">				
+						<option value="공지 사항">공지 사항</option>
 						<option value="상품 문의">상품 문의</option>
 						<option value="배송 문의">배송 문의</option>
 						<option value="주문/결제">주문/결제</option>
@@ -29,19 +32,19 @@
 						<option value="환불 문의">환불 문의</option>
 						<option value="재입고문의">재입고문의</option>
 						<option value="기타 문의">기타 문의</option>
-				</select>
+				</select> -->
 				<!-- <br><span id="pdkMessage" class="eMessage"></span> -->
-		</td></tr>
+		
 	
 	<tr height="40"><th>제 목</th>
 		<td><input type="text" name="qna_title" id="qna_title" size="50"></td></tr>	
 	
-	<tr height="40"><th>문의내용</th>
+	<tr height="40"><th>내 용</th>
 		<td><textarea rows="5" cols="50" name="qna_content" id="qna_content"></textarea>
 		</td></tr>
 	
 	<tr height="40"><th></th>
-		<td><input type="submit" id="submitTag" value="글등록">&nbsp;&nbsp;&nbsp;
+		<td><input type="submit" id="submitTag" value="글등록" onclick="qnaInsertChange()">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="취소">		
 		</td>
 	</tr>

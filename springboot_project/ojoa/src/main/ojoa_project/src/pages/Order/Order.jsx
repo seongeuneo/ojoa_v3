@@ -28,9 +28,9 @@ function Order() {
 
     function orderResultConvert(orderResult) {
         let result = "";
-        if (orderData === 'B') {
+        if (orderResult === 'B') {
             result = "배송 준비 중";
-        } else if (orderData === 'C') {
+        } else if (orderResult === 'C') {
             result = "배송 중";
         }
 

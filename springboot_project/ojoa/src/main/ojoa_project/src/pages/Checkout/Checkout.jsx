@@ -57,7 +57,6 @@ function Checkout({ cart }) {
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
   }, [selectedProducts]);
-  // }, [selectedCartItems]);
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
@@ -92,6 +91,23 @@ function Checkout({ cart }) {
     ordersDetail: cart
   });
 
+  const loginCheck = () => {
+    axios
+      .get("/member/rinfo")
+      .then((response) => {
+        let data = response.data;
+        if (data != null && data !== "") {
+          setIsMember(true);
+        } else {
+          setIsMember(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+  loginCheck();
+
   const getUserInfo = () => {
     axios
       .get("/member/rinfo")
@@ -99,15 +115,18 @@ function Checkout({ cart }) {
         let data = response.data;
         if (data != null && data !== "") {
           setIsMember(true);
-          orderInfo.buyer = data.name;
-          orderInfo.address1 = data.address;
-          orderInfo.address2 = data.addressdetail;
-          orderInfo.email1 = data.email1;
-          orderInfo.email2 = data.email2;
-          orderInfo.phone1 = data.phone1;
-          orderInfo.phone2 = data.phone2;
-          orderInfo.phone3 = data.phone3;
-          orderInfo.postNumber = data.zipcode;
+          setOrderInfo(prevOrderInfo => ({
+            ...prevOrderInfo,
+            buyer: data.name,
+            address1: data.address,
+            address2: data.addressdetail,
+            email1: data.email1,
+            email2: data.email2,
+            phone1: data.phone1,
+            phone2: data.phone2,
+            phone3: data.phone3,
+            postNumber: data.zipcode,
+          }));
         } else {
           setIsMember(false);
         }
@@ -117,9 +136,20 @@ function Checkout({ cart }) {
       });
   };
 
-  getUserInfo();
-
-
+  const getEmpty = () => {
+    setOrderInfo(prevOrderInfo => ({
+      ...prevOrderInfo,
+      buyer: '',
+      address1: '',
+      address2: '',
+      email1: '',
+      email2: '',
+      phone1: '',
+      phone2: '',
+      phone3: '',
+      postNumber: '',
+    }));
+  };
 
   const [popup, setPopup] = useState(false);
 
@@ -145,7 +175,6 @@ function Checkout({ cart }) {
       alert("주문조회 비밀번호를 입력하세요.");
       return false;
     }
-
     axios
       .post("/api/order/orderPayment", orderInfo, {
         headers: {
@@ -165,6 +194,8 @@ function Checkout({ cart }) {
         console.error("Error: ", error);
       });
   };
+
+
 
   return (
     <div className="Checkout">
@@ -243,9 +274,9 @@ function Checkout({ cart }) {
                 <th>배송지 선택</th>
                 <td>
                   <div class="address">
-                    <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" />
+                    <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
                     <label for="sameaddr0">회원 정보와 동일</label>
-                    <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" />
+                    <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
                     <label for="sameaddr1">새로운 배송지</label>
                     <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
                     <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>

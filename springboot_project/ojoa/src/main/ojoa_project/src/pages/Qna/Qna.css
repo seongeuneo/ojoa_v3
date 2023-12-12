@@ -248,6 +248,29 @@
     cursor: pointer;
 }
 
+.qna_modify_btn {
+    position: relative;
+    width: 1240px;
+    margin: 30px auto 20px;
+    /*글쓰기 위치: 상,좌,하,우*/
+    justify-content: flex-end;
+}
+
+.qna_modify_btn a {
+    position: absolute;
+    background-color: #a3a1a1;
+    color: white;
+    font-size: 12px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    font-weight: 600;
+    transition: 0.25s;
+    /* margin-left: -1px; */
+    cursor: pointer;
+}
+
+
 /* ============================== */
 /* QnaModal */
 

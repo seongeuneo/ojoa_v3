@@ -14,8 +14,15 @@ const QnaFilter = ({ setFilters, onFilterChange }) => {
         setSearchConditions({ ...searchConditions, [name]: value });
 
         if (name === 'board_category') {
-            console.log(value); // 선택된 board_category 값을 출력하거나 다른 처리를 수행합니다.
+            setSearchConditions((updatedSearchConditions) => {
+                categoryHandleSearch(updatedSearchConditions);
+                return updatedSearchConditions;
+            });
         }
+    };
+
+    const categoryHandleSearch = (conditions) => {
+        onFilterChange(conditions);
     };
 
     const handleSearch = () => {

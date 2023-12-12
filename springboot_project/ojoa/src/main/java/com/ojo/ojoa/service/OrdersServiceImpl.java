@@ -126,10 +126,10 @@ public class OrdersServiceImpl implements OrdersService {
 				saveOrdersDetail.setQuantity(ordersDetail.getQuantity());
 				int totalPrice = ordersDetail.getProductPriceFormatted() * ordersDetail.getQuantity();
 				saveOrdersDetail.setOrdersdt_totalprice(totalPrice);
+				saveOrdersDetail.setOrdersdt_result('B');
 				
 				// 필요한 값을 추가적으로 넣어야함.
 				// saveOrdersDetail.setOrdersdt_shippingfee(0);
-				// saveOrdersDetail.setOrdersdt_result("");
 					
 				OrdersDetail ordersDetailResult = ordersDetailRepository.save(saveOrdersDetail);
 				if (ordersDetailResult != null) {
@@ -172,10 +172,5 @@ public class OrdersServiceImpl implements OrdersService {
  		return result ;
  	}
  	
- 	
- 	
- 	
- 	
- 	
- 	
+
  } //class

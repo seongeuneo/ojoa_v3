@@ -1,10 +1,10 @@
 import React, { useCallback, useState, useRef } from "react";
 import "../Qna/Qna.css";
 import Modal from 'react-modal';
-import QnaModal from './QnaModal/QnaModal';
+import QnaModalModify from "./QnaModal/QnaModalModify";
 
 
-const QnaWriteBtn = ({ onFilterChange }) => {
+const QnaModifyBtn = ({ onFilterChange }) => {
 
     // // 모달창 띄우기
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -14,13 +14,13 @@ const QnaWriteBtn = ({ onFilterChange }) => {
 
     return (
 
-        <div className="qna_write_btn">
-            <a onClick={openModal}>글쓰기</a>
+        <div className="qna_modify_btn">
+            <a onClick={openModal}>글수정하기</a>
             <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
-                <QnaModal closeModal={closeModal} onFilterChange={onFilterChange} />
+                <QnaModalModify closeModal={closeModal} onFilterChange={onFilterChange} />
             </Modal>
         </div>
     );
 };
 
-export default QnaWriteBtn;
+export default QnaModifyBtn;

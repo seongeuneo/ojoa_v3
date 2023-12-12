@@ -6,7 +6,7 @@ import { useModal } from "../QnaModal/ModalContext";
 import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
 
-function QnaModal({ closeModal, onFilterChange }) {
+function QnaModalModify({ closeModal }) {
 
     const [content, setContent] = useState("");
     // => new 일정 처리할  onChangeContent 이벤트 핸들러 
@@ -19,18 +19,13 @@ function QnaModal({ closeModal, onFilterChange }) {
 
         try {
             const formData = new FormData(document.getElementById('qnaform'));
-            // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
 
-            // 다른 폼 필드를 여기에 추가하세요
-
-            // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
             const response = await axios.post("/api/qna/saveQna/", formData,
                 { headers: { "Content-Type": "application/json" } });
 
             // 성공/실패에 따라 처리합니다.
             console.log("데이터 저장됨:", response.data);
             closeModal(false);
-            onFilterChange();
         } catch (error) {
             // 에러 처리
             console.error("데이터 저장 중 에러:", error);
@@ -40,7 +35,6 @@ function QnaModal({ closeModal, onFilterChange }) {
     };
 
     return (
-
         <div id="QnaModal_Background">
             <div className="qnaModal_container2">
                 <img
@@ -59,7 +53,6 @@ function QnaModal({ closeModal, onFilterChange }) {
                     <div className='qna_writeArea'>
                         <h2>Q & A</h2>
                     </div>
-
 
                     <form className="qna_write_info" action="" method="post" id="qnaform">
                         <table className="qna_board_table">
@@ -94,12 +87,7 @@ function QnaModal({ closeModal, onFilterChange }) {
                                         </select>
                                         <select name="board_category" id="board_category2">
                                             <option>제품목록</option>
-                                            <option value="1">침대</option>
-                                            <option value="2">소파</option>
-                                            <option value="3">책장</option>
-                                            <option value="4">옷장</option>
-                                            <option value="5">조명</option>
-                                            <option value="6">의자</option>
+                                            <option value="1">의자</option>
                                             {mockList.map((item) => (
                                                 <React.Fragment key={item.id}>
                                                     <option value={item.imgNo}>{item.productName}</option>
@@ -111,6 +99,7 @@ function QnaModal({ closeModal, onFilterChange }) {
                                 <tr>
                                     <th scope="row"><label htmlFor="qna_bTitle" name="qna_title">제  목</label></th>
                                     <td className="qna_writetitle" name="qna_title">
+                                        {/*<input type="text" name="bTitle" id="qna_bTitle" ref={inputRef} value={content} onChange={onChangeContent} placeholder="제목을 입력하세요." />*/}
                                         <input
                                             type="text"
                                             name="qna_title"
@@ -128,10 +117,14 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             placeholder="내용을 입력하세요." />
                                     </td>
                                 </tr>
-                                {/* <tr>
+                                <tr>
                                     <th scope="row"><label htmlFor="qna_bPassword">비밀번호</label></th>
                                     <td className="qna_writepassword"><input type="text" name="bPassword" id="qna_bPassword" /></td>
-                                </tr> */}
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label htmlFor="qna_bPassword">비밀번호확인</label></th>
+                                    <td className="qna_writepassword"><input type="text" name="bPassword" id="qna_bPassword" /></td>
+                                </tr>
                             </tbody>
                         </table>
                         <div className="qna_btnSet">
@@ -156,4 +149,4 @@ function QnaModal({ closeModal, onFilterChange }) {
     );
 }
 
-export default QnaModal;
+export default QnaModalModify;

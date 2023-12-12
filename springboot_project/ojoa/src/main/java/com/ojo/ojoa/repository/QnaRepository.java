@@ -18,10 +18,10 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	
 	// 1.기본 리스트 반환
 	// Qna Entity와 Product Entity를 조인하여, 특정 조건에 정렬된 QnA 목록을 검색
-	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, q.prod_num, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.qna_reply, q.id, q.qna_redate) FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num ORDER BY q.qna_redate DESC")
-	// findAllQnaList(); : <QnaDTO.QnaMainListDTO>형식의 데이터를 검색하여 반환
-	// 반환되는 DTO에는 QnA 항목의 주요정보가 포함되어있다.
-	List<QnaDTO.QnaMainListDTO> findAllQnaList();
+	   @Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, q.prod_num, p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.qna_reply, q.id, q.qna_redate) FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num ORDER BY CASE WHEN q.qna_category = '공지사항' THEN 0 ELSE 1 END ASC, q.qna_redate DESC")
+	   // findAllQnaList(); : <QnaDTO.QnaMainListDTO>형식의 데이터를 검색하여 반환
+	   // 반환되는 DTO에는 QnA 항목의 주요정보가 포함되어있다.
+	   List<QnaDTO.QnaMainListDTO> findAllQnaList();
 	
 	// 2.reply 기능
 //	 @Modifying
@@ -30,7 +30,6 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	
 	
 	// 3.검색 기능 조건 추가
-	// 2.검색 기능 조건 추가
 	@Query("SELECT new com.ojo.ojoa.DTO.QnaDTO$QnaMainListDTO(q.qna_seq, q.prod_num,p.prod_mainimage, p.prod_name, q.qna_category, q.qna_title, q.qna_content, '' AS titleIcon, q.qna_reply, q.id, q.qna_redate) "
 			+ "FROM Qna q LEFT JOIN FETCH Product p ON q.prod_num = p.prod_num "
 			+ "WHERE (:board_category IS NULL OR :board_category = '' OR q.qna_category = :board_category) "

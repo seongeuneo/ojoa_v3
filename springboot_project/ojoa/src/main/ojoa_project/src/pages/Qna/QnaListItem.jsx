@@ -21,7 +21,6 @@ function QnaListItem({ qnaList, filters }) {
         }
     };
 
-
     function formatDate(originalDate) {
         const dateObject = new Date(originalDate);
         const year = dateObject.getFullYear();
@@ -66,6 +65,7 @@ function QnaListItem({ qnaList, filters }) {
     });
 
 
+
     return (
         <tbody className='qna_ListItem_container'>
             {qnaList.map((item, i) => (
@@ -93,7 +93,7 @@ function QnaListItem({ qnaList, filters }) {
                                 <td className='qna_board_st4'>
                                     <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
                                 </td>
-                                <td className='qna_board_st5'>{lastName(item.writer)}&#42;&#42;</td>
+                                <td className='qna_board_st5'>{(item.writer)}&#42;&#42;</td>
                                 <td className='qna_board_st6'>{formatDate(item.date)}</td>
                             </tr>
                         )
@@ -105,13 +105,6 @@ function QnaListItem({ qnaList, filters }) {
                             </td>
                         </tr>
                     )}
-                    {/* {expandedId === i && (
-                        <tr className='qna_board_st7'>
-                            <td colSpan="8" className='notification_row'>
-                                {item.notification}
-                            </td>
-                        </tr>
-                    )} */}
                 </React.Fragment>
             ))}
 
