@@ -136,7 +136,6 @@ public class MemberControllerR {
 	        if (existingMember != null) {
 	            // 업데이트할 필드들을 새로운 엔티티의 값으로 업데이트
 	            existingMember.setName(entity.getName());
-	            existingMember.setAddress(entity.getAddress());
 	            // 업데이트된 회원 정보를 저장
 	            service.save(existingMember);
 	            return ResponseEntity.status(HttpStatus.OK).body("회원 정보가 업데이트되었습니다.");
@@ -153,16 +152,15 @@ public class MemberControllerR {
 	
 	// ** Member Delete: 회원탈퇴
 	@DeleteMapping(value="/rmemberdelete")
-	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id) {
-	    // ID 확인
-	    if (service.selectOne(id) != null) {
-	        // => 존재 : 삭제가능
-	        log.info("아이디 삭제 완료: " + id);
-	        return ResponseEntity.status(HttpStatus.OK).body("아이디 삭제 완료: " + id);
-	    } else {
-	        // => 없으면: 삭제불가
-	    	log.info("아이디 삭제 중 오류 발생: " + id);
-	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("아이디 삭제 중 오류 발생");
+	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id, HttpSession session) {
+		log.info("아이디 탈퇴 ID : " + id);
+		try {
+	        service.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body("회원 탈퇴 성공.");
+        } catch (Exception e) {
+	        // 업데이트 중 문제 발생 시
+        	log.info("아이디 탈퇴 중 오류 발생: " + e.toString());
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("탈퇴 중 오류 발생 => "+e.toString());
 	    }
 	} //rmemberdelete
 	

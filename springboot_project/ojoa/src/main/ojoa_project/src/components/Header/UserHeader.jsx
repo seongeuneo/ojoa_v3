@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../components/Header/UserHeader.css';
 import Modal from '../Modal/Modal';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
+function UserHeader({ setIsLoggedIn }) {
+    const navigate = useNavigate();
 
     const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
     console.log('sessionInfo:', sessionInfo);
@@ -12,7 +13,7 @@ function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
     const isAdmin = sessionInfo && sessionInfo.id === 'admin'; // 'admin' 아이디인 경우를 관리자로 판단
     console.log('isAdmin:', isAdmin); // 콘솔에 isAdmin 값 출력
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
+    // const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
 
     // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
     useEffect(() => {
@@ -26,7 +27,7 @@ function UserHeader({ setIsLoggedIn: setLoggedInProp }) {
             if (response.status === 200) {
                 setIsLoggedIn(false); // 로그아웃 상태로 변경
                 sessionStorage.removeItem('loggedInUser'); // 세션 정보 삭제
-                window.location.href = '/'; // 로그아웃 후 홈으로 이동
+                navigate('/'); // 홈으로 페이지로 이동
             } else {
                 // 에러 처리 로직
             }

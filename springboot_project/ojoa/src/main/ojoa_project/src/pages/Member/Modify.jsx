@@ -1,15 +1,14 @@
 import "../Member/Modify.css";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Post from "../../components/Post";
 
-function Modify() {
+function Modify({ setIsLoggedIn }) {
     const navigate = useNavigate();
 
-    const [userName, setUserName] = useState("");
     const [enroll_company, setEnroll_company] = useState({
-        address: '',
+        address: '', // State에서 사용자 정보 관리
         zipcode: '',
         id: '',
         name: '',
@@ -25,77 +24,39 @@ function Modify() {
         marketing_email: '',
     });
 
-    const handleInput = (e) => {
+    const handleInput = (e) => { // 입력값 변경 시 State 업데이트
         setEnroll_company({
             ...enroll_company,
             [e.target.name]: e.target.value,
         })
     }
-
     const handleDelete = async () => {
-        console.log(enroll_company.id);
         try {
-            const response = await axios.delete(`/member/rmemberdelete?id=${enroll_company.id}`);
-            console.log(response.data); // 성공적으로 삭제되었을 때의 응답 확인
-            // 삭제 후에 필요한 작업 수행
-            // 예를 들어, 회원 탈퇴 후 로그인 페이지로 이동 등
+            const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+            if (loggedInUser && loggedInUser.id) {
+                const userId = loggedInUser.id;
+                const response = await axios.delete(`/member/rmemberdelete?id=${userId}`);
+                console.log(response.data); // 성공적으로 삭제되었을 때의 응답 확인
+                alert("회원 탈퇴 성공");
+                // 탈퇴 성공 후 로그인 상태 변경
+                setIsLoggedIn(false); // 로그아웃 시 로그인 상태 변경
+                // 탈퇴 성공 후 세션 무효화
+                sessionStorage.removeItem('loggedInUser');
+                // 회원 탈퇴 후 메인 페이지로 이동
+                navigate('/');
+            } else {
+                console.error('User information not found.');
+                alert('사용자 정보를 찾을 수 없습니다.');
+            }
         } catch (error) {
-            console.error('Error deleting user:', error);
-            // 에러 처리 로직 추가
+            if (error.response && error.response.status === 502) {
+                alert("삭제 오류: " + error.response.data);
+            } else {
+                console.error('Error deleting user:', error.message);
+                alert("삭제 오류: " + error.message);
+            }
         }
     };
-
-    useEffect(() => {
-        // const loggedInUser = sessionStorage.getItem('loggedInUser');
-        // if (loggedInUser) {
-        //     const user = JSON.parse(loggedInUser);
-        //     // 사용자 이름 설정
-        //     setUserName(user.name); // 세션에 저장된 사용자 정보에서 이름 가져와 설정
-
-        // 사용자 정보를 불러오는 API 엔드포인트로 GET 요청을 보냅니다.
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.put('/member/rmemberUpdate');
-                const user = response.data;
-
-
-                // 사용자 정보 설정
-                setEnroll_company({
-                    ...enroll_company,
-                    id: user.id, // 로그인한 사용자의 아이디 설정
-                    name: user.name,
-                    password: user.password,
-                    password2: user.password2,
-                    zipcode: user.zipcode,
-                    address: user.address,
-                    addressdetail: user.addressdetail,
-                    phone1: user.phone1,
-                    phone2: user.phone2,
-                    phone3: user.phone3,
-                    email1: user.email1,
-                    email2: user.email2,
-                });
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-        fetchUserData(); // 사용자 정보 불러오기
-    }, []); // 컴포넌트 마운트 시 한 번만 실행
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            // 백엔드로 요청을 보냄
-            const response = await axios.put('/member/rmemberUpdate', enroll_company);
-            // 업데이트된 데이터 전달
-
-            console.log(response.data); // 요청 결과 확인
-            // 필요 시 상태 업데이트나 페이지 이동 등 추가 작업 수행
-        } catch (error) {
-            console.error('Error modifying user information:', error);
-            // 에러 처리 로직 추가
-        }
-    }
 
     return (
         <div className="Modify">
@@ -115,13 +76,13 @@ function Modify() {
                     <p className="thumbnail">
                         <img src="../images/img_member_default.gif" alt="썸네일" /></p>
                     <div className="description">
-                        <span>저희 쇼핑몰을 이용해 주셔서 감사합니다. <span><strong>[{userName}]</strong></span> 님은 <strong>[<span>일반
+                        <span>저희 쇼핑몰을 이용해 주셔서 감사합니다. <span><strong>[]</strong></span> 님은 <strong>[<span>일반
                         </span>]</strong> 회원이십니다.</span>
                     </div>
                 </div>
 
 
-                <form onSubmit={handleSubmit} name="personalInfo">
+                <form name="personalInfo">
                     <table className="personal_modify">
 
                         <caption>
@@ -135,9 +96,9 @@ function Modify() {
                                 <input type="text"
                                     name="id"
                                     id="id"
-                                    //readOnly
-                                    autocomplete="username"
-                                    
+                                //readOnly
+
+
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -151,9 +112,9 @@ function Modify() {
                                 <input type="text"
                                     name="name"
                                     id="name"
-                                    //readOnly
-                                    autocomplete="username"
-                                    
+                                //readOnly
+
+
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -167,9 +128,9 @@ function Modify() {
                                 <input type="password"
                                     name="password"
                                     id="password"
-                                    //readOnly
-                                    autocomplete="new-password"
-                                    
+                                //readOnly
+
+
                                 />
                                 <span className="input_error"></span>
                             </td>
@@ -183,9 +144,9 @@ function Modify() {
                                 <input type="password"
                                     name="password2"
                                     id="password2"
-                                    //readOnly
-                                    autocomplete="new-password"
-                                    
+                                //readOnly
+
+
                                 />
 
                                 <span className="input_error"></span>
@@ -268,14 +229,14 @@ function Modify() {
                                 <input type="text"
                                     name="email1"
                                     id="email1"
-                                    
+
                                 />
                                 &nbsp;@&nbsp;
                                 <input type="text"
                                     name="email2"
                                     id="email2"
                                     placeholder="직접 입력"
-                                    
+
                                 />
                             </td>
                         </tr>
