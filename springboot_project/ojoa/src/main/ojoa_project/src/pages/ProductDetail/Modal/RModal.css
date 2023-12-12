@@ -282,10 +282,14 @@ table .qna_table2 td {
     /* 원하는 다른 스타일을 추가로 지정할 수 있습니다. */
 }
 
-/* 
+
 .reviewContent {
-    height: 300px;
-} */
+    height: 250px;
+}
+
+.reviewContent input{
+    height: 250px;
+}
 
 .qna_write_content input[name="review_date"] {
     display: none;

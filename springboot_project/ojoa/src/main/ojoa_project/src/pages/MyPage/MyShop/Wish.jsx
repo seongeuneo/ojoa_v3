@@ -29,7 +29,7 @@ function Wish() {
             })
             .catch((error) => {
                 console.log(error);
-                alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
+                // alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
             });
     }, []);
 
@@ -87,7 +87,7 @@ function Wish() {
                                         <td>{item.id}</td>
                                         <td>{item.prod_num}</td>
                                         <td>{item.prod_name}</td>
-                                        <td>{item.prod_mainimage}</td>
+                                        <td class="wishIMG"><img src={`/thumbs/${item.prod_mainimage}`} alt={`Product ${item.prod_num}`} /></td>
                                         <td align="center">
                                             <button onClick={() => handleDelete(item.wish_num)}>삭제</button>
                                         </td>

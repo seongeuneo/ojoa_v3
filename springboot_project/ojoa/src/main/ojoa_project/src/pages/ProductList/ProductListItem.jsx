@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom"
 import "./ProductListItem.css";
-import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from '../../data/ItemsData'
 
 const ProductListItem = ({ content, onSelect, handleCart }) => {
 
@@ -31,6 +30,11 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             alert("해당 상품이 관심상품에 추가되었습니다.")
         }
     };
+
+
+    // 1000단위 끊기
+    const sellPrice = parseInt(content.prod_price1.toString().replace(/,/g, ''));
+    const result = sellPrice.toLocaleString();
 
     /// ====================================================================================== 
     function AddWishIcon() {
@@ -63,7 +67,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 if (error.response && error.response.status === 400) {
                     alert("이미 관심목록에 있는 상품입니다.");
                 } else {
-                    alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
+                    // alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
                 }
             });
 
@@ -78,7 +82,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
         //const loginID = loggedInUser.id;
         //const productData = { prod_num: content.prod_num};
         //const productData = { prod_num: content.prod_num, quantity: 1, loginID: loginID }; 
-        const productData = { prod_num: content.prod_num, quantity: 1}; // 바로 구매시 수량은 1
+        const productData = { prod_num: content.prod_num, quantity: 1 }; // 바로 구매시 수량은 1
 
         axios.post('/api/cart/saveCart', productData) // POST 요청으로 수정 및 상품 정보 전달
             .then(response => {
@@ -111,6 +115,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             alert("해당 상품이 장바구니에 추가되었습니다.")
         }
     };
+    console.log("content.prod_mainimage => " + content.prod_mainimage);
 
     return (
         <div className="ProductListItem" onClick={onSelect}>
@@ -121,7 +126,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                             <Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`}
                                 state={{ productData: content }} >
                                 {/* 선택한 상품정보를 state로 값전달  */}
-                                <img src={`${content.prod_mainimage}`} alt={`Product ${content.prod_num}`} />
+                                <img src={`/thumbs/${content.prod_mainimage}`} alt={`Product ${content.prod_num}`} />
                             </Link>
                             <div className="pl_icon">
                                 <a className="pd_cart">
@@ -144,7 +149,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                         state={{ productData: content }}>{content.prod_name}</Link></a></li>
                     <li className="pl_b"><a><Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`}
                         state={{ productData: content }}>
-                        {content.prod_price1}원
+                        {result}원
                         <span> {content.prod_discount}%</span>
                     </Link></a></li>
                     <li className="pl_c"><a><Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`}

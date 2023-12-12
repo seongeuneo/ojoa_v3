@@ -101,3 +101,8 @@
 .Wish .wishTable td button:hover {
   background-color: #d32f2f;
 }
+
+.wishIMG img{
+  width: 40px;
+  height: 40px;
+}

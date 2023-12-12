@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "./ProductDetail.css";
-import { Routes, Route, Link, useLocation } from "react-router-dom"
+import { Routes, Route, Link, useLocation, useParams } from "react-router-dom"
 import DetailInfo01 from './DetailInfo01';
 import OrderReview02 from './OrderReview02';
 import ProdQna03 from './ProdQna03';
@@ -11,29 +11,10 @@ import axios from "axios";
 
 
 function ProductDetail({ handleCart }) {
-    // ProductListItem에서 데이터 받아오기 
-    // 상품목록(ProductListItem)에서 오는 state값
+
     const location = useLocation();
-    // const productData1 = location.state.productData1;
-    const productData = location.state.productData;
-    // 메인페이지(MiniItems)에서 오는 state값
-    // const location2 = useLocation();
-    // const productData2 = location2.state.productData2;
-
-    // let productData = null;
-
-    // if (productData1 === null) {
-    //     productData = productData2;
-    // } else if (productData2 === null) {
-    //     productData = productData1;
-    // }
-
-    // else if (productData !== null && productData2 !== null) {
-    //     // 두 데이터 모두 존재하는 경우 (우선순위를 정할 수도 있습니다)
-    //     productData = {
-    //         // dataA와 dataC를 필요에 따라 조합하여 dataB를 구성
-    //     };
-    // }
+    const { prod_num } = useParams();
+    const productData = location.state ? location.state.productData : null;
 
     //======================================
     // 수량 변경한 만큼 가격에 계산
@@ -91,19 +72,46 @@ function ProductDetail({ handleCart }) {
 
     // 1000단위 끊기
     const sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
+    const sellPrice1 = sellPrice.toLocaleString();
     const sum = count * sellPrice;
     const result = sum.toLocaleString();
 
+    //======================================
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        axios
+            .get('/api/prod_image/allProd_imageList')
+            .then((response) => {
+                setData(response.data);
+                // console.log("서버연결성공 => ", response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    // 해당하는 상품의 리뷰 필터링
+    const matchingReviews = data.filter((image) => image.prod_num === productData.prod_num);
+    // console.log("matchingReviews => " + JSON.stringify(matchingReviews));
+    const prod_image1 = matchingReviews.map((test) => test.prod_image1);
+    const prod_image2 = matchingReviews.map((test) => test.prod_image2);
+    const prod_image3 = matchingReviews.map((test) => test.prod_image3);
+    const prod_image4 = matchingReviews.map((test) => test.prod_image4);
 
     //======================================
     // 대표 썸네일 이미지 클릭시 변경
-    const [mainImg, setMainImg] = useState(`${productData.prod_mainimage}`);
+    const [mainImg, setMainImg] = useState(`/thumbs/${prod_image1}`);
+    useEffect(() => {
+        setMainImg(`/thumbs/${prod_image1}`);
+    }, [`/thumbs/${prod_image1}`]);
     //======================================
     // 대표 썸네일 이미지 클릭시 변경
     const imgChange = (e) => {
-        setMainImg(e)
+        // 해당하는 이미지 배열의 첫 번째 요소를 가져와 mainImg를 변경합니다.
+        setMainImg(e);
     };
+
 
     //======================================
     return (
@@ -112,7 +120,7 @@ function ProductDetail({ handleCart }) {
                 <span>현재 위치</span>
                 <ol>
                     <li><Link to="/">홈</Link></li>
-                    <li><Link to="/ProductList">&gt; &nbsp;&nbsp;의자</Link></li>
+                    {/* <li><Link to="/ProductList">&gt; &nbsp;&nbsp;의자</Link></li> */}
                     <li title="현재 위치">&gt; &nbsp;&nbsp;현재 위치</li>
                 </ol>
             </div>
@@ -132,7 +140,7 @@ function ProductDetail({ handleCart }) {
                     <tbody>
                         <tr>
                             <th>판매가</th>
-                            <td className="price">{sellPrice}원</td>
+                            <td className="price">{sellPrice1}원</td>
                         </tr>
                         <tr>
                             <th>상품코드</th>
@@ -163,14 +171,14 @@ function ProductDetail({ handleCart }) {
                                 </select>
                             </td>
                         </tr> */}
-                        <tr>
+                        {/* <tr>
                             <th>옵션선택</th>
                             <td>
                                 <select>
                                     <option>기본&#40; &#43;0  &#41;</option>
                                 </select>
                             </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                             <th>배송비</th>
                             <td>무료배송</td>
@@ -183,12 +191,12 @@ function ProductDetail({ handleCart }) {
                 </table>
 
                 <div className="pd_img">
-                    <img src={productData.prod_mainimage} alt="" id="mainImg" />
+                    <img src={mainImg} alt="" id="mainImg" />
                     <ul>
-                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb1" /></li>
-                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb2" /></li>
-                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb3" /></li>
-                        <li><img onClick={() => imgChange(`{productData.prod_mainimage}`)} src={`${productData.prod_mainimage}`} alt="" id="thumb4" /></li>
+                        <li><img onClick={() => imgChange(`/thumbs/${prod_image1}`)} src={`/thumbs/${prod_image1}`} alt="" id="thumb1" /></li>
+                        <li><img onClick={() => imgChange(`/thumbs/${prod_image2}`)} src={`/thumbs/${prod_image2}`} alt="" id="thumb2" /></li>
+                        <li><img onClick={() => imgChange(`/thumbs/${prod_image3}`)} src={`/thumbs/${prod_image3}`} alt="" id="thumb3" /></li>
+                        <li><img onClick={() => imgChange(`/thumbs/${prod_image4}`)} src={`/thumbs/${prod_image4}`} alt="" id="thumb4" /></li>
                     </ul>
                 </div>
 

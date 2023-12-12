@@ -54,23 +54,7 @@ function QModal({ closeModal, pagedQnaList, productData }) {
         setLocalQuestText(text);
     };
 
-    // 리뷰 내용 자식모달 컴포넌트에서 값 받아오기
-    // 리뷰 값 받아온 것을 mockList에 추가하기
-    const [questss, setQuests] = useState([]);
-
-    const handleQuestTextChange = (questText) => {
-        const newQuest = {
-            title: '새 리뷰', // 필요한 속성 추가
-            writer: '사용자', // 필요한 속성 추가
-            createDate: new Date().toLocaleDateString(), // 필요한 속성 추가
-            check: 0, // 필요한 속성 추가
-            content: questText // 사용자 리뷰 내용 추가
-        };
-        setQuests([...questss, newQuest]); // 리뷰 목록에 새 리뷰 추가
-    };
-
     // axios Post 
-
     const onSubmit = async (e) => {
         try {
             const requestData = {
@@ -104,31 +88,6 @@ function QModal({ closeModal, pagedQnaList, productData }) {
         closeModal();
     };
 
-    // const onSubmit = async (e) => {
-
-    //     try {
-    //         const formData = new FormData(document.getElementById('qnaform'));
-    //         // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
-
-    //         // 다른 폼 필드를 여기에 추가하세요
-
-    //         // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
-    //         const response = await axios.post("/api/qna/saveQna/", formData,
-    //             { headers: { "Content-Type": "application/json" } });
-
-    //         // 성공/실패에 따라 처리합니다.
-    //         console.log("데이터 저장됨:", response.data);
-    //         closeModal(false);
-    //     } catch (error) {
-    //         // 에러 처리
-    //         console.error("데이터 저장 중 에러:", error);
-    //         // 선택적으로 사용자에게 에러 메시지 표시 가능
-    //     }
-    //     e.preventDefault();
-    //     closeModal();
-    // };
-
-
 
     return (
         <div className="QModal">
@@ -144,7 +103,7 @@ function QModal({ closeModal, pagedQnaList, productData }) {
                     <div className="sf_order_list_wrap">
                         <span className="owl-carousel-nav prev"></span>
                         <div className="sf_order_item">
-                            <div className="thumbnail"> <img src={`${productData.prod_mainimage}`} alt={productData.prod_mainimage} />
+                            <div className="thumbnail"> <img src={`/thumbs/${productData.prod_mainimage}`} alt={productData.prod_mainimage} />
                             </div>
                             <div className="sf_buy_option">
                                 <div className="sf_review_item_name sf_one_line">상품명 : {productData.prod_name}</div>

@@ -53,21 +53,25 @@ public class RestReactController {
 
 //======================= 관심상품 새로운 코드 추가(성은) ==============================	
 	// 관심상품
-
 	@PostMapping("wish/allWishList")
     public ResponseEntity<List<WishDTO>> getAllWishList() {
 
 		List<WishDTO> wishList = wishService.selectAllList();
 		return ResponseEntity.ok(wishList);
 	}
-
 	
 	// 괌심상품에 상품 추가
 	@PostMapping("wish/saveWish")
 	public ResponseEntity<?> saveWish(HttpSession session, @RequestBody Wish entity) {
-		entity.setId("admin");
-
 		try {
+			 String id = (String) session.getAttribute("loginID");
+		        if (id != null && !id.isEmpty()) {
+		            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+		            entity.setId(id);
+		        } else {
+		            // 로그인되지 않은 경우 처리
+		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+		        }
 			  // 이미 존재하는지 확인
 	        boolean exists = wishRepository.existsByProdNum(entity.getProd_num());
 	        
@@ -85,22 +89,6 @@ public class RestReactController {
 			log.error("데이터 저장 중 에러: {}", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
-//		Member loggedInMember = (Member) session.getAttribute("loggedInMember");
-//
-//		try {
-//			 if (loggedInMember == null) {
-//		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
-//		        }
-//
-//		        String loginID = loggedInMember.getId();
-//		        entity.setId(loginID);
-//
-//			System.out.println("saveCart22222222" + entity);
-//			return ResponseEntity.ok("데이터 저장 성공");
-//		} catch (Exception e) {
-//			log.error("데이터 저장 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//		}
 	}
 	
 	// 관심상품 삭제
