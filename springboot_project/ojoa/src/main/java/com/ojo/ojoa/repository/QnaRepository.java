@@ -3,6 +3,8 @@ package com.ojo.ojoa.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +17,12 @@ import com.ojo.ojoa.entity.Qna;
 @Repository
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	// Qna Entity와 관련된 데이터베이스 작업을 수행
+	
+	@Transactional
+	@Modifying
+	@Query("update Qna q SET q.qna_reply = :reply where q.qna_seq = :seq")
+	void replyUpdate(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
+	
 	
 	// 1.기본 리스트 반환
 	// Qna Entity와 Product Entity를 조인하여, 특정 조건에 정렬된 QnA 목록을 검색
@@ -54,7 +62,10 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
    		    @Param("search_key") String search_key,
    		    @Param("search_query") String search_query);
 	
-
+//	@Modifying
+//    @Transactional
+//    @Query("update Qna q SET q.qna_reply = :reply, q.answer_state='답변완료' where q.qna_seq = :seq")
+//    void replyinsert(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
 
 	
 } //class

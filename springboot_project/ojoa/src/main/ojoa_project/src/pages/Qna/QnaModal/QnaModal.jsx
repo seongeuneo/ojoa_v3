@@ -21,7 +21,6 @@ function QnaModal({ closeModal, onFilterChange }) {
             const formData = new FormData(document.getElementById('qnaform'));
             // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
 
-            // 다른 폼 필드를 여기에 추가하세요
 
             // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
             const response = await axios.post("/api/qna/saveQna/", formData,
@@ -92,14 +91,24 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             <option value="기타문의">기타문의</option>
                                             <option value=" "></option>
                                         </select>
-                                        <select name="board_category" id="board_category2">
+                                        {/* <select name="board_category" id="board_category2"> */}
+                                        <select name="prod_kind" id="board_category2" >
                                             <option>제품목록</option>
+<<<<<<< HEAD
                                             <option value="1">침대</option>
                                             <option value="2">소파</option>
                                             <option value="3">책장</option>
                                             <option value="4">옷장</option>
                                             <option value="5">조명</option>
                                             <option value="6">의자</option>
+=======
+                                            <option value="침대">침대</option>
+                                            <option value="소파">소파</option>
+                                            <option value="책장">책장</option>
+                                            <option value="옷장">옷장</option>
+                                            <option value="조명">조명</option>
+                                            <option value="의자">의자</option>
+>>>>>>> main
                                             {mockList.map((item) => (
                                                 <React.Fragment key={item.id}>
                                                     <option value={item.imgNo}>{item.productName}</option>

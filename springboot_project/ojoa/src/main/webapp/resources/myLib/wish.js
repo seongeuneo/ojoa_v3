@@ -141,9 +141,11 @@ function qnaInsertChange() {
 
 }
 
+
+// 답변달기 페이지로 이동
 function replyAnswerForm(qna_seq) {
-   let url="qna/replyAnswer";
    
+   let url="qna/replyAnswer/" + qna_seq;
    axios.get(url
    ).then(response => {
     //  alert("response 성공");
@@ -151,9 +153,13 @@ function replyAnswerForm(qna_seq) {
    }).catch(err => {
       alert("response 실패 => 바보" + err.message);
    });
-   document.getElementById("contentArea").innerHTML="";
-
+   //document.getElementById("contentArea").innerHTML="";
 }
+
+
+
+
+
 
 // 게시판QnA 글쓰기 삭제
 function qnaDelete(qna_seq) {
@@ -165,8 +171,11 @@ function qnaDelete(qna_seq) {
    });
 };
 
+
 // 문의 답변 등록 완료
-function replyAnswerFinish() {
+function AnswerFinish(e) {
+   e.preventDefault();
+   
    let formData = new FormData(document.getElementById("replyAnswerForm"));
 
    let url = "qna/replyAnswerForm";
@@ -175,12 +184,12 @@ function replyAnswerFinish() {
             {headers:{"Content-Type" : "multipart/form-data"}
    }).then (response => {
          alert("문의에 답변을 등록했습니다.");
-         qnaList();
+        document.getElementById('contentArea').innerHTML=response.data;
    }).catch(err => {
          if(err.response.status=='502') alert("답변 등록에 실패했습니다.");
          else alert("시스템 오류, 잠시 후 다시하세요 =>" + err.message);
    })
-   document.getElementById("resultArea1").innerHTML="";
+   //document.getElementById("resultArea1").innerHTML="";
 }
 
 
