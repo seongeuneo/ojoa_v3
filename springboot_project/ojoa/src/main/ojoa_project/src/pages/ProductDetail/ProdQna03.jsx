@@ -6,8 +6,8 @@ import QModal from './Modal/QModal';
 import { useLocation } from "react-router-dom";
 
 function ProdQna03() {
+    const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
 
-    // 로그인 여부 
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
 
     // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
@@ -15,7 +15,7 @@ function ProdQna03() {
         const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
         setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
     }, []);
-
+    
     // 모달창 띄우기=====================================================
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -63,9 +63,6 @@ function ProdQna03() {
                 console.error("Error: ", error);
             });
     }, []);
-    console.log("qnaList +" + qnaList);
-
-
 
     // ====================================================================
 
@@ -73,7 +70,6 @@ function ProdQna03() {
     const location = useLocation();
     const productData = location.state.productData;
     const matchingReviews = qnaList.filter((prodqna) => prodqna.prod_num === productData.prod_num);
-    console.log("matchingReviews => " + matchingReviews);
 
     // 배열 속성 writer 입력시 성만 따오기========================================
     const lastName = (fullName) => {
@@ -84,6 +80,10 @@ function ProdQna03() {
     };
     // ====================================================================
 
+
+
+
+
     // 한 페이지당 몇 개의 글을 보여줄 것인지 정의===================================
     const itemsPerPage = 10;
     // 현재 페이지 상태와 페이지 변경 함수
@@ -93,6 +93,8 @@ function ProdQna03() {
 
     let pagedQnaList = matchingReviews.slice(startIndex, endIndex);
     // ====================================================================
+
+
 
 
 
@@ -107,6 +109,33 @@ function ProdQna03() {
         }
     };
     // ====================================================================
+
+    // axios Post=======================================================
+    const onSubmit = (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData(document.getElementById('reviewform'));
+            formData.append('prod_num', productData.prod_num);
+            // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
+
+            // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
+            const response = axios.post("/reviewrest/reviewR/saveReview/", formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+
+            // 성공/실패에 따라 처리합니다.
+            console.log("데이터 저장됨:", response.data);
+            closeModal(false);
+        } catch (error) {
+            // 에러 처리
+            console.error("데이터 저장 중 에러:", error);
+            // 선택적으로 사용자에게 에러 메시지 표시 가능
+        }
+    };
+
     return (
         <div className="OrderReview02">
             {/* <!-- main product detail --> */}
@@ -147,7 +176,7 @@ function ProdQna03() {
                                             <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
                                             {/* <td>{item.prod_num}</td> */}
                                             <td>
-                                                <div class="qIMG"> <a onClick={() => handleTitleClick(i)}><img src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
+                                                <div> <a onClick={() => handleTitleClick(i)}><img src={`${item.imgNo}`} alt='상품' /></a></div>
                                                 {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
                                             </td>
                                             <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
