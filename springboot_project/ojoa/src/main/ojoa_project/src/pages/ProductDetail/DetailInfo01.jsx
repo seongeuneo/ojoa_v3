@@ -7,11 +7,10 @@ import "./ProductDetail.css";
 function DetailInfo01() {
     const location = useLocation();
     const productData = location.state.productData;
-    console.log("DetailInfo01?");
+    console.log("DetailInfo01?" + productData);
 
 
     const [data, setData] = useState([]);
-    console.log("data는?" + data);
 
     useEffect(() => {
         axios
@@ -25,10 +24,10 @@ function DetailInfo01() {
             });
     }, []);
 
-    // console.log("data.prod_imagenum");
+
+    console.log("data.prod_num => " + data.prod_num);
     // 해당하는 상품의 리뷰 필터링
     const matchingReviews = data.filter((image) => image.prod_num === productData.prod_num);
-
 
 
 
@@ -42,8 +41,7 @@ function DetailInfo01() {
                 <div className="pd_part1">
                     {matchingReviews.map((images, prod_imagenum) => (
                         <div key={prod_imagenum}>
-                            <p>상품상세페이지 입니다!!{images.prod_imagedetail}</p>
-                            <img src={`${images.prod_imagedetail}`} alt="상품상세이미지" />
+                            <img src={`/detailIMG/${images.prod_imagedetail}`} alt="상품상세이미지" />
                         </div>
                     ))}
 

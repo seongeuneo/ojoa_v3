@@ -7,309 +7,305 @@
 // Password2: 재입력후 Password 와 일치성 확인
 
 ** 작성 규칙
-    => JavaScript function 으로 정의 하고 
-        결과를 true or false 로 return
-    => 정규식을 활용한다.
+	=> JavaScript function 으로 정의 하고 
+		결과를 true or false 로 return
+	=> 정규식을 활용한다.
 
 ** match Test
-    => 아래 조건에 true -> not (!)  match 적용해보면
-    => 정확하지 않으므로 (부적절, replace 를 사용)
-        ...       
-        } else if (!id.match(/[a-z.0-9]/gi)) {
-            alert(' ID는 영문자와 숫자로만 입력하세요. !!!')
-            return false;
-        }    
+	=> 아래 조건에 true -> not (!)  match 적용해보면
+	=> 정확하지 않으므로 (부적절, replace 를 사용)
+		...       
+		} else if (!id.match(/[a-z.0-9]/gi)) {
+			alert(' ID는 영문자와 숫자로만 입력하세요. !!!')
+			return false;
+		}    
  */
 
 "use strict"
 
 // 1) Name : 길이, 한글과 영문
 function nmCheck() {
-    let name = document.getElementById('name').value;
-    if (name.length < 2) {
-        document.getElementById('nMessage').innerHTML = 'name 은 2글자 이상 입력하세요.';
-        return false;
+	let name = document.getElementById('name').value;
+	if (name.length < 2) {
+		document.getElementById('nMessage').innerHTML = 'name 은 2글자 이상 입력하세요.';
+		return false;
 
-    } else if (name.replace(/[a-z.가-힣]/gi, '').length > 0) {
-        document.getElementById('nMessage').innerHTML = 'name 은 한글과 영문으로만 입력하세요.';
-        return false;
+	} else if (name.replace(/[a-z.가-힣]/gi, '').length > 0) {
+		document.getElementById('nMessage').innerHTML = 'name 은 한글과 영문으로만 입력하세요.';
+		return false;
 
-    } else {
-        document.getElementById('nMessage').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('nMessage').innerHTML = '';
+		return true;
+	};
 } //nmCheck
-	
+
 // 2) ID
 function idCheck() {
-    let id = document.getElementById('id').value;
-    if (id.length < 4 || id.length > 10) {
-        document.getElementById('iMessage').innerHTML = 'id 는 4~10 글자 입니다.';
-        return false;
+	let id = document.getElementById('id').value;
+	if (id.length < 4 || id.length > 10) {
+		document.getElementById('iMessage').innerHTML = 'id 는 4~10 글자 입니다.';
+		return false;
 
-        // => 영문과 숫자로만 입력했는지 : id 에서 영문과 숫자를 모두 ' ' 로 변경하면 length 가 0 이면 OK
-    } else if (id.replace(/[a-z.0-9]/gi, '').length > 0) {  // g = id 안의 모든 문자 / i = 대문자는 소문자로 변환.
-        document.getElementById('iMessage').innerHTML = 'id 는 영문과 숫자만 입력하세요.';
-        return false;
+		// => 영문과 숫자로만 입력했는지 : id 에서 영문과 숫자를 모두 ' ' 로 변경하면 length 가 0 이면 OK
+	} else if (id.replace(/[a-z.0-9]/gi, '').length > 0) {  // g = id 안의 모든 문자 / i = 대문자는 소문자로 변환.
+		document.getElementById('iMessage').innerHTML = 'id 는 영문과 숫자만 입력하세요.';
+		return false;
 
-    } else {
-        document.getElementById('iMessage').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('iMessage').innerHTML = '';
+		return true;
+	};
 } //idCheck
 
 // 3) Password
 function pwCheck() {
-    let password = document.getElementById('password').value;
-    let special = /[!-*.@]/gi;  // 특수문자 범위 축소
-    if (password.length < 4 || password.length > 10) {
-        document.getElementById('pMessage').innerHTML = 'password 는 4~10 글자 입니다.';
-        return false;
+	let password = document.getElementById('password').value;
+	let special = /[!-*.@]/gi;  // 특수문자 범위 축소
+	if (password.length < 4 || password.length > 10) {
+		document.getElementById('pMessage').innerHTML = 'password 는 4~10 글자 입니다.';
+		return false;
 
-        // => 영문, 숫자, 특수문자 로만 구성 되었는지 확인
-    } else if (password.replace(/[a-z.0-9.!-*.@]/gi, '').length > 0) {
-        document.getElementById('pMessage').innerHTML = '영문, 숫자, 특수문자만 입력하세요.';
-        return false;
+		// => 영문, 숫자, 특수문자 로만 구성 되었는지 확인
+	} else if (password.replace(/[a-z.0-9.!-*.@]/gi, '').length > 0) {
+		document.getElementById('pMessage').innerHTML = '영문, 숫자, 특수문자만 입력하세요.';
+		return false;
 
-        // => 특수문자 포함 확인 : 정규식의 test 메서드 활용
-    } else if (special.test(password) == false) {
-        document.getElementById('pMessage').innerHTML = '특수문자가 포함되어야 합니다.';
-        return false;
+		// => 특수문자 포함 확인 : 정규식의 test 메서드 활용
+	} else if (special.test(password) == false) {
+		document.getElementById('pMessage').innerHTML = '특수문자가 포함되어야 합니다.';
+		return false;
 
-    } else {
-        document.getElementById('pMessage').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('pMessage').innerHTML = '';
+		return true;
+	};
 } //pwCheck
 
 // 4) Password2
 // => password 와 동일성 확인
 function pw2Check() {
-    let password = document.getElementById('password').value;
-    let password2 = document.getElementById('password2').value;
-    if (password !== password2) {
-        document.getElementById('p2Message').innerHTML = 'password 가 다릅니다.';
-        return false;
+	let password = document.getElementById('password').value;
+	let password2 = document.getElementById('password2').value;
+	if (password !== password2) {
+		document.getElementById('p2Message').innerHTML = 'password 가 다릅니다.';
+		return false;
 
-    } else {
-        document.getElementById('p2Message').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('p2Message').innerHTML = '';
+		return true;
+	};
 } //pw2Check
-  
+
 // 5) Phone1
 function pho1Check() {
-    let phone1 = document.getElementById('phone1').value;
-    if (phone.length < 3) {
-        document.getElementById('ph1Message').innerHTML = '전화번호를 올바르게 입력하세요.';
-        return false;
+	let phone1 = document.getElementById('phone1').value;
+	if (phone.length < 3) {
+		document.getElementById('ph1Message').innerHTML = '전화번호를 올바르게 입력하세요.';
+		return false;
 
-        // => 숫자 로만 구성 되었는지 확인
-    } else if (phone1.replace(/[0-9]/gi, '').length > 0) {
-        document.getElementById('ph1Message').innerHTML = '숫자만 입력하세요.';
-        return false;
+		// => 숫자 로만 구성 되었는지 확인
+	} else if (phone1.replace(/[0-9]/gi, '').length > 0) {
+		document.getElementById('ph1Message').innerHTML = '숫자만 입력하세요.';
+		return false;
 
-    } else {
-        document.getElementById('ph1Message').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('ph1Message').innerHTML = '';
+		return true;
+	};
 } //pho1Check
-  
+
 // 6) Phone2
 function pho2Check() {
-    let phone2 = document.getElementById('phone2').value;
-    if (phone2.length < 4) {
-        document.getElementById('ph2Message').innerHTML = '중간 4자리 번호를 올바르게 입력하세요.';
-        return false;
+	let phone2 = document.getElementById('phone2').value;
+	if (phone2.length < 4) {
+		document.getElementById('ph2Message').innerHTML = '중간 4자리 번호를 올바르게 입력하세요.';
+		return false;
 
-        // => 숫자 로만 구성 되었는지 확인
-    } else if (phone2.replace(/[0-9]/gi, '').length > 0) {
-        document.getElementById('ph2Message').innerHTML = '숫자만 입력하세요.';
-        return false;
+		// => 숫자 로만 구성 되었는지 확인
+	} else if (phone2.replace(/[0-9]/gi, '').length > 0) {
+		document.getElementById('ph2Message').innerHTML = '숫자만 입력하세요.';
+		return false;
 
-    } else {
-        document.getElementById('ph2Message').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('ph2Message').innerHTML = '';
+		return true;
+	};
 } //pho2Check
-  
+
 // 7) Phone3
 function pho3Check() {
-    let phone3 = document.getElementById('phone3').value;
-    if (phone3.length < 4) {
-        document.getElementById('ph3Message').innerHTML = '마지막 4자리 번호를 올바르게 입력하세요.';
-        return false;
+	let phone3 = document.getElementById('phone3').value;
+	if (phone3.length < 4) {
+		document.getElementById('ph3Message').innerHTML = '마지막 4자리 번호를 올바르게 입력하세요.';
+		return false;
 
-        // => 숫자 로만 구성 되었는지 확인
-    } else if (phone3.replace(/[0-9]/gi, '').length > 0) {
-        document.getElementById('ph3Message').innerHTML = '숫자만 입력하세요.';
-        return false;
+		// => 숫자 로만 구성 되었는지 확인
+	} else if (phone3.replace(/[0-9]/gi, '').length > 0) {
+		document.getElementById('ph3Message').innerHTML = '숫자만 입력하세요.';
+		return false;
 
-    } else {
-        document.getElementById('ph3Message').innerHTML = '';
-        return true;
-    };
+	} else {
+		document.getElementById('ph3Message').innerHTML = '';
+		return true;
+	};
 } //pho3Check
-  
+
 // 6) email1
 function email1Check() {
-    let email1 = document.getElementById('email1').value;
-    if (email1.length < 3) {
-        document.getElementById('em1Message').innerHTML = '이메일을 입력하세요.';
-        return false;
-    } else {
-        document.getElementById('em1Message').innerHTML = '';
-        return true;
-    };
+	let email1 = document.getElementById('email1').value;
+	if (email1.length < 3) {
+		document.getElementById('em1Message').innerHTML = '이메일을 입력하세요.';
+		return false;
+	} else {
+		document.getElementById('em1Message').innerHTML = '';
+		return true;
+	};
 } //email1Check
-  
+
 // 7) email2
 function email2Check() {
-    let email2 = document.getElementById('email2').value;
-    if (email2.length < 3) {
-        document.getElementById('em2Message').innerHTML = '도메인을 입력하세요.';
-        return false;
-    } else {
-        document.getElementById('em2Message').innerHTML = '';
-        return true;
-    };
+	let email2 = document.getElementById('email2').value;
+	if (email2.length < 3) {
+		document.getElementById('em2Message').innerHTML = '도메인을 입력하세요.';
+		return false;
+	} else {
+		document.getElementById('em2Message').innerHTML = '';
+		return true;
+	};
 } //email2Check
-  
+
 // 8) zip_code
 function zipCheck() {
-    let zipcode = document.getElementById('zipcode').value;
-    if (zipcode.length < 2) {
-        document.getElementById('zMessage').innerHTML = '우편번호를 입력하세요.';
-        return false;
-    } else {
-        document.getElementById('zMessage').innerHTML = '';
-        return true;
-    };
+	let zipcode = document.getElementById('zipcode').value;
+	if (zipcode.length < 2) {
+		document.getElementById('zMessage').innerHTML = '우편번호를 입력하세요.';
+		return false;
+	} else {
+		document.getElementById('zMessage').innerHTML = '';
+		return true;
+	};
 } //zipCheck
-  
+
 // 9) address
 function addressCheck() {
-    let address = document.getElementById('address').value;
-    if (address.length < 4) {
-        document.getElementById('aMessage').innerHTML = '주소를 입력하세요.';
-        return false;
-    } else {
-        document.getElementById('aMessage').innerHTML = '';
-        return true;
-    };
+	let address = document.getElementById('address').value;
+	if (address.length < 4) {
+		document.getElementById('aMessage').innerHTML = '주소를 입력하세요.';
+		return false;
+	} else {
+		document.getElementById('aMessage').innerHTML = '';
+		return true;
+	};
 } //addressCheck
-  
+
 // 10) address_detail
 function addressdetailCheck() {
-    let addressdetail = document.getElementById('addressdetail').value;
-    if (addressdetail.length < 2) {
-        document.getElementById('adMessage').innerHTML = '상세주소를 입력하세요.';
-        return false;
-    } else {
-        document.getElementById('adMessage').innerHTML = '';
-        return true;
-    };
+	let addressdetail = document.getElementById('addressdetail').value;
+	if (addressdetail.length < 2) {
+		document.getElementById('adMessage').innerHTML = '상세주소를 입력하세요.';
+		return false;
+	} else {
+		document.getElementById('adMessage').innerHTML = '';
+		return true;
+	};
 } //addressdetailCheck
 
 
 
 //==============================================================================
 // productInsert 페이지 비동기 이동
-function productInsertAndMove() {
-   let url="product/productList";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
+function productInsertAndMove(e) {
+	e.preventDefault();
+	let formData = new FormData(document.getElementById("myform"));
+
+	let url = "/api/productInsert";
+
+	axios.post(url, formData,
+		{
+			headers: { "Content-Type": "multipart/form-data" }
+		}).then(response => {
+			alert(`** response.data: ${response.data}`);
+			location.reload(); //화면 새로고침
+		}).catch(err => {
+			if (err.response.status == '502') alert("~~ 입력 오류 !! 다시하세요 ~~");
+			else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+		});
+
+//	document.getElementById('resultArea2').innerHTML = "";
+
+
+
 
 } //productInsert
 
 //==============================================================================
 // 로그인 페이지 비동기 이동
 function loginChange() {
-   let url = "member/loginForm";
-   
-   axios.get(url)
-     .then(response => {
-        document.getElementById('contentArea').innerHTML = response.data;
-     })
-     .catch(err => {
-        alert("response 실패 => " + err.message);
-     });
+	let url = "member/loginForm";
+
+	axios.get(url)
+		.then(response => {
+			document.getElementById('contentArea').innerHTML = response.data;
+		})
+		.catch(err => {
+			alert("response 실패 => " + err.message);
+		});
 } //loginChange
 
-//==============================================================================
-// 회원가입 페이지 비동기 이동
-function joinChange() {
-   let url="member/memberJoin";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
 
-} //joinChange
 
 //==========================================================
 // 내정보 페이지 비동기 이동
 function detailChange() {
-   let url = "member/memberDetail?id=" + loggedInUserID;
+	let url = "member/memberDetail?id=" + loggedInUserID;
 
-    // AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
-    axios.get(url)
-        .then(response => {
-            document.getElementById('contentArea').innerHTML = response.data;
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+	// AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
+	axios.get(url)
+		.then(response => {
+			document.getElementById('contentArea').innerHTML = response.data;
+		})
+		.catch(error => {
+			console.error('Error fetching data:', error);
+		});
 } //detailChange()
-  
+
 //==========================================================
 // 내정보수정 비동기 이동
 function updateChange() {
-   let url = "member/memberDetail?jCode=U&id=" + loggedInUserID;
+	let url = "member/memberDetail?jCode=U&id=" + loggedInUserID;
 
-    // AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
-    axios.get(url)
-        .then(response => {
-            document.getElementById('contentArea').innerHTML = response.data;
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+	// AJAX를 사용하여 해당 URL에서 데이터를 가져옵니다.
+	axios.get(url)
+		.then(response => {
+			document.getElementById('contentArea').innerHTML = response.data;
+		})
+		.catch(error => {
+			console.error('Error fetching data:', error);
+		});
 } //updateChange()
-    
+
 //==========================================================
 /*// 탈퇴 비동기 이동
 function deleteChange() {
    let url = "member/memberdelete?id=" + loggedInUserID;
 
-    axios.get(url)
-     .then(response => {
-        document.getElementById('contentArea').innerHTML = response.data;
-     })
-     .catch(err => {
-        alert("response 실패 => " + err.message);
-     });
+	axios.get(url)
+	 .then(response => {
+		document.getElementById('contentArea').innerHTML = response.data;
+	 })
+	 .catch(err => {
+		alert("response 실패 => " + err.message);
+	 });
 } //deleteChange()*/
-        
+
 //==========================================================
 // 로그인폼 아이디유효성체크 버튼
 function idCheck() {
 
-	
+
 } //idCheck()
-	
+
 //==========================================================
 // 내정보 페이지 비동기 이동
 
@@ -317,27 +313,27 @@ function idCheck() {
 //==========================================================
 // 회원관리 admin 강퇴 버튼
 function memberdelete(id) {
-   axios.get(`/member/memberdelete?id=${id}`)
-    .then(response => {
-      alert("강퇴 성공: " + response.data.message);
-      // 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
-    })
-    .catch(error => {
-      alert("강퇴 실패: " + error.message);
-    });
+	axios.get(`/member/memberdelete?id=${id}`)
+		.then(response => {
+			alert("강퇴 성공: " + response.data.message);
+			// 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
+		})
+		.catch(error => {
+			alert("강퇴 실패: " + error.message);
+		});
 } //memberdelete
 
 //==========================================================
 // 회원관리 / 회원디테일 비동기 이동
 function memberDetail(id) {
-   axios.get(`/member/memberDetail?id=${id}`)
-    .then(response => {
+	axios.get(`/member/memberDetail?id=${id}`)
+		.then(response => {
 
-      // 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
-    })
-    .catch(error => {
-      alert("실패: " + error.message);
-    });
+			// 성공적으로 탈퇴되었을 때 필요한 동작을 추가할 수 있습니다.
+		})
+		.catch(error => {
+			alert("실패: " + error.message);
+		});
 } //memberDetail
 
 //==========================================================
@@ -347,5 +343,6 @@ function memberDetail(id) {
 
 
 //==========================================================
+
 
 

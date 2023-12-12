@@ -57,10 +57,10 @@
 						<!--  <li><a href="/admindeliever/admindelieverlist">배송관리 </a>&nbsp;<span>|</span></li> -->
 						<li onclick="ordersChange()" style="cursor: pointer;"><a>주문관리 </a>&nbsp;<span>|</span></li>
 						<!-- <li><a href="wish/wishlist">관심상품관리 </a>&nbsp;<span>|</span></li> -->
-						<li onclick="wishChange()" style="cursor: pointer;"><a>관심상품관리 </a>&nbsp;<span>|</span></li>
+					<!-- 	<li onclick="wishChange()" style="cursor: pointer;"><a>관심상품관리 </a>&nbsp;<span>|</span></li> -->
 						<li onclick="reviewChange()" style="cursor: pointer;"><a>상품후기관리 </a>&nbsp;<span>|</span></li>
 						<li onclick="qnaChange()" style="cursor: pointer;">게시판QnA관리 </a>&nbsp;<span>|</span></li>
-						<li	onclick="qnaInsertChange()" style="cursor: pointer;">게시판 글쓰기</a>&nbsp;<span>|</span></li>
+						<!-- <li	onclick="qnaInsertChange()" style="cursor: pointer;">게시판 글쓰기</a>&nbsp;<span>|</span></li> -->
 						<li onclick="cartChange()" style="cursor: pointer;"><a>장바구니관리 </a></li>
 						<!-- <li><a href="orders/ordersDetail">주문상세 페이지 </a></li> -->
 					</ul>

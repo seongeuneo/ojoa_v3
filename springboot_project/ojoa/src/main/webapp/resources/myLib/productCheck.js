@@ -63,6 +63,26 @@ function cartDelete(id, prod_num) {
 };
 
 
+//==========================================================================================
+// 상품 비동기 삭제
+ // axios를 사용하여 DELETE 요청 보내기
+    const productDelete = (prod_num) => {
+        axios.delete(`/product/pdelete/${prod_num}`)
+            .then((response) => {
+                // 삭제 요청이 성공하면 성공 메시지 출력 혹은 다른 작업 수행
+                console.log("삭제 요청 성공:", response);
+                // 성공했을 때 필요한 작업 수행
+
+                // 삭제된 항목을 화면에서도 제거하려면 해당 요소를 state에서 필터링하여 재설정해야합니다.
+                setData(data.filter(item => item.prod_num !== prod_num));
+                alert('상품 삭제 성공');
+            })
+            .catch((error) => {
+                // 삭제 요청이 실패한 경우 에러 메시지 출력
+                console.error("삭제 요청 실패:", error);
+            });
+    }; 
+
 
 //==========================================================================================
 // 결제하기 버튼
@@ -274,6 +294,7 @@ document.getElementById('nextPage').addEventListener('click', () => {
         displayItems(currentPage + 1);
     }
 });
+
 
 
 

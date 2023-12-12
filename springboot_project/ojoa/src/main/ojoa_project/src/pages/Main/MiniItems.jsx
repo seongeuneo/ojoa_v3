@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useProductList } from '../ProductList/useProductList'
 
-const MiniItems = ({ id, imgNo, blacklabel, mini_1, mini_2, proname, proprice, sale, castle }) => {
-    const content = useProductList();
-
+const MiniItems = ({ content }) => {
     const [imageSrc, setImageSrc] = useState("./images/emptyheart.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
     const [isClicked, setIsClicked] = useState(false); // 클릭 여부를 state로 관리
 
@@ -52,25 +50,27 @@ const MiniItems = ({ id, imgNo, blacklabel, mini_1, mini_2, proname, proprice, s
                 if (error.response && error.response.status === 400) {
                     alert("이미 관심목록에 있는 상품입니다.");
                 } else {
-                    alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
+                    // alert("상품을 관심목록에 추가하는데 문제가 발생했습니다.");
                 }
             });
 
     };
 
+
+
     return (
         <div className="MiniItems">
 
             <div className="MiniItembox">
-                <Link to={castle} state={{ productData: content }}>
+                <Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`} state={{ productData: content }}>
                     <div className="colsection">
-                        <div className="img_top">할인률: {blacklabel}%</div>
+                        <div className="img_top">OJOA BEST ITEMS</div>
                         {/* <img className="colsec_img" src={"./images/sofa.jpg"} alt="소가죽소파" /> */}
-                        <div className="colsec_img"><img src={`${imgNo}`} /></div>
+                        <div className="colsec_img"><img src={`/thumbs/${content.prod_mainimage}`} /></div>
                         <div className="colsec_info">
-                            <div className="colsec_mini">카테고리 : {mini_1}<br />평점 : {mini_2}</div>
-                            <div className="colsec_name">{proname}</div>
-                            <div className="colsec_price">{proprice}<sup>{sale}</sup></div>
+                            <div className="colsec_mini">카테고리 : {content.prod_kind}<br />평점 : {content.prod_grade}</div>
+                            <div className="colsec_name">{content.prod_name}</div>
+                            <div className="colsec_price">{parseInt(content.prod_price1.toString().replace(/,/g, '')).toLocaleString()}원<sup>{content.prod_discount}%</sup></div>
                         </div>
                     </div>
                 </Link>

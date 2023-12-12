@@ -6,11 +6,28 @@ import QModal from './Modal/QModal';
 import { useLocation } from "react-router-dom";
 
 function ProdQna03() {
+    const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
+
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+    useEffect(() => {
+        const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
+        setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
+    }, []);
+    
     // 모달창 띄우기=====================================================
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const openModal = () => setModalIsOpen(true);
+    // 모달 열기 함수
+    const openModal = () => {
+
+        if (isLoggedIn === true) {
+            setModalIsOpen(true);
+        } else {
+            alert('로그인이 필요합니다.');
+        }
+    };
     const closeModal = () => setModalIsOpen(false);
     // ===============================================================
 
@@ -46,9 +63,6 @@ function ProdQna03() {
                 console.error("Error: ", error);
             });
     }, []);
-    console.log("qnaList +" + qnaList);
-
-
 
     // ====================================================================
 
@@ -56,40 +70,6 @@ function ProdQna03() {
     const location = useLocation();
     const productData = location.state.productData;
     const matchingReviews = qnaList.filter((prodqna) => prodqna.prod_num === productData.prod_num);
-    console.log("matchingReviews => " + matchingReviews);
-
-    // 아마 값전달 ...? =====================================================
-    // ** Local Storage 적용 1
-    // => LocalStorage 의 Data 읽어, todo 초기화 하기  
-    // const [todo, dispatch] = useReducer(reducer, []);
-    // const idRef = useRef(0);
-    // const [isDataLoaded, setIsDataLoaded] = useState(false);
-    // // ** localData Loading
-    // // => Mount시 1회 실행 하도록 useEffect 에 빈 배열 전달
-    // useEffect(() => {
-    //     const rawData = localStorage.getItem("todo");
-    //     // => LocalStorage 의 Data 존재 확인
-    //     if (!rawData) {
-    //         setIsDataLoaded(true);
-    //         return;
-    //     }
-    //     const localData = JSON.parse(rawData);
-    //     if (localData.length === 0) {
-    //         setIsDataLoaded(true);
-    //         return;
-    //     }
-    //     // => localData 가 존재하면
-    //     //  -> create시 id값 생성을 위한 idRef 값 할당
-    //     //  -> Loading 된 Data를 State 변수 todo에 담기위해 dispatch 호출
-    //     //  -> setIsDataLoaded(true) : Loading 완료됨 표시 
-    //     idRef.current = localData.length;
-    //     dispatch({ type: "INIT", dataList: localData });
-    //     setIsDataLoaded(true);
-    // }, []); //useEffect
-    // ====================================================================
-
-
-
 
     // 배열 속성 writer 입력시 성만 따오기========================================
     const lastName = (fullName) => {

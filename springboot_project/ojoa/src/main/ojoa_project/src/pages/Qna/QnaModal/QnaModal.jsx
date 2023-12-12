@@ -1,12 +1,17 @@
 import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
-import mockList from "../../../data/ItemsData";
 import { TodoDispatchContext } from "../Qna";
 import { useModal } from "../QnaModal/ModalContext";
 import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
+import { useProductList } from '../../ProductList/useProductList';
 
+<<<<<<< HEAD
 function QnaModal({ closeModal, onFilterChange }) {
+=======
+function QnaModal({ closeModal }) {
+    const data = useProductList();
+>>>>>>> main
 
     const [content, setContent] = useState("");
     // => new 일정 처리할  onChangeContent 이벤트 핸들러 
@@ -36,6 +41,7 @@ function QnaModal({ closeModal, onFilterChange }) {
             // 선택적으로 사용자에게 에러 메시지 표시 가능
         }
         e.preventDefault();
+
     };
 
     return (
@@ -89,11 +95,12 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             <option value="환불문의">환불문의</option>
                                             <option value="재입고문의">재입고문의</option>
                                             <option value="기타문의">기타문의</option>
-                                            <option value=" "></option>
+                                            {/* <option value=" "></option> */}
                                         </select>
                                         {/* <select name="board_category" id="board_category2"> */}
                                         <select name="prod_kind" id="board_category2" >
                                             <option>제품목록</option>
+<<<<<<< HEAD
 <<<<<<< HEAD
                                             <option value="1">침대</option>
                                             <option value="2">소파</option>
@@ -112,6 +119,12 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             {mockList.map((item) => (
                                                 <React.Fragment key={item.id}>
                                                     <option value={item.imgNo}>{item.productName}</option>
+=======
+                                            {/* <option value="1">의자</option> */}
+                                            {data.map((item) => (
+                                                <React.Fragment key={item.prod_num}>
+                                                    <option value={item.prod_num}>{item.prod_name}</option>
+>>>>>>> main
                                                 </React.Fragment>
                                             ))}
                                         </select>

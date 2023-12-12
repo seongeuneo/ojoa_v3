@@ -55,24 +55,25 @@ function Footer() {
                             ⓒ 오조아 온라인 ALL RIGHTS RESERVED. HOSTING BY JK.
                         </div>
                         {/* 회사소개 */}
-                        <div className="ft_menu">
+                        {/* <div className="ft_menu">
                             <ul>
                                 <li><Link to="#" onClick={handleLinkClick}>회사소개</Link></li>
                                 <li><Link to="#" onClick={handleLinkClick}>이용약관</Link></li>
                                 <li><Link to="#" onClick={handleLinkClick}>개인정보처리방침</Link></li>
                                 <li><Link to="#" onClick={handleLinkClick}>이용안내</Link></li>
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="footer_right">
                         <div className="ft_comm">
                             <ul>
                                 <li><b>Community</b></li>
-                                <li><Link to="./qna">NOTICE</Link></li>
-                                <li><Link to="#" onClick={handleLinkClick}>REVIEW</Link></li>
-                                <li><Link to="./qna">QNA</Link></li>
+                                <li><Link to="./qna">BOARD</Link></li>
+                                {/* <li><Link to="./qna">NOTICE</Link></li> */}
+                                {/* <li><Link to="#" onClick={handleLinkClick}>REVIEW</Link></li> */}
+                                {/* <li><Link to="./qna">QNA</Link></li> */}
                                 <li><Link to="./store">OFFLINE STORE</Link></li>
-                                <li><Link to="#" onClick={handleLinkClick}>MEMBERSHIP</Link></li>
+                                {/* <li><Link to="#" onClick={handleLinkClick}>MEMBERSHIP</Link></li> */}
                             </ul>
                         </div>
                         <div className="ft_quick">
@@ -80,7 +81,7 @@ function Footer() {
                                 <li><b>Shopping Quick</b></li>
                                 <li><Link to="./MyPage">MY PAGE</Link></li>
                                 <li><Link to="./order">ORDER</Link></li>
-                                <li><Link to="./cart">WISH LIST</Link></li>
+                                <li><Link to="./MyPage/wish">WISH LIST</Link></li>
                             </ul>
                         </div>
                         <div className="ft_sns">
