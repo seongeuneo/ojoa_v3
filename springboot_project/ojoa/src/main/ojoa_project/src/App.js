@@ -23,7 +23,7 @@ import Join from './pages/Member/Join';
 import Qna from './pages/Qna/Qna';
 import Mileage from './pages/MyPage/MyShop/Mileage';
 import Modify from './pages/Member/Modify';
-import pUpdateForm from './pages/Member/pUpdateForm';
+import PUpdateForm from './pages/Member/PUpdateForm';
 import productList from './pages/ProductList/ProductList';
 import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
@@ -38,6 +38,7 @@ import PaymentConfirmation from './pages/Checkout/PaymentConfirmation';
 
 
 function App() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태를 추적
 
   //장바구니
@@ -45,10 +46,18 @@ function App() {
   const [isAllChecked, setIsAllChecked] = useState(true);
 
   useEffect(() => {
+    console.log("현재 isLoggedIn 상태 출력" + isLoggedIn); // 현재 isLoggedIn 상태 출력
+
     // 페이지 로딩 시 세션 스토리지에서 로그인 정보 확인
     const sessionInfo = sessionStorage.getItem('loggedInUser');
     setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false
-  }, []);
+  }, [isLoggedIn]); // isLoggedIn 상태 변화 감지
+
+  const handleLogout = () => {
+    // ... 로그아웃 로직
+    sessionStorage.removeItem('loggedInUser');
+    setIsLoggedIn(false); // 로그아웃 시 로그인 상태 변경
+  };
 
   // 장바구니에 상품 추가
   const handleCart = () => {
@@ -69,7 +78,7 @@ function App() {
         <ScrollTop />
 
         {isLoggedIn ? (
-          <UserHeader setIsLoggedIn={setIsLoggedIn} />
+          <UserHeader setIsLoggedIn={setIsLoggedIn} handleLogout={handleLogout} />
         ) : (
           <LoginHeader setIsLoggedIn={setIsLoggedIn} />
         )}
@@ -78,14 +87,14 @@ function App() {
             element={<LoginHandeler />} //당신이 redirect_url에 맞춰 꾸밀 컴포넌트
           />
           <Route path="/mypage/*" element={<MyPage />} />
-          <Route path="/member/*" element={<Modify />} />
-          <Route path="/modify/*" element={<pUpdateForm />} />
+          <Route path="/member/*" element={<Modify setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/mypage/mileage/*" element={<Mileage />} />
           <Route path="/mypage/wish/*" element={<Wish />} />
           <Route path="/store/*" element={<Store />} />
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/member/rlogin" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/member/modify/PUpdateForm" element={<PUpdateForm />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />

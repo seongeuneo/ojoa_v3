@@ -3,6 +3,7 @@ package com.ojo.ojoa.controller;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +36,7 @@ public class MemberControllerR {
 	PasswordEncoder passwordEncoder;
 	
 	
+	
 	//**** => 리액트 ridDupCheck
 	@GetMapping("/ridDupCheck")
 	public ResponseEntity<?> ridDupCheck(@RequestParam("id") String id) {
@@ -50,6 +51,7 @@ public class MemberControllerR {
 	        return ResponseEntity.status(HttpStatus.OK).body("사용 가능한 아이디 입니다.");
 	    }
 	} //ridDupCheck
+	
 	
 	
 	//**** => 리액트 rLogin / Request: JSON, Response: JSON
@@ -100,6 +102,7 @@ public class MemberControllerR {
 	} //rlogout
 	
 	
+	
 	//**** => 리액트 rJoin
 	@PostMapping(value = "/rjoin")
 	public ResponseEntity<?> rjoin(@RequestBody Member entity) throws IOException {
@@ -123,48 +126,67 @@ public class MemberControllerR {
 
 	
 	
-	// **** => 리액트 rUpdate
+	// **** => 리액트 비밀번호 업데이트 rmemberUpdate
 	// => 요청: home 에서 내정보수정 -> 내정보수정Form (memberUpdate.jsp) 출력
 	// => 수정후 submit -> 수정 Service 
 	//		-> 성공: detail
 	//		-> 실패: 재시도 유도 (rmemberUpdate.jsp)
-	@PutMapping(value="/rmemberUpdate")
-	public ResponseEntity<?> rmemberUpdate(@RequestBody Member entity) throws IOException {
-		// 클라이언트로부터 받은 엔티티로 회원 정보 업데이트
+	@PostMapping(value="/rpasswordUpdate")
+	public ResponseEntity<?> rpasswordUpdate(@RequestBody Member entity, HttpServletRequest request) throws IOException {
+	    String id = (String) request.getSession().getAttribute("loginID");
+	    
+	    if (id == null || id.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("세션이 만료되었거나 로그인되어 있지 않습니다.");
+	    }
+	    
 	    try {
-	        Member existingMember = service.selectOne(entity.getId()); // 해당 ID로 기존 회원 정보 조회
-	        if (existingMember != null) {
-	            // 업데이트할 필드들을 새로운 엔티티의 값으로 업데이트
-	            existingMember.setName(entity.getName());
-	            existingMember.setAddress(entity.getAddress());
-	            // 업데이트된 회원 정보를 저장
-	            service.save(existingMember);
-	            return ResponseEntity.status(HttpStatus.OK).body("회원 정보가 업데이트되었습니다.");
+	        // 비밀번호 변경
+	        entity.setId(id);
+	        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+	        boolean passwordUpdated = service.updatePassword(entity);
+
+	        if (passwordUpdated) {
+	            return ResponseEntity.status(HttpStatus.OK).body("비밀번호가 변경되었습니다.");
 	        } else {
-	            // 해당 ID의 회원이 존재하지 않을 경우
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 회원을 찾을 수 없습니다.");
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호 변경에 실패했습니다.");
 	        }
 	    } catch (Exception e) {
-	        // 업데이트 중 문제 발생 시
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 정보 업데이트 중 오류가 발생했습니다.");
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("서버 오류가 발생했습니다.");
 	    }
-	} //rmemberUpdate
+	} //rpasswordUpdate
+	
+	
+	
+	@PostMapping(value="/rUpdate")
+	public ResponseEntity<?> rUpdate(@RequestBody Member entity) throws IOException {
+	    // 클라이언트로부터 받은 엔티티로 회원 정보 업데이트
+	    try {
+	    	System.out.println("rUpdate "+entity);
+	       
+	            service.save(entity);
+	            return ResponseEntity.status(HttpStatus.OK).body("회원 정보가 업데이트되었습니다.");
+	    } catch (Exception e) {
+	        // 업데이트 중 문제 발생 시
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("회원 정보 업데이트 중 오류가 발생했습니다.");
+	    }
+	} //rUpdate
+	
 	
 	
 	// ** Member Delete: 회원탈퇴
 	@DeleteMapping(value="/rmemberdelete")
-	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id) {
-	    // ID 확인
-	    if (service.selectOne(id) != null) {
-	        // => 존재 : 삭제가능
-	        log.info("아이디 삭제 완료: " + id);
-	        return ResponseEntity.status(HttpStatus.OK).body("아이디 삭제 완료: " + id);
-	    } else {
-	        // => 없으면: 삭제불가
-	    	log.info("아이디 삭제 중 오류 발생: " + id);
-	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("아이디 삭제 중 오류 발생");
+	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id, HttpSession session) {
+		log.info("아이디 탈퇴 ID : " + id);
+		try {
+	        service.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body("회원 탈퇴 성공.");
+        } catch (Exception e) {
+	        // 업데이트 중 문제 발생 시
+        	log.info("아이디 탈퇴 중 오류 발생: " + e.toString());
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("탈퇴 중 오류 발생 => "+e.toString());
 	    }
 	} //rmemberdelete
+	
 	
 	
 	//***** 결제페이지 회원정보 가져오기 : 희상추가
@@ -172,15 +194,13 @@ public class MemberControllerR {
 	public  ResponseEntity<?> rinfo(HttpSession session) {
 	   try {
 		   String loginID = (String) session.getAttribute("loginID");
-	       if (loginID == null) {
-	    	   return null;
-	       } else {
+	       if (loginID != null) {
 	           Member result = service.selectOne(loginID);
 	           return ResponseEntity.ok(result);   
-	       }
+	       } else throw new Exception("로그인 아이디 not found");
 	   } catch (Exception e) {
-	       log.error("데이터 가져오기 중 에러: {}", e.getMessage());
-	       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 가져오기 실패");
+	       log.error("데이터 가져오기 중 에러: {}", e.toString());
+	       return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("데이터 가져오기 실패"+ e.toString());
 	       }
 	   } //rinfo
 	   
