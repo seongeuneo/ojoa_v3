@@ -4,7 +4,6 @@ import "./ProductList.css";
 import Pagination from "../../components/Pagination/Pagination";
 import PLFilter from "./PLFilter";
 import { Link } from "react-router-dom";
-import mockList from '../../data/ItemsData'
 import { useProductList } from './useProductList';
 import { useSortProducts } from './useSortProducts';
 import Modal from 'react-modal';
@@ -331,7 +330,7 @@ const Best = ({ cart, setCart, handleCart }) => {
     const data = useProductList();
 
     // "BEST" 카테고리에 속하는 상품들을 필터링
-    const bestProducts = data.filter((product) => parseFloat(product.productGrade) >= 4.8);
+    const bestProducts = data.filter((product) => parseFloat(product.prod_grade) >= 4.2);
 
     const [sortKey, setSortKey] = useState("Best"); // "Best" 카테고리를 기본 정렬 기준으로 설정
     const [currentPage, setCurrentPage] = useState(1);

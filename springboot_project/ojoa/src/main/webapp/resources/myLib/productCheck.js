@@ -75,6 +75,7 @@ function cartDelete(id, prod_num) {
 
                 // 삭제된 항목을 화면에서도 제거하려면 해당 요소를 state에서 필터링하여 재설정해야합니다.
                 setData(data.filter(item => item.prod_num !== prod_num));
+                alert('상품 삭제 성공');
             })
             .catch((error) => {
                 // 삭제 요청이 실패한 경우 에러 메시지 출력

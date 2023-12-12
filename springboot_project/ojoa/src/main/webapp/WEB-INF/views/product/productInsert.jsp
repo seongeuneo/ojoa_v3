@@ -81,7 +81,7 @@ function inCheck() {
 
 <body>
 <h2 class="insert-title">상품등록</h2>
-<form action="productInsert" method="Post" enctype="multipart/form-data" id="myform">
+<form action="" method="post" enctype="multipart/form-data" id="myform">
 <table>
 
 	<tr height="40"><th >상품이름</th>
@@ -169,7 +169,7 @@ function inCheck() {
 	
 	<tr height="40"><th></th>
 		<!-- <td><input type="submit" id="submitTag" value="상품등록" onclick="return inCheck()"> -->
-		<td><input type="submit" id="submitTag" value="상품등록" onclick="productInsertAndMove()">
+		<td><button type="button" id="submitTag" value="상품등록" onclick="productInsertAndMove(event)">상품등록</button>
 			&nbsp;&nbsp;
 			<input type="reset" value="등록취소">&nbsp;&nbsp;
 		</td>

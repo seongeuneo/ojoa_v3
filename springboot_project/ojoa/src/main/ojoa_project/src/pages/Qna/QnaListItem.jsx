@@ -3,13 +3,12 @@ import React, { useState } from "react";
 
 
 // 배열 속성 writer 입력시 성만 따오기
-const lastName = (fullName) => {
-    //     if (fullName.length() > 0) {
-    //        return fullName.charAt(0);
-    //    };
-    return 'A';
+  const lastName = (fullName) => {
+    if (fullName.length > 0) {
+        return fullName.charAt(0);
+    }
+    // fullName이 비어있을 때 처리할 내용을 추가할 수 있습니다.
 };
-
 function QnaListItem({ qnaList, filters }) {
     const [expandedId, setExpandedId] = useState(null);
 

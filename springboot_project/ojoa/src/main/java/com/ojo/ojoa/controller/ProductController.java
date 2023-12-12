@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -52,47 +54,7 @@ public class ProductController {
 
    
     
-	// => Product Insert Service 처리: POST
-	@PostMapping(value="/productInsert")
-	public String productInsert(HttpServletRequest request,
-					Product entity, Model model) throws IOException  {
-		String uri="product/productInsert";
-		
-		
-		// ** MultipartFile ***********************
-		String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\webapp\\resources\\uploadImages\\";
-		// => 기본 이미지 지정하기
-		String file1, file2="resources/uploadImages/basicman4.png";
-		
-		// => 저장경로 완성
-				MultipartFile uploadfilef = entity.getUploadfilef();
-				if ( uploadfilef!=null && !uploadfilef.isEmpty() ) {
-					// => image_File 을 선택함 -> 저장 (저장경로: relaPath+화일명)
-					// 1.3.1) 물리적위치 저장 (file1)
-					file1 = realPath + uploadfilef.getOriginalFilename(); //저장경로 완성 
-					uploadfilef.transferTo(new File(file1)); //해당경로에 저장(붙여넣기)
-					
-					// 1.3.2) Table 저장경로 완성 (file2)
-					file2 =  uploadfilef.getOriginalFilename();
-				} // Image 선택한 경우
-				
-				// 1.4) 완성된 경로를 dto 에 set
-				entity.setProd_mainimage(file2);
-		
-		
-		// 2. Service 처리
-		try {
-			log.info("** insert 성공 id => "+productService.save(entity));
-			model.addAttribute("message", "상품 등록 완료.");
-		} catch (Exception e) {
-			log.info("** insert Exception => "+e.toString());
-			model.addAttribute("message", "상품등록 실패. 다시 하세요.");
-			uri="product/productInsert";
-		}
-		
-		// 3. View 
-		return uri;
-	} // ProductInsert
+	
 	
 	// 상품 수정
 	@PostMapping(value="/updateProduct")
@@ -107,7 +69,7 @@ public class ProductController {
 		// => new Image 를 선택한 경우에만 처리하면 됨 
 		if ( uploadfilef!=null && !uploadfilef.isEmpty() ) {
 			// => Image 재선택 MultipartFile 처리
-			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\webapp\\\\resources\\\\uploadImages\\\\";
+			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
 			
 			// => 물리적위치에 저장 (file1)
 			String file1 = realPath + uploadfilef.getOriginalFilename(); //저장경로 완성
@@ -135,27 +97,17 @@ public class ProductController {
     
 
 	// ** Product Delete - 상품 삭제
-	@DeleteMapping(value="/pdelete")
-	public String pdelete(@PathVariable("prod_num") int prod_num, HttpSession session, Product entity, RedirectAttributes rttr) {
+	@DeleteMapping(value="/pdelete/{prod_num}")
+	public ResponseEntity<?> pdelete(@PathVariable("prod_num") int prod_num, Product entity) {
 		
-		String uri = "redirect:/product/productList";
-		
-		try {
-			log.info("** delete 성공  => "+productService.delete(entity.getProd_num()));
-			rttr.addFlashAttribute("message", "~~ 상품삭제 성공!! ~~") ;	
-			if ( ((String)session.getAttribute("loginID")).equals("admin") ) {
-				// => 관리자에 의한 강제삭제 : cartList.jsp
-				uri="redirect:productList";
-			}else {
-				// => 본인삭제 : home.jsp, session 무효화 
-				session.invalidate();
-			}
-		} catch (Exception e) {
-			log.info("** delete Exception => "+e.toString());
-			rttr.addFlashAttribute("message", "~~ 삭제 실패 ~~");
-		}
-		
-		return uri;
+		 entity.setProd_num(prod_num);
+		 if(productService.delete(prod_num) > 0) {
+	          log.info("axidelete HttpStatus.OK = " + HttpStatus.OK);
+	          return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);      
+	       } else {
+	          log.info("axidelete HttpStatus.BAD_GATEWAY = " + HttpStatus.BAD_GATEWAY);
+	          return new ResponseEntity<String>("삭제 실패, Data_Notfound", HttpStatus.BAD_GATEWAY);
+	       }
 	} // pdelete
 	
 	// 상품 상세 정보 조회
@@ -177,4 +129,5 @@ public class ProductController {
 	
 	
 }
+
 	

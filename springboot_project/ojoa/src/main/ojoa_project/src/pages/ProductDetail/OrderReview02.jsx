@@ -15,25 +15,51 @@ const lastName = (fullName) => {
 
 
 function OrderReview02() {
-    // 클릭시 내용 오픈 !
-    // const [expandedId, setExpandedId] = useState(null);
-
-    // const handleTitleClick = (id) => {
-    //     if (expandedId === id) {
-    //         setExpandedId(null);
-    //     } else {
-    //         setExpandedId(id);
-    //     }
-    // };
-
-
     const location = useLocation();
     const productData = location.state.productData;
-    // console.log("OrderReview02!!!!");
-    // console.log("무슨 번호가 나올까?? " + productData.prod_num)
 
     const [data, setData] = useState([]);
-    // console.log("OrderReview02의 data => " + data);
+    // 모달창 띄우기
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
+
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+    useEffect(() => {
+        const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
+        setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
+    }, []);
+
+
+    // 모달 열기 함수
+    const openModal = () => {
+
+        if (isLoggedIn === true) {
+            setModalIsOpen(true);
+        } else {
+            alert('로그인이 필요합니다.');
+        }
+    };
+    // const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
+
+    // useEffect(() => {
+    //     if (!checkedLogin) {
+    //         // 로그인 상태 확인 함수 호출
+    //         checkLoginStatus();
+    //     }
+
+    //     axios
+    //         .get('/reviewrest/reviewR/allReviewList')
+    //         .then((response) => {
+    //             setData(response.data);
+    //             console.log("서버연결성공 => ", response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, [checkedLogin]);
+
     useEffect(() => {
         axios
             .get('/reviewrest/reviewR/allReviewList')
@@ -46,11 +72,9 @@ function OrderReview02() {
             });
     }, []);
 
-    // // 모달창 띄우기
-    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const openModal = () => setModalIsOpen(true);
-    const closeModal = () => setModalIsOpen(false);
+
+
 
     // 해당하는 상품의 리뷰 필터링
     const matchingReviews = data.filter((review) => review.prod_num === productData.prod_num);
@@ -72,26 +96,6 @@ function OrderReview02() {
             </tr>
         );
     });
-
-
-
-
-    // 리뷰 내용 자식모달 컴포넌트에서 값 받아오기
-    // 리뷰 값 받아온 것을 mockList에 추가하기
-    // const [reviews, setReviews] = useState([]);
-
-    // const handleReviewTextChange = (reviewText) => {
-    //     const newReview = {
-    //         title: '새 리뷰', // 필요한 속성 추가
-    //         writer: '사용자', // 필요한 속성 추가
-    //         createDate: new Date().toLocaleDateString(), // 필요한 속성 추가
-    //         check: 0, // 필요한 속성 추가
-    //         content: reviewText // 사용자 리뷰 내용 추가
-    //     };
-    //     setReviews([...reviews, newReview]); // 리뷰 목록에 새 리뷰 추가
-    // };
-
-
 
     return (
         <div className="OrderReview02">

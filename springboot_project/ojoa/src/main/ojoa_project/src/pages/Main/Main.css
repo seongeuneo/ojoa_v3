@@ -372,7 +372,6 @@
 .MiniItems .colsection .colsec_name {
     font-size: 20px;
     font-weight: bold;
-    text-align: center;
     margin: 5px;
 }
 
@@ -381,7 +380,6 @@
     font-size: 17px;
     font-weight: bold;
     right: 0;
-    position: absolute;
     width: 120px;
 }
 
@@ -392,6 +390,12 @@
     left: 200px;
     margin-top: 10px;
     vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: -10px;
 }
 
 
@@ -414,7 +418,7 @@
 
 .MiniItembox .heartbtn {
     /* position: absolute; */
-    position:relative;
+    position: relative;
     bottom: 45px;
     left: 365px;
     width: 25px;
