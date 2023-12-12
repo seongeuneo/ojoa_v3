@@ -53,11 +53,7 @@ const CartList = ({ id, productname, content, quantity, mainimage, discount, pri
         axios.delete(`/api/cdelete?prod_num=${id}&user_id=${loginID}`)
             .then((response) => {
                 axios
-<<<<<<< HEAD
                     .get(`/api/cart/allCartList?loginID=${loginID}`)
-=======
->>>>>>> main
-                .get(`/api/cart/allCartList?loginID=${loginID}`)
                     .then((response) => {
                         setCart(response.data);
                     })
