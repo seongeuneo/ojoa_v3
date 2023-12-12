@@ -21,6 +21,13 @@ public class QnaServiceImpl implements QnaService {
 	 private final QnaRepository qnaRepository;
 	 //모두 QnaRepository를 통해 실행하여 결화를 반환
 	 
+	// 답변달기!!!
+@Override
+	public int replyUpdate(int qna_seq, String qna_reply) {
+		qnaRepository.replyUpdate(qna_seq, qna_reply);
+		return qna_seq;
+	}	 
+	 
 	 // ** selectList
 	 	@Override
 	 	public List<Qna> selectList() {
@@ -50,7 +57,10 @@ public class QnaServiceImpl implements QnaService {
 	 	}
 	 	
 	 	// ** reply
-	    
+//	 	@Override
+//	    public void replyinsert(int qna_seq, String qna_reply) {
+//	 		qnaRepository.replyinsert(qna_seq, qna_reply);
+//	    }
 	 	
 	 	
 	 	// QnA 목록 조회 (selectAllList를 구현)

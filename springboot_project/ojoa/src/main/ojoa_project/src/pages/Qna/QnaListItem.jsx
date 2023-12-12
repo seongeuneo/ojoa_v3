@@ -1,6 +1,6 @@
 import './Qna.css';
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 // 배열 속성 writer 입력시 성만 따오기
   const lastName = (fullName) => {
@@ -9,9 +9,13 @@ import React, { useState } from "react";
     }
     // fullName이 비어있을 때 처리할 내용을 추가할 수 있습니다.
 };
-function QnaListItem({ qnaList, filters }) {
-    const [expandedId, setExpandedId] = useState(null);
 
+const QnaListItem = ({ qnaList, filters }) => {
+    const [expandedId, setExpandedId] = useState(null);
+    const [replyContents, setReplyContents] = useState({});
+    const [updatedQnaList, setUpdatedQnaList] = useState(qnaList); // 여기서 새로운 상태 추가
+
+    console.log(qnaList);
     const handleTitleClick = (id) => {
         if (expandedId === id) {
             setExpandedId(null);
@@ -65,6 +69,14 @@ function QnaListItem({ qnaList, filters }) {
     });
 
 
+
+
+//=========================================================================
+
+
+
+
+
     return (
         <tbody className='qna_ListItem_container'>
             {qnaList.map((item, i) => (
@@ -97,13 +109,6 @@ function QnaListItem({ qnaList, filters }) {
                             </tr>
                         )
                     }
-                    {expandedId === i && (
-                        <tr className='qna_board_st7'>
-                            <td colSpan="8" className='notification_row'>
-                                {item.notification}
-                            </td>
-                        </tr>
-                    )}
                     {/* {expandedId === i && (
                         <tr className='qna_board_st7'>
                             <td colSpan="8" className='notification_row'>
@@ -111,6 +116,14 @@ function QnaListItem({ qnaList, filters }) {
                             </td>
                         </tr>
                     )} */}
+                    {expandedId === i && (
+                        <tr className='qna_board_st7'>
+                            <td colSpan="8" className='notification_row'>
+                            <p>[문의 내용] : {item.notification}</p>
+                            <p>[답변내용] : {item.titleIcon}</p>
+                            </td>
+                        </tr>
+                    )}
                 </React.Fragment>
             ))}
 
