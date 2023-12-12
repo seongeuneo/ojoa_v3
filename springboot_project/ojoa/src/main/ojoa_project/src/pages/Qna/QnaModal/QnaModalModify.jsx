@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
-import mockList from "../../../data/ItemsData";
 import { TodoDispatchContext } from "../Qna";
 import { useModal } from "../QnaModal/ModalContext";
 import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
+import { useProductList } from "../../ProductList/useProductList";
 
 function QnaModalModify({ closeModal }) {
+    const data = useProductList();
 
     const [content, setContent] = useState("");
     // => new 일정 처리할  onChangeContent 이벤트 핸들러 
@@ -88,7 +89,7 @@ function QnaModalModify({ closeModal }) {
                                         <select name="board_category" id="board_category2">
                                             <option>제품목록</option>
                                             <option value="1">의자</option>
-                                            {mockList.map((item) => (
+                                            {data.map((item) => (
                                                 <React.Fragment key={item.id}>
                                                     <option value={item.imgNo}>{item.productName}</option>
                                                 </React.Fragment>
