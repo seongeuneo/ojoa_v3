@@ -96,7 +96,7 @@ const QnaListItem = ({ qnaList, filters }) => {
                             <tr className='qna_Lboard_st'>
                                 <td className='qna_board_st1'>{item.num}</td>
                                 <td className='qna_Lboard_st2'>
-                                    <div><img src={`../thumbs/${item.imgNo}_1.jpg`} alt='상품' /></div>
+                                    <div><img src={`../thumbs/${item.imgNo}`} alt='상품' /></div>
                                     <div>{item.itemInfo}</div>
                                 </td>
                                 <td className='qna_board_st3'>{item.category}</td>
