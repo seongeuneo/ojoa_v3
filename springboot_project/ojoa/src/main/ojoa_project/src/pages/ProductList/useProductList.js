@@ -20,6 +20,3 @@ export const useProductList = () => {
 
   return data;
 };
-
-
-
