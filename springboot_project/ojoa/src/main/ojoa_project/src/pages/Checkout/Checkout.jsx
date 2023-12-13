@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 // import Iamport, { PaymentRequest } from 'kamport'
 import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
-import { Link, useNavigate } from 'react-router-dom';
 import Post from './KakaoAddressModal/KakaoAddressModal';
 import axios from 'axios';
 import AddressPopup from './AddressPopup/AddressPopup';
@@ -32,6 +32,11 @@ function Checkout({ cart }) {
   const [isMember, setIsMember] = useState(false);
   const navigate = useNavigate();
 
+  // 원희가 준 코드
+  const location = useLocation();
+  const selectedCartItems = location.state.selectedCartItems;
+
+
   function showAddressPopupOpen() {
     setIsAddressPopupOpen(true);
   }
@@ -46,17 +51,28 @@ function Checkout({ cart }) {
   // 할인금액
   const discountPrice = 0;
 
-  //const selectedProducts = cart.filter(item => selectedItems.includes(item.prod_num));
+  //const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
   const selectedProducts = cart;
 
   const displayedCartList = useMemo(() => {
-    return selectedProducts.map(item => ({
+    return selectedCartItems.map(item => ({
       ...item,
       dispalyedPrice: formatNumber(item.productPriceFormatted),
       totalPrice: item.quantity * Number(item.productPriceFormatted),
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
-  }, [selectedProducts]);
+  }, [selectedCartItems]);
+
+
+  //이걸로 !!
+  // const displayedCartList = useMemo(() => {
+  //   return selectedCartItems.map(item => ({
+  //     ...item,
+  //     dispalyedPrice: formatNumber(item.productPriceFormatted),
+  //     totalPrice: item.quantity * Number(item.productPriceFormatted),
+  //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
+  //   }))
+  // }, [selectedCartItems]);
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {

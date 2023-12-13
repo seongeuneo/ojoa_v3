@@ -114,7 +114,7 @@ const CartList = ({ id, productname, content, quantity, mainimage, discount, pri
                                 />
                             </td>
 
-                            <td><img className="cart_img" src={`/thumbs/${mainimage}_1.jpg`} alt={`${productname}`} /></td>
+                            <td><img className="cart_img" src={`/thumbs/${mainimage}`} alt={`${productname}`} /></td>
                             <td>
                                 <div className="cart_mininame" name="prod_content">[{content}]</div>
                                 <td><a className="cart_mainname" name="prod_name" href="#">{productname}</a></td>

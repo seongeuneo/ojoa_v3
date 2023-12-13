@@ -155,7 +155,7 @@ function Order() {
                                                             <div>[{item.orders_num_confirm}]</div>
                                                         </td>
                                                         <td>
-                                                            <div><img src={`../thumbs/${item.prod_mainimage}_1.jpg`} alt='상품' /></div>
+                                                            <div><img src={`../thumbs/${item.prod_mainimage}`} alt='상품' /></div>
                                                         </td>
                                                         <td>{item.prod_name}</td>
                                                         <td>{item.quantity}</td>
