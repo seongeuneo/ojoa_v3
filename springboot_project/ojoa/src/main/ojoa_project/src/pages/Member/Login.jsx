@@ -132,7 +132,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                         &quot;보안접속&quot;
                                     </div>
                                     <div className="login_forget">
-                                        {/* <label for="idSet" class="sign_checkbox">
+                                        <label for="idSet" class="sign_checkbox">
                                             <input
                                                 type="checkbox"
                                                 id="idSet"
@@ -144,7 +144,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                                 </svg>
                                             </span>
                                             <span>아이디 기억하기</span>
-                                        </label> */}
+                                        </label>
                                     </div>
                                     <div className="login_find">
                                         <ul>

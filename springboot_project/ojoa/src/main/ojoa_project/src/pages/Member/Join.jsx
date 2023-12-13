@@ -344,7 +344,7 @@ const Join = () => {
                     </caption>
                     <tr>
                         <th>
-                            <label for="name">이름</label>
+                            <label for="name"><span>&#42;</span>이름</label>
                         </th>
                         <td>
                             <input type="text"
@@ -362,7 +362,7 @@ const Join = () => {
                     </tr>
                     <tr>
                         <th>
-                            <label for="userid">아이디</label>
+                            <label for="userid"><span>&#42;</span>아이디</label>
                         </th>
                         <td>
                             <input type="text"
@@ -391,7 +391,7 @@ const Join = () => {
                     </tr>
                     <tr>
                         <th>
-                            <label for="pw">비밀번호</label>
+                            <label for="pw"><span>&#42;</span>비밀번호</label>
                         </th>
                         <td>
                             <input type="password"
@@ -411,7 +411,7 @@ const Join = () => {
                     </tr>
                     <tr>
                         <th>
-                            <label for="passwordcheck">비밀번호 확인</label>
+                            <label for="passwordcheck"><span>&#42;</span>비밀번호 확인</label>
                         </th>
                         <td>
                             <input type="password"

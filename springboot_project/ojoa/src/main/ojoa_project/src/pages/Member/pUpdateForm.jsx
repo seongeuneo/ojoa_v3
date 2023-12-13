@@ -67,14 +67,14 @@ const PUpdateForm = () => {
 
                     <div className="txt_01"><h3>회원 비밀번호 수정</h3></div>
                 </div>
-                <div className="base-box">
+                {/* <div className="base-box">
                     <p className="thumbnail">
                         <img src="../../images/img_member_default.gif" alt="썸네일" /></p>
                     <div className="description">
                         <span>저희 쇼핑몰을 이용해 주셔서 감사합니다. <span><strong></strong></span> 님은 <strong>[<span>일반
                         </span>]</strong> 회원이십니다.</span>
                     </div>
-                </div>
+                </div> */}
 
                 <form onSubmit={handlePasswordChange} name="personalInfo">
                     <table className="personal_modify">
