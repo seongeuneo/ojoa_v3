@@ -22,5 +22,5 @@ public interface MemberService {
 	// ** 패스워드 업데이트
     public boolean updatePassword(Member entity);
    
-
+    String findIdByNameAndPhone(String name, String phone2, String phone3);
 }

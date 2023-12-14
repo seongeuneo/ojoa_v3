@@ -188,6 +188,29 @@ public class MemberControllerR {
 	} //rmemberdelete
 	
 	
+	@GetMapping("/rfindId")
+    public ResponseEntity<?> findLoginId(
+            @RequestParam("name") String name,
+            @RequestParam("phone2") String phone2,
+            @RequestParam("phone3") String phone3
+    ) {
+        try {
+            // 데이터베이스에서 해당 name, phone2, phone3 값을 가진 ID를 조회합니다.
+            String foundId = service.findIdByNameAndPhone(name, phone2, phone3);
+
+            if (foundId != null) {
+                // ID를 찾은 경우
+                return ResponseEntity.ok(foundId);
+            } else {
+                // ID를 찾지 못한 경우
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 정보로 등록된 ID가 없습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ID를 찾는 중에 오류가 발생했습니다.");
+        }
+    } //findLoginId
+	
+	
 	
 	//***** 결제페이지 회원정보 가져오기 : 희상추가
 	@GetMapping(value="/rinfo")
