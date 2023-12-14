@@ -40,10 +40,7 @@ public interface CartService {
 
 	List<CartDTO> selectAllList(String loginID);
 
-	//새로추가
-	List<CartDTO> selectByIdList(String id);
-	//새로추가
-	List<CartDTO> selectAllCartByOrderList(String id, String state);
+
 }
 	
 	

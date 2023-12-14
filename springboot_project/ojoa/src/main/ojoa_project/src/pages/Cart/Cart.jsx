@@ -37,21 +37,9 @@ const Cart = ({ cart, setCart }) => {
     //     navigate('/checkout', { state: { selectedCartItems } });
     // };
 
-
-    // 원희코드
-    // const onCheckout = () => {
-    //     const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
-    //     navigate('/checkout', { state: { selectedCartItems: selectedCartItems } });
-    // };
-
-    // 원희코드에 state추가
     const onCheckout = () => {
         const selectedCartItems = cart.filter((item) => selectedItems.includes(item.prod_num));
         navigate('/checkout', { state: { selectedCartItems: selectedCartItems } });
-        const updatedSelectedCartItems = selectedCartItems.map((item) => ({
-            ...item,
-            state: 'order',
-        }));
     };
 
     const calculateSelectedTotal = () => {
@@ -117,4 +105,3 @@ const Cart = ({ cart, setCart }) => {
 };
 
 export default Cart;
-

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.ojo.ojoa.domain.MemberDTO;
 import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.repository.MemberRepository;
 
@@ -63,6 +62,13 @@ public class MemberServiceImpl implements MemberService {
 		repository.deleteById(id);
 		return id;  // 삭제후 key return 
 	}
+	
+	// ** 이름과 휴대폰 번호로 아이디 찾기
+	@Override
+    public Member findIdByNameAndPhone(String name, String phone2, String phone3) {
+        // 해당 이름과 전화번호로 회원을 찾는 로직 추가
+        return repository.findIdByNameAndPhone(name, phone2, phone3);
+    }
 	
 	
 } //class

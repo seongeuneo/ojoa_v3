@@ -71,6 +71,5 @@ public class Cart implements Serializable {
 	@Id
 	private int prod_num;
 	private int quantity;
-	private String state;
 	
 } //class

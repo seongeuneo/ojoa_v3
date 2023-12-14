@@ -31,16 +31,6 @@ extends JpaRepository<Cart, CartId> {
 			+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num where c.id=:id order by c.prod_num")
 	List<CartDTO> findAllUserID(@Param("id") String id);
 	
-	// Cart item 목록 검색
-	@Query("SELECT new com.ojo.ojoa.DTO.CartDTO(c.id, c.prod_num, c.quantity, p.prod_mainimage, p.prod_name, p.prod_discount, p.prod_price1, p.prod_content) "
-			+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num WHERE c.id = :id ORDER BY c.prod_num")
-	List<CartDTO> selectByIdList(@Param("id") String id);
-	
-	// Order에 대한 cart item 목록 검색
-	@Query("SELECT new com.ojo.ojoa.DTO.CartDTO(c.id, c.prod_num, c.quantity, p.prod_mainimage, p.prod_name, p.prod_discount, p.prod_price1, p.prod_content) "
-			+ "FROM Cart c LEFT JOIN Product p ON c.prod_num=p.prod_num WHERE c.id = :id AND c.state = :state ORDER BY c.prod_num")
-	List<CartDTO> selectAllCartByOrderList(@Param("id") String id, @Param("state") String state);
-	
 	void save(int prod_num);
 	
 // =================== 복합키 설정한 부분 =================	

@@ -11,7 +11,6 @@ function QnaModal({ closeModal, onFilterChange }) {
 
     const [content, setContent] = useState("");
     // => new 일정 처리할  onChangeContent 이벤트 핸들러 
-
     const onChangeContent = (e) => {
         setContent(e.target.value);
     }; //onChangeContent
@@ -96,7 +95,7 @@ function QnaModal({ closeModal, onFilterChange }) {
                                         </select>
                                         {/* <select name="board_category" id="board_category2"> */}
                                         <select name="prod_kind" id="board_category2" >
-
+                                            <option>제품목록</option>
                                             {/* <option value="1">의자</option> */}
                                             {data.map((item) => (
                                                 <React.Fragment key={item.prod_num}>

@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
+// import Iamport, { PaymentRequest } from 'kamport'
 import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
@@ -11,13 +11,24 @@ import axios from 'axios';
 import AddressPopup from './AddressPopup/AddressPopup';
 
 
+// const mockData = [
+//   {
+//     "id": 101,
+//     "imgNo": 101,
+//     "productName": "조금 큰 나무 침대",
+//     "productPriceFormatted": "385000",
+//     "productPromotion": "7",
+//     "productInfo": "안녕하세요 그렇습니다",
+//     "productReview": "8",
+//     "productGrade": "4.8",
+//     "quantity": 1
+//   }
+// ];
+
+
+
 function Checkout({ cart }) {
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
-
-  //새로추가
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [orderInfo, setOrderInfo] = useState({});
-
   const [isMember, setIsMember] = useState(false);
   const navigate = useNavigate();
 
@@ -41,24 +52,8 @@ function Checkout({ cart }) {
   const discountPrice = 0;
 
   //const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
+  const selectedProducts = cart;
 
-  //const selectedProducts = cart; //오류나서 주석처리
-
-  // state = order 코드추가
-  useEffect(() => {
-    const getSelectedProducts = async () => {
-      try {
-        const response = await axios.get("/api/order/selectCartList?state=order");
-        setSelectedProducts(response.data);
-      } catch (error) {
-        console.error("Error: ", error);
-      }
-    };
-
-    getSelectedProducts();
-  }, []);
-
-  // 원희가 준 코드
   const displayedCartList = useMemo(() => {
     return selectedCartItems.map(item => ({
       ...item,
@@ -93,27 +88,23 @@ function Checkout({ cart }) {
     navigate('/paymentconfirmation');
   };
 
-  //수정
-  useEffect(() => {
-    setOrderInfo({
-      memberCheck: '',
-      orders_method: 'card', // cart , vbank
-      buyer: '',
-      postNumber: '',
-      address1: '',
-      address2: '',
-      phone1: '010',
-      phone2: '',
-      phone3: '',
-      email1: '',
-      email2: '',
-      message: '',
-      orders_totalprice: totalProductPrice,
-      orders_price: totalCheckoutPrice,
-      ordersDetail: displayedCartList
-    });
-  }, [totalProductPrice, totalCheckoutPrice, displayedCartList]);
-
+  const [orderInfo, setOrderInfo] = useState({
+    memberCheck: '',
+    orders_method: 'card', // cart , vbank
+    buyer: '',
+    postNumber: '',
+    address1: '',
+    address2: '',
+    phone1: '010',
+    phone2: '',
+    phone3: '',
+    email1: '',
+    email2: '',
+    message: '',
+    orders_totalprice: totalProductPrice,
+    orders_price: totalCheckoutPrice,
+    ordersDetail: cart
+  });
 
   const loginCheck = () => {
     axios
@@ -209,7 +200,6 @@ function Checkout({ cart }) {
         console.log(response);
         let orderData = response.data;
         if (orderData != null && orderData !== "") {
-          cart = orderInfo.ordersDetail
           navigate('/paymentconfirmation', { state: { orderData, cart } });
         } else {
           alert('결제 실패');
@@ -220,8 +210,10 @@ function Checkout({ cart }) {
       });
   };
 
+
   return (
     <div className="Checkout">
+      {/* <form onSubmit={handleSubmit}> */}
       <form>
         <h2 className="pay_title">주문서 작성</h2>
 
@@ -330,11 +322,14 @@ function Checkout({ cart }) {
               <th>주소 *</th>
               <td>
                 <input type="text" name="postNumber" className="input_control" onChange={handleOrderInfo} value={orderInfo.postNumber} />
+                {/* <button className="btn-control" onClick={() => setIsPostOpen(true)}>우편번호</button> */}
                 <button type="button" className="btn-control" onClick={handleComplete}>우편번호</button>
                 <br />
+                {/* <input type="text" className="input_control" value={isZoneCode} readOnly /> */}
                 <input type="text" name="address1" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address1} readOnly />
                 <p className="help_text">{`기본주소`}</p>
                 <br />
+                {/* <input type="text" className="input_control_help" value={isAddress} readOnly /> */}
                 <input type="text" name="address2" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address2} />
                 <p className="help_text">{`나머지주소(선택입력가능)`}</p>
                 {popup && <Post closeModal={setPopup} company={orderInfo} setcompany={setOrderInfo}></Post>}
@@ -523,6 +518,9 @@ function Checkout({ cart }) {
             </div>
           </div>
         </section>
+
+
+
       </form>
     </div>
 
@@ -532,5 +530,3 @@ function Checkout({ cart }) {
 
 
 export default Checkout;
-
-

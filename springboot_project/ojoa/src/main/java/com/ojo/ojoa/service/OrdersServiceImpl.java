@@ -13,10 +13,8 @@ import org.springframework.stereotype.Service;
 import com.ojo.ojoa.DTO.OrdersDetailReqDTO;
 import com.ojo.ojoa.DTO.OrdersReqDTO;
 import com.ojo.ojoa.DTO.OrdersResDTO;
-import com.ojo.ojoa.entity.CartId;
 import com.ojo.ojoa.entity.Orders;
 import com.ojo.ojoa.entity.OrdersDetail;
-import com.ojo.ojoa.repository.CartRepository;
 import com.ojo.ojoa.repository.OrdersDetailRepository;
 import com.ojo.ojoa.repository.OrdersRepository;
 
@@ -29,8 +27,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     private final OrdersRepository ordersRepository;
     private final OrdersDetailRepository ordersDetailRepository;
-    private final CartRepository cartRepository;
-    
+
  // ** selectList
  	@Override
  	public List<Orders> selectList() {
@@ -138,11 +135,6 @@ public class OrdersServiceImpl implements OrdersService {
 				if (ordersDetailResult != null) {
 					ordersDetailCnt += 1;
 				}
-				
-				CartId cartId = new CartId();
-				cartId.setId(loginID);
-				cartId.setProd_num(ordersDetail.getProd_num());
-				cartRepository.deleteById(cartId);
 			}
 			return result; // 모든 주문 정보가 성공적일 경우
 		} else {

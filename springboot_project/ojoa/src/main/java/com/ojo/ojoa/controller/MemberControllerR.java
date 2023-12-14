@@ -3,6 +3,7 @@ package com.ojo.ojoa.controller;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -186,6 +187,26 @@ public class MemberControllerR {
 	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("탈퇴 중 오류 발생 => "+e.toString());
 	    }
 	} //rmemberdelete
+	
+	
+	//**** => 리액트 FindLoginId
+	// 아이디 찾기
+	@GetMapping(value="/rfindid")
+	public ResponseEntity<?> rfindid(@RequestParam("name") String name,
+	                                  @RequestParam("phone2") String phone2,
+	                                  @RequestParam("phone3") String phone3) {
+	    try {
+	        Member result = service.findIdByNameAndPhone(name, phone2, phone3); // 이름과 휴대폰 번호로 아이디 검색
+	        if (result != null) {
+	            return ResponseEntity.ok(result.getId()); // 아이디 반환
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 아이디를 찾을 수 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        log.error("아이디 찾기 중 에러: {}", e.toString());
+	        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("아이디 찾기 실패: " + e.toString());
+	    }
+	} //rfindid
 	
 	
 	
