@@ -22,7 +22,7 @@ public class QnaServiceImpl implements QnaService {
 	 //모두 QnaRepository를 통해 실행하여 결화를 반환
 	 
 	// 답변달기!!!
-@Override
+	 @Override
 	public int replyUpdate(int qna_seq, String qna_reply) {
 		qnaRepository.replyUpdate(qna_seq, qna_reply);
 		return qna_seq;
@@ -61,7 +61,7 @@ public class QnaServiceImpl implements QnaService {
 //	    public void replyinsert(int qna_seq, String qna_reply) {
 //	 		qnaRepository.replyinsert(qna_seq, qna_reply);
 //	    }
-	 	
+	
 	 	
 	 	// QnA 목록 조회 (selectAllList를 구현)
 	 	@Override
@@ -95,5 +95,7 @@ public class QnaServiceImpl implements QnaService {
 	 	       // 조건에 따라 findConditionQnaList 메서드에 전달
 	 			return qnaRepository.findConditionQnaList(board_category, searchDate, search_key, search_query);
 	 		}
-	 	}
+	 	
+
+}
 }

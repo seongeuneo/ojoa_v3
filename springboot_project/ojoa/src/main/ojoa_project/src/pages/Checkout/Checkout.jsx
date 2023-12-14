@@ -21,10 +21,10 @@ function Checkout({ cart }) {
   const [isMember, setIsMember] = useState(false);
   const navigate = useNavigate();
 
+
   // 원희가 준 코드
   const location = useLocation();
   const selectedCartItems = location.state.selectedCartItems;
-
 
   function showAddressPopupOpen() {
     setIsAddressPopupOpen(true);
@@ -67,6 +67,16 @@ function Checkout({ cart }) {
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
   }, [selectedCartItems]);
+
+  //이걸로 !!
+  // const displayedCartList = useMemo(() => {
+  //   return selectedCartItems.map(item => ({
+  //     ...item,
+  //     dispalyedPrice: formatNumber(item.productPriceFormatted),
+  //     totalPrice: item.quantity * Number(item.productPriceFormatted),
+  //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
+  //   }))
+  // }, [selectedCartItems]);
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
