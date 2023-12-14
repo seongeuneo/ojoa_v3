@@ -8,6 +8,10 @@ import axios from "axios"; // axios import 추가
 
 
 function QModal({ closeModal, pagedQnaList, productData }) {
+
+
+
+
     function reducer(state, action) {
         switch (action.type) {
             case "INIT": {
@@ -22,31 +26,31 @@ function QModal({ closeModal, pagedQnaList, productData }) {
         }; //switch
     } //reducer
 
-    const [todo, dispatch] = useReducer(reducer, []);
-    const idRef = useRef(0);
-    const [isDataLoaded, setIsDataLoaded] = useState(false);
-    // ** localData Loading
-    // => Mount시 1회 실행 하도록 useEffect 에 빈 배열 전달
-    useEffect(() => {
-        const rawData = localStorage.getItem("todo");
-        // => LocalStorage 의 Data 존재 확인
-        if (!rawData) {
-            setIsDataLoaded(true);
-            return;
-        }
-        const localData = JSON.parse(rawData);
-        if (localData.length === 0) {
-            setIsDataLoaded(true);
-            return;
-        }
-        // => localData 가 존재하면
-        //  -> create시 id값 생성을 위한 idRef 값 할당
-        //  -> Loading 된 Data를 State 변수 todo에 담기위해 dispatch 호출
-        //  -> setIsDataLoaded(true) : Loading 완료됨 표시 
-        idRef.current = localData.length;
-        dispatch({ type: "INIT", dataList: localData });
-        setIsDataLoaded(true);
-    }, []); //useEffect 
+    // const [todo, dispatch] = useReducer(reducer, []);
+    // const idRef = useRef(0);
+    // const [isDataLoaded, setIsDataLoaded] = useState(false);
+    // // ** localData Loading
+    // // => Mount시 1회 실행 하도록 useEffect 에 빈 배열 전달
+    // useEffect(() => {
+    //     const rawData = localStorage.getItem("todo");
+    //     // => LocalStorage 의 Data 존재 확인
+    //     if (!rawData) {
+    //         setIsDataLoaded(true);
+    //         return;
+    //     }
+    //     const localData = JSON.parse(rawData);
+    //     if (localData.length === 0) {
+    //         setIsDataLoaded(true);
+    //         return;
+    //     }
+    //     // => localData 가 존재하면
+    //     //  -> create시 id값 생성을 위한 idRef 값 할당
+    //     //  -> Loading 된 Data를 State 변수 todo에 담기위해 dispatch 호출
+    //     //  -> setIsDataLoaded(true) : Loading 완료됨 표시 
+    //     idRef.current = localData.length;
+    //     dispatch({ type: "INIT", dataList: localData });
+    //     setIsDataLoaded(true);
+    // }, []); //useEffect 
 
     const [localQuestText, setLocalQuestText] = useState(''); // QModal 내부에서 사용하는 리뷰 내용 상태
 
@@ -59,7 +63,7 @@ function QModal({ closeModal, pagedQnaList, productData }) {
         try {
             const requestData = {
                 prod_num: productData.prod_num, // 상품 번호
-                id: 'user123', // 사용자 아이디 또는 다른 필요한 정보
+                id: productData.id, // 사용자 아이디 또는 다른 필요한 정보
                 qna_category: '상품 문의', // 문의 카테고리
                 qna_title: '질문 제목', // 질문 제목
                 qna_content: localQuestText, // 사용자가 입력한 질문 내용
@@ -103,6 +107,7 @@ function QModal({ closeModal, pagedQnaList, productData }) {
                     <div className="sf_order_list_wrap">
                         <span className="owl-carousel-nav prev"></span>
                         <div className="sf_order_item">
+                            <div className="sf_review_item_name sf_one_line">작성자 : {productData.id}</div>
                             <div className="thumbnail"> <img src={`/thumbs/${productData.prod_mainimage}`} alt={productData.prod_mainimage} />
                             </div>
                             <div className="sf_buy_option">

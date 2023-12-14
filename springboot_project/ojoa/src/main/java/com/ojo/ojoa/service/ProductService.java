@@ -13,6 +13,10 @@ public interface ProductService {
 
 	// ** selectList
 	List<Product> selectList();
+	
+	// 페이지네이션
+	// Page<Product> getProductList(Pageable pageable);
+	// 레파짓토리쿼리문 서비스 서비스임플 컨트롤러
 
 	// ** selectOne
 	Product selectOne(int prod_num);

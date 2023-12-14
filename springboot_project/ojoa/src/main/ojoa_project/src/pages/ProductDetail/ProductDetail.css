@@ -384,6 +384,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 /* ====================================================== */
+/* OrderReview02 */
+.rv_list .rv_img {
+  width: 50px;
+}
+
+/* ====================================================== */
 /* navi_bar */
 .ProductDetail .path {
   color: #333;
@@ -443,6 +449,11 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .qIMG img {
+  width: 55px;
+  height: 55px;
+}
+
+.prQnaIMG {
   width: 55px;
   height: 55px;
 }

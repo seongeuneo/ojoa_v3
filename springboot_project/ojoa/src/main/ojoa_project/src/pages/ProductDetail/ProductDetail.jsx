@@ -71,9 +71,12 @@ function ProductDetail({ handleCart }) {
     }
 
     // 1000단위 끊기
-    const sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
-    const sellPrice1 = sellPrice.toLocaleString();
-    const sum = count * sellPrice;
+    const sellPrice = Array.isArray(productData) && productData.length > 0
+        ? parseInt(productData[0].prod_price1.toString().replace(/,/g, ''))
+        : 0;
+
+    const sellPrice1 = productData.prod_price1.toLocaleString();
+    const sum = sellPrice1 * sellPrice;
     const result = sum.toLocaleString();
 
     //======================================
@@ -140,7 +143,7 @@ function ProductDetail({ handleCart }) {
                     <tbody>
                         <tr>
                             <th>판매가</th>
-                            <td className="price">{sellPrice1}원</td>
+                            <td className="price">{productData.prod_price1}원</td>
                         </tr>
                         <tr>
                             <th>상품코드</th>
@@ -185,7 +188,7 @@ function ProductDetail({ handleCart }) {
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td className="total"><strong>{result}</strong>원</td>
+                            <td className="total"><strong>{sum}</strong>원</td>
                         </tr>
                     </tbody>
                 </table>

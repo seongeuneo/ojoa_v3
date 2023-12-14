@@ -76,7 +76,7 @@ public class ProductController {
 			uploadfilef.transferTo(new File(file1)); // IO 발생: Checked Exception 처리  
 			
 			// => Table 저장경로 완성 (file2)
-			String file2="resources/uploadImages/" + uploadfilef.getOriginalFilename();
+			String file2="public\\thumbs\\" + uploadfilef.getOriginalFilename();
 			updatedProduct.setProd_mainimage(file2);
 		} // Image 선택 
 		

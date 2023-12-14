@@ -54,9 +54,10 @@ public class ProductRestController {
 //			String uri="/product/productInsert";
 			System.out.println("productInsert****" + entity);
 			// ** MultipartFile ***********************
-			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
+//			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
+			String realPath =  "/Users/seongeun-euh/Desktop/KDT/ojoa_3nd/springboot_project/ojoa/src/main/ojoa_project/public/thumbs";
 			// => 기본 이미지 지정하기
-			String file1, file2="resources/uploadImages/basicman4.png";
+			String file1, file2="";
 			
 			// => 저장경로 완성
 					MultipartFile uploadfilef = entity.getUploadfilef();

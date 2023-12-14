@@ -15,7 +15,7 @@ function ProdQna03() {
         const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
         setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
     }, []);
-    
+
     // 모달창 띄우기=====================================================
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -30,20 +30,6 @@ function ProdQna03() {
     };
     const closeModal = () => setModalIsOpen(false);
     // ===============================================================
-
-    function reducer(state, action) {
-        switch (action.type) {
-            case "INIT": {
-                return action.dataList;
-            }
-            case "Create": {
-                const newState = [action.newItem, ...state];
-                localStorage.setItem("todo", JSON.stringify(newState));
-                return newState;
-            }
-            default: return state;
-        }; //switch
-    } //reducer
 
 
 
@@ -69,7 +55,6 @@ function ProdQna03() {
     // 해당하는 상품의 리뷰 필터링
     const location = useLocation();
     const productData = location.state.productData;
-    const matchingReviews = qnaList.filter((prodqna) => prodqna.prod_num === productData.prod_num);
 
     // 배열 속성 writer 입력시 성만 따오기========================================
     const lastName = (fullName) => {
@@ -82,8 +67,6 @@ function ProdQna03() {
 
 
 
-
-
     // 한 페이지당 몇 개의 글을 보여줄 것인지 정의===================================
     const itemsPerPage = 10;
     // 현재 페이지 상태와 페이지 변경 함수
@@ -91,12 +74,8 @@ function ProdQna03() {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    let pagedQnaList = matchingReviews.slice(startIndex, endIndex);
+    let pagedQnaList = qnaList.slice(startIndex, endIndex);
     // ====================================================================
-
-
-
-
 
     // 클릭시 내용물 오픈~=====================================================
     const [expandedId, setExpandedId] = useState(null);
@@ -136,6 +115,124 @@ function ProdQna03() {
         }
     };
 
+    // 전체 상품문의 목록 ===============================================================================================
+    // 해당하는 상품의 리뷰 필터링
+    const matchingReviews = pagedQnaList.filter((review) => review.prod_num === productData.prod_num);
+    // 리뷰리스트 리스트 맵핑
+    const singleReviewLi = matchingReviews.map((item, i) => {
+        return (
+            <React.Fragment key={i}>
+                {
+                    (item.num == "공지") ? (
+                        <tr key={item.review_seq}>
+                            <td>{item.num}</td>
+                            {/* <td>{item.prod_num}</td> */}
+                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
+
+                            <td>{item.notification}</td>
+                            {/* <td>{item.category}</td> */}
+                            <td>
+                                <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
+                            </td>
+                            <td>{item.writer}</td>
+                            <td>{item.date}</td>
+                        </tr>
+                    ) : (
+                        <tr>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
+                            {/* <td>{item.prod_num}</td> */}
+                            <td>
+                                <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
+                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
+                            </td>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
+                            {/* <td>{item.category}</td> */}
+                            {/* <td> <a onClick={() => handleTitleClick(i)}>{lastName(item.writer)}&#42;&#42;</a></td> */}
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
+                        </tr>
+                    )
+                }
+                {expandedId === i && (
+                    <tr>
+                        <td colSpan="7">
+                            {item.qna_reply == null ? (
+                                <p>답변이 아직 되지 않았습니다.</p>
+                            ) : (
+                                <p>{item.qna_reply}</p>
+                            )}
+                        </td>
+                    </tr>
+                )}
+            </React.Fragment>
+        )
+    });
+
+    const [isUserReviewsVisible, setIsUserReviewsVisible] = useState(false);
+
+    // '내가쓴글조회하기'를 클릭하면 상태를 변경
+    const handleUserReviewsClick = () => {
+
+        if (isLoggedIn === true) {
+            setIsUserReviewsVisible(true);
+        } else {
+            alert('로그인이 필요합니다.');
+        }
+    };
+
+
+    // 해당 사용자가 작성한 리뷰 필터링
+    const userReviews = pagedQnaList.filter((review) => review.id === (sessionInfo && sessionInfo.id)); // loggedInUserId에 현재 로그인한 사용자의 아이디가 있어야 합니다.
+
+    // 리뷰 리스트 맵핑
+    const userReviewLi = userReviews.map((item, i) => {
+        return (
+            <React.Fragment key={i}>
+                {
+                    (item.num == "공지") ? (
+                        <tr key={item.review_seq}>
+                            <td>{item.num}</td>
+                            {/* <td>{item.prod_num}</td> */}
+                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
+
+                            <td>{item.notification}</td>
+                            {/* <td>{item.category}</td> */}
+                            <td>
+                                <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
+                            </td>
+                            <td>{item.writer}</td>
+                            <td>{item.date}</td>
+                        </tr>
+                    ) : (
+                        <tr>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
+                            {/* <td>{item.prod_num}</td> */}
+                            <td>
+                                <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
+                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
+                            </td>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
+                            {/* <td>{item.category}</td> */}
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
+                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
+                        </tr>
+                    )
+                }
+                {expandedId === i && (
+                    <tr>
+                        <td colSpan="7">
+                            {item.qna_reply == null ? (
+                                <p>답변이 아직 되지 않았습니다.</p>
+                            ) : (
+                                <p>{item.qna_reply}</p>
+                            )}
+                        </td>
+                    </tr>
+                )}
+            </React.Fragment>
+        );
+    });
+
     return (
         <div className="OrderReview02">
             {/* <!-- main product detail --> */}
@@ -154,54 +251,14 @@ function ProdQna03() {
                             <th>작성일</th>
                             {/* <th>조회수</th> */}
                         </tr>
-                        {pagedQnaList.map((item, i) => (
-                            <React.Fragment key={i}>
-                                {
-                                    (item.num == "공지") ? (
-                                        <tr key={item.review_seq}>
-                                            <td>{item.num}</td>
-                                            {/* <td>{item.prod_num}</td> */}
-                                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
-
-                                            <td>{item.notification}</td>
-                                            {/* <td>{item.category}</td> */}
-                                            <td>
-                                                <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
-                                            </td>
-                                            <td>{item.writer}</td>
-                                            <td>{item.date}</td>
-                                        </tr>
-                                    ) : (
-                                        <tr>
-                                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
-                                            {/* <td>{item.prod_num}</td> */}
-                                            <td>
-                                                <div> <a onClick={() => handleTitleClick(i)}><img src={`${item.imgNo}`} alt='상품' /></a></div>
-                                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
-                                            </td>
-                                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
-                                            {/* <td>{item.category}</td> */}
-                                            <td> <a onClick={() => handleTitleClick(i)}>{lastName(item.writer)}&#42;&#42;</a></td>
-                                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
-                                        </tr>
-                                    )
-                                }
-                                {expandedId === i && (
-                                    <tr>
-                                        <td colSpan="7">
-                                            {item.qna_reply}
-                                        </td>
-                                    </tr>
-                                )}
-                            </React.Fragment>
-                        ))}
+                        {isUserReviewsVisible ? userReviewLi : singleReviewLi}
                         <tr>
                             <th colspan="7">
                                 <a onClick={openModal}>상품문의하기 </a>
                                 <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal} pagedQnaList={pagedQnaList} >
                                     <QModal closeModal={closeModal} pagedQnaList={pagedQnaList} productData={productData} />
                                 </Modal>
-                                <a> 내가쓴글조회하기</a>
+                                <a onClick={handleUserReviewsClick}> 내가쓴글조회하기</a>
                             </th>
                         </tr>
                     </tbody>

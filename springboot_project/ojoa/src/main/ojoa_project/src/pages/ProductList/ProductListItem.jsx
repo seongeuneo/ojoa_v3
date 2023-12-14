@@ -5,9 +5,15 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import "./ProductListItem.css";
 
 const ProductListItem = ({ content, onSelect, handleCart }) => {
+    const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
 
-    //const productPrice = content.productPriceFormatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+    useEffect(() => {
+        const storedSessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
+        setIsLoggedIn(!!storedSessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
+    }, []);
 
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
@@ -71,6 +77,18 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                 }
             });
 
+    };
+
+    // 로그인 상태에 따라 AddWishIcon 함수 실행 여부 결정
+    const handleWishIconClick = () => {
+        if (isLoggedIn) {
+            AddWishIcon(); // 로그인 상태라면 AddWishIcon 함수 실행
+        } else {
+            // 로그인되지 않은 상태에서는 원하는 동작을 수행하거나 에러를 처리할 수 있습니다.
+            // 예를 들어, 로그인 팝업을 보여줄 수도 있습니다.
+            // 에러 처리나 예외 처리를 하는 등의 작업을 수행하면 됩니다.
+            console.log("사용자가 로그인되지 않았습니다. 관심 상품을 추가하려면 로그인하세요.");
+        }
     };
 
     //============================= 여기서부터 워니의 코드 =================================
@@ -138,7 +156,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                                 <a className="pd_heart">
                                     <img
                                         src={imageSrc}
-                                        onClick={AddWishIcon}
+                                        onClick={handleWishIconClick}
                                         alt="관심상품" />
                                 </a>
                             </div>
