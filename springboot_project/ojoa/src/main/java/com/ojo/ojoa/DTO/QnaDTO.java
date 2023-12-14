@@ -22,7 +22,7 @@ public class QnaDTO {
 	    private int prod_num; //Foregin key
 		
 		@JsonProperty("imgNo")
-	    private String prod_image;
+	    private String prod_mainimage;
 		
 		@JsonProperty("itemInfo")
 	    private String prod_name;
@@ -51,12 +51,12 @@ public class QnaDTO {
 	
 
 		
-	    public QnaMainListDTO(int qna_seq, int prod_num, String prod_image, String prod_name, String qna_category, String qna_title, String qna_content, String qna_reply, String titleIcon, String id, LocalDateTime qna_redate) {
+	    public QnaMainListDTO(int qna_seq, int prod_num, String prod_mainimage, String prod_name, String qna_category, String qna_title, String qna_content, String qna_reply, String titleIcon, String id, LocalDateTime qna_redate) {
 	    // 해당클래스의 객체를 생성할때 필요한 모든 필드를 인자로 받아 초기화하는 생성자
 	    	super();
 	        this.qna_seq = qna_seq;
 	        this.prod_num = prod_num;
-	        this.prod_image = prod_image;
+	        this.prod_mainimage = prod_mainimage;
 	        this.prod_name = prod_name;
 	        this.qna_category = qna_category;
 	        this.qna_title = qna_title;

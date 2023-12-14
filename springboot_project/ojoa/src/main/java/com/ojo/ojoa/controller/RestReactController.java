@@ -151,14 +151,28 @@ public class RestReactController {
 //	}
 	
 //============================================================================================================	
-	// 장바구니
+	// 장바구니 - 원래대로 안되면 밑에걸로 하기
 	@GetMapping("cart/allCartList")
 	public ResponseEntity<List<CartDTO>> getAllCartList(@RequestParam String loginID) {
 	    List<CartDTO> cartList = cartService.selectAllList(loginID);
 	    return ResponseEntity.ok(cartList);
 	}
+
+	//새로추가
+	@GetMapping("cart/selectCartList")
+	public ResponseEntity<List<CartDTO>> getAllCartList(HttpSession session) {
+		
+		String loginID = (String) session.getAttribute("loginID");
+		
+		if (loginID == null) {
+			loginID = "admin";
+		}
+		List<CartDTO> cartList = cartService.selectByIdList(loginID);
+		// model.addAttribute("qna", test);
+		return ResponseEntity.ok(cartList);
+	}
 	
-	
+	//원래주석
 //	@GetMapping("cart/allCartList")
 //	public ResponseEntity<List<CartDTO>> getAllCartList() {
 //	    try {
@@ -172,6 +186,7 @@ public class RestReactController {
 //	    }
 //	}	
 	
+
 
 @PostMapping("cart/saveCart")
 public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
@@ -190,6 +205,7 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
     }
 }
+
 	
 	
 	
@@ -243,6 +259,7 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 			System.out.println("** cart delete Exception => " + e.toString());
 		}
 	}
+
 	
 //===============================================================================		
 
@@ -348,8 +365,21 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
         }
     }
     
-
-
-
+    // 카트에서 선택된 항목만 주문에 가져오기
+	@GetMapping("order/selectCartList")
+	public ResponseEntity<?> getAllCartByOrderList(HttpSession session,@RequestParam String state) {
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+			
+			if (loginID == null) {
+				loginID = "admin";
+			}
+			List<CartDTO> cartList = cartService.selectAllCartByOrderList(loginID, state);
+			return ResponseEntity.ok(cartList);
+		} catch (Exception e) {
+            log.error("데이터 저장 중 에러: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
+        }
+	}
 
 }

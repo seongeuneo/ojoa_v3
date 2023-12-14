@@ -84,7 +84,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
                     </div>
                 </div>
 
-                <div className="button" onClick={onCheckout}>
+                <div className="button" onClick={paynow}>
                     <p className="btnText">PAY NOW</p>
                     <div className="btnTwo">
                         <p className="btnText2">GO!</p>

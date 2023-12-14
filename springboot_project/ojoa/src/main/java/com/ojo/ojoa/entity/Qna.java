@@ -47,7 +47,7 @@ public class Qna extends QnaBaseEntity {
 
     @Column(name="qna_reply")
     private String qna_reply;
-
+    
 //	@OneToOne(mappedBy = "qna", fetch = FetchType.LAZY)
 //    private Product product;
    

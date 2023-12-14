@@ -108,17 +108,19 @@ const QnaListItem = ({ qnaList, filters }) => {
                             </tr>
                         )
                     }
-                    {/* {expandedId === i && (
-                        <tr className='qna_board_st7'>
-                            <td colSpan="8" className='notification_row'>
-                                {item.notification}
-                            </td>
-                        </tr>
-                    )} */}
+
                     {expandedId === i && (
                         <tr className='qna_board_st7'>
                             <td colSpan="8" className='notification_row'>
                                 <p>[문의 내용] : {item.notification}</p>
+
+                            </td>
+                        </tr>
+                    )}
+                    {expandedId === i && (
+                        <tr className='qna_board_st8'>
+                            <td colSpan="8" className='notification_row'>
+
                                 <p>[답변내용] : {item.titleIcon}</p>
                             </td>
                         </tr>
