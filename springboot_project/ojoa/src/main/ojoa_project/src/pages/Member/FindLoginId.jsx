@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 const FindLoginId = () => {
     const [name, setName] = useState(''); // 이름 state
+    const [phone1, setPhone1] = useState('010');
     const [phone2, setPhone2] = useState(''); // 휴대폰 번호 state
     const [phone3, setPhone3] = useState(''); // 휴대폰 번호 state
     const [foundId, setFoundId] = useState(''); // 찾은 ID state
