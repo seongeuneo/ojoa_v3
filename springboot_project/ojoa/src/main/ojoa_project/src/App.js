@@ -16,6 +16,8 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import { Chair, Bed, Sofa, Closet, Bookshelf, Lighting, Best, New } from './pages/ProductList/ProductList';
 import NotFound from './pages/NotFound/NotFound';
 import Login from './pages/Member/Login';
+import FindLoginId from './pages/Member/FindLoginId';
+import FindLoginPw from './pages/Member/FindLoginPw';
 import Cart from './pages/Cart/Cart';
 import Join from './pages/Member/Join';
 //import Agree from './pages/Member/Join';
@@ -94,6 +96,8 @@ function App() {
           <Route path="/order/*" element={<Order />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/member/rlogin" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/member/rlogin/FindLoginId" element={<FindLoginId />} />
+          <Route path="/member/rlogin/FindLoginPw" element={<FindLoginPw />} />
           <Route path="/member/modify/PUpdateForm" element={<PUpdateForm />} />
           <Route path="/" element={<Main />} />
           <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />

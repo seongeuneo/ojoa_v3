@@ -1,5 +1,5 @@
 import '../Member/Login.css';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -26,6 +26,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [rememberId, setRememberId] = useState(false); // 아이디를 기억하는 상태 추가
+
+    useEffect(() => {
+        // 로컬 스토리지에서 저장된 아이디 가져오기
+        const rememberedId = localStorage.getItem('rememberedId');
+        if (rememberedId) {
+            setId(rememberedId); // 가져온 아이디를 상태에 설정
+            setRememberId(true); // 아이디를 기억하는 상태 업데이트
+        }
+    }, []);
 
     useEffect(() => {
         console.log('isLoggedIn 상태 변경:', isLoggedIn); // 상태 변경 시 로그 확인
@@ -61,10 +71,17 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
             //console.log('isLoggedIn 상태:', isLoggedIn);
         } catch (error) {
             if (error.response) {
-                setMessage('로그인 실패: ' + error.response.data);
+                setMessage('로그인 실패: ID 혹은 Password 가 잘못되었습니다.' + error.response.data);
             } else {
                 setMessage('로그인 중 에러 발생');
             }
+        }
+
+        // 아이디 기억하기 체크 여부에 따라 로컬 스토리지에 아이디 저장
+        if (rememberId) {
+            localStorage.setItem('rememberedId', id);
+        } else {
+            localStorage.removeItem('rememberedId');
         }
 
         // // 실패 메시지 추출 함수
@@ -72,6 +89,22 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
         // }
 
     };
+
+    // Ref 객체 추가
+    const idInputRef = useRef(null); // 아이디 입력 필드의 Ref 객체
+    const passwordInputRef = useRef(null);
+
+    // 엔터키 누르면 아래로
+    const handleEnterPress = (event) => {
+        if (event.key === "Enter") {
+            if (event.target.name === "id") {
+                passwordInputRef.current.focus();
+            } else if (event.target.name === "password") {
+                handleLogin();
+            }
+        }
+    };
+
 
     return (
         <div>
@@ -109,6 +142,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                             placeholder="아이디"
                                             value={id}
                                             // autoComplete="username"
+                                            ref={idInputRef}
+                                            onKeyDown={handleEnterPress}
                                             onChange={(e) => setId(e.target.value)} // 아이디 입력 값 업데이트
                                         />
                                     </label>
@@ -119,6 +154,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                             id="password"
                                             placeholder="비밀번호"
                                             value={password}
+                                            ref={passwordInputRef}
+                                            onKeyDown={handleEnterPress}
                                             onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력 값 업데이트
                                         // autocomplete="current-password"
                                         />
@@ -132,28 +169,28 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                         &quot;보안접속&quot;
                                     </div>
                                     <div className="login_forget">
-                                        {/* <label for="idSet" class="sign_checkbox">
+                                        <label for="idSet" class="sign_checkbox">
                                             <input
                                                 type="checkbox"
                                                 id="idSet"
-                                                // onChange={handleOnChange}
-                                                // checked={isRemember}
+                                                checked={rememberId}
+                                                onChange={() => setRememberId(!rememberId)} // 체크 여부 반전
                                             />{""}
                                             <span class="cbx">
                                                 <svg width="5px" height="15px" viewBox="0 0 15 15">
                                                 </svg>
                                             </span>
                                             <span>아이디 기억하기</span>
-                                        </label> */}
+                                        </label>
                                     </div>
                                     <div className="login_find">
                                         <ul>
                                             <li>
-                                                <button type="button" onClick={handleLinkClick}>아이디찾기</button>
+                                                <button type="button"><Link to="/member/rlogin/findLoginId">아이디찾기</Link></button>
                                             </li>
                                             <li>&nbsp;|&nbsp;</li>
                                             <li>
-                                                <button type="button" onClick={handleLinkClick}>비밀번호찾기</button>
+                                                <button type="button"><Link to="/member/rlogin/FindLoginPw">비밀번호찾기</Link></button>
                                             </li>
                                         </ul>
                                     </div>
@@ -168,7 +205,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                                         </p>
                                         <p className="sns">
                                             <React.Fragment>
-                                                <img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' type="button" onClick={loginHandler}/>
+                                                <img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' type="button" onClick={loginHandler} />
                                             </React.Fragment>
                                         </p>
                                     </div>

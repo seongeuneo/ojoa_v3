@@ -156,6 +156,7 @@
 
 .Join .inside_btn:hover {
   background-color: silver;
+  cursor: pointer;
 }
 
 .Join .agree_check {
@@ -186,6 +187,7 @@
 .Join .out_btn3 {
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 
 .Join .out_btn3:hover {

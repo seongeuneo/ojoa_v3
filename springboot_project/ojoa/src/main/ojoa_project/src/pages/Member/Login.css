@@ -216,7 +216,7 @@
 .login_fieldset ul li button {
     color: #666;
     background: none;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* ----------네이버,페이스북,카카오톡 로그인---------- */
@@ -274,4 +274,8 @@
     font-size: 15px;
     line-height: 83px;
     font-weight: 400;
+}
+
+.login_btn p {
+    color: red;
 }
