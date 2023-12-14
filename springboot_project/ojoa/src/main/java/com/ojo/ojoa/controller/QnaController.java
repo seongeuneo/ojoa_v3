@@ -30,7 +30,7 @@ public class QnaController {
    QnaService qnaService;
    
    
-   // ** Qna List - 회원별 카트 목록 반환 
+   // ** Qna List - 회원별 Qna 목록 반환 
     @GetMapping("/qnaList")
     public void qnaList(Model model) {
        model.addAttribute("qna", qnaService.selectList());
@@ -50,9 +50,11 @@ public class QnaController {
    @PostMapping(value="/qnaInsert")
    public String qnaInsert(HttpServletRequest request, Qna entity, Model model) throws IOException  {
       String uri = "redirect:/qna/qnaList";
-   
+     // String a = "N";
       // 2. Service 처리
       try {
+    	 // entity.setQna_answer(a);
+    	 System.out.println(entity);
          log.info("** insert 성공 id => "+qnaService.save(entity));
          model.addAttribute("message", "게시글 등록 완료.");
       } catch (Exception e) {
@@ -92,17 +94,20 @@ public class QnaController {
    
    
    
-// 답변 여부 보여주는거   
+// 답변 등록
    @PostMapping(value="/replyAnswerForm")
    public String replyAnswerForm(HttpSession session, Qna entity, Model model) throws IOException  {
 	   System.out.println("*******"+entity);
 	   qnaService.replyUpdate(entity.getQna_seq(), entity.getQna_reply());
-	   //model.addAttribute("qna",entity); //list변수명 역할을 잘 모르겠음
+	
 	   model.addAttribute("qna", qnaService.selectList());
 	   return "/qna/qnaList";
    }
     
+
    
+   
+// 밑에 코드는 계속 주석   
 //   @PostMapping(value="/replyinsert")
 //   public String replyinsert(Qna entity) {
 //      

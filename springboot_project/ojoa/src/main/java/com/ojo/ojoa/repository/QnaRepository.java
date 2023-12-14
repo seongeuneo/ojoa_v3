@@ -18,10 +18,10 @@ import com.ojo.ojoa.entity.Qna;
 public interface QnaRepository extends JpaRepository<Qna, Integer> {
 	// Qna Entity와 관련된 데이터베이스 작업을 수행
 	
-	@Transactional
-	@Modifying
-	@Query("update Qna q SET q.qna_reply = :reply where q.qna_seq = :seq")
-	void replyUpdate(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
+//	@Transactional
+//	@Modifying
+//	@Query("update Qna q SET q.qna_reply = :reply where q.qna_seq = :seq")
+//	void replyUpdate(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
 	
 	
 	// 1.기본 리스트 반환
@@ -62,10 +62,10 @@ public interface QnaRepository extends JpaRepository<Qna, Integer> {
    		    @Param("search_key") String search_key,
    		    @Param("search_query") String search_query);
 	
-//	@Modifying
-//    @Transactional
-//    @Query("update Qna q SET q.qna_reply = :reply, q.answer_state='답변완료' where q.qna_seq = :seq")
-//    void replyinsert(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
+	@Modifying
+    @Transactional
+    @Query("update Qna q SET q.qna_reply = :reply, q.qna_answer='O' where q.qna_seq = :seq")
+    void replyUpdate(@Param("seq") int qna_seq, @Param("reply") String qna_reply);
 
 	
 } //class
