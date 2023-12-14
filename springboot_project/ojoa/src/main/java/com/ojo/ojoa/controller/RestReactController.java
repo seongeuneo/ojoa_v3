@@ -180,7 +180,7 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
         if (id != null && !id.isEmpty()) {
             // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
             entity.setId(id);
-            cartService.save(entity);
+            cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
             return ResponseEntity.ok("데이터 저장 성공");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
