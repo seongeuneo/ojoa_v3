@@ -25,6 +25,7 @@ import com.ojo.ojoa.domain.ReviewDTO;
 import com.ojo.ojoa.entity.Qna;
 //import com.ojo.ojoa.domain.ReviewDTO;
 import com.ojo.ojoa.entity.Review;
+import com.ojo.ojoa.service.ProductService;
 import com.ojo.ojoa.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/reviewrest")
 public class ReviewRestController {
 	ReviewService reviewService;
+	ProductService productService;
 
 	// 상품문의 review
 //	public ResponseEntity<List<ReviewDTO>> allReviewList() {
@@ -58,6 +60,8 @@ public class ReviewRestController {
 	public ResponseEntity<?> saveReview(HttpSession session, Review entity, Model model) throws IOException {
 		try {
 			String id = (String) session.getAttribute("loginID");
+			int productId = entity.getProd_num();
+			
 			if (id != null && !id.isEmpty()) {
 				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
 				entity.setId(id);
@@ -101,6 +105,10 @@ public class ReviewRestController {
 
 			// Review 엔티티 저장
 			reviewService.save(entity);
+			// ProductService의 rUpdate 메서드에 productId를 전달
+			if (productId != 0) {
+			    productService.update(productId);
+			}
 
 			return ResponseEntity.ok("데이터 저장 성공");
 		} catch (Exception e) {

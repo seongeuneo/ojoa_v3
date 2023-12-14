@@ -3,6 +3,8 @@ package com.ojo.ojoa.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ojo.ojoa.entity.Member;
@@ -61,6 +63,12 @@ public class MemberServiceImpl implements MemberService {
 	public String delete(String id) {
 		repository.deleteById(id);
 		return id;  // 삭제후 key return 
+	}
+	
+	@Override
+	public Page<Member> getMemberList(Pageable pageable) {
+		
+		return repository.getMemberList(pageable);
 	}
 	
 	

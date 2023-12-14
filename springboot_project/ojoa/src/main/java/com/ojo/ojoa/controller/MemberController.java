@@ -5,12 +5,16 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.entity.Member;
@@ -76,9 +80,30 @@ public class MemberController {
 	}
 	
 	// ** MemberList
+//	@GetMapping("/memberList")
+//	public void memberList(Model model) {
+//		model.addAttribute("banana", service.selectList());
+//	} //memberList
 	@GetMapping("/memberList")
-	public void memberList(Model model) {
-		model.addAttribute("banana", service.selectList());
+	public void memberList(@RequestParam(name = "category", defaultValue = "") String category,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size,
+            Model model) {
+		Pageable pageable = PageRequest.of(page, size);
+	       Page<Member> faqPageList = service.getMemberList(pageable);
+
+	       model.addAttribute("faqList", faqPageList.getContent());
+	       model.addAttribute("itemPage", faqPageList);
+	       model.addAttribute("currentPage", faqPageList.getNumber());
+	       model.addAttribute("totalPages", faqPageList.getTotalPages());
+	       model.addAttribute("totalItems", faqPageList.getTotalElements());
+	       
+	      log.info("faq_service.getFaqList(category, pageable) : " + service.getMemberList(pageable));
+	      log.info("faqPageList.getContent() : " + faqPageList.getContent());
+	      log.info("faqPageList : " + faqPageList);
+	      log.info("faqPageList.getNumber() : " + faqPageList.getNumber());
+	      log.info("faqPageList.getTotalElements() : " + faqPageList.getTotalElements());
+		
 	} //memberList
 	
 	// ** MemberDetail

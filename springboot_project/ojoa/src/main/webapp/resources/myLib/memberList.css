@@ -47,6 +47,7 @@ a:visited {
 .home-link {
 	text-align: center;
 	font-size: 20px;
+	margin-top: 10px;
 }
 
 .home-link a {
@@ -55,9 +56,28 @@ a:visited {
 	font-weight: bold;
 }
 
+/* Pagination */
+.pagination_wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
 
+.pagination_wrap span {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
 
- .filterArea {
+.pagination_wrap span.currentPage {
+    background-color: #333;
+    color: white;
+}
+
+/* Filter Area */
+.filterArea {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,24 +86,23 @@ a:visited {
     background-color: #e0e0e0;
 }
 
-
-
 .filterArea div {
-     display: flex; /* 이 부분이 추가되었습니다 */
-    align-items: center; /* 세로 중앙 정렬을 위해 추가되었습니다 */
+    display: flex;
+    align-items: center;
 }
 
-.filterArea select, .filterArea input[type="text"] {
+.filterArea select,
+.filterArea input[type="text"],
+.filterArea button {
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 14px;
-      margin-right: 10px; /* 각 요소 사이의 간격을 조절합니다 */
+    margin-right: 10px;
 }
 
 .filterArea button {
-  padding: 8px 15px; /* Adjust padding for better appearance */
-    border-radius: 4px;
+    padding: 8px 15px;
     border: none;
     font-size: 14px;
     background-color: #4CAF50;
@@ -96,13 +115,13 @@ a:visited {
 }
 
 .filterArea select {
-    width: 100px; /* or a specific width */
-    margin-left: 10px; /* Provide some space between elements */
-    margin-right: 10px; /* Provide some space between elements */
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .filterArea1 {
-	width: 250px;
-	display: flex;
+    width: 250px;
+    display: flex;
     justify-content: space-between;
 }
