@@ -188,6 +188,8 @@ public class MemberControllerR {
 	} //rmemberdelete
 	
 	
+	
+	// ***** 리액트 회원 아이디 찾기
 	@GetMapping("/rfindId")
     public ResponseEntity<?> findLoginId(
             @RequestParam("name") String name,

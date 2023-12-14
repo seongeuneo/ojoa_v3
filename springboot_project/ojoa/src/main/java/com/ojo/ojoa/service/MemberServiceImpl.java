@@ -65,19 +65,19 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	 @Override
-	    public String findIdByNameAndPhone(String name, String phone2, String phone3) {
-	        // 여기서 데이터베이스에서 ID를 찾는 로직을 구현합니다.
-	        // 예를 들어, Member 엔티티에서 이름과 전화번호를 이용하여 ID를 조회하는 코드가 있을 것입니다.
-	        // 이것은 실제 데이터베이스 구조 및 ORM 사용에 따라 다를 수 있습니다.
-	        // 아래 코드는 예시이며, 실제로는 이를 데이터베이스에 맞게 구현해야 합니다.
+    public String findIdByNameAndPhone(String name, String phone2, String phone3) {
+        // 여기서 데이터베이스에서 ID를 찾는 로직을 구현합니다.
+        // 예를 들어, Member 엔티티에서 이름과 전화번호를 이용하여 ID를 조회하는 코드가 있을 것입니다.
+        // 이것은 실제 데이터베이스 구조 및 ORM 사용에 따라 다를 수 있습니다.
+        // 아래 코드는 예시이며, 실제로는 이를 데이터베이스에 맞게 구현해야 합니다.
 
-	        Member foundMember = repository.findByNameAndPhone(name, phone2, phone3);
-	        
-	        if (foundMember != null) {
-	            return foundMember.getId();
-	        } else {
-	            return null;
-	        }
-	    }
+        Member foundMember = repository.findByNameAndPhone(name, phone2, phone3);
+        
+        if (foundMember != null) {
+            return foundMember.getId();
+        } else {
+            return null;
+        }
+    }
 	
 } //class
