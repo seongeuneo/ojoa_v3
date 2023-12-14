@@ -64,7 +64,7 @@ const Cart = ({ cart, setCart }) => {
             .catch((error) => {
                 console.error("Error: ", error);
             });
-    }, [won]);
+    }, [setCart, won]);
 
 
 
