@@ -2,6 +2,9 @@ package com.ojo.ojoa.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.ojo.ojoa.entity.Member;
 
 
@@ -9,6 +12,10 @@ public interface MemberService {
 	
 	// ** selectList
 	public List<Member> selectList();
+	
+	// ** selectList
+	public Page<Member> getMemberList(Pageable pageable);
+	
 
 	// ** selectOne
 	public Member selectOne(String id);

@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<table border="1" style="width: 90%">
+	<table border="1" style="width: 90%" id="memberTable">
 		<tr>
 			<th>ID</th>
 			<th>Password</th>
@@ -51,8 +51,8 @@
 				<th>강퇴</th>
 			</c:if>
 		</tr>
-		<c:if test="${not empty requestScope.banana}">
-			<c:forEach var="s" items="${requestScope.banana}">
+		<c:if test="${not empty requestScope.faqList}">
+			<c:forEach var="s" items="${requestScope.faqList}">
 				<tr>
 					<td>${s.id}</td>
 					<td>${s.password}</td>
@@ -78,12 +78,22 @@
 				</tr>
 			</c:forEach>
 		</c:if>
-		<c:if test="${empty requestScope.banana}">
+		<c:if test="${empty requestScope.faqList}">
 			<tr>
 				<td colspan="7">출력할 Data가 1건도 없습니다 ~~</td>
 			</tr>
 		</c:if>
 	</table>
+	<div class="pagination_wrap">
+       <c:if test="${not empty requestScope.itemPage}">
+           <c:forEach var="pageNumber" begin="0" end="${requestScope.totalPages - 1}">
+           <span onclick="faqManagementPage(${pageNumber})"
+                   class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
+                 ${pageNumber + 1}
+           </span>
+           </c:forEach>
+       </c:if>
+   </div>
 	<div class="home-link">
 		<a href="/home">Home</a>
 	</div>
