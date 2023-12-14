@@ -297,4 +297,47 @@ document.getElementById('nextPage').addEventListener('click', () => {
 
 
 
+// FAQ 페이지네이션
+function faqManagementPage(pageNumber) {
+    let url = "member/memberList?page=" + pageNumber;
+
+    axios.get(url
+    ).then(response => {
+        document.getElementById('contentArea').innerHTML = response.data;
+        
+        /* 요청받은 데이터를 출력하면서 제목과 내용의 길이를 조절*/
+      let table = document.getElementById("memberTable");
+      let rows = table.getElementsByTagName("tr");
+      
+      /* 제목과 내용의 크기를 확인 후 substring을 위한 for문 */
+      for (let i = 1; i < rows.length; i++) {
+         let cells = rows[i].getElementsByTagName("td");
+         
+         if (cells.length >= 4) {
+            /* 제목과 내용 데이터의 length를 확인하기위해*/
+            let passwordValue = cells[1].innerText; 
+            let indateValue = cells[14].innerText; 
+            
+            /* 제목과 내용 데이터를 innerText를 사용하기 위해 변수 지정
+            innerText = 변경값이 원본에 영향을 주지 않기 때문에. */
+            let passwordCell = cells[1];
+            let indateCell = cells[14];
+            
+            if(passwordValue.length > 20) {
+               passwordCell.innerText = passwordValue.substring(0, 20) + "...";
+            }
+            
+            if(indateValue.length > 15) {
+               indateCell.innerText = indateValue.substring(0, 15) + "...";
+            }
+         }
+      }   
+    })
+    .catch(err => {
+        alert("FAQ List response 실패 =>" + err.message);
+    });
+}
+
+
+
 

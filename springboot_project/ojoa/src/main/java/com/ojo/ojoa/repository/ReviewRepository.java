@@ -3,7 +3,10 @@ package com.ojo.ojoa.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,5 +24,9 @@ public interface ReviewRepository
 			+ "  A.review_view, A.review_rate, B.prod_name, B.prod_mainimage) "
 			+ "FROM Review A LEFT JOIN Product B ON A.prod_num = B.prod_num")
     List<ReviewDTO> findAllReviewList();
+	
+    @Query("SELECT AVG(r.review_rate) FROM Review r WHERE r.prod_num = :prod_num")
+    float calculateAverageRateByProdNum(Integer prod_num);
+
 
 }
