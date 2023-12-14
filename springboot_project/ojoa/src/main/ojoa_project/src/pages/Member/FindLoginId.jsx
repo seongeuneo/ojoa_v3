@@ -1,9 +1,11 @@
 import './FindLoginId.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState } from 'react';
 
 const FindLoginId = () => {
+    const navigate = useNavigate();
+
     const [name, setName] = useState(''); // 이름 state
     const [phone1, setPhone1] = useState('010');
     const [phone2, setPhone2] = useState(''); // 휴대폰 번호 state
@@ -14,7 +16,11 @@ const FindLoginId = () => {
         event.preventDefault();
 
         try {
+<<<<<<< HEAD
             const response = await axios.get('/member/rfindid', {
+=======
+            const response = await axios.get('/member/rfindId', {
+>>>>>>> main
                 params: {
                     name: name,
                     phone2: phone2,
@@ -25,7 +31,14 @@ const FindLoginId = () => {
             if (response.status === 200) {
                 const retrievedId = response.data;
                 if (retrievedId) {
+<<<<<<< HEAD
                     alert(`찾은 ID는 ${retrievedId} 입니다.`);
+=======
+                    setFoundId(retrievedId); // Set the found ID state
+                    alert(`찾은 ID는 ${retrievedId} 입니다.`);
+                    // '/rLogin' 페이지로 이동
+                    navigate('/Member/rLogin');
+>>>>>>> main
                 } else {
                     alert(`일치하는 ID를 찾지 못했습니다.`);
                 }
@@ -34,6 +47,7 @@ const FindLoginId = () => {
             }
         } catch (error) {
             console.error('ID 찾기 오류:', error);
+            // Handle error, maybe set an error state to display to the user
         }
     };
 
@@ -70,7 +84,7 @@ const FindLoginId = () => {
             </div>
             <main className="FindLoginId_page">
                 <div className="FindLoginId_container">
-                    <form >
+                    <form onSubmit={handleFindId}>
                         <div className="FindLoginId_content">
                             <div className="FindLoginId">
                                 <fieldset className="FindLoginId_fieldset">
@@ -103,6 +117,7 @@ const FindLoginId = () => {
                                                         value={phone1} // 휴대폰 번호 상태와 연결
                                                         size="1"
                                                         id="phone1"
+                                                        onChange={(event) => setPhone1(event.target.value)}
                                                         readonly
                                                     />
                                                     &nbsp;&ndash;&nbsp;
@@ -147,7 +162,11 @@ const FindLoginId = () => {
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">
+<<<<<<< HEAD
                                         <button className="out_btn3" type="submit" name="아이디 찾기" value={foundId} >아이디 찾기</button>
+=======
+                                        <button className="out_btn3" type="submit" name="아이디 찾기" value={foundId} onChange={(event) => setFoundId(event.target.value)}>아이디 찾기</button>
+>>>>>>> main
                                     </div>
 
                                 </fieldset>
