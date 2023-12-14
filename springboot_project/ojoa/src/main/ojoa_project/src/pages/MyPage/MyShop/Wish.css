@@ -98,8 +98,16 @@
   cursor: pointer;
 }
 
+.Wish .wishTable td .cartBTN {
+  background-color: #5db0eb;
+}
+
 .Wish .wishTable td button:hover {
   background-color: #d32f2f;
+}
+
+.Wish .wishTable td .cartBTN:hover {
+  background-color: #329de8;
 }
 
 .wishIMG img{

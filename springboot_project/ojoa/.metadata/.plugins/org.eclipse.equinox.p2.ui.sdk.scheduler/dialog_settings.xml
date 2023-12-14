@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.equinox.internal.p2.ui.sdk.scheduler.migration.MigrationWizard.WizardSettings">
+		<item key="DIALOG_WIDTH" value="883"/>
+		<item key="DIALOG_HEIGHT" value="691"/>
+	</section>
+</section>

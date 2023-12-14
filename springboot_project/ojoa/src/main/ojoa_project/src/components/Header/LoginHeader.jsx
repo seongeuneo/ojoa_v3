@@ -71,7 +71,7 @@ function UserHeader() {
                     <li><Link to={generateToLink("New")}>NEW</Link></li>
                     {/* <li><Link to="/ProductList/NewList">NEW</Link></li> */}
                     <li><Link to='/ProductList/Bed'>침대</Link>
-                        {/* <ul>
+                      {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>싱글</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>더블</Link></li>
                         </ul> */}
@@ -83,7 +83,7 @@ function UserHeader() {
                         </ul> */}
                     </li>
                     <li><Link to={generateToLink("책장")}>책장</Link>
-                        {/* <ul>
+                         {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>2단</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>3단</Link></li>
                         </ul> */}
@@ -101,7 +101,7 @@ function UserHeader() {
                         </ul> */}
                     </li>
                     <li><Link to={generateToLink("의자")}>의자</Link>
-                        {/* <ul>
+                           {/* <ul>
                             <li><Link to="#" onClick={handleLinkClick}>탁상의자</Link></li>
                             <li><Link to="#" onClick={handleLinkClick}>주방의자</Link></li>
                         </ul> */}
