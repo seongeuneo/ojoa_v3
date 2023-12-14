@@ -1,0 +1,231 @@
+.FindLoginId {
+    background-color: white;
+    min-height: 450px;
+    width: 1240px;
+    margin: auto;
+    text-align: left;
+}
+
+/* ================ */
+.FindLoginId .path {
+    width: 1240px;
+    padding: 0;
+    display: flex;
+    color: #333;
+    font-size: 12px;
+    margin: 20px auto;
+    height: 30px;
+    line-height: 30px;
+    justify-content: flex-end;
+}
+
+.FindLoginId .path span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    text-indent: 100%;
+    display: none;
+}
+
+.FindLoginId .path li {
+    float: left;
+    padding-left: 12px;
+    color: #333;
+}
+
+.FindLoginId .path li a {
+    color: #333;
+}
+
+.FindLoginId .title {
+    padding-top: 100px;
+    text-align: center;
+    color: #333;
+}
+
+.FindLoginId .title h2 {
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 3px;
+}
+
+.FindLoginId .title .txt_01 {
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    font-weight: 300;
+    padding-top: 17px;
+    padding-bottom: 20px;
+}
+
+/* ============================= */
+
+/*---입력정보 칸 시작---*/
+
+.FindLoginId .personal_FindLoginId {
+    border-top: solid 2px black;
+    border-bottom: solid 1px black;
+    width: 80%;
+    margin: auto;
+}
+
+.FindLoginId .personal_FindLoginId caption {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.FindLoginId .personal_FindLoginId span {
+    color: red;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.FindLoginId .personal_FindLoginId th,
+.FindLoginId .personal_FindLoginId td {
+    border-top: solid 1px silver;
+    border-left: solid 1px silver;
+}
+
+.FindLoginId .personal_FindLoginId th:first-child {
+    border-left: none;
+}
+
+.FindLoginId .personal_FindLoginId tr:first-child th,
+.FindLoginId .personal_FindLoginId tr:first-child td {
+    border-top: none;
+}
+
+.FindLoginId .personal_FindLoginId th {
+    font-size: 13px;
+    text-align: center;
+    padding: 10px;
+}
+
+.FindLoginId .personal_FindLoginId td {
+    padding-left: 10px;
+}
+
+.FindLoginId .personal_FindLoginId label {
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+.FindLoginId .personal_FindLoginId label input {
+    height: 25px;
+    /* vertical-align: center; */
+}
+
+.FindLoginId .personal_FindLoginId input,
+.FindLoginId .personal_FindLoginId select {
+    margin: 5px 0px;
+    box-sizing: border-box;
+    padding: 0px 5px;
+    height: 25px;
+    border: solid 1px gray;
+    border-radius: 5%;
+}
+
+.FindLoginId .personal_FindLoginId input[type="text"],
+.FindLoginId .personal_FindLoginId input[type="number"] {
+    width: 100px;
+
+}
+
+.FindLoginId .personal_FindLoginId input[type="tel"] {
+    width: 50px;
+}
+
+
+.FindLoginId .personal_FindLoginId input[type="password"],
+.FindLoginId .personal_FindLoginId input[name="address"] {
+    border: solid 1px gray;
+    border-radius: 5%;
+    width: 200px;
+}
+
+.FindLoginId .input_address {
+    display: flex;
+}
+
+.FindLoginId .input_address input {
+    box-sizing: border-box;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+.FindLoginId .inside_btn:hover {
+    background-color: silver;
+    cursor: pointer;
+}
+
+/* .FindLoginId .agree_check {
+    line-height: 38px;
+} */
+
+.FindLoginId input[type="radio"] {
+    height: 100%;
+    margin: 0;
+}
+
+
+.FindLoginId .FindLoginId_btn {
+    display: flex;
+    justify-content: center;
+}
+
+.FindLoginId .out_btn2,
+.FindLoginId .out_btn3 {
+    height: 35px;
+    width: 150px;
+    font-weight: bold;
+    border: solid 1.5px black;
+    margin: 30px;
+    margin-bottom: 70px;
+}
+
+.FindLoginId .out_btn3 {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    margin-left: 330px;
+}
+
+.FindLoginId .out_btn3:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.FindLoginId .input_warn {
+    color: red;
+    font-size: 12px;
+    margin: 10px 0 0 124px;
+    margin-bottom: 0px;
+}
+
+/* ----------아이디찾기---------- */
+.IdPw_find {
+    float: right;
+    padding-top: 15px;
+    font-size: 13px;
+    margin-right: 130px;
+}
+
+.FindLoginId_fieldset ul {
+    overflow: hidden;
+    margin: 0;
+    border: 0;
+    display: block;
+}
+
+.FindLoginId_fieldset ul li {
+    float: left;
+    padding: 0 0 0 5px;
+}
+
+.FindLoginId_fieldset ul li button {
+    color: #666;
+    background: none;
+    cursor: pointer;
+}
+

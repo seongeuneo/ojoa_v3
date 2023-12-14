@@ -66,9 +66,10 @@ const Join = () => {
 
     // Ref 객체 추가
     const idInputRef = useRef(null); // 아이디 입력 필드의 Ref 객체
+    const idDupInputRef = useRef(null);
     const passwordInputRef = useRef(null);
     const password2InputRef = useRef(null);
-    // const addressInputRef = useRef(null);
+    //const zipcodeInputRef = useRef(null);
     const addressdetailInputRef = useRef(null);
     const phone2InputRef = useRef(null);
     const phone3InputRef = useRef(null);
@@ -373,7 +374,7 @@ const Join = () => {
                                 value={id}
                                 onChange={handleidChange}
                                 ref={idInputRef} // Ref 객체 연결
-                                onKeyDown={(e) => handleKeyDown(e, passwordInputRef)} // 다음 입력창의 Ref 객체 전달
+                                onKeyDown={(e) => handleKeyDown(e, idDupInputRef)} // 다음 입력창의 Ref 객체 전달
                                 required />&nbsp;
 
                             <input className="inside_btn"
@@ -381,9 +382,10 @@ const Join = () => {
                                 name="idDup"
                                 id="idDup"
                                 value="중복확인"
+                                ref={idDupInputRef} // Ref 객체 연결
                                 onClick={handleCheckDuplicate}
-                            // ref={idDupCheck()} // Ref 객체 연결
-                            // onKeyDown={(e) => handleKeyDown(e, password2InputRef)}
+                                // ref={idDupCheck()} // Ref 객체 연결
+                                onKeyDown={(e) => handleKeyDown(e, passwordInputRef)}
                             />
                             {idError && (
                                 <span className="input_error">{idError}</span>)}
@@ -421,7 +423,7 @@ const Join = () => {
                                 value={password2}
                                 onChange={handlePassword2Change}
                                 ref={password2InputRef} // Ref 객체 연결
-                                // onKeyDown={(e) => handleKeyDown(e, zipcodeInputRef)} // 다음 입력창의 Ref 객체 전달
+                                onKeyDown={(e) => handleKeyDown(e, addressdetailInputRef)} // 다음 입력창의 Ref 객체 전달
                                 required />
                             {password2Error && (
                                 <span className="input_error">{password2Error}</span>)}
@@ -456,7 +458,9 @@ const Join = () => {
                                     id="address"
                                     onChange={handleInput}
                                     value={enroll_company.address}
-                                    onKeyDown={(e) => handleKeyDown(e, addressdetailInputRef)} />&nbsp;
+                                //onKeyDown={(e) => handleKeyDown(e, addressdetailInputRef)} 
+                                />&nbsp;
+
                                 <input type="text"
                                     name="addressdetail"
                                     id="addressdetail"
@@ -490,6 +494,8 @@ const Join = () => {
                                     name="phone2"
                                     size="1"
                                     id="phone2"
+                                    minlength="4"
+                                    maxlength="4"
                                     value={phone2}
                                     onChange={handlePhone2Change}
                                     ref={phone2InputRef} // Ref 객체 연결
@@ -500,6 +506,8 @@ const Join = () => {
                                     name="phone3"
                                     size="1"
                                     id="phone3"
+                                    minlength="4"
+                                    maxlength="4"
                                     value={phone3}
                                     onChange={handlePhone3Change}
                                     ref={phone3InputRef} // Ref 객체 연결

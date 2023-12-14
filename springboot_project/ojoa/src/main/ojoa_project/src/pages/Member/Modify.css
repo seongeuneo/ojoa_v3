@@ -264,3 +264,9 @@
     margin-left: 250px;
     cursor: pointer;
 }
+
+.error_message {
+    color: red;
+    font-size: 12px;
+    margin-left: 260px;
+}

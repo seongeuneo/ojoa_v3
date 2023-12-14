@@ -26,12 +26,12 @@ const PUpdateForm = () => {
         e.preventDefault();
 
         if (newPassword !== confirmPassword) {
-            setError("비밀번호가 일치하지 않습니다.");
+            setError("* 비밀번호가 일치하지 않습니다.");
             return;
         }
 
         if (newPassword.length < 4) {
-            setError("비밀번호를 4글자 이상 입력하세요.");
+            setError("* 비밀번호를 4글자 이상 입력하세요.");
             return;
         }
 
