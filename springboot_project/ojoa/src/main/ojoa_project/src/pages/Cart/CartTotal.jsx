@@ -24,15 +24,15 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
         setSelectedTotal(total);
     }, [selectedItems, cart]);
 
-    // const paynow = () => {
-    //     if (selectedItems && selectedItems.length > 0) {
-    //         const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
-    //         onCheckout(selectedCartItems);
-    //     } else {
-    //         console.error("No selected items.");
-    //         // 선택된 항목이 없음을 사용자에게 알릴 수 있는 처리
-    //     }
-    // };
+    const paynow = () => {
+        if (selectedItems && selectedItems.length > 0) {
+            const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
+            onCheckout(selectedCartItems);
+        } else {
+            console.error("No selected items.");
+            // 선택된 항목이 없음을 사용자에게 알릴 수 있는 처리
+        }
+    };
 
     return (
         <div className="CartTotal">
@@ -52,7 +52,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
 
                 <div className="delivery">
                     <p className="cart_product_delivery">배송비</p>
-                    <p className="cart_product_delivery_price">{selectedTotal > 100000 ? "무료": 3000}</p>
+                    <p className="cart_product_delivery_price">{selectedTotal > 100000 ? "무료" : 3000}</p>
                 </div>
 
                 <div className="pay_plus">
@@ -63,7 +63,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
                     <p className="cart_prouct_payment" name="prod_price1">결제 금액</p>
                     {/* <p className="cart_prouct_payment_price">{convertPrice(totalPayment)}원</p> */}
                     {/* <p className="cart_prouct_payment_price">{calculateTotalPrice()}원</p> */}
-                    <p className="cart_prouct_payment_price">{selectedTotal > 100000 ? selectedTotal : selectedTotal+3000}원</p>
+                    <p className="cart_prouct_payment_price">{selectedTotal > 100000 ? selectedTotal : selectedTotal + 3000}원</p>
                 </div>
             </div>
 

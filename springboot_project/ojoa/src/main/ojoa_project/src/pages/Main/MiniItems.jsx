@@ -1,13 +1,24 @@
 import '../../pages/Main/Main.css';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useProductList } from '../ProductList/useProductList'
 
 const MiniItems = ({ content }) => {
     const [imageSrc, setImageSrc] = useState("./images/emptyheart.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
     const [isClicked, setIsClicked] = useState(false); // 클릭 여부를 state로 관리
+
+    // 로그인 & 비로그인
+    const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
+
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+    useEffect(() => {
+        const sessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
+        setIsLoggedIn(!!sessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
+    }, []);
+
 
     const handleClick = () => {
         if (isClicked) {
@@ -39,7 +50,7 @@ const MiniItems = ({ content }) => {
                 } else {
                     // prod_num이 중복되지 않는다면 상태 업데이트
                     console.log("서버연결성공 => ", currentWishlist);
-                    alert("해당 상품이 장바구니에 추가되었습니다.");
+                    alert("해당 상품이 관심목록에 추가되었습니다.");
                     // handleWishClick();
                 }
             })
@@ -54,6 +65,16 @@ const MiniItems = ({ content }) => {
                 }
             });
 
+    };
+
+    // 모달 열기 함수
+    const checkLogin = () => {
+
+        if (isLoggedIn === true) {
+            AddWishIcon();
+        } else {
+            alert('로그인이 필요합니다.');
+        }
     };
 
 
@@ -78,7 +99,7 @@ const MiniItems = ({ content }) => {
 
                 <img className="heartbtn"
                     src={imageSrc}
-                    onClick={AddWishIcon}
+                    onClick={checkLogin}
                     alt="하트찜" />
             </div>
 
