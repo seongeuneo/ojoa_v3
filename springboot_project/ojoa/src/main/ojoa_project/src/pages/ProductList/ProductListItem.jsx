@@ -126,7 +126,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
                             <Link to={`/ProductDetail/${content.prod_num}/DetailInfo01`}
                                 state={{ productData: content }} >
                                 {/* 선택한 상품정보를 state로 값전달  */}
-                                <img src={`/thumbs/${content.prod_mainimage}`} alt={`Product ${content.prod_num}`} />
+                                <img src={`${process.env.PUBLIC_URL}/thumbs/${encodeURIComponent(content.prod_mainimage)}`} alt={`Product ${content.prod_num}`} />
                             </Link>
                             <div className="pl_icon">
                                 <a className="pd_cart">

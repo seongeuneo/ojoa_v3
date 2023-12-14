@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import "./ProductDetail.css";
-import { Routes, Route, Link, useLocation, useParams } from "react-router-dom"
+import { Routes, Route, Link, useLocation, useParams, useNavigate } from "react-router-dom"
 import DetailInfo01 from './DetailInfo01';
 import OrderReview02 from './OrderReview02';
 import ProdQna03 from './ProdQna03';
@@ -10,11 +10,12 @@ import AddCart from './Modal/AddCart';
 import axios from "axios";
 
 
-function ProductDetail({ handleCart }) {
+function ProductDetail({ cart, handleCart }) {
 
     const location = useLocation();
     const { prod_num } = useParams();
     const productData = location.state ? location.state.productData : null;
+    const navigate = useNavigate();
 
     //======================================
     // 수량 변경한 만큼 가격에 계산
@@ -41,6 +42,21 @@ function ProductDetail({ handleCart }) {
                 //alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.');
             });
     }
+
+    const AddOrder = () => {
+
+            navigate('/checkout', {
+                state: {
+                    selectedCartItems: [{
+                        imgNo: prod_image1,
+                        prod_num: productData.prod_num,
+                        prod_name: productData.prod_name,
+                        quantity: count,
+                        productPriceFormatted: productData.prod_price1
+                    }]
+                }
+            });
+    };
 
     //====================================== 여기까지 ========================================
 
@@ -70,12 +86,14 @@ function ProductDetail({ handleCart }) {
         }
     }
 
+    
     // 1000단위 끊기
-    const sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
+    var sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
     const sellPrice1 = sellPrice.toLocaleString();
     const sum = count * sellPrice;
     const result = sum.toLocaleString();
-
+    
+    console.log(sellPrice.type);
     //======================================
     const [data, setData] = useState([]);
 
@@ -90,6 +108,8 @@ function ProductDetail({ handleCart }) {
                 console.log(error);
             });
     }, []);
+
+    console.log(productData);
 
     // 해당하는 상품의 리뷰 필터링
     const matchingReviews = data.filter((image) => image.prod_num === productData.prod_num);
@@ -205,7 +225,7 @@ function ProductDetail({ handleCart }) {
                     <Modal className="ModalContent" handleCart={handleCart} isOpen={modalIsOpen} onRequestClose={closeModal}>
                         <AddCart closeModal={closeModal} AddToCart={AddToCart} />
                     </Modal>
-                    <Link to='../Cart/Cart' className="pd_btn2" onClick={AddToCart}>구매하기</Link>
+                    <span className="pd_btn2" onClick={AddOrder}>구매하기</span>
                 </div>
             </div>
             <div className="PdIndex00">

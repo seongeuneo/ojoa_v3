@@ -32,10 +32,10 @@ function Checkout({ cart }) {
   const [isMember, setIsMember] = useState(false);
   const navigate = useNavigate();
 
+
   // 원희가 준 코드
   const location = useLocation();
   const selectedCartItems = location.state.selectedCartItems;
-
 
   function showAddressPopupOpen() {
     setIsAddressPopupOpen(true);
@@ -62,7 +62,6 @@ function Checkout({ cart }) {
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
   }, [selectedCartItems]);
-
 
   //이걸로 !!
   // const displayedCartList = useMemo(() => {
@@ -212,7 +211,6 @@ function Checkout({ cart }) {
   };
 
 
-
   return (
     <div className="Checkout">
       {/* <form onSubmit={handleSubmit}> */}
@@ -242,7 +240,7 @@ function Checkout({ cart }) {
                 <tr key={item.prod_num}>
                   <td>{index + 1}</td>
                   <td>
-                    <img src={`/thumbs/${item.imgNo}_1.jpg`} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} />
+                    <img src={`/thumbs/${item.imgNo}`} alt="" style={{ width: 80, height: 80, objectFit: 'contain' }} />
                   </td>
                   <td>{item.prod_name}</td>
                   <td>{item.dispalyedPrice}원</td>

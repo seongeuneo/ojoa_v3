@@ -67,7 +67,7 @@ public class ReviewRestController {
 			}
 
 			// ** MultipartFile ***********************
-			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\uploadImages\\";
+			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
 			// => 기본 이미지 지정하기
 			String file1 = "", file2 = "", file3 = "", file4 = "";
 

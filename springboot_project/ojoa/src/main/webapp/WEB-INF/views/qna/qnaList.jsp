@@ -36,7 +36,7 @@
 			<th>카테고리</th>
 			<th>문의 제목</th>
 			<th>문의 내용</th>
-			<th>답변 여부</th>
+			<th>답변 완료 여부</th>
 			<th>답변 하기</th>
 			<th>삭제</th>
 
@@ -53,8 +53,7 @@
 					<td>${s.qna_title}</td>
 					<td>${s.qna_content}</td>
 
-					<td>여기에 qna state</td>
-					<%-- <td>${s.qna_state}</td> --%>
+					<td>${s.qna_answer}</td>
 
 					<td align="center"><a class="texlink"
 						onclick="replyAnswerForm(${s.qna_seq})">답변 하기</a></td>

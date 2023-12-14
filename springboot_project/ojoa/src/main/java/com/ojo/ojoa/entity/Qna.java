@@ -48,7 +48,7 @@ public class Qna extends QnaBaseEntity {
     @Column(name="qna_reply")
     private String qna_reply;
 
+    private String qna_answer; // 답변완료: 'y' , 미등록: 'N'
 //	@OneToOne(mappedBy = "qna", fetch = FetchType.LAZY)
 //    private Product product;
-   
 } //class
