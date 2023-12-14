@@ -52,7 +52,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
 
                 <div className="delivery">
                     <p className="cart_product_delivery">배송비</p>
-                    <p className="cart_product_delivery_price">{selectedTotal > 100000 ? "무료": 3000}</p>
+                    <p className="cart_product_delivery_price">{selectedTotal > 99999 ? "무료": 3000}</p>
                 </div>
 
                 <div className="pay_plus">
@@ -63,7 +63,7 @@ const CartTotal = ({ cart, selectedItems, onCheckout }) => {
                     <p className="cart_prouct_payment" name="prod_price1">결제 금액</p>
                     {/* <p className="cart_prouct_payment_price">{convertPrice(totalPayment)}원</p> */}
                     {/* <p className="cart_prouct_payment_price">{calculateTotalPrice()}원</p> */}
-                    <p className="cart_prouct_payment_price">{selectedTotal > 100000 ? selectedTotal : selectedTotal+3000}원</p>
+                    <p className="cart_prouct_payment_price">{selectedTotal > 99999 ? selectedTotal : selectedTotal+3000}원</p>
                 </div>
             </div>
 

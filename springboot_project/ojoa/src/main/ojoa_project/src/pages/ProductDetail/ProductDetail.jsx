@@ -10,7 +10,7 @@ import AddCart from './Modal/AddCart';
 import axios from "axios";
 
 
-function ProductDetail({ cart, handleCart }) {
+function ProductDetail({ setCart}) {
 
     const location = useLocation();
     const { prod_num } = useParams();
@@ -33,8 +33,20 @@ function ProductDetail({ cart, handleCart }) {
             .then(response => {
                 // 요청 성공 시 처리할 작업
                 //console.log("장바구니 담기" + response.data);
-                alert('장바구니에 추가되었습니다!');
-                // 추가 작업이 필요하다면 여기에 작성
+                const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+                const loginID = loggedInUser.id;
+                
+                axios
+                .get(`/api/cart/allCartList?loginID=${loginID}`)
+                .then((response) => {
+                    setCart(response.data);
+                    //window.location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error: ", error);
+                });
+                
+                //alert('장바구니에 추가되었습니다!');
             })
             .catch(error => {
                 // 요청 실패 시 처리할 작업
@@ -228,10 +240,10 @@ function ProductDetail({ cart, handleCart }) {
 
                 <div className="pd_btns">
                     <a onClick={CartOpenModal} className="pd_btn1">장바구니</a>
-                    <Modal className="ModalContent" handleCart={handleCart} isOpen={modalIsOpen} onRequestClose={closeModal}>
+                    <Modal className="ModalContent"  isOpen={modalIsOpen} onRequestClose={closeModal}>
                         <AddCart closeModal={closeModal} AddToCart={AddToCart} />
                     </Modal>
-                    <span className="pd_btn2" onClick={AddOrder}>구매하기</span>
+                    <a className="pd_btn2" onClick={AddOrder}>구매하기</a>
                 </div>
             </div>
             <div className="PdIndex00">

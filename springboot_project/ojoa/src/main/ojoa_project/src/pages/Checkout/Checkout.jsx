@@ -12,86 +12,89 @@ import AddressPopup from './AddressPopup/AddressPopup';
 
 
 // const mockData = [
-//   {
-//     "id": 101,
-//     "imgNo": 101,
-//     "productName": "조금 큰 나무 침대",
-//     "productPriceFormatted": "385000",
-//     "productPromotion": "7",
-//     "productInfo": "안녕하세요 그렇습니다",
-//     "productReview": "8",
-//     "productGrade": "4.8",
-//     "quantity": 1
-//   }
-// ];
+  //   {
+    //     "id": 101,
+    //     "imgNo": 101,
+    //     "productName": "조금 큰 나무 침대",
+    //     "productPriceFormatted": "385000",
+    //     "productPromotion": "7",
+    //     "productInfo": "안녕하세요 그렇습니다",
+    //     "productReview": "8",
+    //     "productGrade": "4.8",
+    //     "quantity": 1
+    //   }
+    // ];
+    
+    
+    
+    function Checkout({ cart }) {
+      const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
+      const [isMember, setIsMember] = useState(false);
+      const navigate = useNavigate();
+      
+      
+      // 원희가 준 코드
+      const location = useLocation();
+      const selectedCartItems = location.state.selectedCartItems;
+      
+      function showAddressPopupOpen() {
+        setIsAddressPopupOpen(true);
+      }
+      
+      const formatNumber = (num) => {
+        return Intl.NumberFormat().format(num)
+      }
+      
+      
+      // 할인금액
+      const discountPrice = 0;
+      
+      //const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
+      const selectedProducts = cart;
+      
+      const displayedCartList = useMemo(() => {
+        return selectedCartItems.map(item => ({
+          ...item,
+          dispalyedPrice: formatNumber(item.productPriceFormatted),
+          totalPrice: item.quantity * Number(item.productPriceFormatted),
+          displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
+        }))
+      }, [selectedCartItems]);
+      
+      //이걸로 !!
+      // const displayedCartList = useMemo(() => {
+        //   return selectedCartItems.map(item => ({
+          //     ...item,
+          //     dispalyedPrice: formatNumber(item.productPriceFormatted),
+          //     totalPrice: item.quantity * Number(item.productPriceFormatted),
+          //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
+          //   }))
+          // }, [selectedCartItems]);
+          
+          const totalProductPrice = useMemo(() => {
+            return displayedCartList.reduce((acc, curr) => {
+              return acc + curr.totalPrice
+            }, 0)
+          }, [displayedCartList]);
+          
+          
+          // 총 결제 금액
+          const totalCheckoutPrice = (totalProductPrice > 99999 ? totalProductPrice : totalProductPrice+3000);
+          
+          // 배송비
+          const deliveryPrice = (totalProductPrice > 99999 ? 0 : 3000);
 
 
-
-function Checkout({ cart }) {
-  const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
-  const [isMember, setIsMember] = useState(false);
-  const navigate = useNavigate();
-
-
-  // 원희가 준 코드
-  const location = useLocation();
-  const selectedCartItems = location.state.selectedCartItems;
-
-  function showAddressPopupOpen() {
-    setIsAddressPopupOpen(true);
-  }
-
-  const formatNumber = (num) => {
-    return Intl.NumberFormat().format(num)
-  }
-
-  // 배송비
-  const deliveryPrice = 0;
-
-  // 할인금액
-  const discountPrice = 0;
-
-  //const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
-  const selectedProducts = cart;
-
-  const displayedCartList = useMemo(() => {
-    return selectedCartItems.map(item => ({
-      ...item,
-      dispalyedPrice: formatNumber(item.productPriceFormatted),
-      totalPrice: item.quantity * Number(item.productPriceFormatted),
-      displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
-    }))
-  }, [selectedCartItems]);
-
-  //이걸로 !!
-  // const displayedCartList = useMemo(() => {
-  //   return selectedCartItems.map(item => ({
-  //     ...item,
-  //     dispalyedPrice: formatNumber(item.productPriceFormatted),
-  //     totalPrice: item.quantity * Number(item.productPriceFormatted),
-  //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
-  //   }))
-  // }, [selectedCartItems]);
-
-  const totalProductPrice = useMemo(() => {
-    return displayedCartList.reduce((acc, curr) => {
-      return acc + curr.totalPrice
-    }, 0)
-  }, [displayedCartList]);
-
-  // 총 결제 금액
-  const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
-
-  // 결제 성공 시 호출되는 함수
-  const handlePaymentSuccess = () => {
-    // history.push를 사용하여 '/payment-confirmation' 경로로 이동
-    navigate('/paymentconfirmation');
-  };
-
-  const [orderInfo, setOrderInfo] = useState({
-    memberCheck: '',
-    orders_method: 'card', // cart , vbank
-    buyer: '',
+          // 결제 성공 시 호출되는 함수
+          const handlePaymentSuccess = () => {
+            // history.push를 사용하여 '/payment-confirmation' 경로로 이동
+            navigate('/paymentconfirmation');
+          };
+          
+          const [orderInfo, setOrderInfo] = useState({
+        memberCheck: '',
+        orders_method: 'card', // cart , vbank
+        buyer: '',
     postNumber: '',
     address1: '',
     address2: '',
@@ -257,7 +260,7 @@ function Checkout({ cart }) {
                 <td colSpan={9}>
                   <div className="pay_product_summary_content">
                     <p>[기본배송]</p>
-                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
+                    <p>상품구매금액: {formatNumber(totalProductPrice)} + 배송비: {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
                   </div>
                 </td>
               </tr>
