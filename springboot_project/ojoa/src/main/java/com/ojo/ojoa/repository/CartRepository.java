@@ -34,13 +34,6 @@ extends JpaRepository<Cart, CartId> {
 	void save(int prod_num);
 	
 // =================== 복합키 설정한 부분 =================	
-//	// ** Update 구문
-//	@Modifying 
-//	@Transactional
-//	// => Native_SQL : OK (Table명 사용)	
-//	@Query( nativeQuery=true, 
-//			  value="update cart SET quantity=quantity+:quantity where id=:id and prod_num=:prod_num" )
-//	void updateCount(@Param("id") String id, @Param("prod_num") int prod_num, @Param("quantity") int quantity);
 	
 	// ** DUPLICATE KEY UPDATE 구문
 	@Modifying 

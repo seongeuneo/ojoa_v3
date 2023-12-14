@@ -61,17 +61,6 @@ function App() {
     setIsLoggedIn(false); // 로그아웃 시 로그인 상태 변경
   };
 
-  // 장바구니에 상품 추가
-  const handleCart = () => {
-    // setCart((prevCart) => [...prevCart, cartItem]);
-  };
-
-  // 장바구니 상품 가격 쉼표
-  // const convertPrice = (productPriceFormatted) => {
-  //   return productPriceFormatted;
-  //   //.toString()
-  //   //.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // };
 
   return (
     <div className="App">
@@ -100,20 +89,20 @@ function App() {
           <Route path="/member/rlogin/FindLoginPw" element={<FindLoginPw />} />
           <Route path="/member/modify/PUpdateForm" element={<PUpdateForm />} />
           <Route path="/" element={<Main />} />
-          <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Best/*" element={<Best cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Chair/*" element={<Chair cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Sofa/*" element={<Sofa cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Bed/*" element={<Bed cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Bookshelf/*" element={<Bookshelf cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Closet/*" element={<Closet cart={cart} setCart={setCart} handleCart={handleCart} />} />
-          <Route path="/productList/Lighting/*" element={<Lighting cart={cart} setCart={setCart} handleCart={handleCart} />} />
+          <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} />} />
+          <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Best/*" element={<Best cart={cart} setCart={setCart}/>} />
+          <Route path="/productList/Chair/*" element={<Chair cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Sofa/*" element={<Sofa cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Bed/*" element={<Bed cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Bookshelf/*" element={<Bookshelf cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Closet/*" element={<Closet cart={cart} setCart={setCart} />} />
+          <Route path="/productList/Lighting/*" element={<Lighting cart={cart} setCart={setCart} />} />
 
           {/* <Route path="/ProductList/ProductCategory/*" element={<ProductCategory cart={cart} setCart={setCart} handleCart={handleCart} />} /> */}
 
 
-          <Route path="/cart/*" element={<Cart cart={cart} handleCart={handleCart}
+          <Route path="/cart/*" element={<Cart cart={cart} 
             setCart={setCart} isAllChecked={isAllChecked} setIsAllChecked={setIsAllChecked} />} />
           <Route path="/member/rjoin" element={<Join />} />
           {/* <Route path="/login/info/agree" element={<Agree />} />
