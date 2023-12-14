@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.repository.ProductRepository;
+import com.ojo.ojoa.repository.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
 
     
  // ** selectList
@@ -52,5 +54,23 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> result = productRepository.findById(prodNum);
         return result.orElse(null);
     }
+ 	
+ 	// 평점
+ 	public void rUpdate(Integer prod_num) {
+        // productId를 사용하여 review_rate의 평균 계산
+        float averageRate = reviewRepository.calculateAverageRateByProdNum(prod_num);
+
+        // Product 엔티티를 데이터베이스에서 가져와서 prod_grade 값을 설정한 후 저장
+        Product product = productRepository.findById(prod_num).orElse(null);
+        if (product != null) {
+            product.setProd_grade(averageRate);
+            productRepository.save(product);
+        }
+    }
+ 	
+ 	public void update(int prod_num) {
+ 		productRepository.update(prod_num);
+ 		
+ 	}
  	
  } //class

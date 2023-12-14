@@ -23,11 +23,18 @@ public interface ProductService {
 
 	// ** insert, update
 	int save(Product entity);
+	
+	// 평점을 위한 업데이트
+	void update(int prod_num);
 
 	// ** delete
 	int delete(int prod_num);
 
 	// 새로운 메서드 추가
     Product getProductById(String productId);
+    
+    // 평점
+    public void rUpdate(Integer prod_num);
+    
     
 } //class

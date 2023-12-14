@@ -45,17 +45,17 @@ function ProductDetail({ cart, handleCart }) {
 
     const AddOrder = () => {
 
-            navigate('/checkout', {
-                state: {
-                    selectedCartItems: [{
-                        imgNo: prod_image1,
-                        prod_num: productData.prod_num,
-                        prod_name: productData.prod_name,
-                        quantity: count,
-                        productPriceFormatted: productData.prod_price1
-                    }]
-                }
-            });
+        navigate('/checkout', {
+            state: {
+                selectedCartItems: [{
+                    imgNo: prod_image1,
+                    prod_num: productData.prod_num,
+                    prod_name: productData.prod_name,
+                    quantity: count,
+                    productPriceFormatted: productData.prod_price1
+                }]
+            }
+        });
     };
 
     //====================================== 여기까지 ========================================
@@ -86,7 +86,7 @@ function ProductDetail({ cart, handleCart }) {
         }
     }
 
-    
+
     // 1000단위 끊기
     // const sellPrice = Array.isArray(productData) && productData.length > 0
     //     ? parseInt(productData[0].prod_price1.toString().replace(/,/g, ''))
@@ -98,7 +98,7 @@ function ProductDetail({ cart, handleCart }) {
     const sellPrice1 = sellPrice.toLocaleString();
     const sum = count * sellPrice;
     const result = sum.toLocaleString();
-    
+
     console.log(sellPrice.type);
     //======================================
     const [data, setData] = useState([]);
@@ -138,6 +138,9 @@ function ProductDetail({ cart, handleCart }) {
         setMainImg(e);
     };
 
+    // 배송비 
+    const deliveryCharge = sum > 100000 ? '무료배송' : '3000원';
+    const totalSum = sum + (deliveryCharge === '3000원' ? 3000 : 0);
 
     //======================================
     return (
@@ -207,11 +210,11 @@ function ProductDetail({ cart, handleCart }) {
                         </tr> */}
                         <tr>
                             <th>배송비</th>
-                            <td>무료배송</td>
+                            <td>{deliveryCharge}</td>
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td className="total"><strong>{sum}</strong>원</td>
+                            <td className="total"><strong>{totalSum}</strong>원</td>
                         </tr>
                     </tbody>
                 </table>
