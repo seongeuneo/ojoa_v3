@@ -1,15 +1,15 @@
 package com.ojo.ojoa.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.ojo.ojoa.domain.CartProdDTO;
 import com.ojo.ojoa.domain.ProdIMGDTO;
-import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.repository.ProductRepository;
 import com.ojo.ojoa.repository.ReviewRepository;
@@ -91,5 +91,20 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProdIMGDTO> findProdIMG() {
 		return productRepository.findProdIMG();
 	}
+	
+	@Override
+    public Map<String, Object> getProductListWithImages(Pageable pageable) {
+        Map<String, Object> productListWithImages = new HashMap<>();
+        
+        // 페이지네이션된 제품 목록 가져오기
+        Page<Product> productList = getProductList(pageable);
+        productListWithImages.put("productList", productList.getContent());
+
+        // 제품 이미지 정보 가져오기
+        List<ProdIMGDTO> prodIMGList = findProdIMG();
+        productListWithImages.put("prodIMGList", prodIMGList);
+
+        return productListWithImages;
+    }
 
 } // class

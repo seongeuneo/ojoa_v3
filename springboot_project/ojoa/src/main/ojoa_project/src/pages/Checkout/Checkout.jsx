@@ -8,7 +8,8 @@ import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
 import Post from './KakaoAddressModal/KakaoAddressModal';
 import axios from 'axios';
-import AddressPopup from './AddressPopup/AddressPopup';
+import Modal from 'react-modal';
+import AddressPopup from './AddressPopup/AddressPopup'
 
 
 function Checkout({ cart }) {
@@ -210,6 +211,13 @@ function Checkout({ cart }) {
       });
   };
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // 모달창 열기 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  // 모달창 닫기
+  const closeModal = () => setModalIsOpen(false);
 
   return (
     <div className="Checkout">
@@ -282,7 +290,7 @@ function Checkout({ cart }) {
               <col width="200px" />
             </colgroup>
 
-            {isMember ? (
+            {/* {isMember ? ( */}
               <tr>
                 <th>배송지 선택</th>
                 <td>
@@ -291,15 +299,14 @@ function Checkout({ cart }) {
                     <label for="sameaddr0">회원 정보와 동일</label>
                     <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
                     <label for="sameaddr1">새로운 배송지</label>
-                    <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
-                    <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
-                      주소록 보기
-                    </Link>
-                    {isAddressPopupOpen && <AddressPopup />}
+                    <button onClick={openModal}>이전 주소록보기</button>
+                    <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
+                      <AddressPopup closeModal={closeModal} />
+                    </Modal>
                   </div>
                 </td>
               </tr>
-            ) : (
+            {/* ) : (
               <>
                 <tr>
                   <th className="pay_table_th">주문조회 비밀번호 *</th>
@@ -309,7 +316,7 @@ function Checkout({ cart }) {
                   </td>
                 </tr>
               </>
-            )}
+            )} */}
 
             <tr>
               <th>받으시는 분 *</th>

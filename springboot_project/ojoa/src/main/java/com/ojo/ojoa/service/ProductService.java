@@ -1,6 +1,7 @@
 package com.ojo.ojoa.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,10 @@ public interface ProductService {
     
     // ** Join (findProdIMG)
   	List<ProdIMGDTO> findProdIMG();
+  	
+  	// 새로운 메서드 추가: 페이지네이션된 제품 목록과 제품 이미지 정보 반환
+    public Map<String, Object> getProductListWithImages(Pageable pageable);
+
     
     
 } //class

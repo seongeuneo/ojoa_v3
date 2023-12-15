@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,19 +50,23 @@ public class ProductController {
             @RequestParam(name = "size", defaultValue = "5") int size,
             Model model) {
     	Pageable pageable = PageRequest.of(page, size);
-	       Page<Product> productList = productService.getProductList(pageable);
+//	       Page<Product> productList = productService.getProductList(pageable);
+    	 Map<String, Object> productListWithImages = productService.getProductListWithImages(pageable);
 
-	       model.addAttribute("product", productList.getContent());
-	       model.addAttribute("itemPage", productList);
-	       model.addAttribute("currentPage", productList.getNumber());
-	       model.addAttribute("totalPages", productList.getTotalPages());
-	       model.addAttribute("totalItems", productList.getTotalElements());
-	       
-	      log.info("productService.getFaqList(category, pageable) : " + productService.getProductList(pageable));
-	      log.info("productList.getContent() : " + productList.getContent());
-	      log.info("productList : " + productList);
-	      log.info("productList.getNumber() : " + productList.getNumber());
-	      log.info("productList.getTotalElements() : " + productList.getTotalElements());
+    	 model.addAttribute("product", productListWithImages.get("productList"));
+    	    model.addAttribute("prodIMGList", productListWithImages.get("prodIMGList"));
+
+//	       model.addAttribute("product", productListWithImages.getContent());
+//	       model.addAttribute("itemPage", productListWithImages);
+//	       model.addAttribute("currentPage", productListWithImages.getNumber());
+//	       model.addAttribute("totalPages", productListWithImages.getTotalPages());
+//	       model.addAttribute("totalItems", productListWithImages.getTotalElements());
+//	       
+//	      log.info("productService.getFaqList(category, pageable) : " + productService.getProductList(pageable));
+//	      log.info("productList.getContent() : " + productListWithImages.getContent());
+//	      log.info("productList : " + productListWithImages);
+//	      log.info("productList.getNumber() : " + productListWithImages.getNumber());
+//	      log.info("productList.getTotalElements() : " + productListWithImages.getTotalElements());
     } // productList
     
     
