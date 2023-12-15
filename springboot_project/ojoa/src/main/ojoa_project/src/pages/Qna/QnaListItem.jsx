@@ -1,6 +1,8 @@
 import './Qna.css';
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import QnaModal from './QnaModal/QnaModal';
+import QnaWriteBtn from './QnaWriteBtn';
 
 // 배열 속성 writer 입력시 성만 따오기
 const lastName = (fullName) => {
