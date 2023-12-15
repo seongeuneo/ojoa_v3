@@ -213,6 +213,30 @@ public class MemberControllerR {
     } //findLoginId
 	
 	
+//	// ***** 리액트 회원 비밀번호 찾기 ( 변경 )
+//		@GetMapping("/rfindPw")
+//	    public ResponseEntity<?> rfindPw(
+//	    		@RequestParam("id") String id,
+//	            @RequestParam("name") String name,
+//	            @RequestParam("phone2") String phone2,
+//	            @RequestParam("phone3") String phone3
+//	    ) {
+//	        try {
+//	            // 데이터베이스에서 해당 id, name, phone2, phone3 값을 가진 ID를 조회합니다.
+//	            String foundPw = service.findIdByIdAndNameAndPhone(id, name, phone2, phone3);
+//
+//	            if (foundPw != null) {
+//	                // Pw를 찾은 경우
+//	                return ResponseEntity.ok(foundPw);
+//	            } else {
+//	                // Pw를 찾지 못한 경우
+//	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 정보로 등록된 Pw가 없습니다.");
+//	            }
+//	        } catch (Exception e) {
+//	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Pw를 찾는 중에 오류가 발생했습니다.");
+//	        }
+//	    } //rfindPw
+	
 	
 	//***** 결제페이지 회원정보 가져오기 : 희상추가
 	@GetMapping(value="/rinfo")

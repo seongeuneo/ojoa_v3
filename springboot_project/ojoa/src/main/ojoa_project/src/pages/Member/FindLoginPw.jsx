@@ -17,33 +17,33 @@ const FindLoginPw = () => {
 
     const handleFindPassword = async (event) => {
         event.preventDefault();
-        
+
         try {
-            const response = await axios.get('/member/rfindId', {
+            const response = await axios.get('/member/rfindPw', {
                 params: {
+                    id: id,
                     name: name,
+                    phone1: phone1,
                     phone2: phone2,
                     phone3: phone3
                 }
             });
 
             if (response.status === 200) {
-                const retrievedId = response.data;
-                if (retrievedId !== '') {
-                    setFoundId(retrievedId); // Set the found ID state
-                    alert(`찾은 ID는 ${retrievedId} 입니다.`);
-                    // '/rLogin' 페이지로 이동
-                    navigate('/Member/rLogin');
+                const retrievedPassword = response.data;
+                if (retrievedPassword !== '') {
+                    // 비밀번호를 찾았을 때 할 작업
+                    alert(`찾은 비밀번호는 ${retrievedPassword} 입니다.`);
+                    navigate('/Member/rLogin'); // 비밀번호를 찾았을 때, 로그인 페이지로 이동
                 } else {
-                    alert(`일치하는 ID를 찾지 못했습니다.`);
+                    alert(`입력하신 정보와 일치하는 계정을 찾지 못했습니다.`);
                 }
             } else {
-                console.error('ID 찾기 실패');
+                console.error('비밀번호 찾기 실패');
             }
         } catch (error) {
-            console.error('ID 찾기 오류:', error);
-            setError('** 해당 정보와 일치하는 아이디가 없습니다.'); // Set error state for other errors
-            // Handle error, maybe set an error state to display to the user
+            console.error('비밀번호 찾기 오류:', error);
+            setError('** 해당 정보와 일치하는 계정이 없습니다.'); // 다른 오류 발생 시 에러 상태 업데이트
         }
     };
 
