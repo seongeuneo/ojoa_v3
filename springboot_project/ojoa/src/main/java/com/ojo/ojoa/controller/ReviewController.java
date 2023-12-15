@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,9 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.domain.ReviewDTO;
+import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.entity.Review;
 import com.ojo.ojoa.entity.Wish;
@@ -35,15 +40,32 @@ public class ReviewController {
 	
 	// ** Review List - 회원별 리뷰 목록 반환 
     @GetMapping("/reviewList")
-    public void reviewList(Model model) {
-       model.addAttribute("myreview", reviewService.selectList());
-    } // qnaList
+    public void reviewList(@RequestParam(name = "category", defaultValue = "") String category,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size,
+            Model model) {
+    	Pageable pageable = PageRequest.of(page, size);
+	       Page<Review> reviewList = reviewService.getReviewList(pageable);
+
+	       model.addAttribute("myreview", reviewList.getContent());
+	       model.addAttribute("itemPage", reviewList);
+	       model.addAttribute("currentPage", reviewList.getNumber());
+	       model.addAttribute("totalPages", reviewList.getTotalPages());
+	       model.addAttribute("totalItems", reviewList.getTotalElements());
+	       
+	      log.info("reviewService.getReviewList(category, pageable) : " + reviewService.getReviewList(pageable));
+	      log.info("reviewList.getContent() : " + reviewList.getContent());
+	      log.info("reviewList : " + reviewList);
+	      log.info("reviewList.getNumber() : " + reviewList.getNumber());
+	      log.info("reviewList.getTotalElements() : " + reviewList.getTotalElements());
+    	
+    } // reviewList
     
     // ** 새글등록: Insert 
     @GetMapping("/reviewInsert")
     public void reviewInsert(Model model) { 
        model.addAttribute("myreview", reviewService.selectList());
-    } // qnaInsert
+    } // reviewInsert
 	
 	
 //	

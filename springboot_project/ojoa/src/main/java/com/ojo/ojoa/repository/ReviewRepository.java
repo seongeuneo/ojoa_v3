@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,8 +27,14 @@ public interface ReviewRepository
 			+ "FROM Review A LEFT JOIN Product B ON A.prod_num = B.prod_num")
     List<ReviewDTO> findAllReviewList();
 	
+	// 평점
     @Query("SELECT AVG(r.review_rate) FROM Review r WHERE r.prod_num = :prod_num")
     float calculateAverageRateByProdNum(Integer prod_num);
+    
+ // 페이지네이션
+ 	@Transactional
+ 	@Query("Select r from Review r order by r.prod_num asc")
+ 	Page<Review> getReviewList(Pageable pageable);
 
 
 }

@@ -45,7 +45,7 @@
 		</div>
 	</div>
 
-	<table border="1" style="width: 90%">
+	<table border="1" style="width: 90%" id="productTable">
 		<tr class="prod-columns">
 			<th>상품 번호</th>
 			<th>대표 썸네일 사진</th>
@@ -59,8 +59,8 @@
 			<th>재고 수량</th>
 			<th>평점</th>
 			<th>상품 삭제</th>
-			<th>관심목록 추가</th>
-			<th>장바구니 담기</th>
+			<!-- <th>관심목록 추가</th>
+			<th>장바구니 담기</th> -->
 			<th>상품 수정</th>
 
 			<!-- 관리자 기능 추가 -->
@@ -74,7 +74,7 @@
 					<td>${s.prod_num}</td>
 				
 					<td>
-					<img alt="MyImage" src="springboot_project/ojoa/src/main/ojoa_project/public/thumbs/${s.prod_mainimage}" width="80"
+					<img alt="MyImage" src="/springboot_project/ojoa/src/main/ojoa_project/public/thumbs/${s.prod_mainimage}" width="80"
 						height="70">
 						</td>
 					<td>${s.prod_name}</td>
@@ -88,11 +88,11 @@
 					<td>${s.prod_grade}</td>
 
 					<td align="center"><button onclick="productDelete(${s.prod_num})">상품삭제</button></td>
-					<td align="center"><button onclick="addWish(${s.prod_num})">관심목록
+					<%-- <td align="center"><button onclick="addWish(${s.prod_num})">관심목록
 							추가</button></td>
 					<td align="center">
 						<button onclick="addCart(${s.prod_num},1)">장바구니담기</button>
-					</td>
+					</td> --%>
 					<td align="center">
 						<button onclick="modifyProduct(${s.prod_num})">상품수정</button>
 					</td>
@@ -107,12 +107,16 @@
 			</tr>
 		</c:if>
 	</table>
-<!-- 	<div class="pagination">
-		<button id="prevPage">이전</button>
-		<span id="pageNumbers"></span>
-		<button id="nextPage">다음</button>
-	</div> -->
-
+		<div class="pagination_wrap">
+       <c:if test="${not empty requestScope.itemPage}">
+           <c:forEach var="pageNumber" begin="0" end="${requestScope.totalPages - 1}">
+           <span onclick="productManagementPage(${pageNumber})"
+                   class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
+                 ${pageNumber + 1}
+           </span>
+           </c:forEach>
+       </c:if>
+   </div>
 	<div class="home-link">
 		<a href="/home">Home</a>
 	</div>

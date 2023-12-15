@@ -1,6 +1,8 @@
 package com.ojo.ojoa.service;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,9 @@ public interface OrdersService {
 
 	// ** selectList
 	List<Orders> selectList();
+	
+	// ** 페이지네이션
+	public Page<Orders> getOrdersList(Pageable pageable);
 
 	// ** selectOne
 	Orders selectOne(int orders_num);

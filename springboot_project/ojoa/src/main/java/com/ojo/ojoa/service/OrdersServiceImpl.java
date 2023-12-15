@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ojo.ojoa.DTO.OrdersDetailReqDTO;
@@ -32,6 +34,12 @@ public class OrdersServiceImpl implements OrdersService {
  	@Override
  	public List<Orders> selectList() {
  		return ordersRepository.findAll();
+ 	}
+ 	
+ // 페이지네이션
+ 	@Override
+ 	public Page<Orders> getOrdersList(Pageable pageable) {
+ 		return ordersRepository.getOrdersList(pageable);
  	}
  	
  	// ** selectOne

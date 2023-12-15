@@ -2,6 +2,9 @@ package com.ojo.ojoa.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,8 +13,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Orders;
 import com.ojo.ojoa.entity.OrdersDetail;
 import com.ojo.ojoa.service.OrdersDetailService;
@@ -32,8 +37,25 @@ public class OrdersController {
 
 // ** Orders List - 회원별 주문목록
     @GetMapping("/ordersList")
-    public void ordersList(Model model) {
-    	model.addAttribute("myorders", ordersService.selectList());
+    public void ordersList(@RequestParam(name = "category", defaultValue = "") String category,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size,
+            Model model) {
+    	Pageable pageable = PageRequest.of(page, size);
+	       Page<Orders> ordersList = ordersService.getOrdersList(pageable);
+
+	       model.addAttribute("myorders", ordersList.getContent());
+	       model.addAttribute("itemPage", ordersList);
+	       model.addAttribute("currentPage", ordersList.getNumber());
+	       model.addAttribute("totalPages", ordersList.getTotalPages());
+	       model.addAttribute("totalItems", ordersList.getTotalElements());
+	       
+	      log.info("ordersService.getFaqList(category, pageable) : " + ordersService.getOrdersList(pageable));
+	      log.info("ordersList.getContent() : " + ordersList.getContent());
+	      log.info("ordersList : " + ordersList);
+	      log.info("ordersList.getNumber() : " + ordersList.getNumber());
+	      log.info("ordersList.getTotalElements() : " + ordersList.getTotalElements());
+    	
     } // ordersList
 
 

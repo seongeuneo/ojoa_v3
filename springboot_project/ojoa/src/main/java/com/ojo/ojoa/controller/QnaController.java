@@ -5,6 +5,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.service.QnaService;
 
@@ -32,8 +37,25 @@ public class QnaController {
    
    // ** Qna List - 회원별 Qna 목록 반환 
     @GetMapping("/qnaList")
-    public void qnaList(Model model) {
-       model.addAttribute("qna", qnaService.selectList());
+    public void qnaList(@RequestParam(name = "category", defaultValue = "") String category,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size,
+            Model model) {
+    	Pageable pageable = PageRequest.of(page, size);
+	       Page<Qna> qnaList = qnaService.getQnaList(pageable);
+
+	       model.addAttribute("qna", qnaList.getContent());
+	       model.addAttribute("itemPage", qnaList);
+	       model.addAttribute("currentPage", qnaList.getNumber());
+	       model.addAttribute("totalPages", qnaList.getTotalPages());
+	       model.addAttribute("totalItems", qnaList.getTotalElements());
+	       
+	      log.info("qnaService.getQnaList(category, pageable) : " + qnaService.getQnaList(pageable));
+	      log.info("qnaList.getContent() : " + qnaList.getContent());
+	      log.info("qnaList : " + qnaList);
+	      log.info("qnaList.getNumber() : " + qnaList.getNumber());
+	      log.info("qnaList.getTotalElements() : " + qnaList.getTotalElements());
+    	
     } // qnaList
     
     
