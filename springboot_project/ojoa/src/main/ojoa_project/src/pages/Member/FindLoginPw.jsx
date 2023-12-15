@@ -1,9 +1,53 @@
-import './FindLoginId.css';
+import './FindLoginPw.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const FindLoginPw = () => {
+    const navigate = useNavigate();
+
+    const [id, setId] = useState(''); // 아이디 state
+    const [name, setName] = useState(''); // 이름 state
+    const [phone1, setPhone1] = useState('010');
+    const [phone2, setPhone2] = useState(''); // 휴대폰 번호 state
+    const [phone3, setPhone3] = useState(''); // 휴대폰 번호 state
+    const [foundId, setFoundId] = useState(''); // 찾은 ID state
+
+    const [error, setError] = useState(''); // State to handle errors
+
+    const handleFindPassword = async (event) => {
+        event.preventDefault();
+        
+        try {
+            const response = await axios.get('/member/rfindId', {
+                params: {
+                    name: name,
+                    phone2: phone2,
+                    phone3: phone3
+                }
+            });
+
+            if (response.status === 200) {
+                const retrievedId = response.data;
+                if (retrievedId !== '') {
+                    setFoundId(retrievedId); // Set the found ID state
+                    alert(`찾은 ID는 ${retrievedId} 입니다.`);
+                    // '/rLogin' 페이지로 이동
+                    navigate('/Member/rLogin');
+                } else {
+                    alert(`일치하는 ID를 찾지 못했습니다.`);
+                }
+            } else {
+                console.error('ID 찾기 실패');
+            }
+        } catch (error) {
+            console.error('ID 찾기 오류:', error);
+            setError('** 해당 정보와 일치하는 아이디가 없습니다.'); // Set error state for other errors
+            // Handle error, maybe set an error state to display to the user
+        }
+    };
+
+
     //const navigate = useNavigate(); // useNavigate  훅 사용
 
     // Ref 객체 추가
@@ -49,8 +93,9 @@ const FindLoginPw = () => {
                                             <td>
                                                 <input type="text"
                                                     name="id"
-                                                    minlength="2"
                                                     id="id"
+                                                    value={id}
+                                                    onChange={(event) => setName(event.target.value)}
                                                     required
                                                 />
                                             </td>
@@ -66,6 +111,8 @@ const FindLoginPw = () => {
                                                     minlength="2"
                                                     id="name"
                                                     required
+                                                    value={name}
+                                                    onChange={(event) => setName(event.target.value)}
                                                 />
                                             </td>
                                         </tr>
@@ -78,9 +125,10 @@ const FindLoginPw = () => {
                                                 <div>
                                                     <input type="tel"
                                                         name="phone1"
-                                                        value="010"
+                                                        value={phone1} // 휴대폰 번호 상태와 연결
                                                         size="1"
                                                         id="phone1"
+                                                        onChange={(event) => setPhone1(event.target.value)}
                                                         readonly
                                                     />
                                                     &nbsp;&ndash;&nbsp;
@@ -88,6 +136,10 @@ const FindLoginPw = () => {
                                                         name="phone2"
                                                         size="1"
                                                         id="phone2"
+                                                        minlength="4"
+                                                        maxlength="4"
+                                                        value={phone2}
+                                                        onChange={(event) => setPhone2(event.target.value)}
                                                         required
                                                     />
                                                     &nbsp;&ndash;&nbsp;
@@ -95,6 +147,10 @@ const FindLoginPw = () => {
                                                         name="phone3"
                                                         size="1"
                                                         id="phone3"
+                                                        minlength="4"
+                                                        maxlength="4"
+                                                        value={phone3}
+                                                        onChange={(event) => setPhone3(event.target.value)}
                                                         required
                                                     />
                                                 </div>
@@ -132,6 +188,7 @@ const FindLoginPw = () => {
                                             </li>
                                         </ul>
                                     </div>
+                                    {error && <div className="error-message">{error}</div>} {/* Display error message */}
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">

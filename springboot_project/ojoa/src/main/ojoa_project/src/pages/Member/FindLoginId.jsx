@@ -12,6 +12,8 @@ const FindLoginId = () => {
     const [phone3, setPhone3] = useState(''); // 휴대폰 번호 state
     const [foundId, setFoundId] = useState(''); // 찾은 ID state
 
+    const [error, setError] = useState(''); // State to handle errors
+
     const handleFindId = async (event) => {
         event.preventDefault();
 
@@ -26,7 +28,7 @@ const FindLoginId = () => {
 
             if (response.status === 200) {
                 const retrievedId = response.data;
-                if (retrievedId) {
+                if (retrievedId !== '') {
                     setFoundId(retrievedId); // Set the found ID state
                     alert(`찾은 ID는 ${retrievedId} 입니다.`);
                     // '/rLogin' 페이지로 이동
@@ -39,10 +41,10 @@ const FindLoginId = () => {
             }
         } catch (error) {
             console.error('ID 찾기 오류:', error);
+            setError('** 해당 정보와 일치하는 아이디가 없습니다.'); // Set error state for other errors
             // Handle error, maybe set an error state to display to the user
         }
     };
-
 
     //const navigate = useNavigate(); // useNavigate  훅 사용
 
@@ -151,6 +153,7 @@ const FindLoginId = () => {
                                             </li>
                                         </ul>
                                     </div>
+                                    {error && <div className="error-message">{error}</div>} {/* Display error message */}
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">
