@@ -43,7 +43,7 @@
 					<td>${s.orders_totalprice}</td>
 					<td>${s.orders_price}</td>
 					<td>${s.orders_method}</td>
-					<td>${s.address1} ${s.address2}</td>
+					<td>${s.shipping_address}</td>
 					<td align="center"><a href="/orders/ordersdt?orders_num=${s.orders_num}">주문 상세</a></td>
 					<td align="center"><a onclick="ordersDelete(${s.orders_num})">주문 취소</a></td>
 				</tr>
