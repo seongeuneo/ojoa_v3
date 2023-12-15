@@ -55,4 +55,5 @@ public class Orders {
 	
 	private String shipping_phone;
 
+	private String shipping_message;
 }

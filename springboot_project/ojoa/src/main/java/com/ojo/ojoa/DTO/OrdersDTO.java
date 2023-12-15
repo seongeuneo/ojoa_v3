@@ -41,11 +41,12 @@ public class OrdersDTO {
 	
 	private String shipping_phone;
 
+	private String shipping_message;
 	
 	public OrdersDTO(int orders_num, String id, LocalDateTime orders_indate,
 			int orders_totalprice, int orders_price, String orders_method, String orders_addresscheck,
 			String shipping_name, String shipping_zipcode, String shipping_address, 
-			String shipping_addressdetail, String shipping_phone) {
+			String shipping_addressdetail, String shipping_phone, String shipping_message) {
 		super();
 
 		this.orders_num = orders_num;
@@ -60,5 +61,6 @@ public class OrdersDTO {
 		this.shipping_address = shipping_address;
 		this.shipping_addressdetail = shipping_addressdetail;
 		this.shipping_phone = shipping_phone;
+		this.shipping_message = shipping_message;
 	}
 }
