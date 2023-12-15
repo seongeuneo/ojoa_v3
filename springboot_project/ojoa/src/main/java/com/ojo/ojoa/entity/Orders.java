@@ -27,12 +27,9 @@ public class Orders {
 	@Column(name="orders_num")
 	private int orders_num; // 주문번호 PK, AI
 	
-	@Column(name="orders_num_confirm")
-	private String orders_num_confirm; // 주문확인
-	
 	@Column(name="id")
 	private String id; // 주문한 회원 아이디 FK for users(id)
-
+	
 	@Column(name="orders_indate")
 	private LocalDateTime orders_indate; // 주문날짜
 	
@@ -45,37 +42,17 @@ public class Orders {
 	@Column(name="orders_method")
 	private String orders_method; // 결제수단 
 	
-	@Column(name="buyer")
-	private String buyer; 
+	@Column(name="orders_addresscheck")
+	private String orders_addresscheck; // 배송지
 	
-	@Column(name="post_number")
-	private String post_number;
+	private String shipping_name;
 	
-	@Column(name="address1")
-	private String address1;
+	private String shipping_zipcode;
 	
-	@Column(name="address2")
-	private String address2;
+	private String shipping_address;
 	
-	@Column(name="phone1")
-	private String phone1; 
+	private String shipping_addressdetail;
 	
-	@Column(name="phone2")
-	private String phone2; 
-	
-	@Column(name="phone3")
-	private String phone3; 
-	
-	@Column(name="email1")
-	private String email1; 
-	
-	@Column(name="email2")
-	private String email2; 
-	
-	@Column(name="message")
-	private String message; 
-	
-	@Column(name="orders_password")
-	private String orders_password;
+	private String shipping_phone;
 
 }
