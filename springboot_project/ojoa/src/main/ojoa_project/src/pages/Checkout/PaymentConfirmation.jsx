@@ -1,6 +1,7 @@
 import React from 'react';
 import './PaymentConfirmation.css';
 import { useLocation } from 'react-router-dom';
+import Cart from '../Cart/Cart';
 
 const PaymentConfirmation = () => {
     const location = useLocation();

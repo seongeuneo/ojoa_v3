@@ -46,42 +46,40 @@ public class RestReactController {
 	CartService cartService;
 	WishService wishService;
 	Prod_imageService prod_imageService;
-	private final WishRepository wishRepository; 
+	private final WishRepository wishRepository;
 	OrdersService ordersService;
-
-
 
 //======================= 관심상품 새로운 코드 추가(성은) ==============================	
 	// 관심상품
 	@PostMapping("wish/allWishList")
-    public ResponseEntity<List<WishDTO>> getAllWishList() {
+	public ResponseEntity<List<WishDTO>> getAllWishList() {
 
 		List<WishDTO> wishList = wishService.selectAllList();
 		return ResponseEntity.ok(wishList);
 	}
-	
+
 	// 괌심상품에 상품 추가
 	@PostMapping("wish/saveWish")
 	public ResponseEntity<?> saveWish(HttpSession session, @RequestBody Wish entity) {
 		try {
-			 String id = (String) session.getAttribute("loginID");
-		        if (id != null && !id.isEmpty()) {
-		            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
-		            entity.setId(id);
-		        } else {
-		            // 로그인되지 않은 경우 처리
-		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
-		        }
-			  // 이미 존재하는지 확인
-	        boolean exists = wishRepository.existsByProdNum(entity.getProd_num());
-	        
-	        // 이미 존재한다면 에러 처리
-	        if(exists) {
-	            return ResponseEntity.badRequest().body("이미 존재하는 상품입니다.");
-	        }
-	        
-	        // 존재하지 않으면 저장
-	        wishService.save(entity); 
+			String id = (String) session.getAttribute("loginID");
+			if (id != null && !id.isEmpty()) {
+				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+				entity.setId(id);
+			} else {
+				// 로그인되지 않은 경우 처리
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+			}
+			// 이미 존재하는지 확인
+			boolean exists = wishRepository.existsByProdNum(entity.getProd_num());
+
+			// 이미 존재한다면 에러 처리
+			if (exists) {
+				return ResponseEntity.badRequest().body("이미 존재하는 상품입니다.");
+			}
+
+			// 존재하지 않으면 저장
+			wishService.save(entity);
 			System.out.println("saveCart111111" + entity);
 			System.out.println("saveCart22222222" + entity);
 			return ResponseEntity.ok("데이터 저장 성공");
@@ -90,7 +88,7 @@ public class RestReactController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
 	}
-	
+
 	// 관심상품 삭제
 	@DeleteMapping(value = "/wdelete/{wish_num}")
 	public String wdelete(@PathVariable("wish_num") int wish_num, HttpSession session, RedirectAttributes rttr) {
@@ -149,16 +147,15 @@ public class RestReactController {
 //			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 //		}
 //	}
-	
+
 //============================================================================================================	
 	// 장바구니
 	@GetMapping("cart/allCartList")
 	public ResponseEntity<List<CartDTO>> getAllCartList(@RequestParam String loginID) {
-	    List<CartDTO> cartList = cartService.selectAllList(loginID);
-	    return ResponseEntity.ok(cartList);
+		List<CartDTO> cartList = cartService.selectAllList(loginID);
+		return ResponseEntity.ok(cartList);
 	}
-	
-	
+
 //	@GetMapping("cart/allCartList")
 //	public ResponseEntity<List<CartDTO>> getAllCartList() {
 //	    try {
@@ -171,28 +168,25 @@ public class RestReactController {
 //	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 //	    }
 //	}	
-	
 
-@PostMapping("cart/saveCart")
-public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
-	try {
-        String id = (String) session.getAttribute("loginID");
-        if (id != null && !id.isEmpty()) {
-            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
-            entity.setId(id);
-            cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
-            return ResponseEntity.ok("데이터 저장 성공");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
-        }
-    } catch (Exception e) {
-        log.error("데이터 저장 중 에러: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-    }
-}
-	
-	
-	
+	@PostMapping("cart/saveCart")
+	public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
+		try {
+			String id = (String) session.getAttribute("loginID");
+			if (id != null && !id.isEmpty()) {
+				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+				entity.setId(id);
+				cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
+				return ResponseEntity.ok("데이터 저장 성공");
+			} else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
+			}
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
+
 //============================================================================================
 // 장바구니 상품 수량 변경
 
@@ -200,33 +194,31 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 	// 없으면 Save 있으면 Update
 	@PostMapping("/cartUp")
 	public void cartUp(@RequestBody Cart entity, HttpSession session) {
-		 try {
-		        String id = (String) session.getAttribute("loginID");
-		        if (id != null && !id.isEmpty()) {
-		            // 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
-		            entity.setId(id);
-		            cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
-		        }
-		    } catch (Exception e) {
-		        log.error("Exception: {}", e.getMessage());
-		    }
+		try {
+			String id = (String) session.getAttribute("loginID");
+			if (id != null && !id.isEmpty()) {
+				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+				entity.setId(id);
+				cartService.CartUpdateUp(id, entity.getProd_num(), entity.getQuantity());
+			}
+		} catch (Exception e) {
+			log.error("Exception: {}", e.getMessage());
 		}
+	}
 
-	
 	@PostMapping("/cartDown")
 	public void cartDown(@RequestBody Cart entity, HttpSession session) {
-	    try {
-	        // HttpSession에서 현재 로그인된 사용자의 ID를 가져옵니다.
-	        String id = (String) session.getAttribute("loginID");
-	        // cartService.CartUpdateDown 메서드를 호출할 때 실제 로그인된 사용자의 ID를 사용합니다.
-	        cartService.CartUpdateDown(id, entity.getProd_num(), entity.getQuantity());
-	    } catch (Exception e) {
-	        log.info("Exception");
-	    }
+		try {
+			// HttpSession에서 현재 로그인된 사용자의 ID를 가져옵니다.
+			String id = (String) session.getAttribute("loginID");
+			// cartService.CartUpdateDown 메서드를 호출할 때 실제 로그인된 사용자의 ID를 사용합니다.
+			cartService.CartUpdateDown(id, entity.getProd_num(), entity.getQuantity());
+		} catch (Exception e) {
+			log.info("Exception");
+		}
 	}
 
 // 장바구니에 있는 상품 삭제
-
 
 //===============================================================================
 	@DeleteMapping("/cdelete")
@@ -243,51 +235,48 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 			System.out.println("** cart delete Exception => " + e.toString());
 		}
 	}
-	
+
 //===============================================================================		
 
-	
-	// 게시판 QnA 
-    // "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
-    // qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
+	// 게시판 QnA
+	// "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
+	// qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
 	@GetMapping("qna/allQnaList")
 	// "/qna/allQnaList"경로에 대한 HTTP GET요청을 처리함
-    public ResponseEntity<?> getAllQnaList(
-    		// ResponseEntity를 반환
-    		// ResponseEntity는 <List<QnaDTO.QnaMainListDTO>타입의 데이터를 담고있다.
-    		// 그래서 QnaMainListDTO 객체들의 리스트를 반환함
-    		@RequestParam(required = false) String board_category,
-    		//(required = false) -> 값이없어도 호출
-    		@RequestParam(required = false) String search_date,
-	        @RequestParam(required = false) String search_key,
-	        @RequestParam(required = false) String search_query
-    	        ) {
+	public ResponseEntity<?> getAllQnaList(
+			// ResponseEntity를 반환
+			// ResponseEntity는 <List<QnaDTO.QnaMainListDTO>타입의 데이터를 담고있다.
+			// 그래서 QnaMainListDTO 객체들의 리스트를 반환함
+			@RequestParam(required = false) String board_category,
+			// (required = false) -> 값이없어도 호출
+			@RequestParam(required = false) String search_date, @RequestParam(required = false) String search_key,
+			@RequestParam(required = false) String search_query) {
 		try {
-			List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key, search_query);
-	    	// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
+			List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key,
+					search_query);
+			// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
 			return ResponseEntity.ok(qnaList);
 			// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
-    }
-	
+	}
+
 //	 // 게시판 QnA - 게시글 등록
-    @PostMapping("qna/saveQna")
-    public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
-        try {
-        	System.out.println("111111"+entity);
-        	// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-            qnaService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-            System.out.println("22222222"+entity);
-            return ResponseEntity.ok("데이터 저장 성공");
-        } catch (Exception e) {
-            log.error("데이터 저장 중 에러: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-        }
-    }
-    
-    
+	@PostMapping("qna/saveQna")
+	public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
+		try {
+			System.out.println("111111" + entity);
+			// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
+			qnaService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
+			System.out.println("22222222" + entity);
+			return ResponseEntity.ok("데이터 저장 성공");
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
+
 // 게시판 답변등록
 //    @PostMapping("qna/SaveAnswer/${qna_seq}")
 //    public ResponseEntity<String> replyAnswer(@RequestBody Qna entity) {
@@ -305,51 +294,62 @@ public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session)
 //    
 
 //===========================================================================    
-    // 주문결제
-    @PostMapping("order/orderPayment")
-    public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
-        try {
-        	String loginID = (String) session.getAttribute("loginID");
-        	OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            log.error("데이터 저장 중 에러: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-        }
-    }
-    
-    // 비회원 주문결제
-    @GetMapping("order/nonMemberOrder")
-    public ResponseEntity<?> getNonMemberOrder(
-    		@RequestParam(required = false) String orderNumber,
-    		@RequestParam(required = false) String password) {
-        try {
-        	List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            log.error("데이터 저장 중 에러: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-        }
-    }
-    
-    // 주문목록
-    @GetMapping("order/orderList")
-    public ResponseEntity<?> getOrderList(HttpSession session,
-    		@RequestParam(required = false) String startDate,
-    		@RequestParam(required = false) String endDate,
-    		@RequestParam(required = false) String orderNumber) {
-        try {
-        	String loginID = (String) session.getAttribute("loginID");
-        	List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate, orderNumber);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            log.error("데이터 저장 중 에러: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-        }
-    }
-    
+	// 주문결제
+	@PostMapping("order/orderPayment")
+	public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+			OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
 
+	// 비회원 주문결제
+	@GetMapping("order/nonMemberOrder")
+	public ResponseEntity<?> getNonMemberOrder(@RequestParam(required = false) String orderNumber,
+			@RequestParam(required = false) String password) {
+		try {
+			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
 
+	// 주문목록
+	@GetMapping("order/orderList")
+	public ResponseEntity<?> getOrderList(HttpSession session, @RequestParam(required = false) String startDate,
+			@RequestParam(required = false) String endDate, @RequestParam(required = false) String orderNumber) {
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate,
+					orderNumber);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
 
+	// 카트에서 선택된 항목만 주문에 가져오기
+	@GetMapping("order/selectCartList")
+	public ResponseEntity<?> getAllCartByOrderList(HttpSession session, @RequestParam String state) {
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+
+			if (loginID == null) {
+				loginID = "admin";
+			}
+			List<CartDTO> cartList = cartService.selectAllCartByOrderList(loginID, state);
+			return ResponseEntity.ok(cartList);
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
+		}
+	}
 
 }

@@ -8,19 +8,19 @@ import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
 import { useNavigate } from 'react-router-dom';
 
-const mockData = [
-    {
-        "id": 101,
-        "imgNo": 101,
-        "productName": "조금 큰 나무 침대",
-        "productPriceFormatted": "385000",
-        "productPromotion": "7",
-        "productInfo": "안녕하세요 그렇습니다",
-        "productReview": "8",
-        "productGrade": "4.8",
-        "quantity": 1
-    }
-];
+// const mockData = [
+//     {
+//         "id": 101,
+//         "imgNo": 101,
+//         "productName": "조금 큰 나무 침대",
+//         "productPriceFormatted": "385000",
+//         "productPromotion": "7",
+//         "productInfo": "안녕하세요 그렇습니다",
+//         "productReview": "8",
+//         "productGrade": "4.8",
+//         "quantity": 1
+//     }
+// ];
 
 
 

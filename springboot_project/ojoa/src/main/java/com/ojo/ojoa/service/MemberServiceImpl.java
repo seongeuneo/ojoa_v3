@@ -65,20 +65,13 @@ public class MemberServiceImpl implements MemberService {
 		return id;  // 삭제후 key return 
 	}
 	
-<<<<<<< HEAD
-	// ** 이름과 휴대폰 번호로 아이디 찾기
-	@Override
-    public Member findIdByNameAndPhone(String name, String phone2, String phone3) {
-        // 해당 이름과 전화번호로 회원을 찾는 로직 추가
-        return repository.findIdByNameAndPhone(name, phone2, phone3);
-    }
-=======
+
 	@Override
 	public Page<Member> getMemberList(Pageable pageable) {
 		
 		return repository.getMemberList(pageable);
 	}
->>>>>>> main
+
 	
 	
 	 @Override

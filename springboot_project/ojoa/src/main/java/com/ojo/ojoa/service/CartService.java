@@ -1,4 +1,5 @@
 package com.ojo.ojoa.service;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public interface CartService {
 
 	// ** selectList
 	List<Cart> selectList();
-	
+
 	// ** selectOne
 	Cart selectOne(CartId cartid);
 
@@ -24,23 +25,24 @@ public interface CartService {
 
 	// ** delete
 	void delete(CartId cartid);
-	
-	
+
 	// ** DUPLICATE KEY UPDATE 구문
 	void CartUpdateUp(String id, int prod_num, int quantity);
 
 	void CartUpdateDown(String id, int prod_num, int quantity);
 //=================================================================
-	
-    // ** Join (장바구니 + 상품)
+
+	// ** Join (장바구니 + 상품)
 	List<CartProdDTO> findCartProd();
-	 
+
 	// ** react selectAllList
-	//List<CartDTO> selectAllList();
+	// List<CartDTO> selectAllList();
 
 	List<CartDTO> selectAllList(String loginID);
 
+	// 새로추가
+	List<CartDTO> selectByIdList(String id);
 
+	// 새로추가
+	List<CartDTO> selectAllCartByOrderList(String id, String state);
 }
-	
-	

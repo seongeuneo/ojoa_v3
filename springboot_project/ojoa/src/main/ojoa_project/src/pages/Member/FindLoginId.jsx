@@ -16,11 +16,7 @@ const FindLoginId = () => {
         event.preventDefault();
 
         try {
-<<<<<<< HEAD
-            const response = await axios.get('/member/rfindid', {
-=======
             const response = await axios.get('/member/rfindId', {
->>>>>>> main
                 params: {
                     name: name,
                     phone2: phone2,
@@ -31,14 +27,10 @@ const FindLoginId = () => {
             if (response.status === 200) {
                 const retrievedId = response.data;
                 if (retrievedId) {
-<<<<<<< HEAD
-                    alert(`찾은 ID는 ${retrievedId} 입니다.`);
-=======
                     setFoundId(retrievedId); // Set the found ID state
                     alert(`찾은 ID는 ${retrievedId} 입니다.`);
                     // '/rLogin' 페이지로 이동
                     navigate('/Member/rLogin');
->>>>>>> main
                 } else {
                     alert(`일치하는 ID를 찾지 못했습니다.`);
                 }
@@ -162,11 +154,7 @@ const FindLoginId = () => {
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">
-<<<<<<< HEAD
-                                        <button className="out_btn3" type="submit" name="아이디 찾기" value={foundId} >아이디 찾기</button>
-=======
                                         <button className="out_btn3" type="submit" name="아이디 찾기" value={foundId} onChange={(event) => setFoundId(event.target.value)}>아이디 찾기</button>
->>>>>>> main
                                     </div>
 
                                 </fieldset>
