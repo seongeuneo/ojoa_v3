@@ -1,8 +1,7 @@
 import './Qna.css';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-const QnaFilter = ({ setFilters, onFilterChange }) => {
+const QnaFilter = ({ onFilterChange }) => {
     const [searchConditions, setSearchConditions] = useState({
         board_category: '',
         search_date: '',
@@ -28,7 +27,6 @@ const QnaFilter = ({ setFilters, onFilterChange }) => {
     const handleSearch = () => {
         onFilterChange(searchConditions);
     };
-
 
     return (
         <div className="qna_filter_container">

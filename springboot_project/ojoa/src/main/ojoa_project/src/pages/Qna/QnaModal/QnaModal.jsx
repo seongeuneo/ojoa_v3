@@ -1,12 +1,20 @@
 import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
-import { TodoDispatchContext } from "../Qna";
-import { useModal } from "../QnaModal/ModalContext";
 import "./QnaModal.css";
 import axios from "axios"; // axios import 추가
 import { useProductList } from '../../ProductList/useProductList';
 
-function QnaModal({ closeModal, onFilterChange }) {
+function QnaModal({ closeModal, onFilterChange, status, qnaSeq, name, userId }) {
+    const [qnaInfo, setQnaInfo] = useState({
+        qna_seq: qnaSeq,
+        prod_num: '',
+        name: name,
+        id: userId,
+        qna_category: '',
+        qna_title: '',
+        qna_content: '',
+    });
+
     const data = useProductList();
 
     const [content, setContent] = useState("");
@@ -22,8 +30,8 @@ function QnaModal({ closeModal, onFilterChange }) {
             const formData = new FormData(document.getElementById('qnaform'));
             // 'content'와 다른 폼 데이터를 백엔드로 보내고 싶다고 가정합니다.
 
-
             // Spring Boot API 엔드포인트로 POST 요청을 보냅니다.
+            //기존
             const response = await axios.post("/api/qna/saveQna/", formData,
                 { headers: { "Content-Type": "application/json" } });
 
@@ -38,6 +46,39 @@ function QnaModal({ closeModal, onFilterChange }) {
         }
         e.preventDefault();
 
+    };
+
+    const getQnaInfo = () => {
+        axios
+            .get(`/api/qna/selectQnaList?qna_seq=${qnaSeq}`)
+            .then((response) => {
+                let data = response.data;
+                if (data != null && data !== "") {
+                    setQnaInfo(prevQnaInfo => ({
+                        ...prevQnaInfo,
+                        prod_num: data.prod_num,
+                        name: data.id,
+                        qna_category: data.qna_category,
+                        qna_title: data.qna_title,
+                        qna_content: data.qna_content,
+                    }));
+                }
+            })
+            .catch((error) => {
+                console.error("Error: ", error);
+            });
+    };
+
+    useEffect(() => {
+        console.log('QnaModal 렌더링됨');
+        if (status === 'update' && qnaSeq) {
+            getQnaInfo();
+        }
+    }, ['update', qnaSeq]);
+
+    const handleQnaInfo = (e) => {
+        const { name, value } = e.target;
+        setQnaInfo({ ...qnaInfo, [name]: value });
     };
 
     return (
@@ -74,14 +115,15 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             name="id"
                                             id="qna_bID"
                                             onChange={onChangeContent}
-                                            placeholder="작성자명을 입력하세요." />
+                                            placeholder="작성자명을 입력하세요."
+                                            value={qnaInfo.id} />
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th scope="row"><label htmlFor="board_category1">카테고리</label></th>
                                     <td className="qna_writetitle">
-                                        <select name="qna_category" id="board_category1">
+                                        <select name="qna_category" id="board_category1" onChange={handleQnaInfo} value={qnaInfo.qna_category}>
                                             <option value="1">전체</option>
                                             <option value="상품문의">상품문의</option>
                                             <option value="배송문의">배송문의</option>
@@ -91,15 +133,12 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             <option value="환불문의">환불문의</option>
                                             <option value="재입고문의">재입고문의</option>
                                             <option value="기타문의">기타문의</option>
-                                            {/* <option value=" "></option> */}
                                         </select>
-                                        {/* <select name="board_category" id="board_category2"> */}
                                         <select name="prod_kind" id="board_category2" >
                                             <option>제품목록</option>
-                                            {/* <option value="1">의자</option> */}
                                             {data.map((item) => (
-                                                <React.Fragment key={item.prod_num}>
-                                                    <option value={item.prod_num}>{item.prod_name}</option>
+                                                <React.Fragment key={item.id}>
+                                                    <option value={item.imgNo}>{item.productName}</option>
                                                 </React.Fragment>
                                             ))}
                                         </select>
@@ -112,7 +151,8 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             type="text"
                                             name="qna_title"
                                             id="qna_bTitle"
-                                            placeholder="제목을 입력하세요." />
+                                            placeholder="제목을 입력하세요."
+                                            onChange={handleQnaInfo} value={qnaInfo.qna_title} />
                                     </td>
                                 </tr>
                                 <tr>
@@ -122,13 +162,10 @@ function QnaModal({ closeModal, onFilterChange }) {
                                             type="text"
                                             name="qna_content"
                                             id="qna_bContent"
-                                            placeholder="내용을 입력하세요." />
+                                            placeholder="내용을 입력하세요."
+                                            onChange={handleQnaInfo} value={qnaInfo.qna_content} />
                                     </td>
                                 </tr>
-                                {/* <tr>
-                                    <th scope="row"><label htmlFor="qna_bPassword">비밀번호</label></th>
-                                    <td className="qna_writepassword"><input type="text" name="bPassword" id="qna_bPassword" /></td>
-                                </tr> */}
                             </tbody>
                         </table>
                         <div className="qna_btnSet">

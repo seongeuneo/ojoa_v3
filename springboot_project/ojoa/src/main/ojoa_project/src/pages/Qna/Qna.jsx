@@ -1,4 +1,3 @@
-// import React from 'react';
 import { ModalProvider } from './QnaModal/ModalContext';
 import './Qna.css';
 import QnaPage from './QnaPage';
@@ -7,12 +6,9 @@ import QnaListItem from './QnaListItem';
 import QnaTitleList from './QnaTitleList';
 import Modal from 'react-modal';
 import QnaWriteBtn from './QnaWriteBtn';
-import QnaModifyBtn from './QnaModifyBtn';
-import React, { useMemo, useCallback, useReducer, useRef, useEffect, useState } from "react";
+import React, { useMemo, useReducer, useRef, useEffect, useState } from "react";
 import Pagination from "../../components/Pagination/Pagination";
 import axios from 'axios';
-
-
 
 
 Modal.setAppElement('#root');
@@ -143,15 +139,12 @@ function Qna() {
             <div className="Qna">
                 <TodoStateContext.Provider value={todo}>
                     <TodoDispatchContext.Provider value={memoizedDispatches}>
-                        {/* <TodoDispatchContext.Provider value={{onCreate, onUpdate, onDelete}}>  
-            => cONTEXT 분리 했어도 최적화 적용 되지 않음  */}
                         <QnaPage />
                         <QnaFilter setFilters={setFilters} onFilterChange={handleFilterChange} />
                         <table className="qna_ListItem_container">
                             <QnaTitleList />
-                            <QnaListItem qnaList={pagedQnaList} filters={filters} />
+                            <QnaListItem qnaList={pagedQnaList} filters={filters} onFilterChange={allQnaList} />
                         </table>
-                        {/* <QnaModifyBtn onFilterChange={allQnaList} /> */}
                         <QnaWriteBtn onFilterChange={allQnaList} />
                         <Pagination
                             currentPage={currentPage}

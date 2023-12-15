@@ -6,18 +6,25 @@ import QnaWriteBtn from './QnaWriteBtn';
 
 // 배열 속성 writer 입력시 성만 따오기
 const lastName = (fullName) => {
-    if (fullName.length > 0) {
-        return fullName.charAt(0);
-    }
+    // if (fullName.length > 0) {
+    //     return fullName.charAt(0);
+    // }
     // fullName이 비어있을 때 처리할 내용을 추가할 수 있습니다.
+    return 'A';
 };
 
-const QnaListItem = ({ qnaList, filters }) => {
+const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
     const [expandedId, setExpandedId] = useState(null);
+
+    const loggedInUserString = sessionStorage.getItem('loggedInUser');
+    const loggedInUserObject = JSON.parse(loggedInUserString);
+    const userId = loggedInUserObject?.id;
+
     const [replyContents, setReplyContents] = useState({});
     const [updatedQnaList, setUpdatedQnaList] = useState(qnaList); // 여기서 새로운 상태 추가
 
     console.log(qnaList);
+
     const handleTitleClick = (id) => {
         if (expandedId === id) {
             setExpandedId(null);
@@ -25,6 +32,17 @@ const QnaListItem = ({ qnaList, filters }) => {
             setExpandedId(id);
         }
     };
+
+    const [qnaSeq, setqnaSeq] = useState(0);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = (data) => {
+        setqnaSeq(data)
+        setModalIsOpen(true);
+    }
+    const closeModal = () => setModalIsOpen(false);
+
+
 
     function formatDate(originalDate) {
         const dateObject = new Date(originalDate);
@@ -70,16 +88,11 @@ const QnaListItem = ({ qnaList, filters }) => {
     });
 
 
-
-
     //=========================================================================
 
 
-
-
-
     return (
-        <tbody className='qna_ListItem_container'>
+        <><tbody className='qna_ListItem_container'>
             {qnaList.map((item, i) => (
                 <React.Fragment key={i}>
                     {
@@ -98,7 +111,7 @@ const QnaListItem = ({ qnaList, filters }) => {
                             <tr className='qna_Lboard_st'>
                                 <td className='qna_board_st1'>{item.num}</td>
                                 <td className='qna_Lboard_st2'>
-                                    <div><img src={`../thumbs/${item.imgNo}`} alt='상품' /></div>
+                                    <div><img src={`/thumbs/${item.imgNo}`} alt='상품' /></div>
                                     <div>{item.itemInfo}</div>
                                 </td>
                                 <td className='qna_board_st3'>{item.category}</td>
@@ -108,28 +121,31 @@ const QnaListItem = ({ qnaList, filters }) => {
                                 <td className='qna_board_st5'>{(item.writer)}&#42;&#42;</td>
                                 <td className='qna_board_st6'>{formatDate(item.date)}</td>
                             </tr>
-                        )
-                    }
-                    {/* {expandedId === i && (
-                        <tr className='qna_board_st7'>
-                            <td colSpan="8" className='notification_row'>
-                                {item.notification}
-                            </td>
-                        </tr>
-                    )} */}
+                        )}
+
                     {expandedId === i && (
-                        <tr className='qna_board_st7'>
-                            <td colSpan="8" className='notification_row'>
-                                <p>[문의 내용] : {item.notification}</p>
-                                <p>[답변내용] : {item.titleIcon}</p>
-                            </td>
-                        </tr>
+                        <>
+                            <tr className='qna_board_st7'>
+                                <td colSpan="8" className='notification_row'>
+                                    <p>[문의 내용] : {item.notification}</p>
+                                    <p>[답변내용] : {item.titleIcon}</p>
+                                </td>
+                            </tr>
+                            {(userId === 'admin' || userId === item.writer) && (
+                                <tr className='qna_board_st7'>
+                                    <td colSpan="8" style={{ textAlign: 'right', lineHeight: '50px' }}>
+                                        <button className='qna_board_find_btn' onClick={() => openModal(item.num)}>글수정하기</button>
+                                    </td>
+                                </tr>
+                            )}
+                        </>
                     )}
                 </React.Fragment>
             ))}
-
-
         </tbody>
+            <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
+                <QnaModal closeModal={closeModal} onFilterChange={onFilterChange} status={'update'} qnaSeq={qnaSeq} userId={userId} />
+            </Modal></>
     );
 } //QnaListItem
 

@@ -277,21 +277,21 @@ public class RestReactController {
 		}
 	}
 
-// 게시판 답변등록
-//    @PostMapping("qna/SaveAnswer/${qna_seq}")
-//    public ResponseEntity<String> replyAnswer(@RequestBody Qna entity) {
-//    	try {
-//    		System.out.println("111111"+entity);
-//    		// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-//    		qnaService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-//    		System.out.println("22222222"+entity);
-//    		return ResponseEntity.ok("데이터 저장 성공");
-//    	} catch (Exception e) {
-//    		log.error("데이터 저장 중 에러: {}", e.getMessage());
-//    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//    	}
-//    }
-//    
+	@GetMapping("qna/selectQnaList")
+	public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+
+			if (loginID == null) {
+				loginID = "admin";
+			}
+			QnaDTO.QnaItemResDTO qnaItem = qnaService.selectOneById(loginID, qna_seq);
+			return ResponseEntity.ok(qnaItem);
+		} catch (Exception e) {
+			log.error("데이터 조회 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
+		}
+	}
 
 //===========================================================================    
 	// 주문결제

@@ -13,7 +13,7 @@ import AddressPopup from './AddressPopup/AddressPopup';
 
 function Checkout({ cart }) {
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
-  //새로추가
+
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [orderInfo, setOrderInfo] = useState({});
 

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ojo.ojoa.DTO.QnaDTO;
-import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Qna;
 import com.ojo.ojoa.repository.QnaRepository;
 
@@ -53,6 +52,16 @@ public class QnaServiceImpl implements QnaService {
 			return null;
 	}
 
+	// 수정하기
+	@Override
+	public QnaDTO.QnaItemResDTO selectOneById(String Id, int qna_seq) {
+		QnaDTO.QnaItemResDTO result = qnaRepository.selectOneById(Id, qna_seq);
+		if (result != null)
+			return result;
+		else
+			return null;
+	}
+
 	// ** insert, update
 	@Override
 	public int save(Qna entity) {
@@ -66,12 +75,6 @@ public class QnaServiceImpl implements QnaService {
 		qnaRepository.deleteById(qna_seq);
 		return qna_seq; // 삭제후 key return
 	}
-
-	// ** reply
-//	 	@Override
-//	    public void replyinsert(int qna_seq, String qna_reply) {
-//	 		qnaRepository.replyinsert(qna_seq, qna_reply);
-//	    }
 
 	// QnA 목록 조회 (selectAllList를 구현)
 	@Override
