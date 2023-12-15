@@ -42,5 +42,7 @@ public class OrdersDetail {
 	//@Column(name = "ordersdt_result", columnDefinition = "CHAR(1) DEFAULT 'B'")
 	private char ordersdt_result;
 
+
+
 	
 }

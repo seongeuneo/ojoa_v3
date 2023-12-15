@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.DTO.CartDTO;
-import com.ojo.ojoa.DTO.OrdersReqDTO;
-import com.ojo.ojoa.DTO.OrdersResDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.Prod_imageDTO;
 import com.ojo.ojoa.domain.WishDTO;
@@ -120,33 +118,6 @@ public class RestReactController {
 		List<Prod_imageDTO> prod_imageList = prod_imageService.selectAllList();
 		return ResponseEntity.ok(prod_imageList);
 	}
-//======================= 새로운 코드 추가 ==============================	
-
-// 상품리스트에서 장바구니 아이콘으로 상품 추가
-//
-//	@PostMapping("cart/saveCart")
-//	public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
-//
-//		try {
-//			String id = (String) session.getAttribute("loginID");
-//			if (id != null && !id.isEmpty()) {
-//				// 세션에서 가져온 로그인된 사용자의 ID로 entity의 ID를 설정합니다
-//				entity.setId(id);
-//				System.out.println("saveCart111111" + entity);
-//
-//				// QnaDTO를 Qna 엔티티로 변환하여 저장하거나 필요한 로직 수행
-//				cartService.save(entity); // QnaService를 통해 엔티티를 저장합니다.
-//				System.out.println("saveCart22222222" + entity);
-//				return ResponseEntity.ok("데이터 저장 성공");
-//			} else {
-//				// 로그인되지 않은 사용자 처리
-//				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
-//			}
-//		} catch (Exception e) {
-//			log.error("데이터 저장 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//		}
-//	}
 
 //============================================================================================================	
 	// 장바구니
@@ -156,18 +127,7 @@ public class RestReactController {
 		return ResponseEntity.ok(cartList);
 	}
 
-//	@GetMapping("cart/allCartList")
-//	public ResponseEntity<List<CartDTO>> getAllCartList() {
-//	    try {
-//	        // 여기서 사용자 ID를 이용하여 해당 사용자의 장바구니 목록만 가져오도록 필터링
-//	        List<CartDTO> cartList = cartService.selectAllList(); // 예상되는 메서드명은 selectUserCartList
-//
-//	        return ResponseEntity.ok(cartList);
-//	    } catch (Exception e) {
-//	        log.error("장바구니 목록을 가져오는 중 오류: {}", e.getMessage());
-//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//	    }
-//	}	
+
 
 	@PostMapping("cart/saveCart")
 	public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
@@ -277,6 +237,7 @@ public class RestReactController {
 		}
 	}
 
+<<<<<<< HEAD
 	@GetMapping("qna/selectQnaList")
 	public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
 		try {
@@ -292,64 +253,51 @@ public class RestReactController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
 		}
 	}
+=======
+  
+>>>>>>> main
 
 //===========================================================================    
 	// 주문결제
-	@PostMapping("order/orderPayment")
-	public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
-		try {
-			String loginID = (String) session.getAttribute("loginID");
-			OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
-			return ResponseEntity.ok(result);
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
-	}
+//	@PostMapping("order/orderPayment")
+//	public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
+//		try {
+//			String loginID = (String) session.getAttribute("loginID");
+//			OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
+//			return ResponseEntity.ok(result);
+//		} catch (Exception e) {
+//			log.error("데이터 저장 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//		}
+//	}
+//
+//	// 비회원 주문결제
+//	@GetMapping("order/nonMemberOrder")
+//	public ResponseEntity<?> getNonMemberOrder(@RequestParam(required = false) String orderNumber,
+//			@RequestParam(required = false) String password) {
+//		try {
+//			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
+//			return ResponseEntity.ok(result);
+//		} catch (Exception e) {
+//			log.error("데이터 저장 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//		}
+//	}
+//
+//	// 주문목록
+//	@GetMapping("order/orderList")
+//	public ResponseEntity<?> getOrderList(HttpSession session, @RequestParam(required = false) String startDate,
+//			@RequestParam(required = false) String endDate, @RequestParam(required = false) String orderNumber) {
+//		try {
+//			String loginID = (String) session.getAttribute("loginID");
+//			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate,
+//					orderNumber);
+//			return ResponseEntity.ok(result);
+//		} catch (Exception e) {
+//			log.error("데이터 저장 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+//		}
+//	}
 
-	// 비회원 주문결제
-	@GetMapping("order/nonMemberOrder")
-	public ResponseEntity<?> getNonMemberOrder(@RequestParam(required = false) String orderNumber,
-			@RequestParam(required = false) String password) {
-		try {
-			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
-			return ResponseEntity.ok(result);
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
-	}
-
-	// 주문목록
-	@GetMapping("order/orderList")
-	public ResponseEntity<?> getOrderList(HttpSession session, @RequestParam(required = false) String startDate,
-			@RequestParam(required = false) String endDate, @RequestParam(required = false) String orderNumber) {
-		try {
-			String loginID = (String) session.getAttribute("loginID");
-			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate,
-					orderNumber);
-			return ResponseEntity.ok(result);
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
-	}
-
-	// 카트에서 선택된 항목만 주문에 가져오기
-	@GetMapping("order/selectCartList")
-	public ResponseEntity<?> getAllCartByOrderList(HttpSession session, @RequestParam String state) {
-		try {
-			String loginID = (String) session.getAttribute("loginID");
-
-			if (loginID == null) {
-				loginID = "admin";
-			}
-			List<CartDTO> cartList = cartService.selectAllCartByOrderList(loginID, state);
-			return ResponseEntity.ok(cartList);
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
-		}
-	}
 
 }

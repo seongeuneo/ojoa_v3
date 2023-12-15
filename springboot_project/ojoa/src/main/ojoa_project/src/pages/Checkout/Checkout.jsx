@@ -1,60 +1,32 @@
-
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+// import DaumPostcode from "react-daum-postcode";
 // import Iamport, { PaymentRequest } from 'kamport'
 import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from "axios";
 import Post from './KakaoAddressModal/KakaoAddressModal';
-import axios from 'axios';
 import AddressPopup from './AddressPopup/AddressPopup';
 
 
 function Checkout({ cart }) {
-  const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
-
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [orderInfo, setOrderInfo] = useState({});
-
-  const [isMember, setIsMember] = useState(false);
-  const navigate = useNavigate();
-
-
-  // 원희가 준 코드
   const location = useLocation();
   const selectedCartItems = location.state.selectedCartItems;
-
-  function showAddressPopupOpen() {
-    setIsAddressPopupOpen(true);
-  }
+  const [orderInfo, setOrderInfo] = useState({});
+  const [isMember, setIsMember] = useState(false);
 
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
 
+  // 배송비
+  const deliveryPrice = 0;
 
   // 할인금액
   const discountPrice = 0;
 
-  //const selectedCartItems = cart.filter(item => selectedItems.includes(item.prod_num));
-  //const selectedProducts = cart; //오류나서 주석처리
-
-  // state = order 코드추가
-  useEffect(() => {
-    const getSelectedProducts = async () => {
-      try {
-        const response = await axios.get("/api/order/selectCartList?state=order");
-        setSelectedProducts(response.data);
-      } catch (error) {
-        console.error("Error: ", error);
-      }
-    };
-
-    getSelectedProducts();
-  }, []);
-
-  // 원희가 준 이걸로!!! 코드
   const displayedCartList = useMemo(() => {
     return selectedCartItems.map(item => ({
       ...item,
@@ -71,35 +43,57 @@ function Checkout({ cart }) {
     }, 0)
   }, [displayedCartList]);
 
-
   // 총 결제 금액
-  const totalCheckoutPrice = (totalProductPrice > 99999 ? totalProductPrice : totalProductPrice + 3000);
+  const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
 
-  // 배송비
-  const deliveryPrice = (totalProductPrice > 99999 ? 0 : 3000);
+  const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
+  const navigate = useNavigate();
 
-  // 결제 성공 시 호출되는 함수
-  const handlePaymentSuccess = () => {
-    // history.push를 사용하여 '/payment-confirmation' 경로로 이동
-    navigate('/paymentconfirmation');
-  };
+  function showAddressPopupOpen() {
+    setIsAddressPopupOpen(true);
+  }
+
+  //======================================================================= 
+  // 주문
+  function inOrders() {
+    const Orders = {
+      id: orderInfo.shipping_id,
+      orders_totalprice: totalProductPrice + deliveryPrice,
+      orders_price: totalCheckoutPrice,
+      orders_method: orderInfo.orders_method,
+      // orders_addresscheck: "orders_addresscheck",
+      shipping_name: orderInfo.shipping_name,
+      shipping_zipcode: orderInfo.shipping_zipcode,
+      shipping_address: orderInfo.shipping_address,
+      shipping_addressdetail: orderInfo.shipping_addressdetail,
+      shipping_phone: orderInfo.shipping_phone,
+      displayedCartList: displayedCartList ? [...displayedCartList] : []
+    };
+
+    axios.post('/api/orders/saveOrders', Orders)
+      .then(response => {
+        alert("주문완료이 완료되었습니다:)");
+        navigate("/");
+      })
+      .catch(error => {
+        alert('주문에 실패했습니다!!!!!!');
+      });
+  }
+
+  //=========================================================================
 
   //수정
   useEffect(() => {
     setOrderInfo({
       memberCheck: '',
       orders_method: 'card', // cart , vbank
-      buyer: '',
-      postNumber: '',
-      address1: '',
-      address2: '',
-      phone1: '010',
-      phone2: '',
-      phone3: '',
-      email1: '',
-      email2: '',
-      message: '',
+      shipping_name: '',
+      shipping_zipcode: '',
+      shipping_address: '',
+      shipping_addressdetail: '',
+      shipping_phone: '',
+      shipping_message: '',
       orders_totalprice: totalProductPrice,
       orders_price: totalCheckoutPrice,
       ordersDetail: displayedCartList
@@ -132,15 +126,13 @@ function Checkout({ cart }) {
           setIsMember(true);
           setOrderInfo(prevOrderInfo => ({
             ...prevOrderInfo,
-            buyer: data.name,
-            address1: data.address,
-            address2: data.addressdetail,
-            email1: data.email1,
-            email2: data.email2,
-            phone1: data.phone1,
-            phone2: data.phone2,
-            phone3: data.phone3,
-            postNumber: data.zipcode,
+            shipping_id: data.id,
+            shipping_name: data.name,
+            shipping_zipcode: data.zipcode,
+            shipping_address: data.address,
+            shipping_addressdetail: data.addressdetail,
+            shipping_email: data.email1 + data.email2,
+            shipping_phone: data.phone1 + "-" + data.phone2 + "-" + data.phone3
           }));
         } else {
           setIsMember(false);
@@ -154,15 +146,12 @@ function Checkout({ cart }) {
   const getEmpty = () => {
     setOrderInfo(prevOrderInfo => ({
       ...prevOrderInfo,
-      buyer: '',
-      address1: '',
-      address2: '',
-      email1: '',
-      email2: '',
-      phone1: '',
-      phone2: '',
-      phone3: '',
-      postNumber: '',
+      shipping_name: '',
+      shipping_zipcode: '',
+      shipping_address: '',
+      shipping_addressdetail: '',
+      shipping_email: '',
+      shipping_phone: '',
     }));
   };
 
@@ -185,35 +174,52 @@ function Checkout({ cart }) {
     setOrderInfo({ ...orderInfo, [name]: value });
   };
 
-  const orderPayment = () => {
-    if (isMember === false && orderInfo.memberCheck === '') {
-      alert("주문조회 비밀번호를 입력하세요.");
-      return false;
-    }
-    axios
-      .post("/api/order/orderPayment", orderInfo, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        let orderData = response.data;
-        if (orderData != null && orderData !== "") {
-          navigate('/paymentconfirmation', { state: { orderData, cart } });
-        } else {
-          alert('결제 실패');
-        }
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
+  // const orderPayment = () => {
+  //   if (isMember === false && orderInfo.memberCheck === '') {
+  //     alert("주문조회 비밀번호를 입력하세요.");
+  //     return false;
+  //   }
+  //   axios
+  //     .post("/api/order/orderPayment", orderInfo, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       let orderData = response.data;
+  //       if (orderData != null && orderData !== "") {
+  //         navigate('/paymentconfirmation', { state: { orderData, cart } });
+  //       } else {
+  //         alert('결제 실패');
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error: ", error);
+  //     });
+  // };
+
+  //========================================================================
+
+
+
+
+
+
+  // 결제 성공 시 호출되는 함수
+  const handlePaymentSuccess = () => {
+    navigate('/paymentconfirmation', { state: { displayedCartList, orderInfo } });
   };
+
+
+  //===========================================================================================
+
 
 
   return (
     <div className="Checkout">
-      <form>
+      {/* <form onSubmit={handleSubmit}> */}
+      <form id='ordersform'>
         <h2 className="pay_title">주문서 작성</h2>
 
         <section className="pay_orderlist-area">
@@ -225,7 +231,7 @@ function Checkout({ cart }) {
               <tr>
                 <th>번호</th>
                 <th>이미지</th>
-                <th>상품정보</th>
+                <th>상품명</th>
                 <th>판매가</th>
                 <th>수량</th>
                 <th>적립금</th>
@@ -256,7 +262,7 @@ function Checkout({ cart }) {
                 <td colSpan={9}>
                   <div className="pay_product_summary_content">
                     <p>[기본배송]</p>
-                    <p>상품구매금액: {formatNumber(totalProductPrice)} + 배송비: {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
+                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
                   </div>
                 </td>
               </tr>
@@ -272,8 +278,8 @@ function Checkout({ cart }) {
             </span>
           </div>
         </section>
-
         <hr />
+
         {/* 배송정보 */}
         <section>
           <p className="pay_section_header">배송정보</p>
@@ -282,51 +288,40 @@ function Checkout({ cart }) {
               <col width="200px" />
             </colgroup>
 
-            {isMember ? (
-              <tr>
-                <th>배송지 선택</th>
-                <td>
-                  <div class="address">
-                    <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
-                    <label for="sameaddr0">회원 정보와 동일</label>
-                    <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
-                    <label for="sameaddr1">새로운 배송지</label>
-                    <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
-                    <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
-                      주소록 보기
-                    </Link>
-                    {isAddressPopupOpen && <AddressPopup />}
-                  </div>
-                </td>
-              </tr>
-            ) : (
-              <>
-                <tr>
-                  <th className="pay_table_th">주문조회 비밀번호 *</th>
-                  <td>
-                    <input type="password" name="memberCheck" className="input_control" onChange={handleOrderInfo} value={orderInfo.memberCheck} />
-                    <span className="help_text">{`(영문대소문자/숫자/특수문자 중 2가지 이상 조합, 6자~16자)`}</span>
-                  </td>
-                </tr>
-              </>
-            )}
+            {/* 회원일 경우 */}
+            <tr>
+              <th>배송지 선택</th>
+              <td>
+                <div class="address">
+                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
+                  <label for="sameaddr0">회원 정보와 동일</label>
+                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
+                  <label for="sameaddr1">새로운 배송지</label>
+                  <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
+                  <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
+                    주소록 보기
+                  </Link>
+                  {isAddressPopupOpen && <AddressPopup />}
+                </div>
+              </td>
+            </tr>
 
             <tr>
               <th>받으시는 분 *</th>
               <td>
-                <input type="text" name="buyer" className="input_control" onChange={handleOrderInfo} value={orderInfo.buyer} />
+                <input type="text" name="buyer" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_name} />
               </td>
             </tr>
             <tr>
               <th>주소 *</th>
               <td>
-                <input type="text" name="postNumber" className="input_control" onChange={handleOrderInfo} value={orderInfo.postNumber} />
+                <input type="text" name="postNumber" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_zipcode} />
                 <button type="button" className="btn-control" onClick={handleComplete}>우편번호</button>
                 <br />
-                <input type="text" name="address1" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address1} readOnly />
+                <input type="text" name="address1" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_address} readOnly />
                 <p className="help_text">{`기본주소`}</p>
                 <br />
-                <input type="text" name="address2" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.address2} />
+                <input type="text" name="address2" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_addressdetail} />
                 <p className="help_text">{`나머지주소(선택입력가능)`}</p>
                 {popup && <Post closeModal={setPopup} company={orderInfo} setcompany={setOrderInfo}></Post>}
               </td>
@@ -334,38 +329,13 @@ function Checkout({ cart }) {
             <tr>
               <th>휴대전화 *</th>
               <td>
-                <select name="phone1" id="" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone1}>
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
-                </select>
-                {" - "}
-                <input name="phone2" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone2} />
-                {" - "}
-                <input name="phone3" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.phone3} />
-              </td>
-            </tr>
-            <tr>
-              <th>이메일 *</th>
-              <td>
-                <input name="email1" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.email1} />
-                {" @ "}
-                <input name="email2" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.email2} />
-                <select name="email2" id="" className="input_control" onChange={handleOrderInfo}>
-                  <option value="">직접입력</option>
-                  <option value="naver.com">naver.com</option>
-                  <option value="daum.net">daum.net</option>
-                  <option value="gmail.com">gmail.com</option>
-                </select>
+                <input name="phone3" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_phone} />
               </td>
             </tr>
             <tr>
               <th>배송메시지</th>
               <td>
-                <textarea name="message" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }} onChange={handleOrderInfo}></textarea>
+                <textarea name="message" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }} onChange={handleOrderInfo} value={orderInfo.shipping_message}></textarea>
               </td>
             </tr>
           </table>
@@ -393,18 +363,7 @@ function Checkout({ cart }) {
                 </div>
               </td>
             </tr>
-            <tr>
-              <th>비회원 구매 시 개인정보수집 이용동의</th>
-              <td>
-                <textarea name="" id="" cols="30" rows="10" className='input_control' style={{ width: 1000, height: 50 }} readOnly>
-                  {"개인정보 수집목적 및 이용목적: 비회원 구매 서비스 제공 2.수집하는 개인정보 항목: 성명, 주소, 전화번호, 이메일, 결제 정보, 비회원 결제 비밀번호 3.개인정보의 보유기간 및 이용기간원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다. 가.회사 내부 방침에 의한 정보 보유 사유· 부정거래 방지 및 쇼핑몰 운영방침에 따른 보관 : 1년 나.관련 법령에 의한 정보보유 사유 o계약 또는 청약철회 등에 관한 기록-보존이유 : 전자상거래등에서의소비자보호에관한법률-보존기간 : 5년 o대금 결제 및 재화 등의 공급에 관한 기록-보존이유: 전자상거래등에서의소비자보호에관한법률-보존기간 : 5년 o소비자 불만 또는 분쟁처리에 관한 기록-보존이유 : 전자상거래등에서의소비자보호에관한법률-보존기간 : 3년 o로그 기록 -보존이유: 통신비밀보호법-보존기간 : 3개월 ※동의를 거부할 수 있으나 거부시 비회원 구매 서비스 이용이 불가능합니다."}
-                </textarea>
-                <div className='mt-10'>
-                  <input type="checkbox" className='checkbox_control' />
-                  <label htmlFor="">동의</label>
-                </div>
-              </td>
-            </tr>
+
           </table>
         </section>
         <section>
@@ -457,7 +416,7 @@ function Checkout({ cart }) {
               <p>최종결제 금액</p>
               <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              <button type='button' className='payment_btn' onClick={orderPayment}>결제하기</button>
+              <button type='button' className='payment_btn' onClick={() => { inOrders(); handlePaymentSuccess(); }}>결제하기</button>
             </div>
           </div>
         </section>

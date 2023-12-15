@@ -73,16 +73,16 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.findAllUserID(loginID);
 	}
 
-	// 새로추가
-	@Override
-	public List<CartDTO> selectByIdList(String id) {
-		return cartRepository.selectByIdList(id);
-	}
-
-	// 새로추가
-	@Override
-	public List<CartDTO> selectAllCartByOrderList(String id, String state) {
-		return cartRepository.selectAllCartByOrderList(id, state);
-	}
+//	// 새로추가
+//	@Override
+//	public List<CartDTO> selectByIdList(String id) {
+//		return cartRepository.selectByIdList(id);
+//	}
+//
+//	// 새로추가
+//	@Override
+//	public List<CartDTO> selectAllCartByOrderList(String id, String state) {
+//		return cartRepository.selectAllCartByOrderList(id, state);
+//	}
 
 } // class
