@@ -3,49 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const FindLoginPw = () => {
+const FindLoginPw = (e) => {
     const navigate = useNavigate();
+    e.preventDefault();
 
-    const [id, setId] = useState(''); // 아이디 state
-    const [name, setName] = useState(''); // 이름 state
-    const [phone1, setPhone1] = useState('010');
-    const [phone2, setPhone2] = useState(''); // 휴대폰 번호 state
-    const [phone3, setPhone3] = useState(''); // 휴대폰 번호 state
-    const [foundId, setFoundId] = useState(''); // 찾은 ID state
+    const [id, setId] = useState('');
+    const [user_name, setUser_name] = useState('');
+    const [email1, setEmail1] = useState('');
 
-    const [error, setError] = useState(''); // State to handle errors
+    axios.post('/member/uFindPW', {
+        id: id,
+        name: user_name,
+        email1: email1,
+    }).then((response) => {
+        console.log(response.data);
 
-    const handleFindPassword = async (event) => {
-        event.preventDefault();
-
-        try {
-            const response = await axios.get('/member/rfindPw', {
-                params: {
-                    id: id,
-                    name: name,
-                    phone1: phone1,
-                    phone2: phone2,
-                    phone3: phone3
-                }
-            });
-
-            if (response.status === 200) {
-                const retrievedPassword = response.data;
-                if (retrievedPassword !== '') {
-                    // 비밀번호를 찾았을 때 할 작업
-                    alert(`찾은 비밀번호는 ${retrievedPassword} 입니다.`);
-                    navigate('/Member/rLogin'); // 비밀번호를 찾았을 때, 로그인 페이지로 이동
-                } else {
-                    alert(`입력하신 정보와 일치하는 계정을 찾지 못했습니다.`);
-                }
-            } else {
-                console.error('비밀번호 찾기 실패');
-            }
-        } catch (error) {
-            console.error('비밀번호 찾기 오류:', error);
-            setError('** 해당 정보와 일치하는 계정이 없습니다.'); // 다른 오류 발생 시 에러 상태 업데이트
+        if (response.data !== null) {
+            alert(response.data);
+            navigate('/Member/rLogin');
+        } else {
+            alert(response.data);
         }
-    };
+
+    }).catch((err) => {
+        alert(`[checkdata 서버연결 실패] => ${err.message}`);
+    })
+
 
 
     //const navigate = useNavigate(); // useNavigate  훅 사용
@@ -76,7 +59,7 @@ const FindLoginPw = () => {
             </div>
             <div className="title">
                 <h2>비밀번호 찾기</h2>
-                <div className="txt_01">가입 당시 [ 아이디 / 이름 / 휴대폰 번호 ] 을 입력하세요</div>
+                <div className="txt_01">가입 당시 [ 아이디 / 이름 / 이메일 ] 을 입력하세요</div>
             </div>
             <main className="FindLoginId_page">
                 <div className="FindLoginId_container">
@@ -95,7 +78,7 @@ const FindLoginPw = () => {
                                                     name="id"
                                                     id="id"
                                                     value={id}
-                                                    onChange={(event) => setName(event.target.value)}
+                                                    onChange={(e) => setId(e.target.value)}
                                                     required
                                                 />
                                             </td>
@@ -110,14 +93,14 @@ const FindLoginPw = () => {
                                                     name="name"
                                                     minlength="2"
                                                     id="name"
+                                                    value={user_name}
+                                                    onChange={(e) => setUser_name(e.target.value)}
                                                     required
-                                                    value={name}
-                                                    onChange={(event) => setName(event.target.value)}
                                                 />
                                             </td>
                                         </tr>
 
-                                        <tr>
+                                        {/* <tr>
                                             <th>
                                                 <label for="cellphone"><span>&#42;</span>휴대폰 번호</label>
                                             </th>
@@ -155,9 +138,9 @@ const FindLoginPw = () => {
                                                     />
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> */}
 
-                                        {/* <tr>
+                                        <tr>
                                             <th>
                                                 <label for="email1"><span>&#42;</span>이메일</label>
                                             </th>
@@ -165,6 +148,8 @@ const FindLoginPw = () => {
                                                 <input type="text"
                                                     name="email1"
                                                     id="email1"
+                                                    value={email1}
+                                                    onChange={(e) => setEmail1(e.target.value)}
                                                 />
                                                 &nbsp;@&nbsp;
                                                 <input type="text"
@@ -173,7 +158,7 @@ const FindLoginPw = () => {
                                                     placeholder="도메인 입력"
                                                 />
                                             </td>
-                                        </tr> */}
+                                        </tr>
 
                                     </table>
 
@@ -188,11 +173,11 @@ const FindLoginPw = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    {error && <div className="error-message">{error}</div>} {/* Display error message */}
+                                    {/* {error && <div className="error-message">{error}</div>} Display error message */}
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">
-                                        <button className="out_btn3" type="submit" name="finish" value="비밀번호 찾기" >비밀번호 찾기</button>
+                                        <button className="out_btn3" type="submit" name="finish" value="비밀번호 찾기">비밀번호 찾기</button>
                                     </div>
 
                                 </fieldset>

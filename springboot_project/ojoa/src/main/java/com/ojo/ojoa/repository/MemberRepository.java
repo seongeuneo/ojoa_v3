@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import org.springframework.data.repository.query.Param;
-
-
 import com.ojo.ojoa.entity.Member;
 
 public interface MemberRepository 
@@ -24,6 +21,9 @@ public interface MemberRepository
 	@Transactional
 	@Query("Select m from Member m order by m.name asc")
 	Page<Member> getMemberList(Pageable pageable);
-
+	
+	// 패스워드 임의 부여 쿼리문
+	@Query("SELECT m FROM Member m Where m.name = :name and m.id = :id and m.email1 = email1")
+	   Member checkUser(@Param("id") String id, @Param("name") String name, @Param("email1") String email1);
 
 }
