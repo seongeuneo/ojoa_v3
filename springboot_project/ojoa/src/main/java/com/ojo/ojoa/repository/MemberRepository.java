@@ -17,8 +17,9 @@ public interface MemberRepository
 	@Query("SELECT m FROM Member m WHERE m.name = :name AND m.phone2 = :phone2 AND m.phone3 = :phone3")
     Member findByNameAndPhone(@Param("name") String name, @Param("phone2") String phone2, @Param("phone3") String phone3);
 
+	// 페이지네이션
 	@Transactional
-	@Query("Select m from Member m order by m.name desc")
+	@Query("Select m from Member m order by m.name asc")
 	Page<Member> getMemberList(Pageable pageable);
 
 }

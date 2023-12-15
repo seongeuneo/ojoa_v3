@@ -28,7 +28,7 @@
 	</div>
 
 
-	<table class="reviewTable" border="1" style="width: 90%">
+	<table class="reviewTable" border="1" style="width: 90%" id="reviewTable">
 		<tr bgcolor="Orange">
 			<th>리뷰 번호</th>
 			<th>리뷰한 고객 ID</th>
@@ -69,6 +69,16 @@
 			</tr>
 		</c:if>
 	</table>
+	<div class="pagination_wrap">
+       <c:if test="${not empty requestScope.itemPage}">
+           <c:forEach var="pageNumber" begin="0" end="${requestScope.totalPages - 1}">
+           <span onclick="reviewManagementPage(${pageNumber})"
+                   class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
+                 ${pageNumber + 1}
+           </span>
+           </c:forEach>
+       </c:if>
+   </div>
 	<div class="home-link">
 		<a href="/home">Home</a>
 	</div>
