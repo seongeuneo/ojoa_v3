@@ -95,6 +95,7 @@ public class ProductController {
 		if ( uploadfilef!=null && !uploadfilef.isEmpty() ) {
 			// => Image 재선택 MultipartFile 처리
 			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
+//			String realPath2 = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
 			
 			// => 물리적위치에 저장 (file1)
 			String file1 = realPath + uploadfilef.getOriginalFilename(); //저장경로 완성

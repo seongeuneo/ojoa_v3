@@ -14,9 +14,17 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 function Checkout({ cart }) {
-  const location = useLocation();
-  const selectedCartItems = location.state.selectedCartItems;
 
+ 
+
+
+
+
+  const location = useLocation();
+
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
+  // const selectedCartItems = location.state.selectedCartItems;
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
 
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
@@ -43,29 +51,31 @@ function Checkout({ cart }) {
 
   //======================================================================= 
   // 주문
-  function inOrders() {
-    const Orders = {
-      id: "id",
-      orders_totalprice: totalProductPrice + deliveryPrice,
-      orders_price: totalCheckoutPrice,
-      orders_method: "orders_method",
-      orders_addresscheck: "orders_addresscheck",
-      shipping_name: "shipping_name",
-      shipping_zipcode: "zipcode",
-      shipping_address: "shipping_address",
-      shipping_addressdetail: "shipping_addressdetail",
-      shipping_phone: "shipping_phone"
-    };
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
+  // function inOrders() {
+  //   const Orders = {
+  //     id: "id",
+  //     orders_totalprice: totalProductPrice + deliveryPrice,
+  //     orders_price: totalCheckoutPrice,
+  //     orders_method: "orders_method",
+  //     orders_addresscheck: "orders_addresscheck",
+  //     shipping_name: "shipping_name",
+  //     shipping_zipcode: "zipcode",
+  //     shipping_address: "shipping_address",
+  //     shipping_addressdetail: "shipping_addressdetail",
+  //     shipping_phone: "shipping_phone"
+  //   };
 
-    axios.post('/api/orders/saveOrders', Orders)
-      .then(response => {
-        alert("주문완료이 완료되었습니다:)");
-        navigate("/");
-      })
-      .catch(error => {
-        alert('주문에 실패했습니다!!!!!!');
-      });
-  }
+  //   axios.post('/api/orders/saveOrders', Orders)
+  //     .then(response => {
+  //       alert("주문완료이 완료되었습니다:)");
+  //       navigate("/");
+  //     })
+  //     .catch(error => {
+  //       alert('주문에 실패했습니다!!!!!!');
+  //     });
+  // }
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
 
   //========================================================================
 
@@ -79,24 +89,30 @@ function Checkout({ cart }) {
   // 할인금액
   const discountPrice = 0;
 
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
+  // const displayedCartList = useMemo(() => {
+  //   return selectedCartItems.map(item => ({
+  //     ...item,
+  //     dispalyedPrice: formatNumber(item.productPriceFormatted),
+  //     totalPrice: item.quantity * Number(item.productPriceFormatted),
+  //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
+  //   }))
+  // }, [selectedCartItems]);
 
-  const displayedCartList = useMemo(() => {
-    return selectedCartItems.map(item => ({
-      ...item,
-      dispalyedPrice: formatNumber(item.productPriceFormatted),
-      totalPrice: item.quantity * Number(item.productPriceFormatted),
-      displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
-    }))
-  }, [selectedCartItems]);
+  // const totalProductPrice = useMemo(() => {
+  //   return displayedCartList.reduce((acc, curr) => {
+  //     return acc + curr.totalPrice
+  //   }, 0)
+  // }, [displayedCartList]);
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
 
-  const totalProductPrice = useMemo(() => {
-    return displayedCartList.reduce((acc, curr) => {
-      return acc + curr.totalPrice
-    }, 0)
-  }, [displayedCartList]);
+
+
 
   // 총 결제 금액
-  const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
+  // const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
+  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
 
 
   // 결제 성공 시 호출되는 함수
@@ -104,7 +120,6 @@ function Checkout({ cart }) {
     // history.push를 사용하여 '/payment-confirmation' 경로로 이동
     navigate('/paymentconfirmation');
   };
-
 
   //===========================================================================================
 
@@ -137,35 +152,6 @@ function Checkout({ cart }) {
   //     //e.preventDefault();
   // };
 
-  const handleOrderInfo = (e) => {
-    const { name, value } = e.target;
-    setOrderInfo({ ...orderInfo, [name]: value });
-  };
-
-  const orderPayment = () => {
-    if (isMember === false && orderInfo.memberCheck === '') {
-      alert("주문조회 비밀번호를 입력하세요.");
-      return false;
-    }
-    axios
-      .post("/api/order/orderPayment", orderInfo, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        let orderData = response.data;
-        if (orderData != null && orderData !== "") {
-          navigate('/paymentconfirmation', { state: { orderData, cart } });
-        } else {
-          alert('결제 실패');
-        }
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-  };
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // 모달창 열기 
@@ -201,7 +187,8 @@ function Checkout({ cart }) {
               </tr>
             </thead>
             <tbody>
-              {displayedCartList.map((item, index) => (
+              {/* displayedCartList */}
+              {/* {displayedCartList.map((item, index) => (
                 <tr key={item.prod_num}>
                   <td>{index + 1}</td>
                   <td>
@@ -215,14 +202,15 @@ function Checkout({ cart }) {
                   <td>[조건]</td>
                   <td>{item.displayedTotalPrice}원</td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
             <tfoot className="pay_product_summary">
               <tr>
                 <td colSpan={9}>
                   <div className="pay_product_summary_content">
                     <p>[기본배송]</p>
-                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
+                    {/* // 성은테스트로 주석으로 묶어둠 풀어야함 ============================================================================= */}
+                    {/* <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p> */}
                   </div>
                 </td>
               </tr>
@@ -253,11 +241,11 @@ function Checkout({ cart }) {
               <th>배송지 선택</th>
               <td>
                 <div class="address">
-                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
+                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" />
                   <label for="sameaddr0">회원 정보와 동일</label>
-                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
+                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" />
                   <label for="sameaddr1">새로운 배송지</label>
-                  <button onClick={openModal}>이전 주소록보기</button>
+                  <a onClick={openModal}>이전 주소록보기</a>
                   <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
                     <AddressPopup closeModal={closeModal} />
                   </Modal>
@@ -393,7 +381,8 @@ function Checkout({ cart }) {
             <ul className='border'>
               <li>
                 <span className='bg-cell' name='orders_totalprice'>총 주문 금액 <button>내역보기</button></span>
-                <span>{formatNumber(totalProductPrice)}원</span>
+                {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 ============================================================================= */}
+                {/* <span>{formatNumber(totalProductPrice)}원</span> */}
               </li>
               <li>
                 <span className='bg-cell'>총 할인 + 부가결제 금액</span>
@@ -401,7 +390,9 @@ function Checkout({ cart }) {
               </li>
               <li>
                 <span className='bg-cell' name='orders_price'>총 결제예정 금액</span>
-                <span>= {formatNumber(totalCheckoutPrice)}원</span>
+                {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================  */}
+                {/* <span>= {formatNumber(totalCheckoutPrice)}원</span> */}
+                {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================  */}
               </li>
             </ul>
           </div>
@@ -437,9 +428,12 @@ function Checkout({ cart }) {
             </div>
             <div className='pay_select_payment_method_total' >
               <p>최종결제 금액</p>
-              <p className='total_price' name='orders_price'>{formatNumber(totalCheckoutPrice)}원</p>
+              {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================  */}
+              {/* <p className='total_price' name='orders_price'>{formatNumber(totalCheckoutPrice)}원</p> */}
+              {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================  */}
 
-              <button type='submit' className='payment_btn' onClick={(e) => { e.preventDefault(); handlePaymentSuccess(); inOrders(); }}>결제하기</button>
+              {/* <button type='submit' className='payment_btn' onClick={(e) => { e.preventDefault(); handlePaymentSuccess(); inOrders(); }}>결제하기</button> */}
+              {/*  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================  */}
             </div>
           </div>
         </section>
