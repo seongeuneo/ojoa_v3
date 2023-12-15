@@ -28,7 +28,7 @@
 	</div>
 
 
-	<table style="width: 100%">
+	<table style="width: 100%" id="qnaTable">
 		<tr>
 			<th>문의 번호</th>
 			<th>상품 번호</th>
@@ -48,7 +48,7 @@
 					<td>${s.prod_num}</td>
 					<td>${s.id}</td>
 					<td>${s.qna_category}</td>
-				<%-- 	<td><a href="/qna/qdetail?qna_seq=${s.qna_seq}">
+					<%-- 	<td><a href="/qna/qdetail?qna_seq=${s.qna_seq}">
 							${s.qna_title}</a></td> --%>
 					<td>${s.qna_title}</td>
 					<td>${s.qna_content}</td>
@@ -69,7 +69,16 @@
 			</tr>
 		</c:if>
 	</table>
-
+	<div class="pagination_wrap">
+		<c:if test="${not empty requestScope.itemPage}">
+			<c:forEach var="pageNumber" begin="0"
+				end="${requestScope.totalPages - 1}">
+				<span onclick="qnaManagementPage(${pageNumber})"
+					class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
+					${pageNumber + 1} </span>
+			</c:forEach>
+		</c:if>
+	</div>
 	<div class="home-link">
 		<a href="/home">Home</a>
 	</div>

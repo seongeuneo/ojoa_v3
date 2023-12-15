@@ -90,19 +90,19 @@ public class MemberController {
             @RequestParam(name = "size", defaultValue = "5") int size,
             Model model) {
 		Pageable pageable = PageRequest.of(page, size);
-	       Page<Member> faqPageList = service.getMemberList(pageable);
+	       Page<Member> memberList = service.getMemberList(pageable);
 
-	       model.addAttribute("faqList", faqPageList.getContent());
-	       model.addAttribute("itemPage", faqPageList);
-	       model.addAttribute("currentPage", faqPageList.getNumber());
-	       model.addAttribute("totalPages", faqPageList.getTotalPages());
-	       model.addAttribute("totalItems", faqPageList.getTotalElements());
+	       model.addAttribute("memberList", memberList.getContent());
+	       model.addAttribute("itemPage", memberList);
+	       model.addAttribute("currentPage", memberList.getNumber());
+	       model.addAttribute("totalPages", memberList.getTotalPages());
+	       model.addAttribute("totalItems", memberList.getTotalElements());
 	       
-	      log.info("faq_service.getFaqList(category, pageable) : " + service.getMemberList(pageable));
-	      log.info("faqPageList.getContent() : " + faqPageList.getContent());
-	      log.info("faqPageList : " + faqPageList);
-	      log.info("faqPageList.getNumber() : " + faqPageList.getNumber());
-	      log.info("faqPageList.getTotalElements() : " + faqPageList.getTotalElements());
+	      log.info("memberservice.getMemberList(category, pageable) : " + service.getMemberList(pageable));
+	      log.info("memberList.getContent() : " + memberList.getContent());
+	      log.info("memberList : " + memberList);
+	      log.info("memberList.getNumber() : " + memberList.getNumber());
+	      log.info("memberList.getTotalElements() : " + memberList.getTotalElements());
 		
 	} //memberList
 	

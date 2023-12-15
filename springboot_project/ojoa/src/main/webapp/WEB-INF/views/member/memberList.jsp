@@ -51,8 +51,8 @@
 				<th>강퇴</th>
 			</c:if>
 		</tr>
-		<c:if test="${not empty requestScope.faqList}">
-			<c:forEach var="s" items="${requestScope.faqList}">
+		<c:if test="${not empty requestScope.memberList}">
+			<c:forEach var="s" items="${requestScope.memberList}">
 				<tr>
 					<td>${s.id}</td>
 					<td>${s.password}</td>
@@ -78,7 +78,7 @@
 				</tr>
 			</c:forEach>
 		</c:if>
-		<c:if test="${empty requestScope.faqList}">
+		<c:if test="${empty requestScope.memberList}">
 			<tr>
 				<td colspan="7">출력할 Data가 1건도 없습니다 ~~</td>
 			</tr>
@@ -87,7 +87,7 @@
 	<div class="pagination_wrap">
        <c:if test="${not empty requestScope.itemPage}">
            <c:forEach var="pageNumber" begin="0" end="${requestScope.totalPages - 1}">
-           <span onclick="faqManagementPage(${pageNumber})"
+           <span onclick="memberManagementPage(${pageNumber})"
                    class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
                  ${pageNumber + 1}
            </span>

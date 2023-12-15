@@ -9,6 +9,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ojo.ojoa.entity.Member;
 import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.service.ProductService;
 
@@ -40,8 +44,24 @@ public class ProductController {
 
 // ** Product List - 회원별 카트 목록 반환 
     @GetMapping("/productList")
-    public void productList(Model model) {
-    	model.addAttribute("product", productService.selectList());
+    public void productList(@RequestParam(name = "category", defaultValue = "") String category,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size,
+            Model model) {
+    	Pageable pageable = PageRequest.of(page, size);
+	       Page<Product> productList = productService.getProductList(pageable);
+
+	       model.addAttribute("product", productList.getContent());
+	       model.addAttribute("itemPage", productList);
+	       model.addAttribute("currentPage", productList.getNumber());
+	       model.addAttribute("totalPages", productList.getTotalPages());
+	       model.addAttribute("totalItems", productList.getTotalElements());
+	       
+	      log.info("productService.getFaqList(category, pageable) : " + productService.getProductList(pageable));
+	      log.info("productList.getContent() : " + productList.getContent());
+	      log.info("productList : " + productList);
+	      log.info("productList.getNumber() : " + productList.getNumber());
+	      log.info("productList.getTotalElements() : " + productList.getTotalElements());
     } // productList
     
     

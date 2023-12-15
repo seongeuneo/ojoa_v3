@@ -2,9 +2,13 @@ package com.ojo.ojoa.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ojo.ojoa.domain.CartProdDTO;
+import com.ojo.ojoa.domain.ProdIMGDTO;
 import com.ojo.ojoa.entity.Product;
 
 @Service
@@ -14,9 +18,8 @@ public interface ProductService {
 	// ** selectList
 	List<Product> selectList();
 	
-	// 페이지네이션
-	// Page<Product> getProductList(Pageable pageable);
-	// 레파짓토리쿼리문 서비스 서비스임플 컨트롤러
+	// ** 페이지네이션
+	public Page<Product> getProductList(Pageable pageable);
 
 	// ** selectOne
 	Product selectOne(int prod_num);
@@ -35,6 +38,9 @@ public interface ProductService {
     
     // 평점
     public void rUpdate(Integer prod_num);
+    
+    // ** Join (findProdIMG)
+  	List<ProdIMGDTO> findProdIMG();
     
     
 } //class

@@ -48,10 +48,82 @@ a:visited {
 .home-link {
 	text-align: center;
 	font-size: 20px;
+		margin-top: 10px;
 }
 
 .home-link a {
 	text-decoration: none; /* 밑줄 제거 */
 	color: inherit; /* 기본 텍스트 색상으로 설정 */
 	font-weight: bold;
+}
+
+
+/* Pagination */
+.pagination_wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination_wrap span {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.pagination_wrap span.currentPage {
+    background-color: #333;
+    color: white;
+}
+
+/* Filter Area */
+.filterArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;
+}
+
+.filterArea div {
+    display: flex;
+    align-items: center;
+}
+
+.filterArea select,
+.filterArea input[type="text"],
+.filterArea button {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.filterArea button {
+    padding: 8px 15px;
+    border: none;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.filterArea button:hover {
+    background-color: #45a049;
+}
+
+.filterArea select {
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.filterArea1 {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
 }
