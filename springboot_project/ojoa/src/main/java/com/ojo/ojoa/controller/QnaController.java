@@ -101,7 +101,7 @@ public class QnaController {
 		model.addAttribute("qna", qnaService.selectOne(qna_seq));
 		return "qna/replyAnswerForm";
 
-	} // qnaList
+	}
 
 // 답변 등록
 	@PostMapping(value = "/replyAnswerForm")

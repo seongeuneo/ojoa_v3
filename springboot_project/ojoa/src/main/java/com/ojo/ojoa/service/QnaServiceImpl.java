@@ -81,7 +81,9 @@ public class QnaServiceImpl implements QnaService {
 		board_category = board_category != null ? board_category.trim() : "";
 		search_date = search_date != null ? search_date.trim() : "";
 		search_query = search_query != null ? search_query.trim() : "";
+
 		if (board_category.isEmpty() && search_date.isEmpty() && search_query.isEmpty()) {
+//		if (board_category == null && search_date == null && search_query == null) {
 			return qnaRepository.findAllQnaList();
 		} else {
 

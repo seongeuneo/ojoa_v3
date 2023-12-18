@@ -23,9 +23,9 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
     const [replyContents, setReplyContents] = useState({});
     const [updatedQnaList, setUpdatedQnaList] = useState(qnaList); // 여기서 새로운 상태 추가
 
-    console.log(qnaList);
+    console.log('*****' + qnaList);
 
-    const handleTitleClick = (id, readable, admin) => {
+    const handleTitleClick = (id, readable) => {
         if (expandedId === id) {
             setExpandedId(null);
         } else {
