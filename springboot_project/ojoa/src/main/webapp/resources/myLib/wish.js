@@ -61,23 +61,10 @@ function memberChange() {
 
 }
 
-//==============================================================================
-// 주문관리 페이지 비동기 이동
-function ordersChange() {
-   let url="orders/ordersList";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
 
-}
 
 //==============================================================================
+
 // 관심상품 페이지 비동기 이동
 function wishChange() {
    let url="wish/wishlist";
@@ -195,20 +182,7 @@ function AnswerFinish(e) {
 
 
 //==============================================================================
-// 장바구니 페이지 비동기 이동
-function cartChange() {
-   let url="cart/cartList";
-   
-   axios.get(url
-   ).then(response => {
-    //  alert("response 성공");
-      document.getElementById('contentArea').innerHTML=response.data;
-   }).catch(err => {
-      alert("response 실패 => 바보" + err.message);
-   });
-   document.getElementById("contentArea").innerHTML="";
 
-}
 
 
 //==============================================================================

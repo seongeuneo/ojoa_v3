@@ -11,18 +11,17 @@ import axios from "axios";
 
 
 function ProductDetail({ setCart}) {
-
+    
     const location = useLocation();
     const { prod_num } = useParams();
     const productData = location.state ? location.state.productData : null;
     const navigate = useNavigate();
-
+    
     //======================================
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
-
+    
     //============================= 여기서부터 워니의 코드 =================================
-
 
     // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
     function AddToCart() {
