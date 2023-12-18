@@ -38,8 +38,12 @@
 					<td>${s.quantity}</td>
 					<td>${s.ordersdt_shippingfee}</td>
 					<td>${s.ordersdt_totalprice}</td>
-					<td>${s.ordersdt_result}</td>
-					
+					<td>${s.ordersdt_result}</td>>
+			<!-- 		<td><select name="ordersdt_result" id="ordersdt_result">
+					<option value="A">A:배송완료</option>
+					<option value="B">B:배송준비중</option>
+					<option value="C">C:배송중</option>
+					</select></td> -->
 				</tr>
 			</c:forEach>
 		</c:if>

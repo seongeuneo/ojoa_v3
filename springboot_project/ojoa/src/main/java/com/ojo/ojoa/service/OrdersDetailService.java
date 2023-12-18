@@ -1,4 +1,5 @@
 package com.ojo.ojoa.service;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,10 +19,8 @@ public interface OrdersDetailService {
 
 	// ** save : insert, update
 	int save(OrdersDetail entity);
-		
+
 	// ** delete
 	int delete(int ordersdt_num);
-	
+
 }
-
-

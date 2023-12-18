@@ -25,6 +25,9 @@
 			<button onclick="filterMembersByName()">검색</button>
 			<!-- 검색 버튼 -->
 		</div>
+		<div>
+			<button onclick="qnaInsertChange()">공지사항 쓰기</button>
+		</div>
 	</div>
 
 

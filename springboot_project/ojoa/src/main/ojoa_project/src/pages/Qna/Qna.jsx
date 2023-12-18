@@ -116,6 +116,8 @@ function Qna() {
         axios
             .get("/api/qna/allQnaList")
             .then((response) => {
+                console.log(`qnaList : ${response.data}`);
+                console.dir(response.data)
                 setQnaList(response.data);
             })
             .catch((error) => {

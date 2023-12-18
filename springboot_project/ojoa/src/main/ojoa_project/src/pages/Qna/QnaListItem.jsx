@@ -25,11 +25,15 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
 
     console.log(qnaList);
 
-    const handleTitleClick = (id) => {
+    const handleTitleClick = (id, readable, admin) => {
         if (expandedId === id) {
             setExpandedId(null);
         } else {
             setExpandedId(id);
+        }
+
+        if (!readable) {
+            //alert(`작상자만 볼 수 있습니다.`)
         }
     };
 
@@ -87,6 +91,16 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
         return true;
     });
 
+    // 익명처리
+    function maskString(inputString) {
+        if (typeof inputString !== 'string') {
+            throw new Error('Input must be a string');
+        }
+        const maskedPart = inputString.slice(0, 1) + '***';
+        return maskedPart;
+    }
+
+
 
     //=========================================================================
 
@@ -111,26 +125,31 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
                             <tr className='qna_Lboard_st'>
                                 <td className='qna_board_st1'>{item.num}</td>
                                 <td className='qna_Lboard_st2'>
-                                    <div><img src={`/thumbs/${item.imgNo}`} alt='상품' /></div>
+                                    <div><img className='qna_img' src={`../thumbs/${item.imgNo}`} alt='상품' /></div>
                                     <div>{item.itemInfo}</div>
                                 </td>
                                 <td className='qna_board_st3'>{item.category}</td>
                                 <td className='qna_board_st4'>
                                     <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
                                 </td>
-                                <td className='qna_board_st5'>{(item.writer)}&#42;&#42;</td>
+                                <td className='qna_board_st5'>
+                                    {item.readable && <span style={{ color: 'blue' }}>{item.writer}</span>}
+                                    {!item.readable && maskString(item.writer)}
+                                </td>
                                 <td className='qna_board_st6'>{formatDate(item.date)}</td>
                             </tr>
                         )}
 
                     {expandedId === i && (
                         <>
-                            <tr className='qna_board_st7'>
-                                <td colSpan="8" className='notification_row'>
-                                    <p>[문의 내용] : {item.notification}</p>
-                                    <p>[답변내용] : {item.titleIcon}</p>
-                                </td>
-                            </tr>
+                            {(userId === 'admin' || userId === item.writer) && (
+                                <tr className='qna_board_st7'>
+                                    <td colSpan="8" className='notification_row'>
+                                        <p>[문의 내용] : {item.notification}</p>
+                                        <p>[답변내용] : {item.titleIcon}</p>
+                                    </td>
+                                </tr>
+                            )}
                             {(userId === 'admin' || userId === item.writer) && (
                                 <tr className='qna_board_st7'>
                                     <td colSpan="8" style={{ textAlign: 'right', lineHeight: '50px' }}>

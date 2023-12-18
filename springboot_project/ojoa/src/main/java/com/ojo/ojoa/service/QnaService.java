@@ -26,14 +26,17 @@ public interface QnaService {
 	// ** selectOne : 특정 qna데이터 식별자('qna_seq')를 기반으로 조회
 	Qna selectOne(int qna_seq);
 
-	// 수정하기
-	QnaDTO.QnaItemResDTO selectOneById(String Id, int qna_seq);
-
 	// ** insert, update
 	int save(Qna entity);
 
 	// ** delete
 	int delete(int qna_seq);
+
+	// ** reply
+//	int rinsert(QnaDTO dto);
+//	 boolean insertQnaReply(int qna_seq, String id, String qna_content);
+
+//	public void replyinsert(int qna_seq, String qna_reply);
 
 	// ** QnA 데이터 목록 조회 (검색조건 : 카테고리, 날짜, 키워드, 쿼리)받아와서 처리, QnaMainListDTO 객체의 리스트를
 	// 반환

@@ -35,16 +35,9 @@ public interface CartService {
 	// ** Join (장바구니 + 상품)
 	List<CartProdDTO> findCartProd();
 
-
 	// ** react selectAllList
 	List<CartDTO> selectAllList(String loginID);
 
-	
-	//List<CartDTO> selectAllList();
-//
-//	// 새로추가
-//	List<CartDTO> selectByIdList(String id);
-//
-//	// 새로추가
-//	List<CartDTO> selectAllCartByOrderList(String id, String state);
+	// userId, prod_num 로 카트 삭제
+	void deleteCartByUserIdAndProdNum(String user_id, int prod_num);
 }

@@ -113,4 +113,13 @@ public class QnaController {
 		return "/qna/qnaList";
 	}
 
+// 밑에 코드는 계속 주석   
+//   @PostMapping(value="/replyinsert")
+//   public String replyinsert(Qna entity) {
+//      
+//	   qnaService.replyinsert(entity.getQna_seq(), entity.getQna_reply());
+//      String uri="redirect:qnaList";
+//      return uri;
+//   }
+
 }

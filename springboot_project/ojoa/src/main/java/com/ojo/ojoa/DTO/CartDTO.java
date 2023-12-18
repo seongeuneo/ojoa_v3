@@ -36,8 +36,6 @@ public class CartDTO {
 	@JsonProperty("prod_content")
 	private String prod_content;
 
-	private String state;
-
 	// => Join 구문결과 받기위해서는
 	// select 구문의 순서와 동일하게 모든 컬럼을 초기화하는 생성자 필요함.
 

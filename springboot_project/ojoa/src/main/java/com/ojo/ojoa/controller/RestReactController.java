@@ -1,6 +1,7 @@
 package com.ojo.ojoa.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.DTO.CartDTO;
+import com.ojo.ojoa.DTO.OrdersResDTO;
 import com.ojo.ojoa.DTO.QnaDTO;
 import com.ojo.ojoa.domain.Prod_imageDTO;
 import com.ojo.ojoa.domain.WishDTO;
@@ -127,8 +129,6 @@ public class RestReactController {
 		return ResponseEntity.ok(cartList);
 	}
 
-
-
 	@PostMapping("cart/saveCart")
 	public ResponseEntity<?> saveCart(@RequestBody Cart entity, HttpSession session) {
 		try {
@@ -197,7 +197,6 @@ public class RestReactController {
 	}
 
 //===============================================================================		
-
 	// 게시판 QnA
 	// "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
 	// qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
@@ -210,11 +209,29 @@ public class RestReactController {
 			@RequestParam(required = false) String board_category,
 			// (required = false) -> 값이없어도 호출
 			@RequestParam(required = false) String search_date, @RequestParam(required = false) String search_key,
-			@RequestParam(required = false) String search_query) {
+			@RequestParam(required = false) String search_query, HttpSession session) {
+		String id = (String) session.getAttribute("loginID");
 		try {
 			List<QnaDTO.QnaMainListDTO> qnaList = qnaService.selectAllList(board_category, search_date, search_key,
 					search_query);
 			// qnaService의 'selectAllList' 메서드를 호출해서 조회하고 'qnaList'에 저장
+
+			// QNA 에서 작성자만, 관리자만 클릭 시 조회되게
+			qnaList = qnaList.stream().map(item -> {
+				// 작성자 본인
+				if (item.getId().equals(id)) {
+					item.setReadable(true);
+				}
+				// 관리자
+				if (id.equals("admin")) {
+					item.setReadable(true);
+				}
+				// 공지사항
+				if (item.getQna_category().equals("공지사항")) {
+					item.setReadable(true);
+				}
+				return item;
+			}).collect(Collectors.toList());
 			return ResponseEntity.ok(qnaList);
 			// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
 		} catch (Exception e) {
@@ -222,7 +239,7 @@ public class RestReactController {
 		}
 	}
 
-//	 // 게시판 QnA - 게시글 등록
+//		 // 게시판 QnA - 게시글 등록
 	@PostMapping("qna/saveQna")
 	public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
 		try {
@@ -237,67 +254,53 @@ public class RestReactController {
 		}
 	}
 
-<<<<<<< HEAD
-	@GetMapping("qna/selectQnaList")
-	public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
-		try {
-			String loginID = (String) session.getAttribute("loginID");
+//	@GetMapping("qna/selectQnaList")
+//	public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
+//		try {
+//			String loginID = (String) session.getAttribute("loginID");
+//
+//			if (loginID == null) {
+//				loginID = "admin";
+//			}
+//			QnaDTO.QnaItemResDTO qnaItem = qnaService.selectOneById(loginID, qna_seq);
+//			return ResponseEntity.ok(qnaItem);
+//		} catch (Exception e) {
+//			log.error("데이터 조회 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
+//		}
+//	}
 
-			if (loginID == null) {
-				loginID = "admin";
-			}
-			QnaDTO.QnaItemResDTO qnaItem = qnaService.selectOneById(loginID, qna_seq);
-			return ResponseEntity.ok(qnaItem);
-		} catch (Exception e) {
-			log.error("데이터 조회 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
-		}
-	}
-=======
-  
->>>>>>> main
+//	@PostMapping("qna/updateQna")
+//	public ResponseEntity<String> updateQna(HttpSession session, @RequestBody Qna entity) {
+//		try {
+//			System.out.println("111111" + entity);
+//			qnaService.update(entity); // QnaService를 통해 엔티티를 저장합니다.
+//			System.out.println("22222222" + entity);
+//			return ResponseEntity.ok("데이터 갱신 성공");
+//		} catch (Exception e) {
+//			log.error("데이터 갱신 중 에러: {}", e.getMessage());
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 갱신 실패");
+//		}
+//	}
 
 //===========================================================================    
-	// 주문결제
-//	@PostMapping("order/orderPayment")
-//	public ResponseEntity<?> orderPayment(HttpSession session, @RequestBody OrdersReqDTO orderInfo) {
-//		try {
-//			String loginID = (String) session.getAttribute("loginID");
-//			OrdersResDTO.OrderCompleteDTO result = ordersService.saveOrders(loginID, orderInfo);
-//			return ResponseEntity.ok(result);
-//		} catch (Exception e) {
-//			log.error("데이터 저장 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//		}
-//	}
-//
-//	// 비회원 주문결제
-//	@GetMapping("order/nonMemberOrder")
-//	public ResponseEntity<?> getNonMemberOrder(@RequestParam(required = false) String orderNumber,
-//			@RequestParam(required = false) String password) {
-//		try {
-//			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOneOrderNum(orderNumber, password);
-//			return ResponseEntity.ok(result);
-//		} catch (Exception e) {
-//			log.error("데이터 저장 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//		}
-//	}
-//
-//	// 주문목록
-//	@GetMapping("order/orderList")
-//	public ResponseEntity<?> getOrderList(HttpSession session, @RequestParam(required = false) String startDate,
-//			@RequestParam(required = false) String endDate, @RequestParam(required = false) String orderNumber) {
-//		try {
-//			String loginID = (String) session.getAttribute("loginID");
-//			List<OrdersResDTO.OrderNonMemberDTO> result = ordersService.selectOrderList(loginID, startDate, endDate,
-//					orderNumber);
-//			return ResponseEntity.ok(result);
-//		} catch (Exception e) {
-//			log.error("데이터 저장 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-//		}
-//	}
 
+	// 주문목록
+	@GetMapping("order/orderList")
+	public ResponseEntity<?> getOrderList(HttpSession session, @RequestParam(required = false) String startDate,
+			@RequestParam(required = false) String endDate, @RequestParam(required = false) String orderNumber) {
+
+		log.info("startDate : " + startDate);
+		try {
+			String loginID = (String) session.getAttribute("loginID");
+			List<OrdersResDTO> result = ordersService.selectOrderList(loginID, startDate, endDate, orderNumber);
+
+			log.info("result : " + result);
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
 
 }

@@ -297,3 +297,8 @@ table .qna_table2 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
+.qna_img {
+    width: 55px;
+    height: 55px;
+}

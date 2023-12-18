@@ -73,16 +73,10 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.findAllUserID(loginID);
 	}
 
-//	// 새로추가
-//	@Override
-//	public List<CartDTO> selectByIdList(String id) {
-//		return cartRepository.selectByIdList(id);
-//	}
-//
-//	// 새로추가
-//	@Override
-//	public List<CartDTO> selectAllCartByOrderList(String id, String state) {
-//		return cartRepository.selectAllCartByOrderList(id, state);
-//	}
+	// ** id, prod_num 으로 카트 삭제
+	@Override
+	public void deleteCartByUserIdAndProdNum(String user_id, int prod_num) {
+		cartRepository.deleteCartByUserIdAndProdNum(user_id, prod_num);
+	}
 
 } // class

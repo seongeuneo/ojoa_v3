@@ -6,25 +6,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
-
 @Data
 public class OrdersDTO {
-	
+
 	@JsonProperty("orders_num")
 	private int orders_num;
-	
+
 	@JsonProperty("id")
 	private String id;
-	
+
 	@JsonProperty("orders_indate")
 	private LocalDateTime orders_indate;
-	
+
 	@JsonProperty("orders_totalprice")
 	private int orders_totalprice;
-		
+
 	@JsonProperty("orders_price")
 	private int orders_price;
-	
+
 	@JsonProperty("orders_method")
 	private String orders_method;
 
@@ -32,21 +31,20 @@ public class OrdersDTO {
 	private String orders_addresscheck;
 
 	private String shipping_name;
-	
+
 	private String shipping_zipcode;
-	
+
 	private String shipping_address;
-	
+
 	private String shipping_addressdetail;
-	
+
 	private String shipping_phone;
 
 	private String shipping_message;
-	
-	public OrdersDTO(int orders_num, String id, LocalDateTime orders_indate,
-			int orders_totalprice, int orders_price, String orders_method, String orders_addresscheck,
-			String shipping_name, String shipping_zipcode, String shipping_address, 
-			String shipping_addressdetail, String shipping_phone, String shipping_message) {
+
+	public OrdersDTO(int orders_num, String id, LocalDateTime orders_indate, int orders_totalprice, int orders_price,
+			String orders_method, String orders_addresscheck, String shipping_name, String shipping_zipcode,
+			String shipping_address, String shipping_addressdetail, String shipping_phone, String shipping_message) {
 		super();
 
 		this.orders_num = orders_num;

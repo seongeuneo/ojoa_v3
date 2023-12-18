@@ -20,7 +20,7 @@ public class QnaDTO {
 		private int prod_num; // Foregin key
 
 		@JsonProperty("imgNo")
-		private String prod_mainimage;
+		private String prod_image;
 
 		@JsonProperty("itemInfo")
 		private String prod_name;
@@ -46,14 +46,17 @@ public class QnaDTO {
 		@JsonProperty("date")
 		private LocalDateTime qna_redate;
 
-		public QnaMainListDTO(int qna_seq, int prod_num, String prod_mainimage, String prod_name, String qna_category,
+		// 추가
+		private boolean readable = false;
+
+		public QnaMainListDTO(int qna_seq, int prod_num, String prod_image, String prod_name, String qna_category,
 				String qna_title, String qna_content, String qna_reply, String titleIcon, String id,
 				LocalDateTime qna_redate) {
 			// 해당클래스의 객체를 생성할때 필요한 모든 필드를 인자로 받아 초기화하는 생성자
 			super();
 			this.qna_seq = qna_seq;
 			this.prod_num = prod_num;
-			this.prod_mainimage = prod_mainimage;
+			this.prod_image = prod_image;
 			this.prod_name = prod_name;
 			this.qna_category = qna_category;
 			this.qna_title = qna_title;
@@ -64,28 +67,4 @@ public class QnaDTO {
 			this.qna_redate = qna_redate;
 		}
 	}
-
-	@Data
-	public static class QnaItemResDTO {
-
-		private int prod_num;
-
-		private String name;
-
-		private String qna_category;
-
-		private String qna_title;
-
-		private String qna_content;
-
-		public QnaItemResDTO(int prod_num, String name, String qna_category, String qna_title, String qna_content) {
-			super();
-			this.prod_num = prod_num;
-			this.name = name;
-			this.qna_category = qna_category;
-			this.qna_title = qna_title;
-			this.qna_content = qna_content;
-		}
-	}
-
 }
