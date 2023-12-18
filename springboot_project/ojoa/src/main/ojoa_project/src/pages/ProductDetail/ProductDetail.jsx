@@ -10,8 +10,8 @@ import AddCart from './Modal/AddCart';
 import axios from "axios";
 
 
-function ProductDetail({ setCart}) {
-    
+function ProductDetail({ setCart }) {
+
     const location = useLocation();
     const { prod_num } = useParams();
     const productData = location.state ? location.state.productData : null;
@@ -41,7 +41,7 @@ function ProductDetail({ setCart}) {
     //======================================
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
-    
+
     //============================= 여기서부터 워니의 코드 =================================
 
     // 장바구니 아이콘을 누르면 해당 상품이 장바구니에 추가 -----------------------------
@@ -55,17 +55,17 @@ function ProductDetail({ setCart}) {
                 //console.log("장바구니 담기" + response.data);
                 const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
                 const loginID = loggedInUser.id;
-                
+
                 axios
-                .get(`/api/cart/allCartList?loginID=${loginID}`)
-                .then((response) => {
-                    setCart(response.data);
-                    //window.location.reload();
-                })
-                .catch((error) => {
-                    console.error("Error: ", error);
-                });
-                
+                    .get(`/api/cart/allCartList?loginID=${loginID}`)
+                    .then((response) => {
+                        setCart(response.data);
+                        //window.location.reload();
+                    })
+                    .catch((error) => {
+                        console.error("Error: ", error);
+                    });
+
                 //alert('장바구니에 추가되었습니다!');
             })
             .catch(error => {
@@ -141,12 +141,12 @@ function ProductDetail({ setCart}) {
 
     // const sellPrice1 = productData.prod_price1.toLocaleString();
     // const sum = sellPrice1 * sellPrice;
-    var sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
-    const sellPrice1 = sellPrice.toLocaleString();
-    const sum = count * sellPrice;
+    // var sellPrice = parseInt(productData.prod_price1.toString().replace(/,/g, ''));
+    // const sellPrice1 = sellPrice.toLocaleString();
+    // const sum = count * sellPrice;
+    const sum = count * productData.prod_price1;
     const result = sum.toLocaleString();
 
-    console.log(sellPrice.type);
     //======================================
     const [data, setData] = useState([]);
 
@@ -261,7 +261,7 @@ function ProductDetail({ setCart}) {
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td className="total"><strong>{totalSum}</strong>원</td>
+                            <td className="total"><strong>{sum}</strong>원</td>
                         </tr>
                     </tbody>
                 </table>
@@ -277,8 +277,8 @@ function ProductDetail({ setCart}) {
                 </div>
 
                 <div className="pd_btns">
-                    <a onClick={()=> {checkLogin();  }} className="pd_btn1">장바구니</a>
-                    <Modal className="ModalContent"  isOpen={modalIsOpen} onRequestClose={closeModal}>
+                    <a onClick={CartOpenModal} className="pd_btn1">장바구니</a>
+                    <Modal className="ModalContent" isOpen={modalIsOpen} onRequestClose={closeModal}>
                         <AddCart closeModal={closeModal} AddToCart={AddToCart} />
                     </Modal>
                     <a className="pd_btn2" onClick={AddOrder}>구매하기</a>
