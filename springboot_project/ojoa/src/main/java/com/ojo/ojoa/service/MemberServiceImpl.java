@@ -90,8 +90,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member checkUser(String id, String name, String email1) {
-		return repository.checkUser(id, name, email1);
+	public Member checkUser(String id, String name, String email1, String email2) {
+		return repository.checkUser(id, name, email1, email2);
 	}
 	
 	

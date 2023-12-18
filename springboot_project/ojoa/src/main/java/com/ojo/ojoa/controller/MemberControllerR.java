@@ -158,7 +158,7 @@ public class MemberControllerR {
 	} //rpasswordUpdate
 	
 	
-	
+	//**** 정보 업데이트
 	@PostMapping(value="/rUpdate")
 	public ResponseEntity<?> rUpdate(@RequestBody Member entity) throws IOException {
 	    // 클라이언트로부터 받은 엔티티로 회원 정보 업데이트
@@ -212,11 +212,7 @@ public class MemberControllerR {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ID를 찾는 중에 오류가 발생했습니다.");
         }
-    } //findLoginId
-	
-	
-	//***** 비밀번호 찾기 API
-	
+    } //findLoginId	
 	
 	
 	//***** 결제페이지 회원정보 가져오기 : 희상추가
@@ -234,13 +230,13 @@ public class MemberControllerR {
 	       }
 	   } //rinfo
 	   
-	// *****
-	// find PW ======================================================================================
+	
+	// ***** find PW 패스워드 이메일 발송
    @PostMapping(value = "/uFindPW")
    public String postMemberFindPW(Model model, @RequestBody Member entity) {
-      Member checkUser = service.checkUser(entity.getId(), entity.getName(), entity.getEmail1());
+      Member checkUser = service.checkUser( entity.getId(), entity.getName(), entity.getEmail1(), entity.getEmail2());
       System.out.println(checkUser);
-      System.out.println(entity.getId() + entity.getName() + entity.getEmail1());
+      System.out.println(entity.getEmail1() + entity.getName());
       
       try {
          if (checkUser != null) {
@@ -251,8 +247,8 @@ public class MemberControllerR {
             member.setPassword(passwordEncoder.encode(randomPW));
             service.save(member);
 
-            emailService.sendEmail(entity.getId(), entity.getName(), entity.getEmail1(), randomPW);
-            return "[" + entity.getId() + "로 이메일 발송완료]. 임시 비밀번호로 로그인 후, 바로 비밀번호를 변경해주세요.";
+            emailService.sendEmail(entity.getId(), entity.getName(), entity.getEmail1(), entity.getEmail2(), randomPW);
+            return "[" + entity.getEmail1() +"@"+ entity.getEmail2() + "] 로 이메일 발송완료. 임시 비밀번호로 로그인 후, 바로 비밀번호를 변경해주세요.";
          } else {
             return "가입한 회원정보를 정확하게 입력해주세요.";
          }
@@ -260,23 +256,22 @@ public class MemberControllerR {
          System.out.println("postMemberFindPW" + e.toString());
          return "Error processing data";
       }
-
    } //postMemberFindPW
 
-	   public static String generateTempKey(int length) {
-	      String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	      StringBuilder tempKey = new StringBuilder();
+   //**** 패스워드 / 임시비밀번호 부여
+   public static String generateTempKey(int length) {
+      String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      StringBuilder tempKey = new StringBuilder();
 
-	      SecureRandom random = new SecureRandom();
-	      for (int i = 0; i < length; i++) {
-	         int index = random.nextInt(characters.length());
-	         tempKey.append(characters.charAt(index));
-	      }
+      SecureRandom random = new SecureRandom();
+      for (int i = 0; i < length; i++) {
+         int index = random.nextInt(characters.length());
+         tempKey.append(characters.charAt(index));
+      }
 
-	      return tempKey.toString();
-	   } //generateTempKey
+      return tempKey.toString();
+   } //generateTempKey
 	
 	
-
 } //class
 

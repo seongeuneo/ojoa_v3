@@ -5,48 +5,42 @@ import React, { useState } from 'react';
 
 const FindLoginPw = (e) => {
     const navigate = useNavigate();
-    e.preventDefault();
 
+    const [error, setError] = useState(null); // 에러 상태를 저장할 변수 추가
     const [id, setId] = useState('');
     const [user_name, setUser_name] = useState('');
     const [email1, setEmail1] = useState('');
+    const [email2, setEmail2] = useState('');
 
-    axios.post('/member/uFindPW', {
-        id: id,
-        name: user_name,
-        email1: email1,
-    }).then((response) => {
-        console.log(response.data);
+    const handleFindPw = (e) => {
+        e.preventDefault(); // 폼 제출을 막음
 
-        if (response.data !== null) {
-            alert(response.data);
-            navigate('/Member/rLogin');
-        } else {
-            alert(response.data);
-        }
+        axios.post('/member/uFindPW', {
+            id: id,
+            name: user_name,
+            email1: email1,
+            email2: email2,
+        }).then((response) => {
+            console.log(response.data);
 
-    }).catch((err) => {
-        alert(`[checkdata 서버연결 실패] => ${err.message}`);
-    })
+            if (response.data !== null) {
+                alert(response.data);
+                navigate('/Member/rLogin');
+            } else {
+                alert(response.data);
+            }
+        })
+            .catch((err) => {
+                setError(`[checkdata 서버연결 실패] => ${err.message}`); // 에러 발생 시 상태 업데이트
+                console.error(`[checkdata 서버연결 실패] => ${err.message}`);
+            });
+    }
 
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        handleFindPw(e); // 비밀번호 찾기 버튼이 눌렸을 때의 로직을 호출
+    }
 
-
-    //const navigate = useNavigate(); // useNavigate  훅 사용
-
-    // Ref 객체 추가
-    //const idInputRef = useRef(null); // 아이디 입력 필드의 Ref 객체
-    //const passwordInputRef = useRef(null);
-
-    // 엔터키 누르면 아래로
-    // const handleEnterPress = (event) => {
-    //     if (event.key === "Enter") {
-    //         if (event.target.name === "name") {
-    //             passwordInputRef.current.focus();
-    //         } else if (event.target.name === "email1") {
-    //             handleLogin();
-    //         }
-    //     }
-    // };
 
     return (
         <div className="FindLoginId">
@@ -63,7 +57,7 @@ const FindLoginPw = (e) => {
             </div>
             <main className="FindLoginId_page">
                 <div className="FindLoginId_container">
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <div className="FindLoginId_content">
                             <div className="FindLoginId">
                                 <fieldset className="FindLoginId_fieldset">
@@ -71,7 +65,7 @@ const FindLoginPw = (e) => {
 
                                         <tr>
                                             <th>
-                                                <label for="name"><span>&#42;</span>아이디</label>
+                                                <label htmlFor="name"><span>&#42;</span>아이디</label>
                                             </th>
                                             <td>
                                                 <input type="text"
@@ -86,7 +80,7 @@ const FindLoginPw = (e) => {
 
                                         <tr>
                                             <th>
-                                                <label for="name"><span>&#42;</span>이름</label>
+                                                <label htmlFor="name"><span>&#42;</span>이름</label>
                                             </th>
                                             <td>
                                                 <input type="text"
@@ -102,7 +96,7 @@ const FindLoginPw = (e) => {
 
                                         {/* <tr>
                                             <th>
-                                                <label for="cellphone"><span>&#42;</span>휴대폰 번호</label>
+                                                <label htmlFor="cellphone"><span>&#42;</span>휴대폰 번호</label>
                                             </th>
                                             <td>
                                                 <div>
@@ -142,7 +136,7 @@ const FindLoginPw = (e) => {
 
                                         <tr>
                                             <th>
-                                                <label for="email1"><span>&#42;</span>이메일</label>
+                                                <label htmlFor="email1"><span>&#42;</span>이메일</label>
                                             </th>
                                             <td>
                                                 <input type="text"
@@ -156,6 +150,8 @@ const FindLoginPw = (e) => {
                                                     name="email2"
                                                     id="email2"
                                                     placeholder="도메인 입력"
+                                                    value={email2}
+                                                    onChange={(e) => setEmail2(e.target.value)}
                                                 />
                                             </td>
                                         </tr>
@@ -173,7 +169,7 @@ const FindLoginPw = (e) => {
                                             </li>
                                         </ul>
                                     </div>
-                                    {/* {error && <div className="error-message">{error}</div>} Display error message */}
+                                    {error && <div className="error-message">{error}</div>}
                                     <div className="input_warn">* 는 필수 입력사항입니다.</div>
 
                                     <div className="FindLoginId_btn">

@@ -17,10 +17,13 @@ public class OjoaConfig implements WebMvcConfigurer {
 
 	@Value("${spring.mail.host}")
     private String host;
+	
     @Value("${spring.mail.port}")
     private int port;
+    
     @Value("${spring.mail.username}")
-    private String id;
+    private String email1;
+    
     @Value("${spring.mail.password}")
     private String password;
 
@@ -29,7 +32,7 @@ public class OjoaConfig implements WebMvcConfigurer {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         javaMailSender.setHost(host);
-        javaMailSender.setUsername(id);
+        javaMailSender.setUsername(email1);
         javaMailSender.setPassword(password);
         javaMailSender.setPort(port);
 
@@ -48,7 +51,6 @@ public class OjoaConfig implements WebMvcConfigurer {
         return properties;
     }
 	
-    
     
 	
     @Bean

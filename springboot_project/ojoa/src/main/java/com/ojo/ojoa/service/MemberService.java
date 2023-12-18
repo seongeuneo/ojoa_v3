@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 
 import com.ojo.ojoa.entity.Member;
 
@@ -33,6 +32,6 @@ public interface MemberService {
 	// ** 아이디 찾기( 폰넘버와 이름으로 아이디 찾기...)
 	String findIdByNameAndPhone(String name, String phone2, String phone3);
 	
-	Member checkUser(String id, String name, String email1);
+	Member checkUser(String id, String name, String email1, String email2);
 	
 }

@@ -1,6 +1,6 @@
 package com.ojo.ojoa.service;
 
 public interface EmailService {
-	public void sendEmail(String id, String name, String email1, String rendomPW);
+	public void sendEmail(String id, String name, String email1, String email2, String rendomPW);
 
 }
