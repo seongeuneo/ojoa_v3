@@ -31,7 +31,7 @@ import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
 import Wish from "./pages/MyPage/MyShop/Wish";
 import LoginHandeler from "./pages/Member/LoginHandeler";
-import RecentList from './components/RecentList';
+//import RecentList from './components/RecentList';
 
 import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
@@ -114,7 +114,7 @@ function App() {
         </Routes>
         <Footer />
         <TopButton />
-        <RecentList />
+        {/* <RecentList /> */}
       </BrowserRouter>
     </div>
   );

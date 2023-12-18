@@ -1,4 +1,4 @@
-.RecentList {
+/* .RecentList {
     position: fixed;
     width: 120px;
     height: 250px;
@@ -33,36 +33,4 @@
 }
 
 
-
-
-
-/* .MiniItems .img_top {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 5px;
-    background-color: #000;
-    color: white;
-    font-weight: bold;
-    width: 130px;
-    font-size: 13px;
-    text-align: center;
-}
-
-
-.MiniItems .colsection .colsec_name {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 5px;
-}
-
-
-.MiniItems .colsection .colsec_price {
-    font-size: 17px;
-    font-weight: bold;
-    right: 0;
-    width: 120px;
-}
  */
-
