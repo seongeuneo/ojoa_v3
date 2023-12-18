@@ -23,8 +23,8 @@ const Post = (props) => {
 
         props.setcompany({
             ...props.company,
-            address1:fullAddress,
-            postNumber:data.zonecode,
+            shipping_address:fullAddress,
+            shipping_zipcode:data.zonecode,
         });
         props.closeModal(false);
     }
