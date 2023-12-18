@@ -810,6 +810,7 @@ function Checkout({ cart }) {
       shipping_address: orderInfo.shipping_address,
       shipping_addressdetail: orderInfo.shipping_addressdetail,
       shipping_phone: orderInfo.shipping_phone,
+      shipping_message: orderInfo.shipping_message,
       displayedCartList: displayedCartList ? [...displayedCartList] : []
     };
 
@@ -900,6 +901,7 @@ function Checkout({ cart }) {
             shipping_addressdetail: data.addressdetail,
             shipping_email: data.email1 + data.email2,
             shipping_phone: data.phone1 + "-" + data.phone2 + "-" + data.phone3
+
           }));
         } else {
           setIsMember(false);
@@ -911,16 +913,17 @@ function Checkout({ cart }) {
   };
 
   const getEmpty = () => {
-    setOrderInfo(prevOrderInfo => ({
-      ...prevOrderInfo,
+    setOrderInfo({
+      ...orderInfo,
       shipping_name: '',
       shipping_zipcode: '',
       shipping_address: '',
       shipping_addressdetail: '',
-      shipping_email: '',
       shipping_phone: '',
-    }));
+      shipping_message: '',
+    });
   };
+
 
   const [popup, setPopup] = useState(false);
 
@@ -967,9 +970,6 @@ function Checkout({ cart }) {
   // };
 
   //========================================================================
-
-
-
 
 
 
@@ -1094,11 +1094,31 @@ function Checkout({ cart }) {
             <tr>
               <th>배송지 선택</th>
               <td>
-                <div class="address">
-                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
-                  <label for="sameaddr0">회원 정보와 동일</label>
-                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
-                  <label for="sameaddr1">새로운 배송지</label>
+                <div className="address">
+                  <input
+                    id="sameaddr0"
+                    name="sameaddr"
+                    fw-filter=""
+                    fw-label="1"
+                    fw-msg=""
+                    value="M"
+                    type="radio"
+                    autocomplete="off"
+                    onChange={getUserInfo}
+                  />
+                  <label htmlFor="sameaddr0">회원 정보와 동일</label>
+                  <input
+                    id="sameaddr1"
+                    name="sameaddr"
+                    fw-filter=""
+                    fw-label="1"
+                    fw-msg=""
+                    value="F"
+                    type="radio"
+                    autocomplete="off"
+                    onChange={getEmpty} // 이 부분에서 getEmpty 함수 호출
+                  />
+                  <label htmlFor="sameaddr1">새로운 배송지</label>
                   <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
                   <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
                     주소록 보기
@@ -1111,19 +1131,19 @@ function Checkout({ cart }) {
             <tr>
               <th>받으시는 분 *</th>
               <td>
-                <input type="text" name="buyer" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_name} />
+                <input type="text" name="shipping_name" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_name} />
               </td>
             </tr>
             <tr>
               <th>주소 *</th>
               <td>
-                <input type="text" name="postNumber" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_zipcode} />
+                <input type="text" name="shipping_zipcode" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_zipcode} />
                 <button type="button" className="btn-control" onClick={handleComplete}>우편번호</button>
                 <br />
-                <input type="text" name="address1" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_address} readOnly />
+                <input type="text" name="shipping_address" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_address} readOnly />
                 <p className="help_text">{`기본주소`}</p>
                 <br />
-                <input type="text" name="address2" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_addressdetail} />
+                <input type="text" name="shipping_addressdetail" className="input_control_help" onChange={handleOrderInfo} value={orderInfo.shipping_addressdetail} />
                 <p className="help_text">{`나머지주소(선택입력가능)`}</p>
                 {popup && <Post closeModal={setPopup} company={orderInfo} setcompany={setOrderInfo}></Post>}
               </td>
@@ -1131,13 +1151,13 @@ function Checkout({ cart }) {
             <tr>
               <th>휴대전화 *</th>
               <td>
-                <input name="phone3" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_phone} />
+                <input name="shipping_phone" type="text" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_phone} />
               </td>
             </tr>
             <tr>
               <th>배송메시지</th>
               <td>
-                <textarea name="message" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }} onChange={handleOrderInfo} value={orderInfo.shipping_message}></textarea>
+                <textarea name="shipping_message" id="" cols="30" rows="10" className="input_control" style={{ width: 800 }} onChange={handleOrderInfo} value={orderInfo.shipping_message}></textarea>
               </td>
             </tr>
           </table>

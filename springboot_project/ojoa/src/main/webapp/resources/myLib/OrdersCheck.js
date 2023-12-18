@@ -1,18 +1,32 @@
+// 주문관리 페이지 비동기 이동
+function ordersChange() {
+   let url="orders/ordersList";
+   
+   axios.get(url
+   ).then(response => {
+    //  alert("response 성공");
+      document.getElementById('contentArea').innerHTML=response.data;
+   }).catch(err => {
+      alert("response 실패 => 바보" + err.message);
+   });
+   document.getElementById("contentArea").innerHTML="";
+
+}
+
+//==============================================================================
+
+
 // 주문 삭제
 function ordersDelete(orders_num) {
    let url="/orders/odelete/" + orders_num;
    axios.delete(url).then(response => {
       alert("삭제 성공 => " + response.data);
       // 페이지 새로고침을 통해 업데이트된 장바구니 목록을 불러올 수 있습니다.
-      window.location.reload();
+       ordersChange() 
    }).catch(err => {
       alert("삭제 실패 => " + err.message);
    });
 };
-
-
-
-
 // ====================================================================================================================
 // orders 페이지네이션
 function ordersManagementPage(pageNumber) {
