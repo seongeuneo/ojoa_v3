@@ -74,7 +74,7 @@
 					<td>${s.prod_num}</td>
 				
 					<td>
-					<img alt="MyImage" src="/springboot_project/ojoa/src/main/ojoa_project/public/thumbs/${s.prod_mainimage}" width="80"
+					<img alt="MyImage" src="/resources/uploadImages/${s.prod_mainimage}" width="80"
 						height="70">
 						</td>
 					<td>${s.prod_name}</td>

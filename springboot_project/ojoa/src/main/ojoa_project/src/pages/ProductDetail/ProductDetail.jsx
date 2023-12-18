@@ -15,8 +15,29 @@ function ProductDetail({ setCart}) {
     const location = useLocation();
     const { prod_num } = useParams();
     const productData = location.state ? location.state.productData : null;
+    const recentItems = location.state ? location.state.recentItems : null;
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
+
+    useEffect(() => {
+     const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+     const loginID = loggedInUser.id;
     
+    axios
+    .get(`/api/recent/recentList?loginID=${loginID}`)
+    .then((response) => {
+        alert(`전송성공 : `, response.data);
+    }).catch((error) => {
+        alert(`최근 본 상품 실패`, error.message);
+    })
+}, []);
+        
+    
+    // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
+        useEffect(() => {
+            const storedSessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
+            setIsLoggedIn(!!storedSessionInfo); // 세션 정보가 있으면 true, 없으면 false로 설정
+        }, []);
     //======================================
     // 수량 변경한 만큼 가격에 계산
     const [count, setCount] = useState(1);
@@ -54,8 +75,20 @@ function ProductDetail({ setCart}) {
             });
     }
 
-    const AddOrder = () => {
 
+    // 모달 열기 함수
+    const checkLogin = () => {
+
+        if (isLoggedIn === true) {
+            CartOpenModal();
+        } else {
+            alert('로그인이 필요합니다.');
+        }
+    };
+
+
+    const AddOrder = () => {
+        if (isLoggedIn === true) {
         navigate('/checkout', {
             state: {
                 selectedCartItems: [{
@@ -67,6 +100,9 @@ function ProductDetail({ setCart}) {
                 }]
             }
         });
+    } else {
+        alert('로그인이 필요합니다.');
+    }
     };
 
     //====================================== 여기까지 ========================================
@@ -241,7 +277,7 @@ function ProductDetail({ setCart}) {
                 </div>
 
                 <div className="pd_btns">
-                    <a onClick={CartOpenModal} className="pd_btn1">장바구니</a>
+                    <a onClick={()=> {checkLogin();  }} className="pd_btn1">장바구니</a>
                     <Modal className="ModalContent"  isOpen={modalIsOpen} onRequestClose={closeModal}>
                         <AddCart closeModal={closeModal} AddToCart={AddToCart} />
                     </Modal>
@@ -257,7 +293,7 @@ function ProductDetail({ setCart}) {
                         state={{ productData: productData }} activeClassName="active" >
                         <strong>상품구매후기</strong></Link></a>
                     <a><Link to={`/productDetail/${productData.prod_num}/ProdQna03`}
-                        state={{ productData: productData }} activeClassName="active" >
+                        state={{ productDat처a: productData }} activeClassName="active" >
                         <strong>상품 Q&amp;A</strong></Link></a>
                     <a><Link to={`/productDetail/${productData.prod_num}/PurGuide04`}
                         state={{ productData: productData }} activeClassName="active" >

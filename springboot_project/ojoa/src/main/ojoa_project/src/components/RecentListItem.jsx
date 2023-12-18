@@ -1,21 +1,18 @@
-// import './RecentList.css';
-// import React from 'react';
-// import { Link } from "react-router-dom";
+import './RecentList.css';
+import React from 'react';
+import { Link } from "react-router-dom";
 
-// const RecentListItem = ({ content }) => {
-//     const recentItemsToShow = content.slice(0, 2); // 두 개의 항목만 보여줄 수 있도록 제한
+const RecentListItem = ({id, mainimage}) => {
 
-//     return (
-//         <div className="RecentListItem">
-//             {recentItemsToShow.map((item) => (
-//                 <div key={item.prod_num} className="RecentItem">
-//                     <Link to={`/ProductDetail/${item.prod_num}/DetailInfo01`} state={{ productData: item.prod_num }}>
-//                         <img src={`${process.env.PUBLIC_URL}/thumbs/${encodeURIComponent(item.prod_mainimage)}`} alt={`Product ${item.prod_num}`} />
-//                     </Link>
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// };
+    return (
+        <div className="RecentListItem">
+                <div key={id} className="RecentItem">
+                    <Link to={`/ProductDetail/${id}/DetailInfo01`} state={{ productData: id}}>
+                        <img src={`${process.env.PUBLIC_URL}/thumbs/${(mainimage)}`} alt={`Product ${id}`} />
+                    </Link>
+                </div>
+        </div>
+    );
+};
 
-// export default RecentListItem;
+export default RecentListItem;

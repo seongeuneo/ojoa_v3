@@ -24,13 +24,17 @@ import com.ojo.ojoa.domain.Prod_imageDTO;
 import com.ojo.ojoa.domain.WishDTO;
 import com.ojo.ojoa.entity.Cart;
 import com.ojo.ojoa.entity.CartId;
+import com.ojo.ojoa.entity.Product;
 import com.ojo.ojoa.entity.Qna;
+import com.ojo.ojoa.entity.Recent;
 import com.ojo.ojoa.entity.Wish;
 import com.ojo.ojoa.repository.WishRepository;
 import com.ojo.ojoa.service.CartService;
 import com.ojo.ojoa.service.OrdersService;
 import com.ojo.ojoa.service.Prod_imageService;
+import com.ojo.ojoa.service.ProductService;
 import com.ojo.ojoa.service.QnaService;
+import com.ojo.ojoa.service.RecentService;
 import com.ojo.ojoa.service.WishService;
 
 import lombok.AllArgsConstructor;
@@ -48,7 +52,10 @@ public class RestReactController {
 	Prod_imageService prod_imageService;
 	private final WishRepository wishRepository;
 	OrdersService ordersService;
-
+	RecentService recentService;
+	ProductService productService;
+	
+	
 //======================= 관심상품 새로운 코드 추가(성은) ==============================	
 	// 관심상품
 	@PostMapping("wish/allWishList")
@@ -146,7 +153,73 @@ public class RestReactController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
 	}
+	
+	
+//============================================================================================================	
+	// 최근 본 상품
+//	@GetMapping("recent/recentList")
+//	public ResponseEntity<?> getrecentList(@RequestParam String loginID) {
+//		List<Recent> recentList = recentService.recentList(loginID);
+//		return ResponseEntity.ok(recentList);
+//	}
+	
+	@GetMapping("recent/saveRecent")
+	public ResponseEntity<?> saveRecent(@RequestBody Recent entity, HttpSession session) {
+		try {
+			String id = (String) session.getAttribute("loginID");
+			if (id != null && !id.isEmpty()) {
+				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
+				entity.setId(id);
+				return ResponseEntity.ok("데이터 저장 성공");
+			} else {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
+			}
+		} catch (Exception e) {
+			log.error("데이터 저장 중 에러: {}", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
+		}
+	}
+//=============================================================================================
+	@GetMapping("recent/recentList")
+	   public ResponseEntity<?> recentList(@RequestParam(name = "id") String id, 
+			   							   @RequestParam(name = "prod_num") int prod_num, Product product, Recent rencent ) {
+		
+	      try {
+	         if (id != null && !id.isEmpty()) {
+	             
+	        	 product = productService.selectOne(prod_num);
+	            if (recentService.Duplicated(id, prod_num) == 0) {
 
+	               List<Recent> TotalrecentList = recentService.recentList(id);
+
+	               if (TotalrecentList.size() >= 2) {
+	                  //recentService.delete(id);
+	               }
+
+	               rencent.setId(id);
+	               rencent.setProd_num(prod_num);
+	               rencent.setRecent_image(product.getProd_mainimage());
+
+	               recentService.save(rencent);
+
+	               log.info("새 최근본 상품 세이브!");
+
+	            } else if (recentService.Duplicated(id, prod_num) == 1) {
+
+	               return ResponseEntity.ok("중복 제품!!");
+	            } // else if
+	         } else {
+	            return ResponseEntity.ok("로그인 후 이용 가능");
+	         }
+	         
+	      } catch (Exception e) {
+	         log.error("최근방문상품 저장 실패요 : " + e.toString());
+	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("최근방문 상품데이터 저장 실패");
+	      }
+	      return ResponseEntity.ok("예외없음");
+	   }
+
+	   // 
 //============================================================================================
 // 장바구니 상품 수량 변경
 
