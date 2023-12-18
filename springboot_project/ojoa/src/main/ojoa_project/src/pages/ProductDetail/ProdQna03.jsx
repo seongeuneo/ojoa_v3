@@ -123,43 +123,29 @@ function ProdQna03() {
         return (
             <React.Fragment key={i}>
                 {
-                    (item.num == "공지") ? (
-                        <tr key={item.review_seq}>
-                            <td>{item.num}</td>
-                            {/* <td>{item.prod_num}</td> */}
-                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
 
-                            <td>{item.notification}</td>
-                            {/* <td>{item.category}</td> */}
-                            <td>
-                                <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
-                            </td>
-                            <td>{item.writer}</td>
-                            <td>{item.date}</td>
-                        </tr>
-                    ) : (
-                        <tr>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
-                            {/* <td>{item.prod_num}</td> */}
-                            <td>
-                                <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
-                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
-                            </td>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
-                            {/* <td>{item.category}</td> */}
-                            {/* <td> <a onClick={() => handleTitleClick(i)}>{lastName(item.writer)}&#42;&#42;</a></td> */}
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
-                        </tr>
-                    )
+                    <tr>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
+                        {/* <td>{item.prod_num}</td> */}
+                        <td>
+                            <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
+                            {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
+                        </td>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
+                        {/* <td>{item.category}</td> */}
+                        {/* <td> <a onClick={() => handleTitleClick(i)}>{lastName(item.writer)}&#42;&#42;</a></td> */}
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
+                    </tr>
+
                 }
                 {expandedId === i && (
                     <tr>
                         <td colSpan="7">
-                            {item.qna_reply == null ? (
+                            {item.titleIcon === null ? (
                                 <p>답변이 아직 되지 않았습니다.</p>
                             ) : (
-                                <p>{item.qna_reply}</p>
+                                <p>답변 내용 : {item.titleIcon}</p>
                             )}
                         </td>
                     </tr>
@@ -189,42 +175,27 @@ function ProdQna03() {
         return (
             <React.Fragment key={i}>
                 {
-                    (item.num == "공지") ? (
-                        <tr key={item.review_seq}>
-                            <td>{item.num}</td>
-                            {/* <td>{item.prod_num}</td> */}
-                            {/* <td>{item.itemInfo}</td> */} {/* 문의제목 */}
 
-                            <td>{item.notification}</td>
-                            {/* <td>{item.category}</td> */}
-                            <td>
-                                <a className='title_button' onClick={() => handleTitleClick(i)}>{item.title}</a>
-                            </td>
-                            <td>{item.writer}</td>
-                            <td>{item.date}</td>
-                        </tr>
-                    ) : (
-                        <tr>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
-                            {/* <td>{item.prod_num}</td> */}
-                            <td>
-                                <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
-                                {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
-                            </td>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
-                            {/* <td>{item.category}</td> */}
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
-                            <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
-                        </tr>
-                    )
+                    <tr>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.num}</a></td>
+                        {/* <td>{item.prod_num}</td> */}
+                        <td>
+                            <div> <a onClick={() => handleTitleClick(i)}><img class="prQnaIMG" src={`/thumbs/${item.imgNo}`} alt='상품' /></a></div>
+                            {/* <div>{item.itemInfo}</div> */} {/* 문의제목 */}
+                        </td>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.notification}</a></td> {/* 문의내용 */}
+                        {/* <td>{item.category}</td> */}
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.writer}&#42;&#42;</a></td>
+                        <td> <a onClick={() => handleTitleClick(i)}>{item.date}</a></td>
+                    </tr>
                 }
                 {expandedId === i && (
                     <tr>
                         <td colSpan="7">
-                            {item.qna_reply == null ? (
+                            {item.titleIcon === null ? (
                                 <p>답변이 아직 되지 않았습니다.</p>
                             ) : (
-                                <p>{item.qna_reply}</p>
+                                <p>답변내용 : {item.titleIcon}</p>
                             )}
                         </td>
                     </tr>

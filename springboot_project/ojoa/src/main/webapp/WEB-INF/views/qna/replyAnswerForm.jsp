@@ -6,15 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>** SpringBoot Reply_Insert **</title>
-<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/Wish.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/wish.js"></script>
 </head>
 <body>
-<h2>** QnA Reply Answer Form **</h2>
+<h2>QnA Reply Answer Form</h2>
 
-	<h3>문의 내용</h3>
+	<h3 style="text-align: center;">문의 내용</h3>
 
 	<table border="1">
 		<c:if test="${not empty requestScope.qna}">
@@ -52,7 +52,7 @@
 	</table>
 <hr>
 <hr>
-	<h3>답변 내용</h3>
+	<h3 style="text-align: center;">답변 내용</h3>
 	<form action="replyAnswerForm" method="Post" enctype="multipart/form-data" id="replyAnswerForm">
 		<table border="1">
 				<c:if test="${sessionScope.loginID=='admin'}">
@@ -79,12 +79,8 @@
 		</table>
 	</form>
 
-	<hr>
-<c:if test="${not empty requestScope.message}">
-=> ${requestScope.message}
-</c:if>
-<hr>
-&nbsp;<a href="javascript:history.go(-1)">이전으로</a>&nbsp;
-&nbsp;<a href="/home">Home</a>&nbsp;
+<div class="home-link">
+		<a href="/home">Home</a>
+	</div>
 </body>
 </html>

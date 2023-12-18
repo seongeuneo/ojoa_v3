@@ -219,9 +219,9 @@ public class RestReactController {
 			// QNA 에서 작성자만, 관리자만 클릭 시 조회되게
 			qnaList = qnaList.stream().map(item -> {
 				// 작성자 본인
-				if (item.getId().equals(id)) {
-					item.setReadable(true);
-				}
+//				if (item.getId().equals(id)) {
+//					item.setReadable(true);
+//				}
 				// 관리자
 				if (id.equals("admin")) {
 					item.setReadable(true);
@@ -235,6 +235,7 @@ public class RestReactController {
 			return ResponseEntity.ok(qnaList);
 			// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
 		} catch (Exception e) {
+//			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
 	}
