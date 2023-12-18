@@ -65,13 +65,14 @@ function QModal({ closeModal, pagedQnaList, productData }) {
                 prod_num: productData.prod_num, // 상품 번호
                 id: productData.id, // 사용자 아이디 또는 다른 필요한 정보
                 qna_category: '상품 문의', // 문의 카테고리
-                qna_title: '질문 제목', // 질문 제목
+                qna_title: productData.prod_name + ' 상품 문의', // 질문 제목
                 qna_content: localQuestText, // 사용자가 입력한 질문 내용
                 qna_reply: '', // 빈 값으로 시작
                 qna_redate: '', // 빈 값으로 시작
                 qna_indate: '' // 빈 값으로 시작
                 // 필요한 다른 데이터를 여기에 추가하세요
             };
+
 
             const response = await axios.post('/api/qna/saveQna/', requestData, {
                 headers: {
@@ -116,7 +117,7 @@ function QModal({ closeModal, pagedQnaList, productData }) {
                                     <div id="" className="option">
                                         <span className="size_wrap">
                                             <span className="key">상품코드</span><span className="separ"> : </span>
-                                            <span className="value">{productData.prod_num}</span>
+                                            <span className="value" value={productData.prod_num}>{productData.prod_num}</span>
                                         </span>
                                         <span className="unit"></span>
                                     </div>
