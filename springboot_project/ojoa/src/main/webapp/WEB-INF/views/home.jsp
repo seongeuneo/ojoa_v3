@@ -30,9 +30,9 @@
 			<div>
 				<!-- 상단 로고 -->
 				<div class="centered-logo">
-					<a href="/home" class="logo-link"><img class="logo"
-						src="/resources/uploadImages/ojoa_logo_b.png" alt="logo" />
-					<p>관리자용 페이지</p></a>
+					<a href="http://localhost:3000/" class="logo-link"><img class="logo"
+						src="/resources/uploadImages/ojoa_logo_b.png" alt="logo" /></a>
+					&nbsp;&nbsp;<a href="/home" style="text-decoration: none; font-size: 25px; font-weight: bold; color: inherit;" >관리자용 페이지</a>
 				</div>
 				<!-- 상단 네비 -->
 				<div class="navBar">
@@ -60,7 +60,7 @@
 						<!-- <li><a href="wish/wishlist">관심상품관리 </a>&nbsp;<span>|</span></li> -->
 					<!-- 	<li onclick="wishChange()" style="cursor: pointer;"><a>관심상품관리 </a>&nbsp;<span>|</span></li> -->
 						<li onclick="reviewChange()" style="cursor: pointer;"><a>상품후기관리 </a>&nbsp;<span>|</span></li>
-						<li onclick="qnaChange()" style="cursor: pointer;">게시판QnA관리 </a>&nbsp;<span>|</span></li>
+						<li onclick="qnaChange()" style="cursor: pointer;"><a>게시판QnA관리 </a>&nbsp;<span>|</span></li>
 						<!-- <li	onclick="qnaInsertChange()" style="cursor: pointer;">게시판 글쓰기</a>&nbsp;<span>|</span></li> -->
 						<li onclick="cartChange()" style="cursor: pointer;"><a>장바구니관리 </a></li>
 						<!-- <li><a href="orders/ordersDetail">주문상세 페이지 </a></li> -->
