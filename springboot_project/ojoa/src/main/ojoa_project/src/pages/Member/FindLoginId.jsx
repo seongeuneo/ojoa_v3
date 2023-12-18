@@ -69,12 +69,12 @@ const FindLoginId = () => {
                 <span>현재 위치</span>
                 <ol>
                     <li><Link to="/">홈</Link></li>
-                    <li title="현재 위치"> &gt; ID 찾기</li>
+                    <li title="현재 위치"> &gt; &nbsp;&nbsp;ID 찾기</li>
                 </ol>
             </div>
             <div className="title">
                 <h2>ID 찾기</h2>
-                <div className="txt_01">가입 당시 [ 이름 / 휴대폰 번호 ] 을 입력하세요</div>
+                <div className="txt_01">가입하신 [ 이름 / 휴대폰 번호 ] 을 입력하세요</div>
             </div>
             <main className="FindLoginId_page">
                 <div className="FindLoginId_container">
