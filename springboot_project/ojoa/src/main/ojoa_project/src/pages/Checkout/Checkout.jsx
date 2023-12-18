@@ -660,10 +660,7 @@ function Checkout({ cart }) {
   }
 
   // 배송비
-  // TODO: 배송비 데이터를 가져오지 않음.
-  // i)  배송비를 3000원으로 고정한다면 ➡ const deliveryPrice = 3000;
-  // ii) 기본 배송비와 결제금액 조건 배송비 무료 기준 추가 시, 코드 관리 테이블 추가
-  const deliveryPrice = 3000;
+  const deliveryPrice = 0;
 
   // 할인금액
   const discountPrice = 0;
@@ -1238,8 +1235,9 @@ function Checkout({ cart }) {
               <p>최종결제 금액</p>
               <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              {/* <button type='button' className='payment_btn' onClick={()=> {inOrders(); handlePaymentSuccess();} }>결제하기</button> */}
+
               <button type='button' className='payment_btn' onClick={() => requestPay()}>결제하기</button>
+              {/* <button type='button' className='payment_btn' onClick={() => { inOrders(); handlePaymentSuccess(); }}>결제하기</button> */}
             </div>
           </div>
         </section>

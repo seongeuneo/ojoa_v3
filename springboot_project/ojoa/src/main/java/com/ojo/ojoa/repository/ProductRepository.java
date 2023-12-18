@@ -34,4 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("SELECT new com.ojo.ojoa.domain.ProdIMGDTO(i.prod_image1, i.prod_image2, i.prod_image3, i.prod_image4, i.prod_imagedetail, p.prod_mainimage, p.prod_name, p.prod_content) "
 			+ "FROM Prod_image i LEFT JOIN Product p ON i.prod_num=p.prod_num order by i.prod_num")
 	List<ProdIMGDTO> findProdIMG();
+	
+	 @Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Product p WHERE p.prod_name = :prod_name")
+	boolean existsByProductName(String prod_name);
 }

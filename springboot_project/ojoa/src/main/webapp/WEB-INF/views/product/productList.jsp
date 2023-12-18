@@ -86,6 +86,7 @@
 					<td>${s.prod_regdate}</td>
 					<td>${s.prod_stock}</td>
 					<td>${s.prod_grade}</td>
+					<%-- <td><img th:src="${prodIMGList.prod_image1}" alt="Product Image 1"></td> --%>
 
 					<td align="center"><button onclick="productDelete(${s.prod_num})">상품삭제</button></td>
 					<%-- <td align="center"><button onclick="addWish(${s.prod_num})">관심목록
