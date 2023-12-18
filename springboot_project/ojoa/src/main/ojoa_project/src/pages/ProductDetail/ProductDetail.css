@@ -239,7 +239,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: black;
   color: white;
   border: 1px solid #c6c6c6;
-  
+
   transition-duration: 1s;
 }
 
@@ -249,7 +249,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 2px solid;
   font-weight: bold;
   cursor: pointer;
-  
+
 }
 
 .ProductDetail .pd_length button:hover,
@@ -455,4 +455,14 @@ input[type="number"]::-webkit-inner-spin-button {
 .prQnaIMG {
   width: 55px;
   height: 55px;
+}
+
+.OrderReview02 .rv_img1 img {
+  width: 20px;
+  height: 20px;
+}
+
+.OrderReview02 .rv_img2 img {
+  width: 20px;
+  height: 20px;
 }

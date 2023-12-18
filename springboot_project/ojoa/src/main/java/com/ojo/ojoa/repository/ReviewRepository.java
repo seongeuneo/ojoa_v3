@@ -19,7 +19,7 @@ import com.ojo.ojoa.entity.Review;
 @Repository
 public interface ReviewRepository 
 					extends JpaRepository<Review, Integer> {
- List<Review> findAll();
+
 	
 	@Query("SELECT new com.ojo.ojoa.domain.ReviewDTO(A.review_seq, A.id, A.prod_num, A.review_title,  "
 			+ "  A.review_content, A.review_image1, A.review_image2,"

@@ -51,10 +51,18 @@ function OrderReview02() {
             });
     }, []);
 
+
     // 해당하는 상품의 리뷰 필터링
     const matchingReviews = data.filter((review) => review.prod_num === productData.prod_num);
     // 리뷰리스트 리스트 맵핑
     const singleReviewLi = matchingReviews.map((content) => {
+        const imageSource = content.review_image1 ? `/thumbs/${content.review_image1}` : null;
+
+        const html1 = <td class="rv_img1">{content.review_image1 ? <img src={`${imageSource}`} /> : ''}</td>;
+
+        const imageSource2 = content.review_image2 ? `/thumbs/${content.review_image2}` : null;
+
+        const html2 = <td class="rv_img2">{content.review_image2 ? <img src={`${imageSource2}`} /> : ''}</td>;
         return (
             <tr key={content.review_seq}>
                 {/* <th><a>{content.review_seq}</a></th> */}
@@ -63,8 +71,8 @@ function OrderReview02() {
                 {/* <td>{productData.prod_num}</td> */}
                 <td>{content.review_title}</td>
                 <td>{content.review_content}</td>
-                <td><img src={`/public/thumbs/${content.review_image1}`} alt='후기이미지1' /></td>
-                <td><img src={`/public/thumbs/${content.review_image2}`} alt='후기이미지2' /></td>
+                {html1}
+                {html2}
                 <td>{content.review_date}</td>
                 <td>{content.review_rate}</td>
                 {/* <td>{content.review_view}</td> */}
@@ -84,11 +92,19 @@ function OrderReview02() {
         }
     };
 
+
     // 해당 사용자가 작성한 리뷰 필터링
     const userReviews = matchingReviews.filter((review) => review.id === (sessionInfo && sessionInfo.id)); // loggedInUserId에 현재 로그인한 사용자의 아이디가 있어야 합니다.
 
     // 리뷰 리스트 맵핑
     const userReviewLi = userReviews.map((content) => {
+        const imageSource3 = content.review_image1 ? `/thumbs/${content.review_image1}` : null;
+
+        const html3 = <td class="rv_img1">{content.review_image1 ? <img src={`${imageSource3}`} /> : ''}</td>;
+
+        const imageSource4 = content.review_image2 ? `${content.review_image2}` : null;
+
+        const html4 = <td class="rv_img2">{content.review_image2 ? <img src={`${imageSource4}`} /> : ''}</td>;
         return (
             <tr key={content.review_seq}>
                 {/* <th><a>{content.review_seq}</a></th> */}
@@ -97,8 +113,8 @@ function OrderReview02() {
                 {/* <td>{productData.prod_num}</td> */}
                 <td>{content.review_title}</td>
                 <td>{content.review_content}</td>
-                <td><img src={`${content.review_image1}`} alt='후기이미지1' /></td>
-                <td><img src={`/public/thumbs/${content.review_image2}`} alt='후기이미지2' /></td>
+                {html3}
+                {html4}
                 <td>{content.review_date}</td>
                 <td>{content.review_rate}</td>
                 {/* <td>{content.review_view}</td> */}
