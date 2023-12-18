@@ -1,3 +1,17 @@
+// 장바구니 페이지 비동기 이동
+function cartChange() {
+   let url="cart/cartList";
+   
+   axios.get(url
+   ).then(response => {
+    //  alert("response 성공");
+      document.getElementById('contentArea').innerHTML=response.data;
+   }).catch(err => {
+      alert("response 실패 => 바보" + err.message);
+   });
+   document.getElementById("contentArea").innerHTML="";
+
+}
 
 // 장바구니 추가 함수
 //function addCart(prod_num, quantity) {
@@ -10,6 +24,7 @@ function addCart(prod_num, quantity) {
 			// 요청이 성공한 경우
 			console.log(response.data); // 추가 정보나 로그 등을 출력하거나 다른 작업 수행
 			alert('상품이 장바구니에 추가되었습니다.');
+			
 			// 추가적인 작업이 필요한 경우 페이지 새로고침 또는 다른 동작을 수행할 수 있습니다.
 			// window.location.reload(); // 예시로 페이지를 새로고침하는 코드
 		})
@@ -56,7 +71,7 @@ function cartDelete(id, prod_num) {
    axios.delete(url).then(response => {
       alert("삭제 성공 => " + response.data);
       // 페이지 새로고침을 통해 업데이트된 장바구니 목록을 불러올 수 있습니다.
-      window.location.reload();
+      cartChange();
    }).catch(err => {
       alert("삭제 실패 => " + err.message);
    });

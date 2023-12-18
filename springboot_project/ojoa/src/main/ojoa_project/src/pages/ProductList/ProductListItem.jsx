@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom"
 import "./ProductListItem.css";
 
-const ProductListItem = ({ content, onSelect, handleCart }) => {
+const ProductListItem = ({ content, onSelect, addToRecent}) => {
     const sessionInfo = JSON.parse(sessionStorage.getItem('loggedInUser')); // 세션에서 로그인 정보 가져오기
 
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
@@ -118,6 +118,13 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
 
     //====================================== 여기까지 ========================================
 
+// 상품 클릭 시 최근 본 상품 목록에 추가
+const handleItemClick = () => {
+    addToRecent(content); // 최근 상품 목록에 상품 정보 추가
+};
+
+
+    //========================================================================================
 
     // 장바구니 아이콘
     const [cartSrc, setCartSrc] = useState("/images/cartEmpty.png"); // 초기 상태는 선택이 되지 않은 상태를 나타내기 위함
@@ -136,7 +143,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
     console.log("content.prod_mainimage => " + content.prod_mainimage);
 
     return (
-        <div className="ProductListItem" onClick={onSelect}>
+        <div className="ProductListItem" onClick={handleItemClick}>
             <section className="pl_section">
                 <ul className="prodItems">
                     <li className="pl_thumb_img">

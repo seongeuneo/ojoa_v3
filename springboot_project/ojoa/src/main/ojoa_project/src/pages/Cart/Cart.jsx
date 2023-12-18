@@ -66,34 +66,39 @@ const Cart = ({ cart, setCart }) => {
             });
     }, [won]);
 
+console.log("cart : " + cart);
 
+    return (
+        <div className="Cart">
+            <div className="path">
+                <span>현재 위치</span>
+                <ol>
+                    <li>
+                        <Link to="/">홈</Link>
+                    </li>
+                    <li title="현재 위치"> &gt; &nbsp; Cart</li>
+                </ol>
+            </div>
+            <div className="title">
+                <h2>CART</h2>
+                <div className="txt_01">장바구니에 담긴 상품</div>
+            </div>
 
-    const cartList = cart.map((item) => (
+            <CartHeader
+                isAllChecked={isAllChecked}
+                handleCheckAll={handleCheckAll}
+            />
+
         <CartList
-            id={item.prod_num}
-            productname={item.prod_name}
-            content={item.prod_content}
-            quantity={item.quantity}
-            mainimage={item.imgNo}
-            discount={item.productPromotion}
-            price={item.productPriceFormatted}
+            cart={cart}
+            setCart={setCart}
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
             updateTotal={updateTotal}
             won={won}
             setWon={setWon}
-            setCart={setCart}
         />
-    ));
 
-
-    return (
-        <div className="Cart">
-            <CartHeader
-                isAllChecked={isAllChecked}
-                handleCheckAll={handleCheckAll}
-            />
-            {cartList}
             <CartTotal
                 cart={cart}
                 selectedItems={selectedItems}
