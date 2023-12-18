@@ -49,7 +49,7 @@ public class RestReactController {
 	private final WishRepository wishRepository;
 	OrdersService ordersService;
 
-//======================= 관심상품 새로운 코드 추가(성은) ==============================	
+//======================= 관심상품 새로운 코드 추가(성은) ==============================   
 	// 관심상품
 	@PostMapping("wish/allWishList")
 	public ResponseEntity<List<WishDTO>> getAllWishList() {
@@ -113,7 +113,7 @@ public class RestReactController {
 		return uri;
 	}
 
-//======================= prod_image 테이블 새로운 코드 추가(성은) ==============================	
+//======================= prod_image 테이블 새로운 코드 추가(성은) ==============================   
 // prod_image 테이블 리스트
 	@GetMapping("prod_image/allProd_imageList")
 	public ResponseEntity<List<Prod_imageDTO>> getAllProd_imageList() {
@@ -121,7 +121,7 @@ public class RestReactController {
 		return ResponseEntity.ok(prod_imageList);
 	}
 
-//============================================================================================================	
+//============================================================================================================   
 	// 장바구니
 	@GetMapping("cart/allCartList")
 	public ResponseEntity<List<CartDTO>> getAllCartList(@RequestParam String loginID) {
@@ -196,7 +196,7 @@ public class RestReactController {
 		}
 	}
 
-//===============================================================================		
+//===============================================================================      
 	// 게시판 QnA
 	// "/qna/allQnaList"의 엔드포인트로의 GET요청에 대해 react에서로부터 넘겨받은 파라미터들을 이용해
 	// qna데이터를 조회하고, 그 결과를 응답으로 반환하는 역할
@@ -219,9 +219,9 @@ public class RestReactController {
 			// QNA 에서 작성자만, 관리자만 클릭 시 조회되게
 			qnaList = qnaList.stream().map(item -> {
 				// 작성자 본인
-//				if (item.getId().equals(id)) {
-//					item.setReadable(true);
-//				}
+//            if (item.getId().equals(id)) {
+//               item.setReadable(true);
+//            }
 				// 관리자
 				if (id.equals("admin")) {
 					item.setReadable(true);
@@ -235,13 +235,12 @@ public class RestReactController {
 			return ResponseEntity.ok(qnaList);
 			// 조회된 데이터를 ResponseEntity.ok 메서드를 사용해서 200 ok 상태코드와 함께 응답으로 반환
 		} catch (Exception e) {
-			System.out.println("allQnaList Exception -> " + e.toString());
-
+//         e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
 		}
 	}
 
-//		 // 게시판 QnA - 게시글 등록
+//       // 게시판 QnA - 게시글 등록
 	@PostMapping("qna/saveQna")
 	public ResponseEntity<String> saveQna(@RequestBody Qna entity) {
 		try {
@@ -256,34 +255,34 @@ public class RestReactController {
 		}
 	}
 
-//	@GetMapping("qna/selectQnaList")
-//	public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
-//		try {
-//			String loginID = (String) session.getAttribute("loginID");
+//   @GetMapping("qna/selectQnaList")
+//   public ResponseEntity<?> selectQnaList(HttpSession session, int qna_seq) {
+//      try {
+//         String loginID = (String) session.getAttribute("loginID");
 //
-//			if (loginID == null) {
-//				loginID = "admin";
-//			}
-//			QnaDTO.QnaItemResDTO qnaItem = qnaService.selectOneById(loginID, qna_seq);
-//			return ResponseEntity.ok(qnaItem);
-//		} catch (Exception e) {
-//			log.error("데이터 조회 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
-//		}
-//	}
+//         if (loginID == null) {
+//            loginID = "admin";
+//         }
+//         QnaDTO.QnaItemResDTO qnaItem = qnaService.selectOneById(loginID, qna_seq);
+//         return ResponseEntity.ok(qnaItem);
+//      } catch (Exception e) {
+//         log.error("데이터 조회 중 에러: {}", e.getMessage());
+//         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 조회 실패");
+//      }
+//   }
 
-//	@PostMapping("qna/updateQna")
-//	public ResponseEntity<String> updateQna(HttpSession session, @RequestBody Qna entity) {
-//		try {
-//			System.out.println("111111" + entity);
-//			qnaService.update(entity); // QnaService를 통해 엔티티를 저장합니다.
-//			System.out.println("22222222" + entity);
-//			return ResponseEntity.ok("데이터 갱신 성공");
-//		} catch (Exception e) {
-//			log.error("데이터 갱신 중 에러: {}", e.getMessage());
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 갱신 실패");
-//		}
-//	}
+//   @PostMapping("qna/updateQna")
+//   public ResponseEntity<String> updateQna(HttpSession session, @RequestBody Qna entity) {
+//      try {
+//         System.out.println("111111" + entity);
+//         qnaService.update(entity); // QnaService를 통해 엔티티를 저장합니다.
+//         System.out.println("22222222" + entity);
+//         return ResponseEntity.ok("데이터 갱신 성공");
+//      } catch (Exception e) {
+//         log.error("데이터 갱신 중 에러: {}", e.getMessage());
+//         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 갱신 실패");
+//      }
+//   }
 
 //===========================================================================    
 

@@ -116,6 +116,7 @@ public class ProductController {
 			updatedProduct.setProd_mainimage(file2);
 			updatedProduct.setProd_mainimage(file4);
 		} // Image 선택 
+
 		
 	    try {
 	            log.info("상품 업데이트 성공: ");
