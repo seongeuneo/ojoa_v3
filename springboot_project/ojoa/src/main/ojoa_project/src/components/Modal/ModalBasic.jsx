@@ -110,9 +110,10 @@ function ModalBasic({ setModalOpen }) {
                                     key={product.prod_num}
                                     className="search-result-item"
                                     onClick={closeModalAndNavigate} // 클릭 시 모달을 닫는 함수 호출
+                                    state={{ productData: product }}
                                 >
                                     <img
-                                        src={`{product.prod_mainimage}`}
+                                        src={`/thumbs/${product.prod_mainimage}`}
                                         alt={product.prod_name}
                                     />
                                     <h3>&nbsp;&nbsp;{product.prod_name}</h3>

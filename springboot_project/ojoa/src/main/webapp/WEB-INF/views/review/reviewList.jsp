@@ -28,7 +28,8 @@
 	</div>
 
 
-	<table class="reviewTable" border="1" style="width: 90%" id="reviewTable">
+	<table class="reviewTable" border="1" style="width: 90%"
+		id="reviewTable">
 		<tr bgcolor="Orange">
 			<th>리뷰 번호</th>
 			<th>리뷰한 고객 ID</th>
@@ -50,10 +51,25 @@
 					<td>${s.prod_num}</td>
 					<td>${s.review_title}</td>
 					<td>${s.review_content}</td>
-					<td><img alt="MyImage" src="/${s.review_image1}" width="80"
-						height="70"></td>
-					<td><img alt="MyImage2" src="/${s.review_image2}" width="80"
-						height="70"></td>
+					<td><c:choose>
+							<c:when test="${not empty s.review_image1}">
+								<img alt="MyImage" src="/resources/uploadImages/${s.review_image1}" width="80"
+									height="70">
+							</c:when>
+							<c:otherwise>
+								이미지 없음.
+							</c:otherwise>
+						</c:choose></td>
+					<td>
+					<c:choose>
+							<c:when test="${not empty s.review_image2}">
+								<img alt="MyImage" src="/resources/uploadImages/${s.review_image2}" width="80"
+									height="70">
+							</c:when>
+							<c:otherwise>
+								이미지 없음.
+							</c:otherwise>
+						</c:choose>
 					<td>${s.review_date}</td>
 					<td>${s.review_view}</td>
 					<td align="center"><a class="textlink"
@@ -70,15 +86,15 @@
 		</c:if>
 	</table>
 	<div class="pagination_wrap">
-       <c:if test="${not empty requestScope.itemPage}">
-           <c:forEach var="pageNumber" begin="0" end="${requestScope.totalPages - 1}">
-           <span onclick="reviewManagementPage(${pageNumber})"
-                   class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
-                 ${pageNumber + 1}
-           </span>
-           </c:forEach>
-       </c:if>
-   </div>
+		<c:if test="${not empty requestScope.itemPage}">
+			<c:forEach var="pageNumber" begin="0"
+				end="${requestScope.totalPages - 1}">
+				<span onclick="reviewManagementPage(${pageNumber})"
+					class="${pageNumber == requestScope.itemPage.number ? 'currentPage' : ''}">
+					${pageNumber + 1} </span>
+			</c:forEach>
+		</c:if>
+	</div>
 	<div class="home-link">
 		<a href="/home">Home</a>
 	</div>

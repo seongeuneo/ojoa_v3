@@ -102,7 +102,7 @@ function OrderReview02() {
 
         const html3 = <td class="rv_img1">{content.review_image1 ? <img src={`${imageSource3}`} /> : ''}</td>;
 
-        const imageSource4 = content.review_image2 ? `${content.review_image2}` : null;
+        const imageSource4 = content.review_image2 ? `/thumbs/${content.review_image2}` : null;
 
         const html4 = <td class="rv_img2">{content.review_image2 ? <img src={`${imageSource4}`} /> : ''}</td>;
         return (
