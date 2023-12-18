@@ -45,6 +45,9 @@ public interface ProductService {
   	
   	// 새로운 메서드 추가: 페이지네이션된 제품 목록과 제품 이미지 정보 반환
     public Map<String, Object> getProductListWithImages(Pageable pageable);
+    
+    // 상품명 중복체크 유효성 검사
+    public boolean checkIfProductNameExists(String prod_name);
 
     
     

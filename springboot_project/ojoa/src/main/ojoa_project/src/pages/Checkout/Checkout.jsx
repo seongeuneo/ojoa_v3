@@ -5,10 +5,6 @@ import './Checkout.css';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import PaymentConfirmation from './PaymentConfirmation';
-import Post from './KakaoAddressModal/KakaoAddressModal';
-import axios from 'axios';
-import Modal from 'react-modal';
-import AddressPopup from './AddressPopup/AddressPopup'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import Post from './KakaoAddressModal/KakaoAddressModal';
@@ -20,14 +16,14 @@ function Checkout({ cart }) {
   const selectedCartItems = location.state.selectedCartItems;
   const [orderInfo, setOrderInfo] = useState({});
   const [isMember, setIsMember] = useState(false);
-  
+
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
-  
+
   // 배송비
   const deliveryPrice = 0;
-  
+
   // 할인금액
   const discountPrice = 0;
 
@@ -39,17 +35,17 @@ function Checkout({ cart }) {
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
   }, [selectedCartItems]);
-  
+
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
       return acc + curr.totalPrice
     }, 0)
   }, [displayedCartList]);
-  
+
   // 총 결제 금액
   const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
-  
+
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -58,7 +54,7 @@ function Checkout({ cart }) {
     setIsAddressPopupOpen(true);
   }
 
- //======================================================================= 
+  //======================================================================= 
   // 주문
   function inOrders() {
     const Orders = {
@@ -73,19 +69,19 @@ function Checkout({ cart }) {
       shipping_addressdetail: orderInfo.shipping_addressdetail,
       shipping_phone: orderInfo.shipping_phone,
       displayedCartList: displayedCartList ? [...displayedCartList] : []
-  };
-  
-  axios.post('/api/orders/saveOrders', Orders)
-  .then(response => {
-    alert("주문완료이 완료되었습니다:)");
-    navigate("/");
-  })
-  .catch(error => {
-    alert('주문에 실패했습니다!!!!!!');
-  });
-}
-  
-//=========================================================================
+    };
+
+    axios.post('/api/orders/saveOrders', Orders)
+      .then(response => {
+        alert("주문완료이 완료되었습니다:)");
+        navigate("/");
+      })
+      .catch(error => {
+        alert('주문에 실패했습니다!!!!!!');
+      });
+  }
+
+  //=========================================================================
 
   //수정
   useEffect(() => {
@@ -135,8 +131,8 @@ function Checkout({ cart }) {
             shipping_zipcode: data.zipcode,
             shipping_address: data.address,
             shipping_addressdetail: data.addressdetail,
-            shipping_email: data.email1+data.email2,
-            shipping_phone: data.phone1+"-"+data.phone2+"-"+data.phone3
+            shipping_email: data.email1 + data.email2,
+            shipping_phone: data.phone1 + "-" + data.phone2 + "-" + data.phone3
           }));
         } else {
           setIsMember(false);
@@ -203,25 +199,8 @@ function Checkout({ cart }) {
   //     });
   // };
 
-//========================================================================
+  //========================================================================
 
-
-  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
-  // const displayedCartList = useMemo(() => {
-  //   return selectedCartItems.map(item => ({
-  //     ...item,
-  //     dispalyedPrice: formatNumber(item.productPriceFormatted),
-  //     totalPrice: item.quantity * Number(item.productPriceFormatted),
-  //     displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
-  //   }))
-  // }, [selectedCartItems]);
-
-  // const totalProductPrice = useMemo(() => {
-  //   return displayedCartList.reduce((acc, curr) => {
-  //     return acc + curr.totalPrice
-  //   }, 0)
-  // }, [displayedCartList]);
-  // 성은테스트로 주석으로 묶어둠 풀어야함 =============================================================================
 
 
 
@@ -232,9 +211,9 @@ function Checkout({ cart }) {
     navigate('/paymentconfirmation', { state: { displayedCartList, orderInfo } });
   };
 
+
   //===========================================================================================
 
-  // const inOrders = () => {
 
 
   return (
@@ -262,8 +241,7 @@ function Checkout({ cart }) {
               </tr>
             </thead>
             <tbody>
-              {/* displayedCartList */}
-              {/* {displayedCartList.map((item, index) => (
+              {displayedCartList.map((item, index) => (
                 <tr key={item.prod_num}>
                   <td>{index + 1}</td>
                   <td>
@@ -277,15 +255,14 @@ function Checkout({ cart }) {
                   <td>[조건]</td>
                   <td>{item.displayedTotalPrice}원</td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
             <tfoot className="pay_product_summary">
               <tr>
                 <td colSpan={9}>
                   <div className="pay_product_summary_content">
                     <p>[기본배송]</p>
-                    {/* // 성은테스트로 주석으로 묶어둠 풀어야함 ============================================================================= */}
-                    {/* <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p> */}
+                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {deliveryPrice} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
                   </div>
                 </td>
               </tr>
@@ -301,7 +278,7 @@ function Checkout({ cart }) {
             </span>
           </div>
         </section>
-        <hr/>
+        <hr />
 
         {/* 배송정보 */}
         <section>
@@ -312,25 +289,25 @@ function Checkout({ cart }) {
             </colgroup>
 
             {/* 회원일 경우 */}
-              <tr>
-                <th>배송지 선택</th>
-                <td>
-                  <div class="address">
-                    <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
-                    <label for="sameaddr0">회원 정보와 동일</label>
-                    <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
-                    <label for="sameaddr1">새로운 배송지</label>
-                    <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
-                    <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
-                      주소록 보기
-                    </Link>
-                    {isAddressPopupOpen && <AddressPopup />}
-                  </div>
-                </td>
-              </tr>
+            <tr>
+              <th>배송지 선택</th>
+              <td>
+                <div class="address">
+                  <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="M" type="radio" autocomplete="off" onChange={getUserInfo} />
+                  <label for="sameaddr0">회원 정보와 동일</label>
+                  <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" autocomplete="off" onChange={getEmpty} />
+                  <label for="sameaddr1">새로운 배송지</label>
+                  <span class="recent ec-shop-RecentDelivery displaynone">최근 배송지 : </span>
+                  <Link to="/address-popup" className="btnNormal" onClick={showAddressPopupOpen}>
+                    주소록 보기
+                  </Link>
+                  {isAddressPopupOpen && <AddressPopup />}
+                </div>
+              </td>
+            </tr>
 
             <tr>
-            <th>받으시는 분 *</th>
+              <th>받으시는 분 *</th>
               <td>
                 <input type="text" name="buyer" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_name} />
               </td>
@@ -386,7 +363,7 @@ function Checkout({ cart }) {
                 </div>
               </td>
             </tr>
-          
+
           </table>
         </section>
         <section>
@@ -439,7 +416,7 @@ function Checkout({ cart }) {
               <p>최종결제 금액</p>
               <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              <button type='button' className='payment_btn' onClick={()=> {inOrders(); handlePaymentSuccess();} }>결제하기</button>
+              <button type='button' className='payment_btn' onClick={() => { inOrders(); handlePaymentSuccess(); }}>결제하기</button>
             </div>
           </div>
         </section>

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,23 +51,23 @@ public class ProductController {
             @RequestParam(name = "size", defaultValue = "5") int size,
             Model model) {
     	Pageable pageable = PageRequest.of(page, size);
-//	       Page<Product> productList = productService.getProductList(pageable);
-    	 Map<String, Object> productListWithImages = productService.getProductListWithImages(pageable);
+	       Page<Product> productList = productService.getProductList(pageable);
+//    	 Map<String, Object> productListWithImages = productService.getProductListWithImages(pageable);
 
-    	 model.addAttribute("product", productListWithImages.get("productList"));
-    	    model.addAttribute("prodIMGList", productListWithImages.get("prodIMGList"));
+//    	 model.addAttribute("product", productList.get("productList"));
+//    	    model.addAttribute("prodIMGList", productList.get("prodIMGList"));
 
-//	       model.addAttribute("product", productListWithImages.getContent());
-//	       model.addAttribute("itemPage", productListWithImages);
-//	       model.addAttribute("currentPage", productListWithImages.getNumber());
-//	       model.addAttribute("totalPages", productListWithImages.getTotalPages());
-//	       model.addAttribute("totalItems", productListWithImages.getTotalElements());
-//	       
-//	      log.info("productService.getFaqList(category, pageable) : " + productService.getProductList(pageable));
-//	      log.info("productList.getContent() : " + productListWithImages.getContent());
-//	      log.info("productList : " + productListWithImages);
-//	      log.info("productList.getNumber() : " + productListWithImages.getNumber());
-//	      log.info("productList.getTotalElements() : " + productListWithImages.getTotalElements());
+	       model.addAttribute("product", productList.getContent());
+	       model.addAttribute("itemPage", productList);
+	       model.addAttribute("currentPage", productList.getNumber());
+	       model.addAttribute("totalPages", productList.getTotalPages());
+	       model.addAttribute("totalItems", productList.getTotalElements());
+	       
+	      log.info("productService.getFaqList(category, pageable) : " + productService.getProductList(pageable));
+	      log.info("productList.getContent() : " + productList.getContent());
+	      log.info("productList : " + productList);
+	      log.info("productList.getNumber() : " + productList.getNumber());
+	      log.info("productList.getTotalElements() : " + productList.getTotalElements());
     } // productList
     
     
@@ -77,8 +78,13 @@ public class ProductController {
     	model.addAttribute("product", productService.selectList());
     } // productInsert
 
-   
-    
+  // 상품명 중복확인 유효성검사
+    @GetMapping(value="/checkProductName")
+    @ResponseBody
+    public boolean checkProductName(@RequestParam(name = "prod_name") String prod_name) {
+        boolean isDuplicate = productService.checkIfProductNameExists(prod_name);
+        return isDuplicate;
+    }
 	
 	
 	// 상품 수정
@@ -95,17 +101,20 @@ public class ProductController {
 		if ( uploadfilef!=null && !uploadfilef.isEmpty() ) {
 			// => Image 재선택 MultipartFile 처리
 			String realPath = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
-//			String realPath2 = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\ojoa_project\\public\\thumbs\\";
-			
+			String realPath2 = "C:\\ojoa_v3\\springboot_project\\ojoa\\src\\main\\webapp\\resources\\uploadImages\\";
 			// => 물리적위치에 저장 (file1)
 			String file1 = realPath + uploadfilef.getOriginalFilename(); //저장경로 완성
+			String file3 = realPath2 + uploadfilef.getOriginalFilename(); //저장경로 완성
 			uploadfilef.transferTo(new File(file1)); // IO 발생: Checked Exception 처리  
+			uploadfilef.transferTo(new File(file3)); // IO 발생: Checked Exception 처리  
 			
 			// => Table 저장경로 완성 (file2)
 
 			String file2=uploadfilef.getOriginalFilename();
+			String file4=uploadfilef.getOriginalFilename();
 
 			updatedProduct.setProd_mainimage(file2);
+			updatedProduct.setProd_mainimage(file4);
 		} // Image 선택 
 		
 	    try {

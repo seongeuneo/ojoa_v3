@@ -106,5 +106,18 @@ public class ProductServiceImpl implements ProductService {
 
         return productListWithImages;
     }
+	
+	@Override
+	public boolean checkIfProductNameExists(String prod_name) {
+		// 상품 이름이 존재하는지 확인하는 로직을 구현합니다.
+        // 여기서는 데이터베이스에서 해당 이름을 검색하여 존재 여부를 확인하는 예시를 보여드립니다.
+        // 실제 데이터베이스 조회 및 확인을 위한 코드를 작성해야 합니다.
+        
+        // 예를 들어, ProductRepository를 통해 데이터베이스에서 상품 이름을 검색하는 코드
+        boolean exists = productRepository.existsByProductName(prod_name);
+        
+        // 검색 결과를 반환합니다. 존재하면 true, 존재하지 않으면 false를 반환합니다.
+        return exists;
+	}
 
 } // class
