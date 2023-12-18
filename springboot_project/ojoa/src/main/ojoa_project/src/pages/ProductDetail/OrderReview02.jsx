@@ -98,7 +98,7 @@ function OrderReview02() {
                 <td>{content.review_title}</td>
                 <td>{content.review_content}</td>
                 <td><img src={`${content.review_image1}`} alt='후기이미지1' /></td>
-                <td><img src={`${content.review_image2}`} alt='후기이미지2' /></td>
+                <td><img src={`/public/thumbs/${content.review_image2}`} alt='후기이미지2' /></td>
                 <td>{content.review_date}</td>
                 <td>{content.review_rate}</td>
                 {/* <td>{content.review_view}</td> */}
