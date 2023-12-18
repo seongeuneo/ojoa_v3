@@ -16,14 +16,14 @@ function Checkout({ cart }) {
   const selectedCartItems = location.state.selectedCartItems;
   const [orderInfo, setOrderInfo] = useState({});
   const [isMember, setIsMember] = useState(false);
-  
+
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
-  
+
   // 배송비
   const deliveryPrice = 0;
-  
+
   // 할인금액
   const discountPrice = 0;
 
@@ -35,17 +35,17 @@ function Checkout({ cart }) {
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted))
     }))
   }, [selectedCartItems]);
-  
+
 
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
       return acc + curr.totalPrice
     }, 0)
   }, [displayedCartList]);
-  
+
   // 총 결제 금액
   const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
-  
+
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ function Checkout({ cart }) {
     setIsAddressPopupOpen(true);
   }
 
- //======================================================================= 
+  //======================================================================= 
   // 주문
   function inOrders() {
     const Orders = {
@@ -70,19 +70,19 @@ function Checkout({ cart }) {
       shipping_phone: orderInfo.shipping_phone, 
       shipping_message: orderInfo.shipping_message,
       displayedCartList: displayedCartList ? [...displayedCartList] : []
-  };
-  
-  axios.post('/api/orders/saveOrders', Orders)
-  .then(response => {
-    alert("주문완료이 완료되었습니다:)");
-    navigate("/");
-  })
-  .catch(error => {
-    alert('주문에 실패했습니다!!!!!!');
-  });
-}
-  
-//=========================================================================
+    };
+
+    axios.post('/api/orders/saveOrders', Orders)
+      .then(response => {
+        alert("주문완료이 완료되었습니다:)");
+        navigate("/");
+      })
+      .catch(error => {
+        alert('주문에 실패했습니다!!!!!!');
+      });
+  }
+
+  //=========================================================================
 
   //수정
   useEffect(() => {
@@ -202,7 +202,7 @@ function Checkout({ cart }) {
   //     });
   // };
 
-//========================================================================
+  //========================================================================
 
 
 
@@ -212,7 +212,7 @@ function Checkout({ cart }) {
   };
 
 
-//===========================================================================================
+  //===========================================================================================
 
 
 
@@ -278,7 +278,7 @@ function Checkout({ cart }) {
             </span>
           </div>
         </section>
-        <hr/>
+        <hr />
 
         {/* 배송정보 */}
         <section>
@@ -327,7 +327,7 @@ function Checkout({ cart }) {
               </tr>
 
             <tr>
-            <th>받으시는 분 *</th>
+              <th>받으시는 분 *</th>
               <td>
                 <input type="text" name="shipping_name" className="input_control" onChange={handleOrderInfo} value={orderInfo.shipping_name} />
               </td>
@@ -383,7 +383,7 @@ function Checkout({ cart }) {
                 </div>
               </td>
             </tr>
-          
+
           </table>
         </section>
         <section>
@@ -436,7 +436,7 @@ function Checkout({ cart }) {
               <p>최종결제 금액</p>
               <p className='total_price'>{formatNumber(totalCheckoutPrice)}원</p>
 
-              <button type='button' className='payment_btn' onClick={()=> {inOrders(); handlePaymentSuccess();} }>결제하기</button>
+              <button type='button' className='payment_btn' onClick={() => { inOrders(); handlePaymentSuccess(); }}>결제하기</button>
             </div>
           </div>
         </section>
