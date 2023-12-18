@@ -5,21 +5,23 @@ import axios from 'axios';
 
 const Login = ({ isLoggedIn, setIsLoggedIn }) => {
 
-    // 카카오 로그인 함수를 실행시키면 아래에 설정해 놓은 KAKAO_AUTH_URL 주소로 이동한다.
-    // 이동 된 창에서 kakao 계정 로그인을 시도할 수 있으며 로그인 버튼 클릭 시 Redirect URI로 이동하면서 빈화면과 함께
-    // 인가 코드가 발급된다.( 인가코드는 파라미터 값에 들어가 있다.)
-    const REST_API_KEY = '2f9b2c7502a2208b4674aae7c158d54f';
-    const REDIRECT_URI = 'http://localhost:3000/kakaoLogin';
-    const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?
-    client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    // // 카카오 로그인 함수를 실행시키면 아래에 설정해 놓은 KAKAO_AUTH_URL 주소로 이동한다.
+    // // 이동 된 창에서 kakao 계정 로그인을 시도할 수 있으며 로그인 버튼 클릭 시 Redirect URI로 이동하면서 빈화면과 함께
+    // // 인가 코드가 발급된다.( 인가코드는 파라미터 값에 들어가 있다.)
+    // const REST_API_KEY = '2f9b2c7502a2208b4674aae7c158d54f';
+    // const REDIRECT_URI = 'http://localhost:3000/kakaoLogin';
+    // const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?
+    // client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    // // 인가코드 받아오기
+    // const code = new URL(window.location.href).searchParams.get("code");
 
-    const loginHandler = () => {
-        window.location.href = KAKAO_AUTH_URL;
-    }
+    // const loginHandler = () => {
+    //     window.location.href = KAKAO_AUTH_URL;
+    // }
 
-    const handleLinkClick = () => {
-        alert('해당 페이지는 현재 준비중 입니다.');
-    };
+    // const handleLinkClick = () => {
+    //     alert('해당 페이지는 현재 준비중 입니다.');
+    // };
 
     const navigate = useNavigate(); // useNavigate  훅 사용
 
@@ -198,15 +200,15 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
 
                                     <div className="login_sns">
                                         <p className="sns">
-                                            <img src="../images/btn_naver_login.gif" onClick={handleLinkClick} alt='네이버로그인' />
+                                            {/* <img src="../images/btn_naver_login.gif" onClick={handleLinkClick} alt='네이버로그인' /> */}
                                         </p>
                                         <p className="sns">
-                                            <img src="../images/btn_facebook_login.gif" onClick={handleLinkClick} alt='페이스북로그인' />
+                                            {/* <img src="../images/btn_facebook_login.gif" onClick={handleLinkClick} alt='페이스북로그인' /> */}
                                         </p>
                                         <p className="sns">
-                                            <React.Fragment>
+                                            {/* <React.Fragment>
                                                 <img src="../images/btn_kakao_login.gif" alt='카카오톡로그인' type="button" onClick={loginHandler} />
-                                            </React.Fragment>
+                                            </React.Fragment> */}
                                         </p>
                                     </div>
                                     <div className="login_cboth"></div>

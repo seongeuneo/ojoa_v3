@@ -1,9 +1,9 @@
 package com.ojo.ojoa.controller;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ojo.ojoa.domain.UserDTO;
 import com.ojo.ojoa.entity.Member;
+import com.ojo.ojoa.service.EmailService;
 import com.ojo.ojoa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +36,7 @@ public class MemberControllerR {
 	
 	MemberService service;
 	PasswordEncoder passwordEncoder;
-	
+	EmailService emailService;
 	
 	
 	//**** => 리액트 ridDupCheck
@@ -157,7 +158,7 @@ public class MemberControllerR {
 	} //rpasswordUpdate
 	
 	
-	
+	//**** 정보 업데이트
 	@PostMapping(value="/rUpdate")
 	public ResponseEntity<?> rUpdate(@RequestBody Member entity) throws IOException {
 	    // 클라이언트로부터 받은 엔티티로 회원 정보 업데이트
@@ -188,7 +189,7 @@ public class MemberControllerR {
 	    }
 	} //rmemberdelete
 	
-
+	
 	
 	// ***** 리액트 회원 아이디 찾기
 	@GetMapping("/rfindId")
@@ -211,32 +212,7 @@ public class MemberControllerR {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("ID를 찾는 중에 오류가 발생했습니다.");
         }
-    } //findLoginId
-	
-	
-//	// ***** 리액트 회원 비밀번호 찾기 ( 변경 )
-//		@GetMapping("/rfindPw")
-//	    public ResponseEntity<?> rfindPw(
-//	    		@RequestParam("id") String id,
-//	            @RequestParam("name") String name,
-//	            @RequestParam("phone2") String phone2,
-//	            @RequestParam("phone3") String phone3
-//	    ) {
-//	        try {
-//	            // 데이터베이스에서 해당 id, name, phone2, phone3 값을 가진 ID를 조회합니다.
-//	            String foundPw = service.findIdByIdAndNameAndPhone(id, name, phone2, phone3);
-//
-//	            if (foundPw != null) {
-//	                // Pw를 찾은 경우
-//	                return ResponseEntity.ok(foundPw);
-//	            } else {
-//	                // Pw를 찾지 못한 경우
-//	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 정보로 등록된 Pw가 없습니다.");
-//	            }
-//	        } catch (Exception e) {
-//	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Pw를 찾는 중에 오류가 발생했습니다.");
-//	        }
-//	    } //rfindPw
+    } //findLoginId	
 	
 	
 	//***** 결제페이지 회원정보 가져오기 : 희상추가
@@ -254,7 +230,48 @@ public class MemberControllerR {
 	       }
 	   } //rinfo
 	   
-	   
+	
+	// ***** find PW 패스워드 이메일 발송
+   @PostMapping(value = "/uFindPW")
+   public String postMemberFindPW(Model model, @RequestBody Member entity) {
+      Member checkUser = service.checkUser( entity.getId(), entity.getName(), entity.getEmail1(), entity.getEmail2());
+      System.out.println(checkUser);
+      System.out.println(entity.getEmail1() + entity.getName());
+      
+      try {
+         if (checkUser != null) {
+            String randomPW = generateTempKey(8);
+            log.info(randomPW);
+            
+            Member member = service.selectOne(entity.getId());
+            member.setPassword(passwordEncoder.encode(randomPW));
+            service.save(member);
 
+            emailService.sendEmail(entity.getId(), entity.getName(), entity.getEmail1(), entity.getEmail2(), randomPW);
+            return "[" + entity.getEmail1() +"@"+ entity.getEmail2() + "] 로 이메일 발송완료. 임시 비밀번호로 로그인 후, 바로 비밀번호를 변경해주세요.";
+         } else {
+            return "가입한 회원정보를 정확하게 입력해주세요.";
+         }
+      } catch (Exception e) {
+         System.out.println("postMemberFindPW" + e.toString());
+         return "Error processing data";
+      }
+   } //postMemberFindPW
+
+   //**** 패스워드 / 임시비밀번호 부여
+   public static String generateTempKey(int length) {
+      String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      StringBuilder tempKey = new StringBuilder();
+
+      SecureRandom random = new SecureRandom();
+      for (int i = 0; i < length; i++) {
+         int index = random.nextInt(characters.length());
+         tempKey.append(characters.charAt(index));
+      }
+
+      return tempKey.toString();
+   } //generateTempKey
+	
+	
 } //class
 
