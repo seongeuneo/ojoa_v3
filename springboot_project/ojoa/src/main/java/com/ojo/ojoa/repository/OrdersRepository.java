@@ -22,14 +22,6 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 	List<OrdersDTO> findAllOrdersList();
 
 	// 주문정보 조회
-//    @Query("SELECT new com.ojo.ojoa.DTO.OrdersDTO(o.orders_num, o.id, o.orders_indate, o.orders_totalprice, "
-//    		+ "o.orders_price, o.orders_method, o.orders_addresscheck, o.shipping_name, o.shipping_zipcode, "
-//    		+ "o.shipping_address, o.shipping_addressdetail, o.shipping_phone, o.shipping_message) "
-//    		+ "FROM Orders o "
-//    		+ "	LEFT JOIN FETCH OrdersDetail od ON od.orders_num = o.orders_num" +
-//            " WHERE (:loginID IS NULL OR o.id = :loginID) ")
-//    List<OrdersDTO> findOrderList(@Param("loginID") String loginID); 
-
 	@Query("SELECT new com.ojo.ojoa.DTO.OrdersResDTO("
 			+ "o.orders_num, o.id, o.orders_indate, o.orders_totalprice, o.orders_price, "
 			+ "o.orders_method, o.orders_addresscheck, o.shipping_name, o.shipping_zipcode, "
