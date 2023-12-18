@@ -655,15 +655,23 @@ function Checkout({ cart }) {
   const [orderInfo, setOrderInfo] = useState({});
   const [isMember, setIsMember] = useState(false);
 
+
   const formatNumber = (num) => {
     return Intl.NumberFormat().format(num)
   }
 
-  // 배송비
-  const deliveryPrice = 0;
 
   // 할인금액
   const discountPrice = 0;
+  
+
+
+
+
+
+
+  // 배송비
+  //const deliveryPrice = (totalProductPrice > 99999 ? 0 : 3000); // 원래코드 적용안됨
 
   const displayedCartList = useMemo(() => {
     return selectedCartItems.map(item => ({
@@ -672,29 +680,31 @@ function Checkout({ cart }) {
       totalPrice: item.quantity * Number(item.productPriceFormatted),
       displayedTotalPrice: formatNumber(item.quantity * Number(item.productPriceFormatted)),
       // ADD: 주문 상세정보 내역 등록을 위한 속성
-      ordersdt_shippingfee: deliveryPrice,
+      // ordersdt_shippingfee: totalProductPrice > 99999 ? 0 : 3000,
       ordersdt_totalprice: item.quantity * Number(item.productPriceFormatted),
       ordersdt_result: 'B',
     }))
-  }, [selectedCartItems]);
-
-
-  displayedCartList.map((item) => {
-    console.log(`test : ${item}`);
-    Object.keys(item).forEach(key => {
-      console.log(`${key}: ${item[key]}`);
-    });
-  })
-
+    }, [selectedCartItems]);
+  
   const totalProductPrice = useMemo(() => {
     return displayedCartList.reduce((acc, curr) => {
       return acc + curr.totalPrice
     }, 0)
   }, [displayedCartList]);
 
-  // 총 결제 금액
-  const totalCheckoutPrice = totalProductPrice + deliveryPrice - discountPrice;
+  const totalCheckoutPrice = (totalProductPrice > 99999 ? totalProductPrice : totalProductPrice + 3000);
 
+  const deliveryPrice = (totalProductPrice > 99999 ? 0 : 3000); // 원래코드 적용안됨
+
+  
+  displayedCartList.map((item) => {
+    console.log(`test : ${item}`);
+    Object.keys(item).forEach(key => {
+      console.log(`${key}: ${item[key]}`);
+    });
+  })
+  
+  
   const [isAddressPopupOpen, setIsAddressPopupOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -798,7 +808,7 @@ function Checkout({ cart }) {
 
     const Orders = {
       id: orderInfo.shipping_id,
-      orders_totalprice: totalProductPrice + deliveryPrice,
+      orders_totalprice: totalProductPrice + totalProductPrice > 99999 ? 0 : 3000,
       orders_price: totalCheckoutPrice,
       orders_method: orderInfo.orders_method,
       // orders_addresscheck: "orders_addresscheck",
@@ -1010,7 +1020,6 @@ function Checkout({ cart }) {
     navigate('/paymentconfirmation', { state: { displayedCartList, orderInfo } });
   };
 
-
   //===========================================================================================
 
 
@@ -1061,7 +1070,7 @@ function Checkout({ cart }) {
                 <td colSpan={9}>
                   <div className="pay_product_summary_content">
                     <p>[기본배송]</p>
-                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {formatNumber(deliveryPrice)} = 합계 : {formatNumber(totalProductPrice + deliveryPrice)}원</p>
+                    <p>상품구매금액 {formatNumber(totalProductPrice)} + 배송비 {formatNumber(totalProductPrice > 99999 ? 0 : 3000)} = 합계 : {formatNumber(totalProductPrice + totalProductPrice > 99999 ? 0 : 3000)}원</p>
                   </div>
                 </td>
               </tr>
@@ -1211,7 +1220,7 @@ function Checkout({ cart }) {
             </li>
             <li className='bg-cell'>
               <span>총 부가결제금액</span>
-              <span>{formatNumber(deliveryPrice)}원</span>
+              <span>{formatNumber(totalProductPrice > 99999 ? 0 : 3000)}원</span>
             </li>
           </ul>
         </section>

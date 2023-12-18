@@ -112,7 +112,7 @@ const ProductListItem = ({ content, onSelect, handleCart }) => {
             .catch(error => {
                 // 요청 실패 시 처리할 작업
                 console.error('장바구니 추가 중 오류:', error);
-                alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.');
+                alert('로그인 후 이용해 주세요.');
             });
     }
 
