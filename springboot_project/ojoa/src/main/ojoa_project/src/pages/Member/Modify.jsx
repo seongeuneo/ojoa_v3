@@ -70,13 +70,13 @@ function Modify({ setIsLoggedIn }) {
                 const userId = loggedInUser.id;
                 const response = await axios.delete(`/member/rmemberdelete?id=${userId}`);
                 alert("회원 탈퇴 성공");
-                console.log(response.data); // 성공적으로 삭제되었을 때의 응답 확인
+                //console.log(response.data); // 성공적으로 삭제되었을 때의 응답 확인
 
                 setIsLoggedIn(false); // 로그아웃 시 로그인 상태 변경
                 // 탈퇴 성공 후 세션 무효화
                 sessionStorage.removeItem('loggedInUser');
-
-                window.location.href = '/member/rLogin';
+                //navigate('/'); // 회원 탈퇴 후 메인 홈으로 이동
+                window.location.replace('/'); // 또는 다른 목적지 URL
             } else {
                 console.error('사용자 정보를 찾을 수 없습니다.');
                 alert('사용자 정보를 찾을 수 없습니다.');
