@@ -122,8 +122,10 @@ public class RestReactController {
 
 //======================= prod_image 테이블 새로운 코드 추가(성은) ==============================	
 // prod_image 테이블 리스트
+
 	@GetMapping("prod_image/allProd_imageList")
 	public ResponseEntity<List<Prod_imageDTO>> getAllProd_imageList() {
+
 		List<Prod_imageDTO> prod_imageList = prod_imageService.selectAllList();
 		return ResponseEntity.ok(prod_imageList);
 	}
@@ -156,70 +158,64 @@ public class RestReactController {
 	
 	
 //============================================================================================================	
-	// 최근 본 상품
-//	@GetMapping("recent/recentList")
-//	public ResponseEntity<?> getrecentList(@RequestParam String loginID) {
-//		List<Recent> recentList = recentService.recentList(loginID);
-//		return ResponseEntity.ok(recentList);
-//	}
-	
-	@GetMapping("recent/saveRecent")
-	public ResponseEntity<?> saveRecent(@RequestBody Recent entity, HttpSession session) {
-		try {
-			String id = (String) session.getAttribute("loginID");
-			if (id != null && !id.isEmpty()) {
-				// 세션에서 가져온 로그인된 사용자의 ID를 이용하여 entity의 ID를 설정합니다
-				entity.setId(id);
-				return ResponseEntity.ok("데이터 저장 성공");
-			} else {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("사용자 인증되지 않음");
-			}
-		} catch (Exception e) {
-			log.error("데이터 저장 중 에러: {}", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("데이터 저장 실패");
-		}
-	}
-//=============================================================================================
+	// 최근 본 상품	
 	@GetMapping("recent/recentList")
-	   public ResponseEntity<?> recentList(@RequestParam(name = "id") String id, 
-			   							   @RequestParam(name = "prod_num") int prod_num, Product product, Recent rencent ) {
-		
+	   public ResponseEntity<?> recentList(@RequestParam String loginID, Recent recent) {
+
 	      try {
-	         if (id != null && !id.isEmpty()) {
-	             
-	        	 product = productService.selectOne(prod_num);
-	            if (recentService.Duplicated(id, prod_num) == 0) {
-
-	               List<Recent> TotalrecentList = recentService.recentList(id);
-
-	               if (TotalrecentList.size() >= 2) {
-	                  //recentService.delete(id);
-	               }
-
-	               rencent.setId(id);
-	               rencent.setProd_num(prod_num);
-	               rencent.setRecent_image(product.getProd_mainimage());
-
-	               recentService.save(rencent);
-
-	               log.info("새 최근본 상품 세이브!");
-
-	            } else if (recentService.Duplicated(id, prod_num) == 1) {
-
-	               return ResponseEntity.ok("중복 제품!!");
-	            } // else if
+	         if (loginID == null || loginID.isEmpty()) {
+	            return ResponseEntity.ok("로그인 후 확인 가능합니다.");
 	         } else {
-	            return ResponseEntity.ok("로그인 후 이용 가능");
+	            List<Recent> recentItem = recentService.recentList(loginID);
+	            return ResponseEntity.ok(recentItem);
 	         }
+
+	      } catch (Exception e) {
+	         log.info("최근방문상품 실패요 : " + e.toString());
+	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("최근방문상품출력 예외오류");
+	      }
+
+	   }
+//=============================================================================================
+	@GetMapping("recent/saveRecent")
+	
+	   public ResponseEntity<?> saveRecent(@RequestParam String loginID, @RequestParam int prod_num, 
+			   											 Product product, Recent recent ) {
+		// 로그인 한 경우에만 저장 후 보여줌!
+	      try {
+//	         if (loginID != null && !loginID.isEmpty()) {
+	            if (recentService.Duplicated(loginID, prod_num) == 0) {
+	            	product = productService.selectOne(prod_num);
+		            recent.setId(loginID);
+		            recent.setProd_num(prod_num);
+		            recent.setRecent_image(product.getProd_mainimage());
+		            recentService.save(recent);
+		            log.info("새 최근본 상품 세이브!"+prod_num);
+		            List<Recent> Totalrecent = recentService.recentList(loginID);
+		            
+	                if (Totalrecent.size() >= 2) {
+	                	recentService.delete(loginID); 
+	                	Totalrecent = recentService.recentList(loginID);
+	                }
+	                System.out.println("저장 후 목록확인_0번쨰!!!!!!!!!!"+Totalrecent.get(0));
+	                System.out.println("저장 후 목록확인_1번쨰!!!!!!!!!!"+Totalrecent.get(1));
+	                return ResponseEntity.ok(Totalrecent);
+	            } else if (recentService.Duplicated(loginID, prod_num) == 1) {
+	            	   return ResponseEntity.ok("중복 제품!!");
+	            } else return ResponseEntity.ok("예외없음");
+//	         } 
+//	      else {
+//	            return ResponseEntity.ok("로그인 후 이용 가능");
+//	         }
 	         
 	      } catch (Exception e) {
 	         log.error("최근방문상품 저장 실패요 : " + e.toString());
 	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("최근방문 상품데이터 저장 실패");
 	      }
-	      return ResponseEntity.ok("예외없음");
+	    
 	   }
 
-	   // 
+	
 //============================================================================================
 // 장바구니 상품 수량 변경
 

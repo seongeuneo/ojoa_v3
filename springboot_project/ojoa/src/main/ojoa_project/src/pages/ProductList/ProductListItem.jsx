@@ -7,7 +7,7 @@ import "./ProductListItem.css";
 const ProductListItem = ({content, recentItems, setRecentItems}) => {
     
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태에 따른 nav바 변경
-    
+    const [lastClickedItemId, setLastClickedItemId] = useState(null);
     // 세션 정보를 확인하여 로그인 상태를 설정하는 로직 추가
     useEffect(() => {
         const storedSessionInfo = sessionStorage.getItem('loggedInUser'); // 세션에서 로그인 정보 가져오기
@@ -105,20 +105,21 @@ const ProductListItem = ({content, recentItems, setRecentItems}) => {
 
 // 최근 본 상품 ========================================
 
-function ItemClick() {
+// function ItemClick() {
 
-    const productData = { prod_num: content.prod_num}; 
+//     const productData = { prod_num: content.prod_num}; 
 
-    axios.get('/api/recent/saveRecent', productData)
-        .then(response => {
-        })
-        .catch(error => {
-            // 요청 실패 시 처리할 작업
-            console.error('최근 본 상품 오류:', error);
-            //alert('최근 상품 보는 중 오류 발생!!!');
-        });
-}
-// console.log(recentItems);
+//     axios.get('/api/recent/saveRecent', productData)
+//     .then(response => {
+//         window.location.reload();
+//     })
+//         .catch(error => {
+//             // 요청 실패 시 처리할 작업
+//             console.error('최근 본 상품 오류:', error);
+//             //alert('최근 상품 보는 중 오류 발생!!!');
+//         });
+// }
+
 
     //============================= 여기서부터 워니의 코드 =================================
 
@@ -165,7 +166,7 @@ function ItemClick() {
     console.log("content.prod_mainimage => " + content.prod_mainimage);
 
     return (
-        <div className="ProductListItem" onClick={ItemClick}>
+        <div className="ProductListItem">
             <section className="pl_section" >
                 <ul className="prodItems">
                     <li className="pl_thumb_img">

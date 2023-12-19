@@ -18,9 +18,20 @@ public class Prod_imageController {
 
 	Prod_imageService prod_imageService;
 	
+	
+	
 	// ** prod_image List
+	// 이미지 리스트와 최근 본 상품 저장하기 동시에 처리
     @GetMapping("/prod_imageList")
     public void prod_imageList(Model model) {
     	model.addAttribute("myprod_image", prod_imageService.selectList());
+   
+    
+    
+    
+    
+    
     } // prod_imageList
+    
+//    
 }

@@ -31,7 +31,7 @@ import ScrollTop from './components/ScrollToTop';
 import Checkout from "./pages/Checkout/Checkout";
 import Wish from "./pages/MyPage/MyShop/Wish";
 import LoginHandeler from "./pages/Member/LoginHandeler";
-import RecentList from './components/RecentList';
+// import RecentList from './components/RecentList';
 
 import ProductCategory from "./pages/ProductList/ProductCategory";
 // import NewList from './pages/ProductList/NewList';
@@ -91,7 +91,7 @@ function App() {
           <Route path="/member/rlogin/FindLoginPw" element={<FindLoginPw />} />
           <Route path="/member/modify/PUpdateForm" element={<PUpdateForm />} />
           <Route path="/" element={<Main />} />
-          <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} />} />
+          <Route path="/productDetail/:prod_num/*" element={<ProductDetail cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}/>} />
           <Route path="/productList/New/*" element={<New cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}/>} />
           <Route path="/productList/Best/*" element={<Best cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}/>} />
           <Route path="/productList/Chair/*" element={<Chair cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems} />} />
@@ -115,7 +115,9 @@ function App() {
         </Routes>
         <Footer />
         <TopButton />
-        <RecentList recentItems={recentItems} setRecentItems={setRecentItems} />
+        {/* {isLoggedIn ? (
+          <RecentList recentItems={recentItems} setRecentItems={setRecentItems} />
+        ) : "" } */}
       </BrowserRouter>
     </div>
   );

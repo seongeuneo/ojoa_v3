@@ -12,6 +12,7 @@ function Wish() {
   
 
     const prod_num = data.prod_num;
+    // console.log("prod_num =>" + prod_num);
 
     useEffect(() => {
         axios

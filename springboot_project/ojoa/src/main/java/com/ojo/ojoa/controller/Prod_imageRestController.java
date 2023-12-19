@@ -23,8 +23,10 @@ public class Prod_imageRestController {
 	Prod_imageService prod_imageService;
 
 	// prod_image 테이블 리스트
+	
 	@GetMapping("prod_image/allProd_imageList")
     public ResponseEntity<List<Prod_imageDTO>> getAllProd_imageList() {
+
 		List<Prod_imageDTO> prod_imageList = prod_imageService.selectAllList();
     	return ResponseEntity.ok(prod_imageList);
     }

@@ -410,9 +410,9 @@ const New = ({ cart, setCart, recentItems, setRecentItems }) => {
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
             <ProductListItem content={content} cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}>
-                <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
+                {/* <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
-                </Link>
+                </Link> */}
             </ProductListItem>
         </li>
     ));

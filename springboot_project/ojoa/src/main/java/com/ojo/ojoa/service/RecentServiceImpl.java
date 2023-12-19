@@ -20,17 +20,17 @@ public class RecentServiceImpl implements RecentService {
  // ** selectList
 
 	@Override
- 	public List<Recent> recentList(String id){
+ 	public List<Recent> recentList(String loginID){
  		return recentRepository.findAll();
  	}
  	
  	// ** selectOne
- 	@Override
- 	public Recent selectOne(int recent_num) {
- 		Optional<Recent> result = recentRepository.findById(recent_num);
-     	if ( result.isPresent() ) return result.get();
-     	else return null;
- 	}
+// 	@Override
+// 	public List<Recent> selectOne(int prod_num) {
+// 		Optional<Recent> result = recentRepository.findById(prod_num);
+//     	if ( result.isPresent() ) return (List<Recent>) result.get();
+//     	else return null;
+// 	}
 
  	// ** insert, update
  	@Override
@@ -39,23 +39,23 @@ public class RecentServiceImpl implements RecentService {
          return entity.getId();   // 저장후 key return
  	}
  	 
- 	// ** delete
-// 	@Override
-// 	public String delete(String id) {
-// 		recentRepository.deleteById(id);
-// 		return id; // 삭제후 key return
-// 	}
-// 	
+    @Override
+    public void delete(String loginID) {
+    	recentRepository.delete(loginID);
+    }
+
+ 	
 
 
 
  	@Override
-    public int Duplicated(String id, int prod_num) {
-       Optional<Recent> result = recentRepository.Duplicated(id, prod_num);
+    public int Duplicated(String loginID, int prod_num) {
+       Optional<Recent> result = recentRepository.Duplicated(loginID, prod_num);
        if (result.isPresent())
           return 1;
        else
           return 0;
     }
+
  	
  } //class

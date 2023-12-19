@@ -1,4 +1,4 @@
-.RecentList {
+/* .RecentList {
     position: fixed;
     width: 120px;
     height: 250px;
@@ -7,6 +7,7 @@
     top: 18%;
     border: black solid 2px;
     cursor: pointer;
+    background-color: white;
     
 }
 
@@ -19,6 +20,12 @@
     background-color: white;
     display: flex;
     margin: auto;
+    margin-bottom: 15px;
+}
+
+.RecentListItem .recentImg {
+width: 100px;
+height: 80px;
 }
 
 
@@ -30,4 +37,4 @@
     font-weight: bold;
     margin-top: 5px;
     margin-bottom: 5px;
-}
+} */
