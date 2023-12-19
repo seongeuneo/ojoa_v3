@@ -48,12 +48,12 @@ const FindLoginPw = (e) => {
                 <span>현재 위치</span>
                 <ol>
                     <li><Link to="/">홈</Link></li>
-                    <li title="현재 위치"> &gt; 비밀번호 찾기</li>
+                    <li title="현재 위치"> &gt; &nbsp;&nbsp;비밀번호 찾기</li>
                 </ol>
             </div>
             <div className="title">
                 <h2>비밀번호 찾기</h2>
-                <div className="txt_01">가입 당시 [ 아이디 / 이름 / 이메일 ] 을 입력하세요</div>
+                <div className="txt_01">가입하신 [ 아이디 / 이름 / 이메일 ] 을 입력하세요</div>
             </div>
             <main className="FindLoginId_page">
                 <div className="FindLoginId_container">

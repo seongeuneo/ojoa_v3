@@ -27,6 +27,7 @@ function UserHeader({ setIsLoggedIn }) {
             if (response.status === 200) {
                 setIsLoggedIn(false); // 로그아웃 상태로 변경
                 sessionStorage.removeItem('loggedInUser'); // 세션 정보 삭제
+                alert("로그아웃이 완료되었습니다.");
                 navigate('/'); // 홈으로 페이지로 이동
             } else {
                 // 에러 처리 로직

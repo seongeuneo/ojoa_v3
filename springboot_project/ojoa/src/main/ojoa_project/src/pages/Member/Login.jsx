@@ -120,7 +120,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                 <span>현재 위치</span>
                 <ol>
                     <li><Link to="/">홈</Link></li>
-                    <li title="현재 위치"> &gt; Login</li>
+                    <li title="현재 위치"> &gt; &nbsp;&nbsp;Login</li>
                 </ol>
             </div>
             <div className="login_title">

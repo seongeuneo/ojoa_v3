@@ -177,7 +177,7 @@ public class MemberControllerR {
 	
 	// ** Member Delete: 회원탈퇴
 	@DeleteMapping(value="/rmemberdelete")
-	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id, HttpSession session) {
+	public ResponseEntity<?> rmemberdelete(@RequestParam("id") String id) {
 		log.info("아이디 탈퇴 ID : " + id);
 		try {
 	        service.delete(id);
