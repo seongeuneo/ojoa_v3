@@ -134,7 +134,7 @@ function QnaModal({ closeModal, onFilterChange, status, qnaSeq, name, userId }) 
                                             <option value="재입고문의">재입고문의</option>
                                             <option value="기타문의">기타문의</option>
                                         </select>
-                                        <select name="prod_kind" id="board_category2" >
+                                        <select name="prod_num" id="board_category2" >
                                             <option>제품목록</option>
                                             {data.map((item) => (
                                                 <React.Fragment key={item.prod_num}>

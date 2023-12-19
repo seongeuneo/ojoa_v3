@@ -23,7 +23,7 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
     const [replyContents, setReplyContents] = useState({});
     const [updatedQnaList, setUpdatedQnaList] = useState(qnaList); // 여기서 새로운 상태 추가
 
-    console.log('*****' + qnaList);
+    console.log(qnaList);
 
     const handleTitleClick = (id, readable) => {
         if (expandedId === id) {
@@ -96,7 +96,7 @@ const QnaListItem = ({ qnaList, filters, onFilterChange }) => {
         if (typeof inputString !== 'string') {
             throw new Error('Input must be a string');
         }
-        const maskedPart = inputString.slice(0, 1) + '***';
+        const maskedPart = inputString.slice(0, 1) + '**';
         return maskedPart;
     }
 
