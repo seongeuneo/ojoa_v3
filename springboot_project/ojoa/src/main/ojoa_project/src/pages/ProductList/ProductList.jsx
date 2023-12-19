@@ -12,7 +12,7 @@ import { parse } from "qs";
 
 
 //카테고리 : 의자
-function Chair({ cart, setCart, handleCart }) {
+function Chair({ cart, setCart, recentItems, setRecentItems }) {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -30,7 +30,7 @@ function Chair({ cart, setCart, handleCart }) {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart}  recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -64,7 +64,7 @@ function Chair({ cart, setCart, handleCart }) {
 
 }; //Chair
 
-const Bed = ({ cart, setCart, handleCart }) => {
+const Bed = ({ cart, setCart, recentItems, setRecentItems}) => {
 
     // Spring Boot 연결
     const data = useProductList();
@@ -83,7 +83,7 @@ const Bed = ({ cart, setCart, handleCart }) => {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -117,7 +117,7 @@ const Bed = ({ cart, setCart, handleCart }) => {
     )
 }; //Bed
 
-const Sofa = ({ cart, setCart, handleCart }) => {
+const Sofa = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -135,7 +135,7 @@ const Sofa = ({ cart, setCart, handleCart }) => {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart}  recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -169,7 +169,7 @@ const Sofa = ({ cart, setCart, handleCart }) => {
     )
 }; //Sofa
 
-const Bookshelf = ({ cart, setCart, handleCart }) => {
+const Bookshelf = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -187,7 +187,7 @@ const Bookshelf = ({ cart, setCart, handleCart }) => {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart}  recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -221,7 +221,7 @@ const Bookshelf = ({ cart, setCart, handleCart }) => {
     )
 }; //Bookshelf
 
-const Closet = ({ cart, setCart, handleCart }) => {
+const Closet = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -240,7 +240,7 @@ const Closet = ({ cart, setCart, handleCart }) => {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart}  recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -273,7 +273,7 @@ const Closet = ({ cart, setCart, handleCart }) => {
     )
 }; //Closet
 
-const Lighting = ({ cart, setCart, handleCart }) => {
+const Lighting = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -291,7 +291,7 @@ const Lighting = ({ cart, setCart, handleCart }) => {
 
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -325,7 +325,7 @@ const Lighting = ({ cart, setCart, handleCart }) => {
     )
 }; //Lighting
 
-const Best = ({ cart, setCart, handleCart }) => {
+const Best = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -345,7 +345,7 @@ const Best = ({ cart, setCart, handleCart }) => {
     // 화면에 표시할 상품 목록을 생성
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
+            <ProductListItem content={content} cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}>
                 <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
                 </Link>
@@ -378,7 +378,7 @@ const Best = ({ cart, setCart, handleCart }) => {
     )
 }; //Best
 
-const New = ({ cart, setCart, handleCart }) => {
+const New = ({ cart, setCart, recentItems, setRecentItems }) => {
     // Spring Boot 연결
     const data = useProductList();
 
@@ -409,10 +409,10 @@ const New = ({ cart, setCart, handleCart }) => {
     // 화면에 표시할 상품 목록을 생성
     const singleLi = displayedItems.map((content) => (
         <li key={content.prod_num}>
-            <ProductListItem content={content} cart={cart} setCart={setCart} handleCart={handleCart}>
-                <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
+            <ProductListItem content={content} cart={cart} setCart={setCart} recentItems={recentItems} setRecentItems={setRecentItems}>
+                {/* <Link className="productLink" to={`/products/detail/${content.prod_num}`} key={content.prod_num}>
                     {content.prod_name}
-                </Link>
+                </Link> */}
             </ProductListItem>
         </li>
     ));
